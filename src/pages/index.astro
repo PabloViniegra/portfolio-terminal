@@ -1,0 +1,14 @@
+---
+import Terminal from "../components/Terminal";
+import TerminalLayout from "../layouts/TerminalLayout.astro";
+import "../styles/global.css";
+
+if (typeof window !== "undefined") {
+  const savedTheme = localStorage.getItem("theme") || "one-dark";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+}
+---
+
+<TerminalLayout>
+  <Terminal client:load />
+</TerminalLayout>
