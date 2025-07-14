@@ -150,11 +150,20 @@ const Terminal: React.FC = () => {
     }
   }, [history.length]);
 
+  // Efecto para manejar el scroll automático
   useEffect(() => {
     if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+      // Usamos requestAnimationFrame para asegurarnos de que el DOM se ha actualizado
+      requestAnimationFrame(() => {
+        if (terminalRef.current) {
+          terminalRef.current.scrollTo({
+            top: terminalRef.current.scrollHeight,
+            behavior: 'smooth'
+          });
+        }
+      });
     }
-  }, [history]);
+  }, [history, isLoading]);
 
   const processCommand = (input: string): React.ReactNode => {
     if (input.trim() === "") return null;
@@ -292,7 +301,10 @@ const Terminal: React.FC = () => {
   }, [showMatrixRain]);
 
   return (
-    <div className="terminal relative" ref={terminalRef}>
+    <div 
+      className="terminal relative h-full flex flex-col overflow-hidden" 
+      ref={terminalRef}
+    >
       {showMatrixRain && <MatrixRain onDeactivate={handleDeactivateRain} />}
       <div className={`relative z-10 ${showMatrixRain ? 'bg-terminal-bg/80' : ''}`}>
         <div className="terminal-header flex justify-between items-center px-4 py-2 border-b border-terminal-border bg-terminal-header-bg rounded-t-lg">
@@ -316,7 +328,7 @@ const Terminal: React.FC = () => {
           </div>
         </div>
 
-        <div className="terminal-body relative">
+        <div className="terminal-body relative flex-1 overflow-y-auto p-4">
           {history.map((item, index) => (
             <div key={index} className="mb-4">
               {item.input && (
