@@ -36,7 +36,6 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
   const suggestionsRef = useRef<HTMLDivElement>(null);
 
   const updateSuggestions = useCallback((value: string) => {
-    // Solo mostramos sugerencias si el input comienza con '/'
     if (!value.startsWith('/') || value.trim() === '') {
       setSuggestions([]);
       setShowSuggestions(false);
@@ -57,11 +56,9 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
     const value = e.target.value;
     setInput(value);
     
-    // Solo mostramos sugerencias si el input comienza con '/'
     if (value.startsWith('/')) {
       updateSuggestions(value);
     } else {
-      // Ocultamos las sugerencias si el usuario borra la '/'
       setShowSuggestions(false);
       setSuggestions([]);
     }
@@ -120,9 +117,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (disabled) return;
 
-    // Manejar teclas de navegación solo si no estamos en modo de edición normal
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab') {
-      // Si hay sugerencias visibles, manejamos la navegación entre ellas
       if (showSuggestions && suggestions.length > 0) {
         e.preventDefault();
         
@@ -148,19 +143,15 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
             return;
         }
       } 
-      // Si no hay sugerencias visibles, manejamos la navegación del historial
       else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         e.preventDefault();
         
-        // Guardar el input actual solo si es la primera vez que presionamos arriba
         if (e.key === 'ArrowUp' && temporaryInput === '') {
           setTemporaryInput(input);
         }
         
-        // Obtener el comando del historial
         const historyCommand = onHistoryNavigate(e.key === 'ArrowUp' ? 'up' : 'down');
         
-        // Actualizar el input con el comando del historial o restaurar el input temporal
         if (e.key === 'ArrowDown' && historyCommand === '' && temporaryInput !== '') {
           setInput(temporaryInput);
           setTemporaryInput('');
@@ -169,7 +160,6 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
         }
       }
     }
-    // Cerrar sugerencias con Escape
     else if (e.key === 'Escape') {
       if (showSuggestions) {
         e.preventDefault();
@@ -191,9 +181,9 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
   };
 
   return (
-    <div className="relative">
-      <form onSubmit={handleSubmit} className="w-full">
-        <div className="flex items-center">
+    <div className="relative w-full">
+      <form onSubmit={handleSubmit} className="w-full relative">
+        <div className="flex items-center relative">
           <span className="text-terminal-prompt font-mono font-bold mr-2">$</span>
           <input
             ref={inputRef}
@@ -204,20 +194,22 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
             onKeyUp={handleKeyUp}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-            className="command-input flex-1"
+            className="command-input flex-1 bg-transparent outline-none"
             disabled={disabled}
             autoFocus
             aria-label="Comando de terminal"
             placeholder={disabled ? 'Procesando comando...' : 'Escribe un comando...'}
           />
         </div>
+        <div className="absolute left-0 right-0 -top-1 transform -translate-y-full">
+          <CommandSuggestions
+            suggestions={suggestions}
+            selectedIndex={selectedSuggestion}
+            onSelect={selectSuggestion}
+            visible={showSuggestions && !disabled}
+          />
+        </div>
       </form>
-      <CommandSuggestions
-        suggestions={suggestions}
-        selectedIndex={selectedSuggestion}
-        onSelect={selectSuggestion}
-        visible={showSuggestions && !disabled}
-      />
     </div>
   );
 }

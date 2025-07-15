@@ -21,23 +21,42 @@ const CommandSuggestions: React.FC<CommandSuggestionsProps> = ({
   if (!visible || suggestions.length === 0) return null;
 
   return (
-    <div className="absolute z-10 w-full mt-1 bg-[#282c34] border border-[#3e4451] rounded-md shadow-lg">
-      <ul className="py-1">
-        {suggestions.map((suggestion, index) => (
-          <li
-            key={suggestion.command}
-            className={`px-4 py-2 text-sm cursor-pointer flex justify-between ${
-              index === selectedIndex
-                ? 'bg-[#3e4451] text-white'
-                : 'text-[#abb2bf] hover:bg-[#2c313a]'
-            }`}
-            onClick={() => onSelect(suggestion.command)}
-          >
-            <span className="text-[#61afef] font-mono">{suggestion.command}</span>
-            <span className="text-[#5c6370] ml-4">{suggestion.description}</span>
-          </li>
-        ))}
-      </ul>
+    <div className="relative w-full">
+      <div 
+        className="absolute bottom-full left-0 right-0 mb-1 rounded-md shadow-lg z-50 overflow-hidden"
+        style={{
+          backgroundColor: 'var(--terminal-bg)',
+          border: '1px solid var(--terminal-border)'
+        }}
+      >
+        <div 
+          className="rounded-md shadow-inner"
+          style={{
+            backgroundColor: 'var(--terminal-bg)',
+            border: '1px solid var(--terminal-border)'
+          }}
+        >
+          <ul className="py-1" style={{ backgroundColor: 'var(--terminal-bg)' }}>
+          {suggestions.map((suggestion, index) => (
+            <li
+              key={suggestion.command}
+              className={`px-4 py-2.5 text-sm cursor-pointer flex justify-between items-center ${
+                index === selectedIndex
+                  ? 'bg-terminal-accent/10 text-terminal-accent'
+                  : 'text-terminal-text hover:bg-terminal-bg-secondary'
+              } transition-colors duration-150`}
+              onMouseDown={(e) => {
+                e.preventDefault(); // Evitar que el input pierda el foco
+                onSelect(suggestion.command);
+              }}
+            >
+              <span className="font-mono text-terminal-accent/90">{suggestion.command}</span>
+              <span className="text-terminal-text-secondary ml-4 text-right">{suggestion.description}</span>
+            </li>
+          ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
