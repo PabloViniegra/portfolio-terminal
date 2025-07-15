@@ -1,6 +1,7 @@
 ---
 import Terminal from "../components/Terminal";
 import TerminalLayout from "../layouts/TerminalLayout.astro";
+import MobileWarning from "../components/MobileWarning.astro";
 import "../styles/global.css";
 
 if (typeof window !== "undefined") {
@@ -11,4 +12,5 @@ if (typeof window !== "undefined") {
 
 <TerminalLayout>
   <Terminal client:load />
+  <MobileWarning client:load />
 </TerminalLayout>

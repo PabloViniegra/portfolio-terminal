@@ -1,0 +1,157 @@
+---
+// MobileWarning.astro
+---
+
+<div class="mobile-warning">
+  <div class="warning-content">
+    <div class="warning-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+    </div>
+    <div class="warning-text">
+      <h3>Para la mejor experiencia</h3>
+      <p>
+        Este portafolio está optimizado para ser usado en un ordenador con
+        teclado. Algunas funciones pueden no estar disponibles en dispositivos
+        móviles.
+      </p>
+    </div>
+    <button id="close-warning" class="close-button" aria-label="Cerrar aviso">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  .mobile-warning {
+    display: none;
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    z-index: 1000;
+    background-color: var(--terminal-warning);
+    color: var(--terminal-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translate(-50%, 100%);
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+  }
+
+  .warning-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .warning-icon {
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+
+  .warning-text h3 {
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: var(--font-sans);
+  }
+
+  .warning-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .close-button {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    background: var(--terminal-bg);
+    color: var(--terminal-warning);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s ease;
+  }
+
+  .close-button:hover {
+    background: var(--terminal-text);
+  }
+
+  @media (max-width: 768px) {
+    .mobile-warning {
+      display: block;
+    }
+  }
+
+  [data-theme="light"] .mobile-warning {
+    background-color: var(--terminal-warning);
+    color: #1a202c;
+  }
+
+  [data-theme="light"] .close-button {
+    color: var(--terminal-warning);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const closeButton = document.getElementById("close-warning");
+    const warning = document.querySelector(".mobile-warning") as HTMLElement;
+
+    if (closeButton && warning) {
+      closeButton.addEventListener("click", () => {
+        warning.style.animation = "fadeOut 0.3s ease-out";
+        setTimeout(() => {
+          warning.style.display = "none";
+        }, 300);
+      });
+    }
+  });
+</script>
