@@ -140,10 +140,10 @@
   }
 </style>
 
-<script>
+<script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
     const closeButton = document.getElementById("close-warning");
-    const warning = document.querySelector(".mobile-warning") as HTMLElement;
+    const warning = document.querySelector(".mobile-warning");
 
     if (closeButton && warning) {
       closeButton.addEventListener("click", () => {
