@@ -29,7 +29,24 @@ const ProjectsSection: React.FC = () => {
         "Hero UI",
       ],
     },
-
+    {
+      title: "Daily-Ideas",
+      description:
+        "Aplicación web que te sugiere ideas de proyectos de forma diaria con IA. Puedes regenerar las ideas de forma finita.",
+      link: "https://daily-ideas-frontend.vercel.app/",
+      github: "https://github.com/PabloViniegra/daily-ideas-frontend",
+      technologies: [
+        "Git",
+        "NextJS",
+        "React",
+        "Shadcn UI",
+        "pnpm",
+        "Python",
+        "FastAPI",
+        "Typescript",
+        "Tailwind CSS",
+      ],
+    },
     {
       title: "PromptLazy",
       description:
