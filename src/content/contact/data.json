@@ -1,0 +1,34 @@
+[
+  {
+    "id": "email",
+    "title": "Email",
+    "content": "pablovpmadrid@gmail.com",
+    "link": "mailto:pablovpmadrid@gmail.com",
+    "icon": "email",
+    "order": 1
+  },
+  {
+    "id": "location",
+    "title": "Dirección",
+    "content": "Móstoles, Madrid, España",
+    "link": "https://www.google.com/maps?q=Mostoles,+Madrid,+España",
+    "icon": "location",
+    "order": 2
+  },
+  {
+    "id": "linkedin",
+    "title": "LinkedIn",
+    "content": "linkedin.com/in/pabloviniegra",
+    "link": "https://linkedin.com/in/pabloviniegra",
+    "icon": "linkedin",
+    "order": 3
+  },
+  {
+    "id": "github",
+    "title": "GitHub",
+    "content": "github.com/PabloViniegra",
+    "link": "https://github.com/PabloViniegra",
+    "icon": "github",
+    "order": 4
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "rain",
+    "command": "/rain",
+    "description": "Siéntete un hacker",
+    "category": "special",
+    "hint": "Usa Ctrl+C para desactivar",
+    "order": 1
+  },
+  {
+    "id": "home",
+    "command": "/home",
+    "description": "Muestra la página de inicio",
+    "category": "navigation",
+    "order": 2
+  },
+  {
+    "id": "experience",
+    "command": "/experience",
+    "description": "Muestra mi experiencia laboral",
+    "category": "info",
+    "order": 3
+  },
+  {
+    "id": "projects",
+    "command": "/projects",
+    "description": "Muestra mis proyectos",
+    "category": "info",
+    "order": 4
+  },
+  {
+    "id": "skills",
+    "command": "/skills",
+    "description": "Muestra mis habilidades técnicas",
+    "category": "info",
+    "order": 5
+  },
+  {
+    "id": "contact",
+    "command": "/contact",
+    "description": "Muestra mis datos de contacto",
+    "category": "info",
+    "order": 6
+  },
+  {
+    "id": "cv",
+    "command": "/cv",
+    "description": "Descarga mi CV en PDF",
+    "category": "utility",
+    "order": 7
+  },
+  {
+    "id": "clear",
+    "command": "/clear",
+    "description": "Limpia la terminal",
+    "category": "utility",
+    "order": 8
+  },
+  {
+    "id": "help",
+    "command": "/help",
+    "description": "Muestra esta ayuda",
+    "category": "utility",
+    "order": 9
+  }
+]

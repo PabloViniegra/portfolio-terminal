@@ -7,22 +7,11 @@ interface ExperienceItem {
   tags: string[];
 }
 
-const ExperienceSection: React.FC = () => {
-  const experiences: ExperienceItem[] = [
-    {
-      title: "Desarrollador de Software y consultor en Minsait (Indra)",
-      date: "Abril de 2024 - Actualidad",
-      description: "Mantenimiento e implementación de mejoras para proyectos internos del BBVA. Desarrollo de features, testing unitario y CI/CD.",
-      tags: ["Java", "Maven", "Google Cloud Platform", "GAE", "Vue js", "Python", "Flask", "Javascript/Typescript", "JQuery"],
-    },
-    {
-      title: "Desarrollador de Software y consultor en Imagar Solutions Company",
-      date: "Junio de 2021 - Abril 2024",
-      description: "Desarrollo de proyectos diversos para cliente, basados en la integración de distintos sistemas vía software y RPA. Creación de soluciones low code para pequeños clientes con el objetivo de automatizar procesos de negocio.",
-      tags: [".NET", "ASP.NET", "Power Platform", "Power Automate Desktop", "Azure Functions", "Mulesoft", "MySQL", "SQL Server"],
-    },
-  ];
+interface ExperienceSectionProps {
+  experiences: ExperienceItem[];
+}
 
+const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) => {
   return (
     <div className="font-mono">
       <div className="mb-4">

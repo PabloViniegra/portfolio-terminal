@@ -1,11 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTheme, type ThemeType } from '../hooks/useTheme';
 
+/**
+ * Representa un tema de la aplicación
+ * @interface Theme
+ * @property {string} id - Identificador único del tema
+ * @property {string} name - Nombre visible del tema
+ * @property {string} color - Clase de Tailwind para el color representativo
+ */
 type Theme = {
-  id: string;
+  id: ThemeType;
   name: string;
   color: string;
 };
 
+/**
+ * Lista de temas disponibles en la aplicación
+ * @constant
+ */
 const themes: Theme[] = [
   { 
     id: 'one-dark', 
@@ -29,16 +41,27 @@ const themes: Theme[] = [
   },
 ];
 
+/**
+ * Componente selector de temas
+ * 
+ * Permite al usuario cambiar entre diferentes temas de color.
+ * El tema seleccionado se guarda en localStorage y se aplica
+ * mediante el atributo data-theme en el elemento HTML.
+ * 
+ * @component
+ * @returns {JSX.Element} Dropdown selector de temas
+ * 
+ * @example
+ * ```tsx
+ * <ThemeSwitcher client:load />
+ * ```
+ */
 const ThemeSwitcher = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState('one-dark');
+  const { theme: currentTheme, setTheme: changeTheme } = useTheme();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'one-dark';
-    setCurrentTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
-
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
@@ -49,10 +72,8 @@ const ThemeSwitcher = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const setTheme = (themeId: string) => {
-    setCurrentTheme(themeId);
-    localStorage.setItem('theme', themeId);
-    document.documentElement.setAttribute('data-theme', themeId);
+  const handleThemeChange = (themeId: ThemeType) => {
+    changeTheme(themeId);
     setIsOpen(false);
   };
 
@@ -75,23 +96,30 @@ const ThemeSwitcher = () => {
       </button>
 
       {isOpen && (
-        <div className={`absolute right-0 mt-1 w-48 rounded-md shadow-xl py-1 z-30 overflow-hidden
-          bg-terminal-bg border border-terminal-border/80 backdrop-blur-sm
-          transform transition-all duration-200 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+        <div 
+          className={`absolute right-0 mt-1 w-48 rounded-md shadow-xl py-1 z-30 overflow-hidden
+            bg-terminal-bg border border-terminal-border/80 backdrop-blur-sm
+            transform transition-all duration-200 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
           style={{
             background: 'rgba(var(--terminal-bg-rgb), 0.95)',
             backdropFilter: 'blur(8px)'
-          }}>
+          }}
+          role="menu"
+          aria-label="Selector de tema"
+        >
           {themes.map((theme) => (
             <button
               key={theme.id}
-              onClick={() => setTheme(theme.id)}
+              onClick={() => handleThemeChange(theme.id)}
               className={`w-full text-left px-4 py-2.5 text-sm flex items-center space-x-3
                 transition-all duration-150 ${currentTheme === theme.id
                   ? 'bg-terminal-accent/15 text-terminal-accent font-medium'
                   : 'text-terminal-text hover:bg-terminal-bg-secondary'}`}
+              role="menuitem"
+              aria-label={`Cambiar al tema ${theme.name}`}
+              aria-pressed={currentTheme === theme.id}
             >
-              <span className={`w-3 h-3 rounded-full ${theme.color}`}></span>
+              <span className={`w-3 h-3 rounded-full ${theme.color}`} aria-hidden="true"></span>
               <span>{theme.name}</span>
             </button>
           ))}

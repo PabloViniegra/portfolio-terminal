@@ -2,11 +2,21 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import type { KeyboardEvent } from "react";
 import CommandSuggestions from "./CommandSuggestions";
 
+/**
+ * Representa una sugerencia de comando
+ * @typedef {Object} Suggestion
+ * @property {string} command - El comando sugerido
+ * @property {string} description - Descripción del comando
+ */
 type Suggestion = {
   command: string;
   description: string;
 };
 
+/**
+ * Lista de comandos disponibles con sus descripciones
+ * @constant
+ */
 const COMMAND_SUGGESTIONS: Suggestion[] = [
   { command: '/home', description: 'Ir a la página de inicio' },
   { command: '/experience', description: 'Ver experiencia laboral' },
@@ -19,12 +29,41 @@ const COMMAND_SUGGESTIONS: Suggestion[] = [
   { command: '/clear', description: 'Limpiar la terminal' },
 ];
 
+/**
+ * Props del componente CommandInput
+ * @interface Props
+ * @property {(input: string) => void} onCommand - Callback ejecutado cuando se envía un comando
+ * @property {(direction: 'up' | 'down') => string} onHistoryNavigate - Callback para navegar por el historial
+ * @property {boolean} [disabled=false] - Si el input está deshabilitado
+ */
 type Props = {
   onCommand: (input: string) => void;
   onHistoryNavigate: (direction: 'up' | 'down') => string;
   disabled?: boolean;
 };
 
+/**
+ * Componente de entrada de comandos para la terminal
+ * 
+ * Proporciona un campo de entrada con características avanzadas:
+ * - Autocompletado de comandos con Tab
+ * - Navegación por historial con flechas arriba/abajo
+ * - Sugerencias en tiempo real
+ * - Navegación por sugerencias con flechas
+ * 
+ * @component
+ * @param {Props} props - Props del componente
+ * @returns {JSX.Element} Campo de entrada de comandos
+ * 
+ * @example
+ * ```tsx
+ * <CommandInput
+ *   onCommand={(cmd) => console.log(cmd)}
+ *   onHistoryNavigate={(dir) => getPreviousCommand(dir)}
+ *   disabled={false}
+ * />
+ * ```
+ */
 export default function CommandInput({ onCommand, onHistoryNavigate, disabled = false }: Props) {
   const [input, setInput] = useState("");
   const [temporaryInput, setTemporaryInput] = useState("");

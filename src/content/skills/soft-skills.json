@@ -1,0 +1,44 @@
+[
+  {
+    "id": "communication",
+    "name": "Comunicación con el equipo",
+    "rating": 60,
+    "order": 1
+  },
+  {
+    "id": "teamwork",
+    "name": "Trabajo en equipo",
+    "rating": 50,
+    "order": 2
+  },
+  {
+    "id": "adaptability",
+    "name": "Adaptación al cambio",
+    "rating": 75,
+    "order": 3
+  },
+  {
+    "id": "time-management",
+    "name": "Gestión del tiempo",
+    "rating": 55,
+    "order": 4
+  },
+  {
+    "id": "responsibility",
+    "name": "Responsabilidad",
+    "rating": 80,
+    "order": 5
+  },
+  {
+    "id": "problem-solving",
+    "name": "Resolución de problemas",
+    "rating": 75,
+    "order": 6
+  },
+  {
+    "id": "interpersonal",
+    "name": "Habilidades interpersonales",
+    "rating": 55,
+    "order": 7
+  }
+]

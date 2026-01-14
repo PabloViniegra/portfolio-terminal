@@ -5,9 +5,12 @@
 ## 🚀 Características
 
 - **Interfaz de terminal interactiva** con autocompletado de comandos
-- **Tema oscuro/ligero** con conmutador integrado
+- **Content Collections de Astro** para gestión de contenido estructurado
+- **Validación de datos** con Zod schemas y type-safety completo
+- **Tema oscuro/ligero** con conmutador integrado (4 temas disponibles)
 - **Efecto de lluvia de Matrix** (activable con el comando `/rain`)
 - **Navegación por historial** de comandos con las teclas de flecha
+- **Contenido fácilmente editable** en archivos JSON
 
 ## 🖥️ Comandos Disponibles
 
@@ -25,10 +28,11 @@
 
 ## 🛠️ Tecnologías Utilizadas
 
-- [Astro](https://astro.build/) - El framework web todo en uno
-- [React](https://reactjs.org/) - Biblioteca de JavaScript para interfaces de usuario
+- [Astro 5.11](https://astro.build/) - Framework web con Content Collections
+- [React 19](https://reactjs.org/) - Biblioteca de JavaScript para interfaces de usuario
 - [TypeScript](https://www.typescriptlang.org/) - JavaScript tipado estáticamente
-- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS utility-first
+- [Tailwind CSS 4](https://tailwindcss.com/) - Framework CSS utility-first
+- [Zod](https://zod.dev/) - Validación de schemas TypeScript-first
 - [Vite](https://vitejs.dev/) - Herramienta de compilación y servidor de desarrollo
 
 ## 🚀 Cómo Empezar
@@ -72,18 +76,32 @@
 ├── public/               # Archivos estáticos
 │   └── cv/              # Archivos de CV para descargar
 ├── src/
+│   ├── content/         # 🆕 Content Collections (JSON)
+│   │   ├── experience/  # Experiencia laboral
+│   │   ├── projects/    # Proyectos personales
+│   │   ├── skills/      # Habilidades técnicas
+│   │   ├── contact/     # Información de contacto
+│   │   ├── commands/    # Comandos de terminal
+│   │   └── general/     # Textos generales
+│   ├── content.config.ts # 🆕 Configuración de colecciones
 │   ├── assets/          # Imágenes y fuentes
 │   ├── components/      # Componentes React/TSX
 │   │   ├── CommandInput.tsx  # Entrada de comandos
 │   │   ├── MatrixRain.tsx    # Efecto de lluvia de Matrix
 │   │   ├── SectionOutput.tsx # Salida de secciones
-│   │   └── ...
+│   │   └── sections/    # Componentes de sección
 │   ├── layouts/         # Plantillas de diseño
 │   └── pages/           # Páginas de la aplicación
+├── docs/                # 🆕 Documentación completa
+│   ├── README.md        # Índice de documentación
+│   ├── QUICK-START-CONTENT.md    # Guía rápida
+│   ├── CONTENT-COLLECTIONS.md   # Guía completa
+│   ├── MIGRATION-GUIDE.md       # Guía de migración
+│   └── CONTENT-STRUCTURE.md     # Estructura de contenido
 └── package.json         # Dependencias y scripts
 ```
 
-## 🧪 Comandos Disponibles
+## 🧪 Comandos de Desarrollo
 
 | Comando          | Acción                                    |
 | ---------------- | ----------------------------------------- |
@@ -93,7 +111,47 @@
 | `pnpm preview`   | Vista previa de la compilación localmente |
 | `pnpm astro ...` | Comandos de la CLI de Astro               |
 
+## 📝 Actualizar Contenido
+
+### Opción 1: Edición Rápida (Recomendado)
+
+1. Abre el archivo JSON correspondiente en `src/content/`
+2. Edita el contenido siguiendo el formato existente
+3. Guarda el archivo
+4. El servidor recargará automáticamente
+
+**[⚡ Ver guía rápida](./docs/QUICK-START-CONTENT.md)**
+
+### Opción 2: Documentación Completa
+
+Para entender la arquitectura completa:
+
+**[📖 Documentación de Content Collections](./docs/CONTENT-COLLECTIONS.md)**
+
 ## 🌟 Características Especiales
+
+### Content Collections
+
+Todo el contenido está organizado en **Content Collections** de Astro:
+
+- ✅ **Validación automática** con Zod schemas
+- ✅ **Type-safety** completo con TypeScript
+- ✅ **Fácil edición** en archivos JSON
+- ✅ **Intellisense** en el editor
+
+**[📖 Ver documentación completa](./docs/README.md)**
+
+### Gestión de Contenido
+
+Actualiza fácilmente:
+- Experiencia laboral
+- Proyectos personales
+- Habilidades técnicas y blandas
+- Información de contacto
+- Comandos de terminal
+- Textos generales
+
+**[⚡ Guía rápida de edición](./docs/QUICK-START-CONTENT.md)**
 
 ### Efecto de Lluvia de Matrix
 
@@ -106,7 +164,13 @@ Activa el efecto de lluvia de Matrix escribiendo `/rain` en la terminal. Puedes 
 
 ### Temas
 
-Cambia entre varios temas con el selector de temas. La preferencia se guarda localmente.
+Cambia entre 4 temas disponibles con el selector de temas:
+- One Dark (por defecto)
+- Light
+- Ayu
+- GitHub Dark
+
+La preferencia se guarda localmente en localStorage.
 
 ## 📄 Licencia
 
@@ -118,4 +182,33 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 - Efecto de lluvia de Matrix inspirado en la película "The Matrix"
 - Desarrollado con ❤️ por Pablo Viniegra
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📚 Documentación
+
+- **[Índice de Documentación](./docs/README.md)** - Punto de partida
+- **[Quick Start](./docs/QUICK-START-CONTENT.md)** - Edición rápida de contenido
+- **[Content Collections](./docs/CONTENT-COLLECTIONS.md)** - Guía completa
+- **[Migration Guide](./docs/MIGRATION-GUIDE.md)** - Cambios recientes
+- **[Content Structure](./docs/CONTENT-STRUCTURE.md)** - Vista general
+
+## 🤝 Contribuir
+
+Las contribuciones son bienvenidas! Por favor:
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📧 Contacto
+
+Pablo Viniegra - [@PabloViniegra](https://github.com/PabloViniegra)
+
+- Email: pablovpmadrid@gmail.com
+- LinkedIn: [pabloviniegra](https://linkedin.com/in/pabloviniegra)
+
+## 🌟 Recursos Adicionales
+
+- [Documentación de Astro](https://docs.astro.build)
+- [Astro Discord](https://astro.build/chat)
+- [Content Collections Guide](https://docs.astro.build/en/guides/content-collections/)

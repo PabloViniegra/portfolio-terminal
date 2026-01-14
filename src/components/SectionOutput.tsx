@@ -4,11 +4,56 @@ import ProjectsSection from './sections/ProjectsSection';
 import SkillsSection from './sections/SkillsSection';
 import ContactSection from './sections/ContactSection';
 
+interface ExperienceItem {
+  title: string;
+  date: string;
+  description: string;
+  tags: string[];
+}
+
+interface ProjectItem {
+  title: string;
+  description: string;
+  link?: string;
+  github: string;
+  technologies: string[];
+}
+
+interface KnowledgeItem {
+  name: string;
+  rating: number;
+}
+
+interface KnowledgeCategory {
+  category: string;
+  knowledges: KnowledgeItem[];
+}
+
+interface SoftSkill {
+  name: string;
+  rating: number;
+}
+
+interface ContactItem {
+  title: string;
+  content: string;
+  link: string;
+}
+
 type Props = {
   section: 'home' | 'experience' | 'projects' | 'skills' | 'contact';
+  data?: {
+    experiences?: ExperienceItem[];
+    projects?: ProjectItem[];
+    knowledgeCategories?: KnowledgeCategory[];
+    softSkills?: SoftSkill[];
+    contactInfo?: ContactItem[];
+    ctaMessage?: string;
+    ctaButtonText?: string;
+  };
 };
 
-const SectionOutput: React.FC<Props> = ({ section }) => {
+const SectionOutput: React.FC<Props> = ({ section, data = {} }) => {
   switch (section) {
     case 'home':
       return (
@@ -39,16 +84,23 @@ const SectionOutput: React.FC<Props> = ({ section }) => {
       );
 
     case 'experience':
-      return <ExperienceSection />;
+      return <ExperienceSection experiences={data.experiences || []} />;
 
     case 'projects':
-      return <ProjectsSection />;
+      return <ProjectsSection projects={data.projects || []} />;
 
     case 'skills':
-      return <SkillsSection />;
+      return <SkillsSection 
+        knowledgeCategories={data.knowledgeCategories || []} 
+        softSkills={data.softSkills || []} 
+      />;
 
     case 'contact':
-      return <ContactSection />;
+      return <ContactSection 
+        contactInfo={data.contactInfo || []} 
+        ctaMessage={data.ctaMessage || "¿Quieres trabajar juntos en un proyecto?"}
+        ctaButtonText={data.ctaButtonText || "Enviar mensaje"}
+      />;
 
     default:
       return null;

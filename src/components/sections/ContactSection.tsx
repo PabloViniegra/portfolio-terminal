@@ -6,30 +6,13 @@ interface ContactItem {
   link: string;
 }
 
-const ContactSection: React.FC = () => {
-  const contactInfo: ContactItem[] = [
-    {
-      title: "Email",
-      content: "pablovpmadrid@gmail.com",
-      link: "mailto:pablovpmadrid@gmail.com",
-    },
-    {
-      title: "Dirección",
-      content: "Móstoles, Madrid, España",
-      link: "https://www.google.com/maps?q=Mostoles,+Madrid,+España",
-    },
-    {
-      title: "LinkedIn",
-      content: "linkedin.com/in/pabloviniegra",
-      link: "https://linkedin.com/in/pabloviniegra",
-    },
-    {
-      title: "GitHub",
-      content: "github.com/PabloViniegra",
-      link: "https://github.com/PabloViniegra",
-    },
-  ];
+interface ContactSectionProps {
+  contactInfo: ContactItem[];
+  ctaMessage: string;
+  ctaButtonText: string;
+}
 
+const ContactSection: React.FC<ContactSectionProps> = ({ contactInfo, ctaMessage, ctaButtonText }) => {
   return (
     <div className="font-mono">
       <div className="mb-6">
@@ -58,12 +41,12 @@ const ContactSection: React.FC = () => {
         ))}
         
         <div className="pt-4 mt-6 border-t border-terminal-border">
-          <p className="text-terminal-text mb-4">¿Quieres trabajar juntos en un proyecto?</p>
+          <p className="text-terminal-text mb-4">{ctaMessage}</p>
           <a 
             href="mailto:pablovpmadrid@gmail.com" 
             className="inline-block bg-terminal-accent text-terminal-bg px-4 py-2 rounded hover:bg-opacity-90 transition-colors font-medium"
           >
-            Enviar mensaje
+            {ctaButtonText}
           </a>
         </div>
       </div>

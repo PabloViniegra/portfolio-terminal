@@ -11,7 +11,7 @@ const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
   const animationRef = useRef<number>(0);
   const columnsRef = useRef<number[]>([]);
   const fontSize = 14;
-  const characters = '01';
+  const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
 
   const init = useCallback(() => {
     const canvas = canvasRef.current;
@@ -37,18 +37,27 @@ const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Fondo semi-transparente para efecto de desvanecimiento
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#0f0';
     ctx.font = `${fontSize}px monospace`;
 
     columnsRef.current.forEach((yPos, index) => {
       const text = characters.charAt(Math.floor(Math.random() * characters.length));
       const x = index * fontSize;
       
+      // Color verde brillante para el carácter principal
+      ctx.fillStyle = '#0f0';
       ctx.fillText(text, x, yPos);
       
+      // Efecto de brillo adicional
+      if (Math.random() > 0.95) {
+        ctx.fillStyle = '#fff';
+        ctx.fillText(text, x, yPos);
+      }
+      
+      // Reiniciar columna o avanzar
       if (yPos > canvas.height || Math.random() > 0.975) {
         columnsRef.current[index] = 0;
       } else {
@@ -95,10 +104,11 @@ const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
   }, [init]);
 
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block"
+        style={{ opacity: 0.6 }}
       />
     </div>
   );

@@ -1,4 +1,5 @@
 ---
+import ThemeSwitcher from "../components/ThemeSwitcher";
 import "../styles/global.css";
 ---
 
@@ -14,30 +15,11 @@ import "../styles/global.css";
     class="min-h-screen flex items-center justify-center bg-terminal-bg text-terminal-text"
   >
     <div class="fixed top-4 right-4 z-50">
-      <div id="theme-switcher"></div>
+      <ThemeSwitcher client:load />
     </div>
 
     <main class="w-full max-w-3xl mx-auto p-4">
       <slot />
     </main>
-
-    <script>
-      import React from "react";
-
-      const savedTheme = localStorage.getItem("theme") || "one-dark";
-      document.documentElement.setAttribute("data-theme", savedTheme);
-
-      import("../components/ThemeSwitcher").then(
-        ({ default: ThemeSwitcher }) => {
-          const container = document.getElementById("theme-switcher");
-          if (container) {
-            // @ts-ignore
-            ReactDOM.createRoot(container).render(
-              React.createElement(ThemeSwitcher)
-            );
-          }
-        }
-      );
-    </script>
   </body>
 </html>

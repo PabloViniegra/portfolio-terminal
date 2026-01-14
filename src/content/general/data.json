@@ -1,0 +1,118 @@
+[
+  {
+    "id": "welcome-title",
+    "key": "welcome-title",
+    "title": "Portfolio Terminal",
+    "content": "$ ./portfolio_",
+    "metadata": {
+      "type": "ascii-title"
+    }
+  },
+  {
+    "id": "welcome-message",
+    "key": "welcome-message",
+    "title": "Bienvenida",
+    "content": "Bienvenido a mi portfolio interactivo en modo terminal",
+    "metadata": {
+      "type": "welcome"
+    }
+  },
+  {
+    "id": "welcome-hint",
+    "key": "welcome-hint",
+    "content": "Prueba el comando /rain para un efecto especial",
+    "metadata": {
+      "type": "hint"
+    }
+  },
+  {
+    "id": "help-intro",
+    "key": "help-intro",
+    "content": "Escribe /help para ver los comandos disponibles.",
+    "metadata": {
+      "type": "hint"
+    }
+  },
+  {
+    "id": "tab-hint",
+    "key": "tab-hint",
+    "content": "para autocompletar comandos",
+    "metadata": {
+      "type": "keyboard-hint",
+      "key": "Tab"
+    }
+  },
+  {
+    "id": "arrow-hint",
+    "key": "arrow-hint",
+    "content": "para navegar entre sugerencias",
+    "metadata": {
+      "type": "keyboard-hint",
+      "key": "↑/↓"
+    }
+  },
+  {
+    "id": "version",
+    "key": "version",
+    "content": "1.0.0",
+    "metadata": {
+      "type": "version"
+    }
+  },
+  {
+    "id": "terminal-user",
+    "key": "terminal-user",
+    "content": "pablo@terminal: ~",
+    "metadata": {
+      "type": "terminal-prompt"
+    }
+  },
+  {
+    "id": "terminal-domain",
+    "key": "terminal-domain",
+    "content": "terminal@pablo.dev",
+    "metadata": {
+      "type": "terminal-domain"
+    }
+  },
+  {
+    "id": "contact-cta",
+    "key": "contact-cta",
+    "content": "¿Quieres trabajar juntos en un proyecto?",
+    "metadata": {
+      "type": "cta"
+    }
+  },
+  {
+    "id": "contact-button",
+    "key": "contact-button",
+    "content": "Enviar mensaje",
+    "metadata": {
+      "type": "button-text"
+    }
+  },
+  {
+    "id": "error-unknown-command",
+    "key": "error-unknown-command",
+    "content": "Comando no reconocido",
+    "metadata": {
+      "type": "error"
+    }
+  },
+  {
+    "id": "help-title",
+    "key": "help-title",
+    "content": "=== Comandos disponibles ===",
+    "metadata": {
+      "type": "title"
+    }
+  },
+  {
+    "id": "help-tip",
+    "key": "help-tip",
+    "content": "Consejo: Usa las teclas de flecha arriba/abajo para navegar por el historial de comandos.",
+    "metadata": {
+      "type": "tip"
+    }
+  }
+]

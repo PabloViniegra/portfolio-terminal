@@ -2,29 +2,15 @@
 
 @import "tailwindcss";
 
+/* Variables globales y tema por defecto (One Dark) */
 :root {
   --font-sans: 'Montserrat', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   
-  /* Colores base */
-  --color-bg: #282c34;
-  --color-bg-secondary: #21252b;
-  --color-text: #abb2bf;
-  --color-text-secondary: #5c6370;
-  --color-accent: #61afef;
-  --color-prompt: #98c379;
-  --color-error: #e06c75;
-  --color-warning: #e5c07b;
-  --color-success: #98c379;
-  --color-border: #3e4451;
-  --color-selection: #3e4451;
-  --color-cursor: #528bff;
-  --color-cursor-text: #ffffff;
-  
-  /* Colores específicos del tema */
+  /* Tema One Dark */
   --terminal-bg: #282c34;
+  --terminal-bg-secondary: #21252b;
   --terminal-header-bg: #1e1e1e;
-  --terminal-title-color: #61afef;
   --terminal-text: #abb2bf;
   --terminal-text-secondary: #5c6370;
   --terminal-accent: #61afef;
@@ -33,21 +19,14 @@
   --terminal-warning: #e5c07b;
   --terminal-success: #98c379;
   --terminal-border: #3e4451;
-  --terminal-selection: #3e4451;
   --terminal-cursor: #528bff;
-  --terminal-cursor-text: #ffffff;
-  --terminal-cursor-bg: #528bff33;
-  --terminal-cursor-blink: #528bff;
-  --terminal-cursor-blink-bg: #528bff33;
-  --terminal-cursor-blink-text: #ffffff;
-  --terminal-cursor-blink-bg-text: #528bff33;
 }
 
-/* Tema Claro */
+/* Tema Light */
 [data-theme="light"] {
   --terminal-bg: #f8f8f8;
+  --terminal-bg-secondary: #e8e8e8;
   --terminal-header-bg: #e8e8e8;
-  --terminal-title-color: #2b6cb0;
   --terminal-text: #4a5568;
   --terminal-text-secondary: #718096;
   --terminal-accent: #2b6cb0;
@@ -56,21 +35,14 @@
   --terminal-warning: #b7791f;
   --terminal-success: #2f855a;
   --terminal-border: #cbd5e0;
-  --terminal-selection: #cbd5e0;
   --terminal-cursor: #2b6cb0;
-  --terminal-cursor-text: #ffffff;
-  --terminal-cursor-bg: #2b6cb033;
-  --terminal-cursor-blink: #2b6cb0;
-  --terminal-cursor-blink-bg: #2b6cb033;
-  --terminal-cursor-blink-text: #ffffff;
-  --terminal-cursor-blink-bg-text: #2b6cb033;
 }
 
 /* Tema Ayu */
 [data-theme="ayu"] {
   --terminal-bg: #0f1419;
+  --terminal-bg-secondary: #0a0e11;
   --terminal-header-bg: #0a0e11;
-  --terminal-title-color: #ffb454;
   --terminal-text: #e6e1cf;
   --terminal-text-secondary: #8a8f98;
   --terminal-accent: #39bae6;
@@ -79,21 +51,14 @@
   --terminal-warning: #ffb454;
   --terminal-success: #b8cc52;
   --terminal-border: #2a3541;
-  --terminal-selection: #2a3541;
   --terminal-cursor: #ffb454;
-  --terminal-cursor-text: #0f1419;
-  --terminal-cursor-bg: #ffb45433;
-  --terminal-cursor-blink: #ffb454;
-  --terminal-cursor-blink-bg: #ffb45433;
-  --terminal-cursor-blink-text: #0f1419;
-  --terminal-cursor-blink-bg-text: #ffb45433;
 }
 
 /* Tema GitHub Dark */
 [data-theme="github-dark"] {
   --terminal-bg: #0d1117;
+  --terminal-bg-secondary: #161b22;
   --terminal-header-bg: #161b22;
-  --terminal-title-color: #58a6ff;
   --terminal-text: #c9d1d9;
   --terminal-text-secondary: #8b949e;
   --terminal-accent: #58a6ff;
@@ -102,30 +67,26 @@
   --terminal-warning: #e3b341;
   --terminal-success: #7ee787;
   --terminal-border: #30363d;
-  --terminal-selection: #30363d;
   --terminal-cursor: #58a6ff;
-  --terminal-cursor-text: #0d1117;
-  --terminal-cursor-bg: #58a6ff33;
-  --terminal-cursor-blink: #58a6ff;
-  --terminal-cursor-blink-bg: #58a6ff33;
-  --terminal-cursor-blink-text: #0d1117;
-  --terminal-cursor-blink-bg-text: #58a6ff33;
 }
 
+/* Estilos base del body */
 body {
-  background-color: var(--color-bg);
-  background-image: radial-gradient(circle at 50% 50%, rgba(94, 143, 255, 0.05) 0%, transparent 50%);
-  color: var(--color-text);
+  margin: 0;
+  padding: 0;
   font-family: var(--font-sans);
+  background-color: var(--terminal-bg);
+  background-image: radial-gradient(circle at 50% 50%, rgba(94, 143, 255, 0.05) 0%, transparent 50%);
+  color: var(--terminal-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin: 0;
-  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
+/* Animaciones */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
@@ -143,17 +104,13 @@ body {
   80% { opacity: 0.91; }
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-sans);
-  background-color: var(--terminal-bg);
-  color: var(--terminal-text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  min-height: 100vh;
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
 }
 
 ::-webkit-scrollbar {

@@ -1,11 +1,19 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, lazy, Suspense } from "react";
 import CommandInput from "./CommandInput";
 import SectionOutput from "./SectionOutput";
 import TerminalLoader from "./TerminalLoader";
 import Avatar from "./Avatar";
-import MatrixRain from "./MatrixRain";
-import ThemeSwitcher from "./ThemeSwitcher";
 
+// Lazy load MatrixRain solo cuando se necesita
+const MatrixRain = lazy(() => import("./MatrixRain"));
+
+/**
+ * Representa un comando ejecutado en la terminal
+ * @interface Command
+ * @property {string} input - El comando ingresado por el usuario
+ * @property {React.ReactNode} output - La salida renderizada del comando
+ * @property {number} timestamp - Timestamp de cuando se ejecutó el comando
+ */
 interface Command {
   input: string;
   output: React.ReactNode;
@@ -37,12 +45,12 @@ const AsciiTitle = () => (
   </div>
 );
 
-const WelcomeMessage = () => (
+const WelcomeMessage: React.FC<{ welcomeMessage: string, version: string }> = ({ welcomeMessage, version }) => (
   <div className="terminal-output">
     <div className="text-center max-w-2xl mx-auto">
       <AsciiTitle />
       <div className="mb-6 text-terminal-text-secondary text-lg">
-        Bienvenido a mi portfolio interactivo en modo terminal
+        {welcomeMessage}
       </div>
       <div className="mb-4 p-3 bg-terminal-bg-secondary rounded border border-terminal-border/30">
         <p className="text-sm">Prueba el comando <span className="text-terminal-prompt font-mono font-bold">/rain</span> para un efecto especial</p>
@@ -73,69 +81,86 @@ const WelcomeMessage = () => (
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6">
           <span>Última actualización: {new Date().toLocaleDateString()}</span>
           <span className="hidden sm:inline text-[#5c6370]">•</span>
-          <span>Versión: 1.0.0</span>
+          <span>Versión: {version}</span>
         </div>
       </div>
     </div>
   </div>
 );
 
-const helpMsg = (
+const HelpMessage: React.FC<{ commands: any[], helpTitle: string, helpTip: string }> = ({ commands, helpTitle, helpTip }) => (
   <div className="terminal-output">
     <div className="text-terminal-accent mb-2">
-      === Comandos disponibles ===
+      {helpTitle}
     </div>
     <ul className="command-list">
-      <li>
-        <span className="text-terminal-accent">/rain</span> – Siéntete un hacker
-        <div className="text-terminal-text-secondary text-xs ml-8 mt-1">
-          Usa <span className="font-mono px-1.5 py-0.5 bg-terminal-bg rounded border border-terminal-border/50">Ctrl+C</span> para desactivar
-        </div>
-      </li>
-      <li>
-        <span className="text-terminal-accent">/home</span> – Muestra la página
-        de inicio
-      </li>
-      <li>
-        <span className="text-terminal-accent">/experience</span> – Muestra mi
-        experiencia laboral
-      </li>
-      <li>
-        <span className="text-terminal-accent">/projects</span> – Muestra mis
-        proyectos
-      </li>
-      <li>
-        <span className="text-terminal-accent">/skills</span> – Muestra mis
-        habilidades técnicas
-      </li>
-      <li>
-        <span className="text-terminal-accent">/contact</span> – Muestra mis
-        datos de contacto
-      </li>
-      <li>
-        <span className="text-terminal-accent">/cv</span> – Descarga mi CV en
-        PDF
-      </li>
-      <li>
-        <span className="text-terminal-accent">/clear</span> – Limpia la
-        terminal
-      </li>
-      <li>
-        <span className="text-terminal-accent">/help</span> – Muestra esta
-        ayuda
-      </li>
+      {commands.map((cmd, idx) => (
+        <li key={idx}>
+          <span className="text-terminal-accent">{cmd.command}</span> – {cmd.description}
+          {cmd.hint && (
+            <div className="text-terminal-text-secondary text-xs ml-8 mt-1">
+              {cmd.hint}
+            </div>
+          )}
+        </li>
+      ))}
     </ul>
     <div className="mt-4 text-xs text-terminal-text-secondary">
       <div>
-        Consejo: Usa las teclas de flecha arriba/abajo para navegar por el
-        historial de comandos.
+        {helpTip}
       </div>
     </div>
   </div>
 );
 
-const Terminal: React.FC = () => {
-  const [history, setHistory] = useState<Command[]>([]);
+interface ContentData {
+  experiences: any[];
+  projects: any[];
+  knowledgeCategories: any[];
+  softSkills: any[];
+  contactInfo: any[];
+  commands: any[];
+  general: {
+    ctaMessage: string;
+    ctaButtonText: string;
+    welcomeMessage: string;
+    helpTitle: string;
+    helpTip: string;
+    version: string;
+  };
+}
+
+interface TerminalProps {
+  contentData: ContentData;
+}
+
+/**
+ * Componente principal de la terminal interactiva
+ * 
+ * Simula una terminal de comandos donde los usuarios pueden ejecutar comandos
+ * para navegar por el contenido del portfolio. Incluye características como:
+ * - Historial de comandos navegable con flechas arriba/abajo
+ * - Autocompletado de comandos con Tab
+ * - Efecto Matrix Rain activable
+ * - Scroll automático al final del historial
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <Terminal client:idle contentData={contentData} />
+ * ```
+ */
+const Terminal: React.FC<TerminalProps> = ({ contentData }) => {
+  const [history, setHistory] = useState<Command[]>(() => [
+    { 
+      input: "", 
+      output: <WelcomeMessage 
+        welcomeMessage={contentData.general.welcomeMessage} 
+        version={contentData.general.version}
+      />, 
+      timestamp: Date.now() 
+    }
+  ]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [isLoading, setIsLoading] = useState(false);
@@ -143,18 +168,13 @@ const Terminal: React.FC = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
   const historyEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (history.length === 0) {
-      setHistory([
-        { input: "", output: <WelcomeMessage />, timestamp: Date.now() },
-      ]);
-    }
-  }, [history.length]);
-
-  // Efecto para manejar el scroll automático
+  // Efecto para manejar el scroll automático optimizado
   useEffect(() => {
     if (historyEndRef.current) {
-      historyEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      // Usar requestAnimationFrame para mejor rendimiento
+      requestAnimationFrame(() => {
+        historyEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      });
     }
   }, [history, isLoading]);
 
@@ -178,17 +198,40 @@ const Terminal: React.FC = () => {
         setHistory([]);
         return null;
       case "/help":
-        return helpMsg;
+        return <HelpMessage 
+          commands={contentData.commands} 
+          helpTitle={contentData.general.helpTitle}
+          helpTip={contentData.general.helpTip}
+        />;
       case "/home":
         return <SectionOutput section="home" />;
       case "/experience":
-        return <SectionOutput section="experience" />;
+        return <SectionOutput 
+          section="experience" 
+          data={{ experiences: contentData.experiences }}
+        />;
       case "/projects":
-        return <SectionOutput section="projects" />;
+        return <SectionOutput 
+          section="projects" 
+          data={{ projects: contentData.projects }}
+        />;
       case "/skills":
-        return <SectionOutput section="skills" />;
+        return <SectionOutput 
+          section="skills" 
+          data={{ 
+            knowledgeCategories: contentData.knowledgeCategories,
+            softSkills: contentData.softSkills 
+          }}
+        />;
       case "/contact":
-        return <SectionOutput section="contact" />;
+        return <SectionOutput 
+          section="contact" 
+          data={{ 
+            contactInfo: contentData.contactInfo,
+            ctaMessage: contentData.general.ctaMessage,
+            ctaButtonText: contentData.general.ctaButtonText
+          }}
+        />;
       case "/cv":
         const link = document.createElement('a');
         link.href = '/cv/CV_2024.pdf';
@@ -229,8 +272,9 @@ const Terminal: React.FC = () => {
 
     setIsLoading(true);
 
+    // Delay reducido para mejor UX (200-400ms en lugar de 800-1500ms)
     await new Promise((resolve) =>
-      setTimeout(resolve, 800 + Math.random() * 700)
+      setTimeout(resolve, 200 + Math.random() * 200)
     );
 
     const output = processCommand(input);
@@ -294,62 +338,79 @@ const Terminal: React.FC = () => {
   }, [showMatrixRain]);
 
   return (
-    <div className="terminal relative h-full flex flex-col bg-terminal-bg text-terminal-text overflow-hidden">
-      {showMatrixRain && <MatrixRain onDeactivate={handleDeactivateRain} />}
+    <section 
+      className="terminal relative h-full flex flex-col bg-terminal-bg text-terminal-text overflow-hidden"
+      role="application"
+      aria-label="Terminal interactiva de portfolio"
+    >
+      {showMatrixRain && (
+        <Suspense fallback={<div className="text-terminal-text-secondary">Cargando efecto...</div>}>
+          <MatrixRain onDeactivate={handleDeactivateRain} />
+        </Suspense>
+      )}
       
-      <div className={`relative z-10 flex flex-col h-full ${showMatrixRain ? 'bg-terminal-bg/80' : ''}`}>
-        <div className="flex justify-between items-center px-4 py-2 border-b border-terminal-border bg-terminal-header-bg">
+      <div className={`relative flex flex-col h-full ${showMatrixRain ? 'bg-terminal-bg/90 backdrop-blur-sm' : ''}`} style={{ zIndex: 10 }}>
+        <header 
+          className="flex justify-between items-center px-4 py-2 border-b border-terminal-border bg-terminal-header-bg"
+          aria-label="Barra de título de la terminal"
+        >
           <div className="flex items-center space-x-2">
-            <div className="flex space-x-1.5">
-              <div className="w-3 h-3 rounded-full bg-red-500" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
-              <div className="w-3 h-3 rounded-full bg-green-500" />
+            <div className="flex space-x-1.5" role="presentation" aria-label="Botones de ventana">
+              <div className="w-3 h-3 rounded-full bg-red-500" aria-label="Cerrar" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500" aria-label="Minimizar" />
+              <div className="w-3 h-3 rounded-full bg-green-500" aria-label="Maximizar" />
             </div>
             <span className="text-xs text-terminal-text-secondary">terminal@pablo.dev</span>
           </div>
           <div className="flex items-center space-x-3">
-            <ThemeSwitcher />
             <div className="relative group">
-              <div className="w-8 h-8 rounded-full overflow-hidden border border-terminal-border/30 hover:border-terminal-accent/50 transition-colors duration-200">
+              <div 
+                className="w-8 h-8 rounded-full overflow-hidden border border-terminal-border/30 hover:border-terminal-accent/50 transition-colors duration-200"
+                role="img"
+                aria-label="Avatar de Pablo Viniegra"
+              >
                 <Avatar size={32} className="opacity-80 hover:opacity-100 transition-opacity duration-200" />
               </div>
             </div>
           </div>
-        </div>
+        </header>
 
-        <div 
+        <main 
           ref={terminalRef}
           className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 scrollbar-thin scrollbar-thumb-terminal-border/30 scrollbar-track-transparent"
+          role="log"
+          aria-live="polite"
+          aria-label="Salida de la terminal"
         >
           {history.map((item, index) => (
             <div key={index} className="command-group">
               {item.input && (
                 <div className="flex items-baseline">
-                  <span className="text-terminal-prompt font-mono font-bold mr-2">$</span>
-                  <span className="text-terminal-text font-mono">{item.input}</span>
+                  <span className="text-terminal-prompt font-mono font-bold mr-2" aria-hidden="true">$</span>
+                  <span className="text-terminal-text font-mono" role="text">{item.input}</span>
                 </div>
               )}
               <div className="pl-4 border-l-2 border-terminal-border my-1">
                 {item.output}
               </div>
-              <div className="text-xs text-terminal-text-secondary opacity-50 mt-1">
+              <time className="text-xs text-terminal-text-secondary opacity-50 mt-1">
                 {new Date(item.timestamp).toLocaleTimeString()}
-              </div>
+              </time>
             </div>
           ))}
           {isLoading && <TerminalLoader />}
           <div ref={historyEndRef} />
-        </div>
+        </main>
 
-        <div className="border-t border-terminal-border bg-terminal-bg/90 backdrop-blur-sm p-4 sticky bottom-0 z-10">
+        <footer className="border-t border-terminal-border bg-terminal-bg/90 backdrop-blur-sm p-4 sticky bottom-0 z-10">
           <CommandInput
             onCommand={handleCommand}
             onHistoryNavigate={navigateHistory}
             disabled={isLoading}
           />
-        </div>
+        </footer>
       </div>
-    </div>
+    </section>
   );
 };
 

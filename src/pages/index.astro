@@ -1,16 +1,203 @@
 ---
+import { getCollection } from 'astro:content';
 import Terminal from "../components/Terminal";
 import TerminalLayout from "../layouts/TerminalLayout.astro";
 import MobileWarning from "../components/MobileWarning.astro";
 import "../styles/global.css";
 
-if (typeof window !== "undefined") {
-  const savedTheme = localStorage.getItem("theme") || "one-dark";
-  document.documentElement.setAttribute("data-theme", savedTheme);
-}
+// Cargar todas las colecciones de contenido
+const experienceEntries = await getCollection('experience');
+const projectsEntries = await getCollection('projects');
+const skillsEntries = await getCollection('skills');
+const softSkillsEntries = await getCollection('soft-skills');
+const contactEntries = await getCollection('contact');
+const commandsEntries = await getCollection('commands');
+const generalEntries = await getCollection('general');
+
+// Ordenar y formatear los datos
+const experiences = experienceEntries
+  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+  .map(entry => entry.data);
+
+const projects = projectsEntries
+  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+  .map(entry => entry.data);
+
+const knowledgeCategories = skillsEntries
+  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+  .map(entry => entry.data);
+
+const softSkills = softSkillsEntries
+  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+  .map(entry => entry.data);
+
+const contactInfo = contactEntries
+  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+  .map(entry => entry.data);
+
+const commands = commandsEntries
+  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+  .map(entry => entry.data);
+
+// Obtener mensajes generales
+const getGeneralContent = (key: string) => {
+  const entry = generalEntries.find(e => e.data.key === key);
+  return entry?.data.content || '';
+};
+
+const contentData = {
+  experiences,
+  projects,
+  knowledgeCategories,
+  softSkills,
+  contactInfo,
+  commands,
+  general: {
+    ctaMessage: getGeneralContent('contact-cta'),
+    ctaButtonText: getGeneralContent('contact-button'),
+    welcomeMessage: getGeneralContent('welcome-message'),
+    helpTitle: getGeneralContent('help-title'),
+    helpTip: getGeneralContent('help-tip'),
+    version: getGeneralContent('version'),
+  }
+};
 ---
 
 <TerminalLayout>
-  <Terminal client:load />
+  <!-- Skeleton loader mientras carga el terminal -->
+  <div id="terminal-skeleton" class="terminal-skeleton">
+    <div class="skeleton-header">
+      <div class="skeleton-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="skeleton-title">terminal@pablo.dev</div>
+    </div>
+    <div class="skeleton-body">
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line short"></div>
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line medium"></div>
+    </div>
+  </div>
+
+  <!-- Terminal con client:visible para carga más rápida -->
+  <Terminal client:visible contentData={contentData} />
   <MobileWarning />
 </TerminalLayout>
+
+<style>
+  .terminal-skeleton {
+    background-color: var(--terminal-bg);
+    border-radius: 12px;
+    border: 1px solid var(--terminal-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    height: 80vh;
+    max-height: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .skeleton-header {
+    background-color: var(--terminal-header-bg);
+    border-bottom: 1px solid var(--terminal-border);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .skeleton-dots {
+    display: flex;
+    gap: 0.375rem;
+  }
+
+  .skeleton-dots span {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: var(--terminal-border);
+  }
+
+  .skeleton-dots span:nth-child(1) {
+    background-color: rgba(239, 68, 68, 0.5);
+  }
+
+  .skeleton-dots span:nth-child(2) {
+    background-color: rgba(234, 179, 8, 0.5);
+  }
+
+  .skeleton-dots span:nth-child(3) {
+    background-color: rgba(34, 197, 94, 0.5);
+  }
+
+  .skeleton-title {
+    font-size: 0.75rem;
+    color: var(--terminal-text-secondary);
+  }
+
+  .skeleton-body {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skeleton-line {
+    height: 1rem;
+    background-color: var(--terminal-border);
+    border-radius: 0.25rem;
+    width: 100%;
+  }
+
+  .skeleton-line.short {
+    width: 60%;
+  }
+
+  .skeleton-line.medium {
+    width: 80%;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  /* Ocultar skeleton cuando el terminal carga */
+  :global(.terminal) {
+    display: block !important;
+  }
+
+  :global(.terminal) ~ .terminal-skeleton {
+    display: none;
+  }
+</style>
+
+<script is:inline>
+  // Aplicar tema guardado antes de la hidratación para evitar FOUC
+  const savedTheme = localStorage.getItem("theme") || "one-dark";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+
+  // Ocultar skeleton cuando el terminal se carga
+  const observer = new MutationObserver(() => {
+    const terminal = document.querySelector('.terminal');
+    const skeleton = document.getElementById('terminal-skeleton');
+    if (terminal && skeleton) {
+      skeleton.style.display = 'none';
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+</script>
