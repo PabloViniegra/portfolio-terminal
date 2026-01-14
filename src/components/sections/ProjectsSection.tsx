@@ -1,5 +1,14 @@
 import React from "react";
 
+/**
+ * Representa un proyecto del portfolio
+ * @interface ProjectItem
+ * @property {string} title - Título del proyecto
+ * @property {string} description - Descripción del proyecto
+ * @property {string} [link] - URL del proyecto en producción (opcional)
+ * @property {string} github - URL del repositorio en GitHub
+ * @property {string[]} technologies - Tecnologías utilizadas en el proyecto
+ */
 interface ProjectItem {
   title: string;
   description: string;
@@ -8,10 +17,27 @@ interface ProjectItem {
   technologies: string[];
 }
 
+/**
+ * Props del componente ProjectsSection
+ * @interface ProjectsSectionProps
+ * @property {ProjectItem[]} projects - Lista de proyectos
+ */
 interface ProjectsSectionProps {
   projects: ProjectItem[];
 }
 
+/**
+ * Componente que muestra la sección de proyectos
+ * 
+ * @component
+ * @param {ProjectsSectionProps} props - Props del componente
+ * @returns {JSX.Element} Sección de proyectos renderizada
+ * 
+ * @example
+ * ```tsx
+ * <ProjectsSection projects={projects} />
+ * ```
+ */
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
   return (
     <div className="font-mono">

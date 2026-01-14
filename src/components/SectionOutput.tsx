@@ -4,6 +4,20 @@ import ProjectsSection from './sections/ProjectsSection';
 import SkillsSection from './sections/SkillsSection';
 import ContactSection from './sections/ContactSection';
 
+/**
+ * Componente de mensaje de error para datos faltantes
+ * @param {Object} props - Props del componente
+ * @param {string} props.message - Mensaje de error a mostrar
+ * @returns {JSX.Element} Mensaje de error renderizado
+ */
+const ErrorMessage: React.FC<{ message: string }> = ({ message }) => (
+  <div className="error-message">
+    <div className="text-terminal-text">
+      ⚠️ {message}
+    </div>
+  </div>
+);
+
 interface ExperienceItem {
   title: string;
   date: string;
@@ -50,9 +64,25 @@ type Props = {
     contactInfo?: ContactItem[];
     ctaMessage?: string;
     ctaButtonText?: string;
+    contactEmail?: string;
   };
 };
 
+/**
+ * Componente que renderiza diferentes secciones del portfolio
+ * 
+ * @component
+ * @param {Props} props - Props del componente
+ * @returns {JSX.Element | null} Sección renderizada o null
+ * 
+ * @example
+ * ```tsx
+ * <SectionOutput 
+ *   section="experience" 
+ *   data={{ experiences: [...] }}
+ * />
+ * ```
+ */
 const SectionOutput: React.FC<Props> = ({ section, data = {} }) => {
   switch (section) {
     case 'home':
@@ -84,22 +114,35 @@ const SectionOutput: React.FC<Props> = ({ section, data = {} }) => {
       );
 
     case 'experience':
-      return <ExperienceSection experiences={data.experiences || []} />;
+      if (!data.experiences || data.experiences.length === 0) {
+        return <ErrorMessage message="No hay datos de experiencia disponibles" />;
+      }
+      return <ExperienceSection experiences={data.experiences} />;
 
     case 'projects':
-      return <ProjectsSection projects={data.projects || []} />;
+      if (!data.projects || data.projects.length === 0) {
+        return <ErrorMessage message="No hay proyectos disponibles" />;
+      }
+      return <ProjectsSection projects={data.projects} />;
 
     case 'skills':
+      if (!data.knowledgeCategories || !data.softSkills) {
+        return <ErrorMessage message="No hay datos de habilidades disponibles" />;
+      }
       return <SkillsSection 
-        knowledgeCategories={data.knowledgeCategories || []} 
-        softSkills={data.softSkills || []} 
+        knowledgeCategories={data.knowledgeCategories} 
+        softSkills={data.softSkills} 
       />;
 
     case 'contact':
+      if (!data.contactInfo || data.contactInfo.length === 0) {
+        return <ErrorMessage message="No hay información de contacto disponible" />;
+      }
       return <ContactSection 
-        contactInfo={data.contactInfo || []} 
+        contactInfo={data.contactInfo} 
         ctaMessage={data.ctaMessage || "¿Quieres trabajar juntos en un proyecto?"}
         ctaButtonText={data.ctaButtonText || "Enviar mensaje"}
+        contactEmail={data.contactEmail || "pablovpmadrid@gmail.com"}
       />;
 
     default:

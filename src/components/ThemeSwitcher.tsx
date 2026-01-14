@@ -1,45 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTheme, type ThemeType } from '../hooks/useTheme';
-
-/**
- * Representa un tema de la aplicación
- * @interface Theme
- * @property {string} id - Identificador único del tema
- * @property {string} name - Nombre visible del tema
- * @property {string} color - Clase de Tailwind para el color representativo
- */
-type Theme = {
-  id: ThemeType;
-  name: string;
-  color: string;
-};
-
-/**
- * Lista de temas disponibles en la aplicación
- * @constant
- */
-const themes: Theme[] = [
-  { 
-    id: 'one-dark', 
-    name: 'One Dark', 
-    color: 'bg-[#61afef]' 
-  },
-  { 
-    id: 'light', 
-    name: 'Light', 
-    color: 'bg-[#e5c07b]' 
-  },
-  { 
-    id: 'ayu', 
-    name: 'Ayu', 
-    color: 'bg-[#ffb454]' 
-  },
-  { 
-    id: 'github-dark', 
-    name: 'GitHub', 
-    color: 'bg-[#58a6ff]' 
-  },
-];
+import { THEMES } from '../constants/themes';
 
 /**
  * Componente selector de temas
@@ -77,7 +38,7 @@ const ThemeSwitcher = () => {
     setIsOpen(false);
   };
 
-  const currentThemeData = themes.find(theme => theme.id === currentTheme) || themes[0];
+  const currentThemeData = THEMES.find(theme => theme.id === currentTheme) || THEMES[0];
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -107,7 +68,7 @@ const ThemeSwitcher = () => {
           role="menu"
           aria-label="Selector de tema"
         >
-          {themes.map((theme) => (
+          {THEMES.map((theme) => (
             <button
               key={theme.id}
               onClick={() => handleThemeChange(theme.id)}

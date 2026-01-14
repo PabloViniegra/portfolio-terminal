@@ -1,33 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import type { KeyboardEvent } from "react";
 import CommandSuggestions from "./CommandSuggestions";
-
-/**
- * Representa una sugerencia de comando
- * @typedef {Object} Suggestion
- * @property {string} command - El comando sugerido
- * @property {string} description - Descripción del comando
- */
-type Suggestion = {
-  command: string;
-  description: string;
-};
-
-/**
- * Lista de comandos disponibles con sus descripciones
- * @constant
- */
-const COMMAND_SUGGESTIONS: Suggestion[] = [
-  { command: '/home', description: 'Ir a la página de inicio' },
-  { command: '/experience', description: 'Ver experiencia laboral' },
-  { command: '/projects', description: 'Ver proyectos destacados' },
-  { command: '/skills', description: 'Ver habilidades técnicas' },
-  { command: '/contact', description: 'Información de contacto' },
-  { command: '/cv', description: 'Descargar mi CV' },
-  { command: '/rain', description: 'Siéntete un hacker' },
-  { command: '/help', description: 'Mostrar ayuda' },
-  { command: '/clear', description: 'Limpiar la terminal' },
-];
+import { COMMAND_SUGGESTIONS, type Suggestion } from "../constants/suggestions";
 
 /**
  * Props del componente CommandInput
@@ -153,60 +127,84 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
     setShowSuggestions(false);
   };
 
+  /**
+   * Maneja la navegación por sugerencias con flechas y Tab
+   * @param {KeyboardEvent<HTMLInputElement>} e - Evento de teclado
+   */
+  const handleSuggestionNavigation = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    
+    switch (e.key) {
+      case 'ArrowDown':
+        setSelectedSuggestion(prev => 
+          prev < suggestions.length - 1 ? prev + 1 : 0
+        );
+        break;
+        
+      case 'ArrowUp':
+        setSelectedSuggestion(prev => 
+          prev > 0 ? prev - 1 : suggestions.length - 1
+        );
+        break;
+        
+      case 'Tab':
+        if (suggestions.length > 0) {
+          setInput(suggestions[selectedSuggestion].command);
+          setShowSuggestions(false);
+        }
+        break;
+    }
+  }, [suggestions, selectedSuggestion]);
+
+  /**
+   * Maneja la navegación por el historial de comandos
+   * @param {KeyboardEvent<HTMLInputElement>} e - Evento de teclado
+   */
+  const handleHistoryNavigation = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    
+    const direction = e.key === 'ArrowUp' ? 'up' : 'down';
+    
+    // Guardar input actual antes de navegar hacia arriba
+    if (direction === 'up' && temporaryInput === '') {
+      setTemporaryInput(input);
+    }
+    
+    const historyCommand = onHistoryNavigate(direction);
+    
+    // Restaurar input temporal al llegar al final del historial
+    if (direction === 'down' && historyCommand === '' && temporaryInput !== '') {
+      setInput(temporaryInput);
+      setTemporaryInput('');
+    } else if (historyCommand !== '') {
+      setInput(historyCommand);
+    }
+  }, [input, temporaryInput, onHistoryNavigate]);
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (disabled) return;
 
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab') {
-      if (showSuggestions && suggestions.length > 0) {
-        e.preventDefault();
-        
-        switch (e.key) {
-          case 'ArrowDown':
-            setSelectedSuggestion(prev => 
-              prev < suggestions.length - 1 ? prev + 1 : 0
-            );
-            return;
-            
-          case 'ArrowUp':
-            setSelectedSuggestion(prev => 
-              prev > 0 ? prev - 1 : suggestions.length - 1
-            );
-            return;
-            
-          case 'Tab':
-            if (suggestions.length > 0) {
-              e.preventDefault();
-              setInput(suggestions[selectedSuggestion].command);
-              setShowSuggestions(false);
-            }
-            return;
-        }
-      } 
-      else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        
-        if (e.key === 'ArrowUp' && temporaryInput === '') {
-          setTemporaryInput(input);
-        }
-        
-        const historyCommand = onHistoryNavigate(e.key === 'ArrowUp' ? 'up' : 'down');
-        
-        if (e.key === 'ArrowDown' && historyCommand === '' && temporaryInput !== '') {
-          setInput(temporaryInput);
-          setTemporaryInput('');
-        } else if (historyCommand !== '') {
-          setInput(historyCommand);
-        }
-      }
+    // Manejar Escape
+    if (e.key === 'Escape' && showSuggestions) {
+      e.preventDefault();
+      setShowSuggestions(false);
+      return;
     }
-    else if (e.key === 'Escape') {
-      if (showSuggestions) {
-        e.preventDefault();
-        setShowSuggestions(false);
-      }
+
+    // Manejar navegación por sugerencias
+    if (showSuggestions && suggestions.length > 0 && 
+        (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
+      handleSuggestionNavigation(e);
+      return;
     }
-    
-    
+
+    // Manejar navegación por historial
+    if (!showSuggestions && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+      handleHistoryNavigation(e);
+      return;
+    }
+
+    // Manejar Tab para autocompletar cuando no hay sugerencias visibles
     if (e.key === 'Tab' && !showSuggestions) {
       e.preventDefault();
       autocompleteSuggestion();

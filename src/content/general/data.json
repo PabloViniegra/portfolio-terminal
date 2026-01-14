@@ -114,5 +114,13 @@
     "metadata": {
       "type": "tip"
     }
+  },
+  {
+    "id": "contact-email",
+    "key": "contact-email",
+    "content": "pablovpmadrid@gmail.com",
+    "metadata": {
+      "type": "email"
+    }
   }
 ]

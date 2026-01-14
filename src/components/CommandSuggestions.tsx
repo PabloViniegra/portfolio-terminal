@@ -1,10 +1,14 @@
 import React from 'react';
+import type { Suggestion } from '../constants/suggestions';
 
-type Suggestion = {
-  command: string;
-  description: string;
-};
-
+/**
+ * Props del componente CommandSuggestions
+ * @interface CommandSuggestionsProps
+ * @property {Suggestion[]} suggestions - Lista de sugerencias de comandos
+ * @property {number} selectedIndex - Índice de la sugerencia seleccionada
+ * @property {(command: string) => void} onSelect - Callback al seleccionar una sugerencia
+ * @property {boolean} visible - Si las sugerencias deben mostrarse
+ */
 type CommandSuggestionsProps = {
   suggestions: Suggestion[];
   selectedIndex: number;
@@ -12,6 +16,23 @@ type CommandSuggestionsProps = {
   visible: boolean;
 };
 
+/**
+ * Componente que muestra sugerencias de comandos
+ * 
+ * @component
+ * @param {CommandSuggestionsProps} props - Props del componente
+ * @returns {JSX.Element | null} Lista de sugerencias o null si no hay sugerencias
+ * 
+ * @example
+ * ```tsx
+ * <CommandSuggestions
+ *   suggestions={filteredSuggestions}
+ *   selectedIndex={0}
+ *   onSelect={(cmd) => setInput(cmd)}
+ *   visible={showSuggestions}
+ * />
+ * ```
+ */
 const CommandSuggestions: React.FC<CommandSuggestionsProps> = ({
   suggestions,
   selectedIndex,
@@ -22,21 +43,9 @@ const CommandSuggestions: React.FC<CommandSuggestionsProps> = ({
 
   return (
     <div className="relative w-full">
-      <div 
-        className="absolute bottom-full left-0 right-0 mb-1 rounded-md shadow-lg z-50 overflow-hidden"
-        style={{
-          backgroundColor: 'var(--terminal-bg)',
-          border: '1px solid var(--terminal-border)'
-        }}
-      >
-        <div 
-          className="rounded-md shadow-inner"
-          style={{
-            backgroundColor: 'var(--terminal-bg)',
-            border: '1px solid var(--terminal-border)'
-          }}
-        >
-          <ul className="py-1" style={{ backgroundColor: 'var(--terminal-bg)' }}>
+      <div className="absolute bottom-full left-0 right-0 mb-1 z-50 suggestions-dropdown">
+        <div className="suggestions-dropdown-inner">
+          <ul className="py-1 bg-terminal-bg">
           {suggestions.map((suggestion, index) => (
             <li
               key={suggestion.command}

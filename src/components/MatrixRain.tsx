@@ -1,17 +1,34 @@
-'use client';
-
 import { useEffect, useRef, useCallback } from 'react';
+import { MATRIX_CONFIG } from '../constants/matrixRain';
 
+/**
+ * Props del componente MatrixRain
+ * @interface MatrixRainProps
+ * @property {() => void} [onDeactivate] - Callback ejecutado cuando se desactiva el efecto
+ */
 interface MatrixRainProps {
   onDeactivate?: () => void;
 }
 
+/**
+ * Componente que renderiza el efecto Matrix Rain
+ * 
+ * Crea un efecto visual de lluvia de caracteres estilo Matrix sobre un canvas.
+ * El efecto puede desactivarse presionando Ctrl+C.
+ * 
+ * @component
+ * @param {MatrixRainProps} props - Props del componente
+ * @returns {JSX.Element} Canvas con el efecto Matrix Rain
+ * 
+ * @example
+ * ```tsx
+ * <MatrixRain onDeactivate={() => setShowRain(false)} />
+ * ```
+ */
 const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const columnsRef = useRef<number[]>([]);
-  const fontSize = 14;
-  const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
 
   const init = useCallback(() => {
     const canvas = canvasRef.current;
@@ -23,11 +40,11 @@ const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const columns = Math.floor(canvas.width / fontSize);
+    const columns = Math.floor(canvas.width / MATRIX_CONFIG.FONT_SIZE);
     columnsRef.current = Array(columns).fill(0);
 
     ctx.fillStyle = '#0f0';
-    ctx.font = `${fontSize}px monospace`;
+    ctx.font = `${MATRIX_CONFIG.FONT_SIZE}px monospace`;
   }, []);
 
   const draw = useCallback(() => {
@@ -38,30 +55,32 @@ const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
     if (!ctx) return;
 
     // Fondo semi-transparente para efecto de desvanecimiento
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillStyle = `rgba(0, 0, 0, ${MATRIX_CONFIG.FADE_OPACITY})`;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.font = `${fontSize}px monospace`;
+    ctx.font = `${MATRIX_CONFIG.FONT_SIZE}px monospace`;
 
     columnsRef.current.forEach((yPos, index) => {
-      const text = characters.charAt(Math.floor(Math.random() * characters.length));
-      const x = index * fontSize;
+      const text = MATRIX_CONFIG.CHARACTERS.charAt(
+        Math.floor(Math.random() * MATRIX_CONFIG.CHARACTERS.length)
+      );
+      const x = index * MATRIX_CONFIG.FONT_SIZE;
       
       // Color verde brillante para el carácter principal
       ctx.fillStyle = '#0f0';
       ctx.fillText(text, x, yPos);
       
       // Efecto de brillo adicional
-      if (Math.random() > 0.95) {
+      if (Math.random() > MATRIX_CONFIG.BRIGHT_PROBABILITY) {
         ctx.fillStyle = '#fff';
         ctx.fillText(text, x, yPos);
       }
       
       // Reiniciar columna o avanzar
-      if (yPos > canvas.height || Math.random() > 0.975) {
+      if (yPos > canvas.height || Math.random() > MATRIX_CONFIG.RESET_PROBABILITY) {
         columnsRef.current[index] = 0;
       } else {
-        columnsRef.current[index] = yPos + fontSize;
+        columnsRef.current[index] = yPos + MATRIX_CONFIG.FONT_SIZE;
       }
     });
 
@@ -108,7 +127,8 @@ const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
       <canvas
         ref={canvasRef}
         className="w-full h-full block"
-        style={{ opacity: 0.6 }}
+        style={{ opacity: MATRIX_CONFIG.CANVAS_OPACITY }}
+        aria-hidden="true"
       />
     </div>
   );

@@ -3,6 +3,7 @@ import CommandInput from "./CommandInput";
 import SectionOutput from "./SectionOutput";
 import TerminalLoader from "./TerminalLoader";
 import Avatar from "./Avatar";
+import { COMMANDS, COMMAND_DELAYS } from "../constants/commands";
 
 // Lazy load MatrixRain solo cuando se necesita
 const MatrixRain = lazy(() => import("./MatrixRain"));
@@ -127,6 +128,7 @@ interface ContentData {
     helpTitle: string;
     helpTip: string;
     version: string;
+    contactEmail: string;
   };
 }
 
@@ -168,23 +170,35 @@ const Terminal: React.FC<TerminalProps> = ({ contentData }) => {
   const terminalRef = useRef<HTMLDivElement>(null);
   const historyEndRef = useRef<HTMLDivElement>(null);
 
-  // Efecto para manejar el scroll automático optimizado
-  useEffect(() => {
+  /**
+   * Hace scroll automático al final del historial
+   */
+  const scrollToBottom = useCallback(() => {
     if (historyEndRef.current) {
       // Usar requestAnimationFrame para mejor rendimiento
       requestAnimationFrame(() => {
         historyEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       });
     }
-  }, [history, isLoading]);
+  }, []);
 
+  // Efecto para manejar el scroll automático optimizado
+  useEffect(() => {
+    scrollToBottom();
+  }, [history, isLoading, scrollToBottom]);
+
+  /**
+   * Procesa un comando ingresado por el usuario
+   * @param {string} input - El comando a procesar
+   * @returns {React.ReactNode} El output del comando
+   */
   const processCommand = (input: string): React.ReactNode => {
     if (input.trim() === "") return null;
 
     const command = input.toLowerCase();
     
     switch (command) {
-      case "/rain":
+      case COMMANDS.RAIN:
         setShowMatrixRain(true);
         return (
           <div className="terminal-output">
@@ -194,28 +208,28 @@ const Terminal: React.FC<TerminalProps> = ({ contentData }) => {
             </p>
           </div>
         );
-      case "/clear":
+      case COMMANDS.CLEAR:
         setHistory([]);
         return null;
-      case "/help":
+      case COMMANDS.HELP:
         return <HelpMessage 
           commands={contentData.commands} 
           helpTitle={contentData.general.helpTitle}
           helpTip={contentData.general.helpTip}
         />;
-      case "/home":
+      case COMMANDS.HOME:
         return <SectionOutput section="home" />;
-      case "/experience":
+      case COMMANDS.EXPERIENCE:
         return <SectionOutput 
           section="experience" 
           data={{ experiences: contentData.experiences }}
         />;
-      case "/projects":
+      case COMMANDS.PROJECTS:
         return <SectionOutput 
           section="projects" 
           data={{ projects: contentData.projects }}
         />;
-      case "/skills":
+      case COMMANDS.SKILLS:
         return <SectionOutput 
           section="skills" 
           data={{ 
@@ -223,28 +237,26 @@ const Terminal: React.FC<TerminalProps> = ({ contentData }) => {
             softSkills: contentData.softSkills 
           }}
         />;
-      case "/contact":
+      case COMMANDS.CONTACT:
         return <SectionOutput 
           section="contact" 
           data={{ 
             contactInfo: contentData.contactInfo,
             ctaMessage: contentData.general.ctaMessage,
-            ctaButtonText: contentData.general.ctaButtonText
+            ctaButtonText: contentData.general.ctaButtonText,
+            contactEmail: contentData.general.contactEmail
           }}
         />;
-      case "/cv":
-        const link = document.createElement('a');
-        link.href = '/cv/CV_2024.pdf';
-        link.download = 'Pablo_Viniegra_CV_2024.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      case COMMANDS.CV:
+        // Abrir CV en nueva pestaña en lugar de manipular el DOM
+        window.open('/cv/CV_2024.pdf', '_blank');
         return (
           <div className="text-terminal-text">
-            Descargando CV... Si la descarga no comienza automáticamente, 
+            Abriendo CV en nueva pestaña... Si no se abre automáticamente, 
             <a 
               href="/cv/CV_2024.pdf" 
-              download="Pablo_Viniegra_CV_2024.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-terminal-accent underline ml-1"
             >
               haz clic aquí
@@ -259,7 +271,7 @@ const Terminal: React.FC<TerminalProps> = ({ contentData }) => {
             </div>
             <div>
               Escribe{" "}
-              <span className="text-terminal-accent font-bold">/help</span> para
+              <span className="text-terminal-accent font-bold">{COMMANDS.HELP}</span> para
               ver los comandos disponibles.
             </div>
           </div>
@@ -267,15 +279,18 @@ const Terminal: React.FC<TerminalProps> = ({ contentData }) => {
     }
   };
 
+  /**
+   * Maneja la ejecución de un comando
+   * @param {string} input - El comando a ejecutar
+   */
   const handleCommand = async (input: string) => {
     if (input.trim() === "") return;
 
     setIsLoading(true);
 
-    // Delay reducido para mejor UX (200-400ms en lugar de 800-1500ms)
-    await new Promise((resolve) =>
-      setTimeout(resolve, 200 + Math.random() * 200)
-    );
+    // Simular delay de procesamiento para mejor UX
+    const delay = COMMAND_DELAYS.MIN + Math.random() * (COMMAND_DELAYS.MAX - COMMAND_DELAYS.MIN);
+    await new Promise((resolve) => setTimeout(resolve, delay));
 
     const output = processCommand(input);
 
@@ -291,6 +306,11 @@ const Terminal: React.FC<TerminalProps> = ({ contentData }) => {
     setIsLoading(false);
   };
 
+  /**
+   * Navega por el historial de comandos
+   * @param {("up" | "down")} direction - Dirección de navegación
+   * @returns {string} El comando del historial
+   */
   const navigateHistory = (direction: "up" | "down"): string => {
     if (commandHistory.length === 0) return "";
 

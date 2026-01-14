@@ -1,26 +1,53 @@
-import React from "react";
+import React, { memo } from "react";
 
+/**
+ * Representa un item de conocimiento técnico
+ * @interface KnowledgeItem
+ * @property {string} name - Nombre de la tecnología o herramienta
+ * @property {number} rating - Nivel de dominio (0-4)
+ */
 interface KnowledgeItem {
   name: string;
   rating: number;
 }
 
+/**
+ * Representa una categoría de conocimientos técnicos
+ * @interface KnowledgeCategory
+ * @property {string} category - Nombre de la categoría
+ * @property {KnowledgeItem[]} knowledges - Lista de conocimientos en esta categoría
+ */
 interface KnowledgeCategory {
   category: string;
   knowledges: KnowledgeItem[];
 }
 
+/**
+ * Representa una habilidad blanda
+ * @interface SoftSkill
+ * @property {string} name - Nombre de la habilidad
+ * @property {number} rating - Nivel de dominio (0-100)
+ */
 interface SoftSkill {
   name: string;
   rating: number;
 }
 
+/**
+ * Props del componente SkillsSection
+ * @interface SkillsSectionProps
+ * @property {KnowledgeCategory[]} knowledgeCategories - Categorías de habilidades técnicas
+ * @property {SoftSkill[]} softSkills - Lista de habilidades blandas
+ */
 interface SkillsSectionProps {
   knowledgeCategories: KnowledgeCategory[];
   softSkills: SoftSkill[];
 }
 
-const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, softSkills }) => {
+/**
+ * Componente memoizado para renderizar un item de conocimiento técnico
+ */
+const SkillItem = memo(({ skill, maxRating = 4 }: { skill: KnowledgeItem; maxRating?: number }) => {
   const renderRatingStars = (rating: number, maxRating: number = 4) => {
     const percentage = (rating / maxRating) * 100;
     
@@ -63,6 +90,22 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
     );
   };
 
+  return (
+    <div className="flex items-center justify-between p-3 rounded-lg bg-terminal-bg-secondary/30 hover:bg-terminal-bg-secondary/50 border border-terminal-border/30 hover:border-terminal-accent/30 transition-all duration-200">
+      <span className="text-terminal-text text-sm font-medium mr-4">
+        {skill.name}
+      </span>
+      {renderRatingStars(skill.rating, maxRating)}
+    </div>
+  );
+});
+
+SkillItem.displayName = 'SkillItem';
+
+/**
+ * Componente memoizado para renderizar una habilidad blanda
+ */
+const SoftSkillItem = memo(({ skill }: { skill: SoftSkill }) => {
   const getSkillLevel = (rating: number): { label: string; color: string } => {
     if (rating >= 80) return { label: "Experto", color: "text-green-400" };
     if (rating >= 60) return { label: "Avanzado", color: "text-blue-400" };
@@ -70,6 +113,58 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
     return { label: "Básico", color: "text-orange-400" };
   };
 
+  const level = getSkillLevel(skill.rating);
+
+  return (
+    <div className="group p-4 rounded-lg bg-terminal-bg-secondary/30 hover:bg-terminal-bg-secondary/50 border border-terminal-border/30 hover:border-terminal-accent/30 transition-all duration-200">
+      <div className="flex justify-between items-center mb-3">
+        <span className="text-terminal-text text-sm font-medium">
+          {skill.name}
+        </span>
+        <div className="flex items-center gap-2">
+          <span className={`text-xs font-bold ${level.color}`}>
+            {level.label}
+          </span>
+          <span className="text-xs text-terminal-comment font-mono">
+            {skill.rating}%
+          </span>
+        </div>
+      </div>
+      
+      <div className="relative">
+        <div className="w-full h-2 bg-terminal-bg rounded-full overflow-hidden border border-terminal-border/50">
+          <div
+            className="h-full bg-gradient-to-r from-terminal-accent via-terminal-accent to-terminal-accent/70 rounded-full transition-all duration-700 ease-out relative"
+            style={{
+              width: `${skill.rating}%`,
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+SoftSkillItem.displayName = 'SoftSkillItem';
+
+/**
+ * Componente que muestra la sección de habilidades técnicas y blandas
+ * 
+ * @component
+ * @param {SkillsSectionProps} props - Props del componente
+ * @returns {JSX.Element} Sección de habilidades renderizada
+ * 
+ * @example
+ * ```tsx
+ * <SkillsSection 
+ *   knowledgeCategories={categories}
+ *   softSkills={softSkills}
+ * />
+ * ```
+ */
+const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, softSkills }) => {
   return (
     <div className="font-mono">
       <div className="mb-6">
@@ -101,15 +196,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pl-4">
                   {category.knowledges.map((skill, skillIdx) => (
-                    <div
-                      key={skillIdx}
-                      className="flex items-center justify-between p-3 rounded-lg bg-terminal-bg-secondary/30 hover:bg-terminal-bg-secondary/50 border border-terminal-border/30 hover:border-terminal-accent/30 transition-all duration-200"
-                    >
-                      <span className="text-terminal-text text-sm font-medium mr-4">
-                        {skill.name}
-                      </span>
-                      {renderRatingStars(skill.rating, 4)}
-                    </div>
+                    <SkillItem key={skillIdx} skill={skill} maxRating={4} />
                   ))}
                 </div>
               </div>
@@ -127,42 +214,9 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {softSkills.map((skill, idx) => {
-              const level = getSkillLevel(skill.rating);
-              return (
-                <div 
-                  key={idx} 
-                  className="group p-4 rounded-lg bg-terminal-bg-secondary/30 hover:bg-terminal-bg-secondary/50 border border-terminal-border/30 hover:border-terminal-accent/30 transition-all duration-200"
-                >
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="text-terminal-text text-sm font-medium">
-                      {skill.name}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className={`text-xs font-bold ${level.color}`}>
-                        {level.label}
-                      </span>
-                      <span className="text-xs text-terminal-comment font-mono">
-                        {skill.rating}%
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div className="relative">
-                    <div className="w-full h-2 bg-terminal-bg rounded-full overflow-hidden border border-terminal-border/50">
-                      <div
-                        className="h-full bg-gradient-to-r from-terminal-accent via-terminal-accent to-terminal-accent/70 rounded-full transition-all duration-700 ease-out relative"
-                        style={{
-                          width: `${skill.rating}%`,
-                        }}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {softSkills.map((skill, idx) => (
+              <SoftSkillItem key={idx} skill={skill} />
+            ))}
           </div>
         </div>
 

@@ -6,13 +6,39 @@ interface ContactItem {
   link: string;
 }
 
+/**
+ * Props del componente ContactSection
+ * @interface ContactSectionProps
+ * @property {ContactItem[]} contactInfo - Lista de información de contacto
+ * @property {string} ctaMessage - Mensaje de call-to-action
+ * @property {string} ctaButtonText - Texto del botón de contacto
+ * @property {string} contactEmail - Email de contacto
+ */
 interface ContactSectionProps {
   contactInfo: ContactItem[];
   ctaMessage: string;
   ctaButtonText: string;
+  contactEmail: string;
 }
 
-const ContactSection: React.FC<ContactSectionProps> = ({ contactInfo, ctaMessage, ctaButtonText }) => {
+/**
+ * Componente que muestra la sección de contacto
+ * 
+ * @component
+ * @param {ContactSectionProps} props - Props del componente
+ * @returns {JSX.Element} Sección de contacto renderizada
+ * 
+ * @example
+ * ```tsx
+ * <ContactSection 
+ *   contactInfo={contacts}
+ *   ctaMessage="¿Hablamos?"
+ *   ctaButtonText="Contactar"
+ *   contactEmail="email@example.com"
+ * />
+ * ```
+ */
+const ContactSection: React.FC<ContactSectionProps> = ({ contactInfo, ctaMessage, ctaButtonText, contactEmail }) => {
   return (
     <div className="font-mono">
       <div className="mb-6">
@@ -43,7 +69,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ contactInfo, ctaMessage
         <div className="pt-4 mt-6 border-t border-terminal-border">
           <p className="text-terminal-text mb-4">{ctaMessage}</p>
           <a 
-            href="mailto:pablovpmadrid@gmail.com" 
+            href={`mailto:${contactEmail}`}
             className="inline-block bg-terminal-accent text-terminal-bg px-4 py-2 rounded hover:bg-opacity-90 transition-colors font-medium"
           >
             {ctaButtonText}
