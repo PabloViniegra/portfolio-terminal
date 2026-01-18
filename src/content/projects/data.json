@@ -21,6 +21,16 @@
     "order": 1
   },
   {
+    "id": "win_opt",
+    "title": "win_opt",
+    "description": "Aplicación TUI para la gestión del rendimiento y el espacio en disco de Windows 11. Sencilla, rápida y eficiente.",
+    "link": "https://github.com/PabloViniegra/win_opt/releases/tag/v1.2.1",
+    "github": "https://github.com/PabloViniegra/win_opt",
+    "technologies": ["Git", "Rust", "Claude"],
+    "featured": true,
+    "order": 2
+  },
+  {
     "id": "daily-ideas",
     "title": "Daily-Ideas",
     "description": "Aplicación web que te sugiere ideas de proyectos de forma diaria con IA. Puedes regenerar las ideas de forma finita.",
@@ -38,7 +48,7 @@
       "Tailwind CSS"
     ],
     "featured": true,
-    "order": 2
+    "order": 4
   },
   {
     "id": "promptlazy",
@@ -78,16 +88,16 @@
       "RapidAPI",
       "npm"
     ],
-    "order": 4
+    "order": 5
   },
   {
-    "id": "amazon-scrapper",
-    "title": "Amazon Web Scrapper",
-    "description": "Script de Python para scrappear productos de Amazon y exportarlo a json, xslx o un csv. Además puedes asignarle distintas localizaciones para que extraiga las búsquedas de tu país. ¡Prueba a extraer tus búsquedas!",
-    "link": "",
-    "github": "https://github.com/PabloViniegra/amazon-web-scrapper",
-    "technologies": ["Python", "Git"],
-    "order": 5
+    "id": "pkg-sense",
+    "title": "pkg Sense",
+    "description": "Extensión de Visual Studio Code para el análisis profundo en tiempo real del archivo package.json de tus proyectos. La extensión ofrece sugerencias y detecta vulnerabilidades para que mamntengas tu proyecto de Node seguro.",
+    "link": "https://marketplace.visualstudio.com/items?itemName=PabloViniegra.pkgsense",
+    "github": "https://github.com/PabloViniegra/pkgsense",
+    "technologies": ["npm", "Git", "Typescript", "VS Code API"],
+    "order": 6
   },
   {
     "id": "tboi-platinum",
@@ -107,7 +117,7 @@
       "npm",
       "Pinia"
     ],
-    "order": 6
+    "order": 7
   },
   {
     "id": "trello-clone",
@@ -129,7 +139,7 @@
       "Resend",
       "Biome"
     ],
-    "order": 7
+    "order": 8
   },
   {
     "id": "dragonball-app",
@@ -147,7 +157,7 @@
       "Vite",
       "Git"
     ],
-    "order": 8
+    "order": 9
   },
   {
     "id": "mmo-games",
@@ -165,6 +175,6 @@
       "RapidAPI",
       "CSS"
     ],
-    "order": 9
+    "order": 10
   }
 ]
