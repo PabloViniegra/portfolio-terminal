@@ -31,21 +31,22 @@
     "order": 2
   },
   {
-    "id": "daily-ideas",
-    "title": "Daily-Ideas",
-    "description": "Aplicación web que te sugiere ideas de proyectos de forma diaria con IA. Puedes regenerar las ideas de forma finita.",
-    "link": "https://daily-ideas-frontend.vercel.app/",
-    "github": "https://github.com/PabloViniegra/daily-ideas-frontend",
+    "id": "dev_snippets",
+    "title": "Dev Snippets",
+    "description": "Dev Snippets es una aplicación web que te permite organizar y compartir tus snippets de código.",
+    "link": "https://dev-snippets-pi.vercel.app/",
+    "github": "https://github.com/PabloViniegra/dev-snippets",
     "technologies": [
-      "Git",
       "NextJS",
-      "React",
-      "Shadcn UI",
-      "pnpm",
-      "Python",
-      "FastAPI",
       "Typescript",
-      "Tailwind CSS"
+      "React",
+      "pnpm",
+      "Tailwind",
+      "Shadcn UI",
+      "Better Auth",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Vercel"
     ],
     "featured": true,
     "order": 4
@@ -73,21 +74,12 @@
     "order": 3
   },
   {
-    "id": "weather-app",
-    "title": "Weather App",
-    "description": "Aplicación sencilla y minimalista para conocer el tiempo meteorológico en la zona que indiques. Incluye pronóstico del tiempo para los días siguientes.",
-    "link": "https://tututu-weather-app.onrender.com/",
-    "github": "https://github.com/PabloViniegra/tututu-weather-app",
-    "technologies": [
-      "Vue JS",
-      "TypeScript",
-      "Vite",
-      "Tailwind CSS",
-      "Git",
-      "Flowbite",
-      "RapidAPI",
-      "npm"
-    ],
+    "id": "llama_specs",
+    "title": "Llama Specs",
+    "description": "Una TUI creada con Rust para verificar la compatibilidad de tu PC con los modelos locales de Ollama. Se acabó el probar a ciegas ;).",
+    "link": "https://github.com/PabloViniegra/llama-specs/releases/tag/v0.2.0",
+    "github": "https://github.com/PabloViniegra/llama-specs",
+    "technologies": ["Git", "Rust", "Claude"],
     "order": 5
   },
   {
@@ -100,22 +92,24 @@
     "order": 6
   },
   {
-    "id": "tboi-platinum",
-    "title": "The Binding of Isaac Platinum Remake",
-    "description": "Se trata de un reboot visual para la mítica página de Platinum God, que es una guía de los objetos del famoso videojuego The Binding of Isaac. He implementado un diseño más moderno y minimalista, con una mejor experiencia de usuario. ¡Descubre los objetos!",
-    "link": "https://tboi-platinum-remake.netlify.app/",
-    "github": "https://github.com/PabloViniegra/tboi-app",
+    "id": "santa_app",
+    "title": "Santa App [Amigo Invisible]",
+    "description": "Si alguna vez has organizado un amigo invisible con tu grupo ya sabrás que precisamente divertido no es. Santa App es una aplicación web que te permite organizar un amigo invisible de forma sencilla y divertida. Además puedes cusstomizar las reglas del sorteo y más.",
+    "link": "https://santa-app-chi.vercel.app/",
+    "github": "https://github.com/PabloViniegra/santa-app",
     "technologies": [
-      "Python",
-      "FastAPI",
+      "Nuxt",
+      "Vue",
+      "Bun",
+      "Tailwind",
+      "Typescript",
+      "Pinia",
+      "Better Auth",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Vercel",
       "Git",
-      "Tailwind CSS",
-      "Vue JS",
-      "TypeScript",
-      "Vite",
-      "Tanstack Query",
-      "npm",
-      "Pinia"
+      "Biome"
     ],
     "order": 7
   },
@@ -142,39 +136,23 @@
     "order": 8
   },
   {
-    "id": "dragonball-app",
-    "title": "Dragon Ball App",
-    "description": "Aplicación web que muestra información sobre los personajes de la famosa serie de anime Dragon Ball. Puedes buscar personajes por su nombre, ver su descripción, ver su imagen y conocer otros datos. ¡Descubre a tus personajes favoritos!",
-    "link": "https://bola-dragon-app.netlify.app/",
-    "github": "https://github.com/PabloViniegra/dragonball-app",
+    "id": "personal_blog",
+    "title": "Personal Blog",
+    "description": "Un blog personal donde solo yo puedo escribir posts. Construido con Next JS y Typescript e inspirado en el diseño de Vercel.",
+    "link": "https://my-personal-blog-five-sigma.vercel.app/",
+    "github": "https://github.com/PabloViniegra/dev-snippets",
     "technologies": [
-      "TypeScript",
-      "Vue JS",
-      "Tailwind CSS",
-      "Pinia",
-      "Tanstack Query",
-      "npm",
-      "Vite",
-      "Git"
-    ],
-    "order": 9
-  },
-  {
-    "id": "mmo-games",
-    "title": "MMO Games",
-    "description": "Aplicación web de contenido dinámico que presenta los últimos videojuegos y noticias relacionado sobre todo con los MMO's. La aplicación se conecta a una API externa para obtener los datos de los juegos y noticias. ¡Descubre los últimos juegos MMO!",
-    "link": "https://mmo-games.onrender.com/",
-    "github": "https://github.com/PabloViniegra/mmo-games",
-    "technologies": [
-      "TypeScript",
-      "Vue JS",
-      "Tailwind CSS",
-      "Vite",
-      "Git",
-      "npm",
-      "RapidAPI",
-      "CSS"
-    ],
-    "order": 10
+      "NextJS",
+      "Typescript",
+      "React",
+      "Vercel",
+      "Shadcn UI",
+      "Bun",
+      "Shiki",
+      "PostgreSQL",
+      "SQLite",
+      "Drizzle ORM",
+      "Biome"
+    ]
   }
 ]
