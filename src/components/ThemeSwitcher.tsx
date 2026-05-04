@@ -1,22 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { useTheme, type ThemeType } from '../hooks/useTheme';
-import { THEMES } from '../constants/themes';
+import { useEffect, useRef, useState } from 'react';
 
-/**
- * Componente selector de temas
- * 
- * Permite al usuario cambiar entre diferentes temas de color.
- * El tema seleccionado se guarda en localStorage y se aplica
- * mediante el atributo data-theme en el elemento HTML.
- * 
- * @component
- * @returns {JSX.Element} Dropdown selector de temas
- * 
- * @example
- * ```tsx
- * <ThemeSwitcher client:load />
- * ```
- */
+import { THEMES } from '../constants/themes';
+import { useTheme, type ThemeType } from '../hooks/useTheme';
+
 const ThemeSwitcher = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme: currentTheme, setTheme: changeTheme } = useTheme();
@@ -38,32 +24,27 @@ const ThemeSwitcher = () => {
     setIsOpen(false);
   };
 
-  const currentThemeData = THEMES.find(theme => theme.id === currentTheme) || THEMES[0];
+  const currentThemeData = THEMES.find((theme) => theme.id === currentTheme) || THEMES[0];
 
   return (
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center space-x-2 px-3 py-2 text-sm rounded-md transition-all duration-200
-          bg-terminal-bg border border-terminal-border shadow-sm
-          text-terminal-text hover:bg-terminal-bg-secondary hover:border-terminal-accent/30
-          focus:outline-none focus:ring-1 focus:ring-terminal-accent focus:ring-opacity-50`}
+        className="flex items-center gap-2 rounded-lg border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
         aria-label="Cambiar tema"
         aria-expanded={isOpen}
       >
-        <span className={`w-3 h-3 rounded-full ${currentThemeData.color}`}></span>
-        <span className="hidden md:inline">{currentThemeData.name}</span>
-        <span className="ml-1">▼</span>
+        <span className={`h-3 w-3 rounded-full ${currentThemeData.color}`} aria-hidden="true"></span>
+        <span className="hidden lg:inline">{currentThemeData.name}</span>
+        <span className="text-xs text-terminal-text-secondary">theme</span>
       </button>
 
       {isOpen && (
-        <div 
-          className={`absolute right-0 mt-1 w-48 rounded-md shadow-xl py-1 z-30 overflow-hidden
-            bg-terminal-bg border border-terminal-border/80 backdrop-blur-sm
-            transform transition-all duration-200 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+        <div
+          className="absolute right-0 mt-2 w-52 overflow-hidden rounded-xl border border-terminal-border/80 bg-terminal-bg py-1 shadow-xl backdrop-blur-sm"
           style={{
             background: 'rgba(var(--terminal-bg-rgb), 0.95)',
-            backdropFilter: 'blur(8px)'
+            backdropFilter: 'blur(8px)',
           }}
           role="menu"
           aria-label="Selector de tema"
@@ -72,15 +53,16 @@ const ThemeSwitcher = () => {
             <button
               key={theme.id}
               onClick={() => handleThemeChange(theme.id)}
-              className={`w-full text-left px-4 py-2.5 text-sm flex items-center space-x-3
-                transition-all duration-150 ${currentTheme === theme.id
-                  ? 'bg-terminal-accent/15 text-terminal-accent font-medium'
-                  : 'text-terminal-text hover:bg-terminal-bg-secondary'}`}
+              className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-all duration-150 ${
+                currentTheme === theme.id
+                  ? 'bg-terminal-accent/12 text-terminal-accent font-medium'
+                  : 'text-terminal-text hover:bg-terminal-bg-secondary/80'
+              }`}
               role="menuitem"
               aria-label={`Cambiar al tema ${theme.name}`}
               aria-pressed={currentTheme === theme.id}
             >
-              <span className={`w-3 h-3 rounded-full ${theme.color}`} aria-hidden="true"></span>
+              <span className={`h-3 w-3 rounded-full ${theme.color}`} aria-hidden="true"></span>
               <span>{theme.name}</span>
             </button>
           ))}

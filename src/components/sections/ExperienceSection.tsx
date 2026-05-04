@@ -1,13 +1,5 @@
 import React from 'react';
 
-/**
- * Representa un item de experiencia laboral
- * @interface ExperienceItem
- * @property {string} title - Título del puesto o posición
- * @property {string} date - Fecha o período de la experiencia
- * @property {string} description - Descripción de las responsabilidades
- * @property {string[]} tags - Tecnologías o habilidades utilizadas
- */
 interface ExperienceItem {
   title: string;
   date: string;
@@ -15,55 +7,49 @@ interface ExperienceItem {
   tags: string[];
 }
 
-/**
- * Props del componente ExperienceSection
- * @interface ExperienceSectionProps
- * @property {ExperienceItem[]} experiences - Lista de experiencias laborales
- */
 interface ExperienceSectionProps {
   experiences: ExperienceItem[];
 }
 
-/**
- * Componente que muestra la sección de experiencia laboral
- * 
- * @component
- * @param {ExperienceSectionProps} props - Props del componente
- * @returns {JSX.Element} Sección de experiencia renderizada
- * 
- * @example
- * ```tsx
- * <ExperienceSection experiences={experiences} />
- * ```
- */
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) => {
   return (
-    <div className="font-mono">
-      <div className="mb-4">
-        <span className="text-terminal-prompt">$ </span>
-        <span className="text-terminal-accent">cat</span>
-        <span> experiencia.txt</span>
+    <div className="font-sans">
+      <div className="mb-5 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2 font-mono text-sm">
+          <span className="text-terminal-prompt">$</span>
+          <span className="text-terminal-accent">history</span>
+          <span className="text-terminal-text-secondary">--experience</span>
+        </div>
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">
+          {experiences.length} entries
+        </span>
       </div>
-      
-      <div className="space-y-8">
-        {experiences.map((exp, idx) => (
-          <div key={idx} className="border-l-2 border-terminal-accent pl-4">
-            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
-              <h3 className="text-terminal-text font-bold">{exp.title}</h3>
-              <span className="text-terminal-comment text-sm"># {exp.date}</span>
+
+      <div className="relative space-y-0">
+        {experiences.map((experience, index) => (
+          <article
+            key={experience.title}
+            className="border-t border-terminal-border/40 py-5 first:border-t-0 first:pt-0"
+          >
+            <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
+              <h3 className="text-base font-semibold leading-snug text-terminal-text md:text-lg">
+                {experience.title}
+              </h3>
+              <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-terminal-text-secondary">
+                {experience.date}
+              </div>
             </div>
-            <p className="my-2 text-terminal-text">{exp.description}</p>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {exp.tags.map((tag, tagIdx) => (
-                <span 
-                  key={tagIdx}
-                  className="px-2 py-1 bg-terminal-bg-secondary text-xs rounded border border-terminal-border"
-                >
-                  {tag}
-                </span>
+
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-terminal-text-secondary">
+              {experience.description}
+            </p>
+
+            <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-terminal-text-secondary/80">
+              {experience.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
               ))}
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </div>

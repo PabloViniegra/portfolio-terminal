@@ -8,66 +8,82 @@
   --font-mono: 'JetBrains Mono', monospace;
   
   /* Tema One Dark */
-  --terminal-bg: #282c34;
-  --terminal-bg-secondary: #21252b;
-  --terminal-header-bg: #1e1e1e;
-  --terminal-text: #abb2bf;
-  --terminal-text-secondary: #5c6370;
-  --terminal-accent: #61afef;
-  --terminal-prompt: #98c379;
-  --terminal-error: #e06c75;
-  --terminal-warning: #e5c07b;
-  --terminal-success: #98c379;
-  --terminal-border: #3e4451;
-  --terminal-cursor: #528bff;
+  --terminal-bg: #11151b;
+  --terminal-bg-rgb: 17, 21, 27;
+  --terminal-bg-secondary: #171d26;
+  --terminal-bg-secondary-rgb: 23, 29, 38;
+  --terminal-header-bg: #0d1117;
+  --terminal-header-bg-rgb: 13, 17, 23;
+  --terminal-text: #d5dde8;
+  --terminal-text-secondary: #7d889c;
+  --terminal-text-secondary-rgb: 125, 136, 156;
+  --terminal-accent: #77bdfb;
+  --terminal-prompt: #8fd6b4;
+  --terminal-error: #f38b92;
+  --terminal-warning: #d8b26b;
+  --terminal-success: #8fd6b4;
+  --terminal-border: #273142;
+  --terminal-cursor: #8fd6b4;
 }
 
 /* Tema Light */
 [data-theme="light"] {
-  --terminal-bg: #f8f8f8;
-  --terminal-bg-secondary: #e8e8e8;
-  --terminal-header-bg: #e8e8e8;
-  --terminal-text: #4a5568;
-  --terminal-text-secondary: #718096;
-  --terminal-accent: #2b6cb0;
-  --terminal-prompt: #2f855a;
-  --terminal-error: #c53030;
-  --terminal-warning: #b7791f;
-  --terminal-success: #2f855a;
-  --terminal-border: #cbd5e0;
-  --terminal-cursor: #2b6cb0;
+  --terminal-bg: #f2f4f7;
+  --terminal-bg-rgb: 242, 244, 247;
+  --terminal-bg-secondary: #ffffff;
+  --terminal-bg-secondary-rgb: 255, 255, 255;
+  --terminal-header-bg: #e6ebf2;
+  --terminal-header-bg-rgb: 230, 235, 242;
+  --terminal-text: #1b2430;
+  --terminal-text-secondary: #5a6678;
+  --terminal-text-secondary-rgb: 90, 102, 120;
+  --terminal-accent: #2f6fb2;
+  --terminal-prompt: #2d7d61;
+  --terminal-error: #c64747;
+  --terminal-warning: #a97721;
+  --terminal-success: #2d7d61;
+  --terminal-border: #c9d2e0;
+  --terminal-cursor: #2f6fb2;
 }
 
 /* Tema Ayu */
 [data-theme="ayu"] {
   --terminal-bg: #0f1419;
-  --terminal-bg-secondary: #0a0e11;
-  --terminal-header-bg: #0a0e11;
-  --terminal-text: #e6e1cf;
-  --terminal-text-secondary: #8a8f98;
-  --terminal-accent: #39bae6;
-  --terminal-prompt: #b8cc52;
-  --terminal-error: #ff3333;
-  --terminal-warning: #ffb454;
-  --terminal-success: #b8cc52;
-  --terminal-border: #2a3541;
-  --terminal-cursor: #ffb454;
+  --terminal-bg-rgb: 15, 20, 25;
+  --terminal-bg-secondary: #151d24;
+  --terminal-bg-secondary-rgb: 21, 29, 36;
+  --terminal-header-bg: #0b1015;
+  --terminal-header-bg-rgb: 11, 16, 21;
+  --terminal-text: #edf0e3;
+  --terminal-text-secondary: #90a0ae;
+  --terminal-text-secondary-rgb: 144, 160, 174;
+  --terminal-accent: #5cc8f5;
+  --terminal-prompt: #b9d36a;
+  --terminal-error: #ff6b6b;
+  --terminal-warning: #f2be67;
+  --terminal-success: #b9d36a;
+  --terminal-border: #283746;
+  --terminal-cursor: #f2be67;
 }
 
 /* Tema GitHub Dark */
 [data-theme="github-dark"] {
   --terminal-bg: #0d1117;
-  --terminal-bg-secondary: #161b22;
-  --terminal-header-bg: #161b22;
-  --terminal-text: #c9d1d9;
-  --terminal-text-secondary: #8b949e;
-  --terminal-accent: #58a6ff;
-  --terminal-prompt: #7ee787;
-  --terminal-error: #ff7b72;
-  --terminal-warning: #e3b341;
-  --terminal-success: #7ee787;
-  --terminal-border: #30363d;
-  --terminal-cursor: #58a6ff;
+  --terminal-bg-rgb: 13, 17, 23;
+  --terminal-bg-secondary: #151b23;
+  --terminal-bg-secondary-rgb: 21, 27, 35;
+  --terminal-header-bg: #0b1016;
+  --terminal-header-bg-rgb: 11, 16, 22;
+  --terminal-text: #d0d7de;
+  --terminal-text-secondary: #8b98a8;
+  --terminal-text-secondary-rgb: 139, 152, 168;
+  --terminal-accent: #66b3ff;
+  --terminal-prompt: #87e1a0;
+  --terminal-error: #ff8a80;
+  --terminal-warning: #d7ac55;
+  --terminal-success: #87e1a0;
+  --terminal-border: #2c3644;
+  --terminal-cursor: #66b3ff;
 }
 
 /* Estilos base del body */
@@ -76,7 +92,13 @@ body {
   padding: 0;
   font-family: var(--font-sans);
   background-color: var(--terminal-bg);
-  background-image: radial-gradient(circle at 50% 50%, rgba(94, 143, 255, 0.05) 0%, transparent 50%);
+  background-image:
+    radial-gradient(circle at top, rgba(119, 189, 251, 0.12), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 22rem),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: auto, auto, 40px 40px, 40px 40px;
+  background-position: center top, center top, center center, center center;
   color: var(--terminal-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -119,24 +141,28 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(57, 255, 20, 0.05);
+  background: rgba(var(--terminal-header-bg-rgb), 0.8);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(57, 255, 20, 0.2);
+  background: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.35);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(57, 255, 20, 0.3);
+  background: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.55);
 }
 
 .terminal {
-  background-color: var(--terminal-bg);
-  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 12rem),
+    var(--terminal-bg);
+  border-radius: 18px;
   border: 1px solid var(--terminal-border);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 28px 80px rgba(3, 6, 11, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   color: var(--terminal-text);
   display: flex;
   flex-direction: column;
@@ -147,24 +173,7 @@ body {
   position: relative;
   width: 100%;
   margin: 0 auto;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.terminal::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(57, 255, 20, 0.02) 50%,
-    transparent 100%
-  );
-  pointer-events: none;
-  z-index: 1;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .terminal-header {
@@ -207,7 +216,6 @@ body {
 .terminal-prompt {
   color: var(--terminal-prompt);
   font-weight: bold;
-  text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
 }
 
 .terminal-cursor {
@@ -274,35 +282,34 @@ input[type="text"]:disabled {
 
 .command-list li:hover {
   color: var(--terminal-accent);
-  padding-left: 0.5rem;
+  padding-left: 0.25rem;
 }
 
 .text-terminal-accent {
   color: var(--terminal-accent);
-  text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
   transition: all 0.3s ease;
 }
 
 .text-terminal-accent:hover {
-  color: var(--terminal-accent-hover);
-  text-shadow: 0 0 10px rgba(127, 255, 0, 0.8);
+  color: var(--terminal-text);
 }
 
 .error-message {
   color: var(--terminal-error);
-  text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
 }
 
 .success-message {
   color: var(--terminal-success);
-  text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+}
+
+.text-terminal-comment {
+  color: var(--terminal-text-secondary);
 }
 
 @media (max-width: 768px) {
   .terminal {
     margin: 0.5rem;
-    border-radius: 0;
-    border: none;
+    border-radius: 16px;
     height: 100vh !important;
     max-height: 100vh !important;
   }

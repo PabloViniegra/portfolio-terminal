@@ -3,17 +3,15 @@
     "id": "gasolink",
     "title": "GasoLink",
     "description": "Aplicación de escritorio para encontrar las gasolineras mas baratas en España. Explora, elige y añadelas a favoritos.",
+    "type": "Desktop app",
+    "scope": "App multiplataforma con datos oficiales del Gobierno de España",
     "link": "https://mega.nz/file/UD1ByaJQ#u3gVPPO6XB0K55Tcu2Hzjm97W-LfrM9lyTKsl37Ho2Q",
     "github": "https://github.com/PabloViniegra/gasolink-app",
     "technologies": [
-      "Git",
-      "pnpm",
       "Tauri",
       "React",
       "Typescript",
       "Tailwind CSS",
-      "CSS",
-      "Vite",
       "Tanstack Query",
       "Hero UI"
     ],
@@ -24,9 +22,11 @@
     "id": "win_opt",
     "title": "win_opt",
     "description": "Aplicación TUI para la gestión del rendimiento y el espacio en disco de Windows 11. Sencilla, rápida y eficiente.",
+    "type": "CLI tool",
+    "scope": "Utilidad de sistema para optimización de Windows",
     "link": "https://github.com/PabloViniegra/win_opt/releases/tag/v1.2.1",
     "github": "https://github.com/PabloViniegra/win_opt",
-    "technologies": ["Git", "Rust", "Claude"],
+    "technologies": ["Rust", "TUI"],
     "featured": true,
     "order": 2
   },
@@ -34,13 +34,13 @@
     "id": "dev_snippets",
     "title": "Dev Snippets",
     "description": "Dev Snippets es una aplicación web que te permite organizar y compartir tus snippets de código.",
+    "type": "Web app",
+    "scope": "Plataforma de gestión y sharing de código",
     "link": "https://dev-snippets-pi.vercel.app/",
     "github": "https://github.com/PabloViniegra/dev-snippets",
     "technologies": [
       "NextJS",
       "Typescript",
-      "React",
-      "pnpm",
       "Tailwind",
       "Shadcn UI",
       "Better Auth",
@@ -55,6 +55,8 @@
     "id": "promptlazy",
     "title": "PromptLazy",
     "description": "Aplicación web para optimizar y mejorar prompts perezosos con IA. Empieza a darle a tus LLMMS prompts de verdad.",
+    "type": "Web app",
+    "scope": "Frontend + backend para enriquecimiento de prompts con IA",
     "link": "https://prompt-lazy.netlify.app/",
     "github": "https://github.com/PabloViniegra/promptlazy-frontend",
     "technologies": [
@@ -62,8 +64,6 @@
       "TypeScript",
       "Vite",
       "Tailwind CSS",
-      "Git",
-      "pnpm",
       "Tanstack Query",
       "Shadcn UI",
       "Python",
@@ -77,24 +77,30 @@
     "id": "llama_specs",
     "title": "Llama Specs",
     "description": "Una TUI creada con Rust para verificar la compatibilidad de tu PC con los modelos locales de Ollama. Se acabó el probar a ciegas ;).",
+    "type": "CLI tool",
+    "scope": "Diagnóstico de hardware para modelos locales",
     "link": "https://github.com/PabloViniegra/llama-specs/releases/tag/v0.2.0",
     "github": "https://github.com/PabloViniegra/llama-specs",
-    "technologies": ["Git", "Rust", "Claude"],
+    "technologies": ["Rust", "TUI"],
     "order": 5
   },
   {
     "id": "pkg-sense",
     "title": "pkg Sense",
     "description": "Extensión de Visual Studio Code para el análisis profundo en tiempo real del archivo package.json de tus proyectos. La extensión ofrece sugerencias y detecta vulnerabilidades para que mamntengas tu proyecto de Node seguro.",
+    "type": "VS Code Extension",
+    "scope": "Análisis estático y detección de vulnerabilidades en dependencias",
     "link": "https://marketplace.visualstudio.com/items?itemName=PabloViniegra.pkgsense",
     "github": "https://github.com/PabloViniegra/pkgsense",
-    "technologies": ["npm", "Git", "Typescript", "VS Code API"],
+    "technologies": ["Typescript", "VS Code API"],
     "order": 6
   },
   {
     "id": "santa_app",
     "title": "Santa App [Amigo Invisible]",
     "description": "Si alguna vez has organizado un amigo invisible con tu grupo ya sabrás que precisamente divertido no es. Santa App es una aplicación web que te permite organizar un amigo invisible de forma sencilla y divertida. Además puedes cusstomizar las reglas del sorteo y más.",
+    "type": "Web app",
+    "scope": "Gestión de sorteos con reglas customizables",
     "link": "https://santa-app-chi.vercel.app/",
     "github": "https://github.com/PabloViniegra/santa-app",
     "technologies": [
@@ -107,9 +113,7 @@
       "Better Auth",
       "PostgreSQL",
       "Drizzle ORM",
-      "Vercel",
-      "Git",
-      "Biome"
+      "Vercel"
     ],
     "order": 7
   },
@@ -117,21 +121,20 @@
     "id": "trello-clone",
     "title": "Trello Clone!",
     "description": "Clon de la famosa aplicación Trello, que permite la gestión de tareas y proyectos de forma visual. Puedes crear, editar y eliminar tareas, así como moverlas entre las distintas columnas. ¡Crea tu propio tablero!",
+    "type": "Web app",
+    "scope": "Gestión visual de tareas con drag-and-drop",
     "link": "https://trello-next-five.vercel.app/",
     "github": "https://github.com/PabloViniegra/trello-next",
     "technologies": [
-      "Git",
       "React",
       "Tailwind CSS",
       "NextJS",
-      "pnpm",
       "TypeScript",
       "Shadcn UI",
       "Better Auth",
       "PostgreSQL",
       "Vercel",
-      "Resend",
-      "Biome"
+      "Resend"
     ],
     "order": 8
   },
@@ -139,6 +142,8 @@
     "id": "personal_blog",
     "title": "Personal Blog",
     "description": "Un blog personal donde solo yo puedo escribir posts. Construido con Next JS y Typescript e inspirado en el diseño de Vercel.",
+    "type": "Web app",
+    "scope": "Blog con autenticación y renderizado de código",
     "link": "https://my-personal-blog-five-sigma.vercel.app/",
     "github": "https://github.com/PabloViniegra/dev-snippets",
     "technologies": [
@@ -147,12 +152,9 @@
       "React",
       "Vercel",
       "Shadcn UI",
-      "Bun",
       "Shiki",
       "PostgreSQL",
-      "SQLite",
-      "Drizzle ORM",
-      "Biome"
+      "Drizzle ORM"
     ]
   }
 ]

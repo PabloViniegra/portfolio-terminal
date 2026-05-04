@@ -12,7 +12,7 @@
     "id": "welcome-message",
     "key": "welcome-message",
     "title": "Bienvenida",
-    "content": "Bienvenido a mi portfolio interactivo en modo terminal",
+    "content": "Fullstack engineer. Producto web, tooling y arquitectura pragmática.",
     "metadata": {
       "type": "welcome"
     }
@@ -28,7 +28,7 @@
   {
     "id": "help-intro",
     "key": "help-intro",
-    "content": "Escribe /help para ver los comandos disponibles.",
+    "content": "Empieza por /experience, /projects o /contact.",
     "metadata": {
       "type": "hint"
     }
@@ -78,7 +78,7 @@
   {
     "id": "contact-cta",
     "key": "contact-cta",
-    "content": "¿Quieres trabajar juntos en un proyecto?",
+    "content": "Disponible para roles fullstack, producto web y tooling.",
     "metadata": {
       "type": "cta"
     }
@@ -86,7 +86,7 @@
   {
     "id": "contact-button",
     "key": "contact-button",
-    "content": "Enviar mensaje",
+    "content": "Abrir email",
     "metadata": {
       "type": "button-text"
     }
@@ -102,7 +102,7 @@
   {
     "id": "help-title",
     "key": "help-title",
-    "content": "=== Comandos disponibles ===",
+    "content": "Índice de comandos",
     "metadata": {
       "type": "title"
     }
@@ -110,7 +110,7 @@
   {
     "id": "help-tip",
     "key": "help-tip",
-    "content": "Consejo: Usa las teclas de flecha arriba/abajo para navegar por el historial de comandos.",
+    "content": "Tab autocompleta, las flechas recuperan historial y /help muestra el índice completo.",
     "metadata": {
       "type": "tip"
     }

@@ -45,8 +45,8 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
   const [selectedSuggestion, setSelectedSuggestion] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
+  const hasVisibleSuggestions = showSuggestions && suggestions.length > 0;
 
   const updateSuggestions = useCallback((value: string) => {
     if (!value.startsWith('/') || value.trim() === '') {
@@ -192,20 +192,20 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
     }
 
     // Manejar navegación por sugerencias
-    if (showSuggestions && suggestions.length > 0 && 
+    if (hasVisibleSuggestions &&
         (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
       handleSuggestionNavigation(e);
       return;
     }
 
     // Manejar navegación por historial
-    if (!showSuggestions && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+    if (!hasVisibleSuggestions && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
       handleHistoryNavigation(e);
       return;
     }
 
     // Manejar Tab para autocompletar cuando no hay sugerencias visibles
-    if (e.key === 'Tab' && !showSuggestions) {
+    if (e.key === 'Tab' && !hasVisibleSuggestions) {
       e.preventDefault();
       autocompleteSuggestion();
     }
@@ -220,30 +220,50 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
   return (
     <div className="relative w-full">
       <form onSubmit={handleSubmit} className="w-full relative">
-        <div className="flex items-center relative">
-          <span className="text-terminal-prompt font-mono font-bold mr-2">$</span>
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-            onKeyUp={handleKeyUp}
-            onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-            className="command-input flex-1 bg-transparent outline-none"
-            disabled={disabled}
-            autoFocus
-            aria-label="Comando de terminal"
-            placeholder={disabled ? 'Procesando comando...' : 'Escribe un comando...'}
-          />
+        <div className="rounded-2xl border border-terminal-border/80 bg-terminal-bg-secondary/45 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+          <div className="mb-2 flex items-center justify-between gap-3">
+            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
+              command input
+            </span>
+            <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary md:inline">
+              /help · tab autocomplete · history
+            </span>
+          </div>
+          <div className="relative flex items-center">
+            <span className="mr-3 font-mono text-lg font-bold text-terminal-prompt">$</span>
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+              onKeyUp={handleKeyUp}
+              onFocus={() => {
+                if (input.startsWith('/')) {
+                  updateSuggestions(input);
+                } else {
+                  setShowSuggestions(false);
+                }
+              }}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+              className="command-input flex-1 bg-transparent outline-none text-base"
+              disabled={disabled}
+              autoFocus
+              aria-label="Comando de terminal"
+              placeholder={disabled ? 'Procesando comando...' : 'Prueba con /projects, /experience o /contact'}
+            />
+          </div>
+          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-terminal-text-secondary/70">
+            <span>tab · autocomplete</span>
+            <span>↑↓ · history</span>
+          </div>
         </div>
-        <div className="absolute left-0 right-0 -top-1 transform -translate-y-full">
+        <div ref={suggestionsRef} className="absolute left-0 right-0 -top-1 transform -translate-y-full">
           <CommandSuggestions
             suggestions={suggestions}
             selectedIndex={selectedSuggestion}
             onSelect={selectSuggestion}
-            visible={showSuggestions && !disabled}
+            visible={hasVisibleSuggestions && !disabled}
           />
         </div>
       </form>

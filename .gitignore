@@ -28,3 +28,6 @@ AGENTS.md
 .opencode/*
 docs/*
 opencode.json
+.agents/*
+skills-lock.json
+.codex/*
