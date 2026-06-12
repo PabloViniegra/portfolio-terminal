@@ -155,6 +155,28 @@
       "Shiki",
       "PostgreSQL",
       "Drizzle ORM"
-    ]
+    ],
+    "order": 9
+  },
+  {
+    "id": "tier_maker",
+    "title": "Tier Maker",
+    "description": "Aplicación para hacer tier lists y compartirlas con quien quieras.",
+    "type": "Web app",
+    "scope": "Creación y compartición de tier lists",
+    "link": "https://project-hbojo.vercel.app/",
+    "github": "https://github.com/PabloViniegra/tier-maker",
+    "technologies": [
+      "NextJS",
+      "Typescript",
+      "React",
+      "Vercel",
+      "Shadcn UI",
+      "Tailwind CSS",
+      "Better Auth",
+      "PostgreSQL",
+      "Drizzle ORM"
+    ],
+    "order": 9
   }
 ]
