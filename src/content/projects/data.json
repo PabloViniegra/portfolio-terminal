@@ -49,7 +49,7 @@
       "Vercel"
     ],
     "featured": true,
-    "order": 4
+    "order": 10
   },
   {
     "id": "promptlazy",
@@ -71,7 +71,7 @@
       "Vitest"
     ],
     "featured": true,
-    "order": 3
+    "order": 5
   },
   {
     "id": "llama_specs",
@@ -82,7 +82,7 @@
     "link": "https://github.com/PabloViniegra/llama-specs/releases/tag/v0.2.0",
     "github": "https://github.com/PabloViniegra/llama-specs",
     "technologies": ["Rust", "TUI"],
-    "order": 5
+    "order": 3
   },
   {
     "id": "pkg-sense",
@@ -177,6 +177,6 @@
       "PostgreSQL",
       "Drizzle ORM"
     ],
-    "order": 9
+    "order": 4
   }
 ]
