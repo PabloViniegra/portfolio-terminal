@@ -74,14 +74,14 @@
     "order": 5
   },
   {
-    "id": "llama_specs",
-    "title": "Llama Specs",
-    "description": "Una TUI creada con Rust para verificar la compatibilidad de tu PC con los modelos locales de Ollama. Se acabó el probar a ciegas ;).",
+    "id": "ollama_fit",
+    "title": "Ollama Fit",
+    "description": "Una TUI creada con Go para verificar la compatibilidad de tu PC con los modelos locales de Ollama. Se acabó el probar a ciegas ;).",
     "type": "CLI tool",
     "scope": "Diagnóstico de hardware para modelos locales",
-    "link": "https://github.com/PabloViniegra/llama-specs/releases/tag/v0.2.0",
-    "github": "https://github.com/PabloViniegra/llama-specs",
-    "technologies": ["Rust", "TUI"],
+    "link": "https://github.com/PabloViniegra/tui-ollama-go/releases/tag/v0.3.0",
+    "github": "https://github.com/PabloViniegra/tui-ollama-go",
+    "technologies": ["Go", "TUI"],
     "order": 3
   },
   {
