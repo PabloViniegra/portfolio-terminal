@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionHeader from './SectionHeader';
 
 interface KnowledgeItem {
   name: string;
@@ -50,16 +51,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
 
   return (
     <div className="font-sans">
-      <div className="mb-5 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 font-mono text-sm">
-          <span className="text-terminal-prompt">$</span>
-          <span className="text-terminal-accent">map</span>
-          <span className="text-terminal-text-secondary">skillset --current</span>
-        </div>
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">
-          stack overview
-        </span>
-      </div>
+      <SectionHeader verb="map" args="skillset --current" meta="stack overview" />
 
       <div className="space-y-8">
         <section>
@@ -88,7 +80,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
                     >
                       <div className="min-w-0">
                         <div className="text-sm text-terminal-text">{skill.name}</div>
-                        <div className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-terminal-text-secondary/70">
+                        <div className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-terminal-text-secondary/70">
                           {getDepthLabel(skill.rating)}
                         </div>
                       </div>
@@ -116,7 +108,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
                 className="flex items-baseline justify-between gap-4 border-t border-terminal-border/30 py-2"
               >
                 <span className="text-sm text-terminal-text">{skill.name}</span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-terminal-text-secondary/70">
+                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-terminal-text-secondary/70">
                   {getSoftSkillLabel(skill.rating)}
                 </span>
               </div>

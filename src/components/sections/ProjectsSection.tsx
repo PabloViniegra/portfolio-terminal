@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionHeader from './SectionHeader';
 
 interface ProjectItem {
   title: string;
@@ -20,7 +21,7 @@ const ExternalLink = ({ href, label }: { href: string; label: string }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="font-mono text-[11px] uppercase tracking-[0.14em] text-terminal-text-secondary transition-colors duration-200 hover:text-terminal-accent"
+    className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary transition-colors duration-200 hover:text-terminal-accent active:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
   >
     {label} →
   </a>
@@ -32,16 +33,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
 
   return (
     <div className="font-sans">
-      <div className="mb-5 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 font-mono text-sm">
-          <span className="text-terminal-prompt">$</span>
-          <span className="text-terminal-accent">inspect</span>
-          <span className="text-terminal-text-secondary">projects.registry</span>
-        </div>
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">
-          {projects.length} builds
-        </span>
-      </div>
+      <SectionHeader verb="inspect" args="projects.registry" meta={`${projects.length} builds`} />
 
       <div className="space-y-8">
         <section>

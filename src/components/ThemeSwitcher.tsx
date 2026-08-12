@@ -30,7 +30,7 @@ const ThemeSwitcher = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-lg border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
+        className="flex items-center gap-2 rounded-lg border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.98]"
         aria-label="Cambiar tema"
         aria-expanded={isOpen}
       >
@@ -41,11 +41,8 @@ const ThemeSwitcher = () => {
 
       {isOpen && (
         <div
-          className="absolute right-0 mt-2 w-52 overflow-hidden rounded-xl border border-terminal-border/80 bg-terminal-bg py-1 shadow-xl backdrop-blur-sm"
-          style={{
-            background: 'rgba(var(--terminal-bg-rgb), 0.95)',
-            backdropFilter: 'blur(8px)',
-          }}
+          className="absolute right-0 mt-2 w-52 overflow-hidden rounded-xl border border-terminal-border/80 bg-terminal-bg/95 py-1 shadow-xl backdrop-blur-sm"
+          style={{ zIndex: 'var(--z-dropdown)' }}
           role="menu"
           aria-label="Selector de tema"
         >
@@ -53,7 +50,7 @@ const ThemeSwitcher = () => {
             <button
               key={theme.id}
               onClick={() => handleThemeChange(theme.id)}
-              className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-all duration-150 ${
+              className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 focus:ring-inset active:scale-[0.98] ${
                 currentTheme === theme.id
                   ? 'bg-terminal-accent/12 text-terminal-accent font-medium'
                   : 'text-terminal-text hover:bg-terminal-bg-secondary/80'

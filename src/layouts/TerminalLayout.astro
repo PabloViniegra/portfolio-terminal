@@ -1,19 +1,47 @@
 ---
 import "../styles/global.css";
+
+const pageTitle = "Portfolio | Pablo Viniegra — Fullstack Engineer";
+const pageDescription =
+  "Portfolio interactivo en modo terminal de Pablo Viniegra, fullstack engineer. Producto web, tooling y arquitectura pragmática.";
+const canonicalUrl = "https://portfolio.pablo.dev/";
 ---
 
 <html lang="es" class="h-full">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Portfolio interactivo en modo terminal" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content="Pablo Viniegra" />
+    <meta name="theme-color" content="#11151b" />
+
+    <title>{pageTitle}</title>
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/avatar.svg" />
-    <title>Portfolio | Terminal</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content="/avatar.svg" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Pablo Viniegra" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content="/avatar.svg" />
   </head>
   <body
     class="min-h-screen flex items-center justify-center bg-terminal-bg text-terminal-text"
   >
-    <main class="w-full max-w-5xl mx-auto p-4 md:p-6">
+    <a
+      href="#terminal-output"
+      class="skip-link"
+    >
+      Saltar al contenido
+    </a>
+    <main id="terminal-output" class="w-full max-w-5xl mx-auto p-4 md:p-6">
       <slot />
     </main>
   </body>

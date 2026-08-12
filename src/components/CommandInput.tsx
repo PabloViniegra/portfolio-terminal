@@ -1,43 +1,14 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useId } from "react";
 import type { KeyboardEvent } from "react";
 import CommandSuggestions from "./CommandSuggestions";
 import { COMMAND_SUGGESTIONS, type Suggestion } from "../constants/suggestions";
 
-/**
- * Props del componente CommandInput
- * @interface Props
- * @property {(input: string) => void} onCommand - Callback ejecutado cuando se envía un comando
- * @property {(direction: 'up' | 'down') => string} onHistoryNavigate - Callback para navegar por el historial
- * @property {boolean} [disabled=false] - Si el input está deshabilitado
- */
 type Props = {
   onCommand: (input: string) => void;
   onHistoryNavigate: (direction: 'up' | 'down') => string;
   disabled?: boolean;
 };
 
-/**
- * Componente de entrada de comandos para la terminal
- * 
- * Proporciona un campo de entrada con características avanzadas:
- * - Autocompletado de comandos con Tab
- * - Navegación por historial con flechas arriba/abajo
- * - Sugerencias en tiempo real
- * - Navegación por sugerencias con flechas
- * 
- * @component
- * @param {Props} props - Props del componente
- * @returns {JSX.Element} Campo de entrada de comandos
- * 
- * @example
- * ```tsx
- * <CommandInput
- *   onCommand={(cmd) => console.log(cmd)}
- *   onHistoryNavigate={(dir) => getPreviousCommand(dir)}
- *   disabled={false}
- * />
- * ```
- */
 export default function CommandInput({ onCommand, onHistoryNavigate, disabled = false }: Props) {
   const [input, setInput] = useState("");
   const [temporaryInput, setTemporaryInput] = useState("");
@@ -46,6 +17,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
+  const listboxId = useId();
   const hasVisibleSuggestions = showSuggestions && suggestions.length > 0;
 
   const updateSuggestions = useCallback((value: string) => {
@@ -220,12 +192,12 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
   return (
     <div className="relative w-full">
       <form onSubmit={handleSubmit} className="w-full relative">
-        <div className="rounded-2xl border border-terminal-border/80 bg-terminal-bg-secondary/45 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+        <div className="rounded-2xl border border-terminal-border/80 bg-terminal-bg-secondary/60 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-colors duration-200 focus-within:border-terminal-accent/40">
           <div className="mb-2 flex items-center justify-between gap-3">
             <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
               command input
             </span>
-            <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary md:inline">
+            <span className="hidden font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary md:inline">
               /help · tab autocomplete · history
             </span>
           </div>
@@ -249,7 +221,12 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
               className="command-input flex-1 bg-transparent outline-none text-base"
               disabled={disabled}
               autoFocus
+              role="combobox"
               aria-label="Comando de terminal"
+              aria-autocomplete="list"
+              aria-expanded={hasVisibleSuggestions}
+              aria-controls={hasVisibleSuggestions ? `${listboxId}-listbox` : undefined}
+              aria-activedescendant={hasVisibleSuggestions ? `${listboxId}-listbox-opt-${selectedSuggestion}` : undefined}
               placeholder={disabled ? 'Procesando comando...' : 'Prueba con /projects, /experience o /contact'}
             />
           </div>
@@ -264,6 +241,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
             selectedIndex={selectedSuggestion}
             onSelect={selectSuggestion}
             visible={hasVisibleSuggestions && !disabled}
+            listboxId={listboxId}
           />
         </div>
       </form>

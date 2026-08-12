@@ -5,8 +5,7 @@
 ## 🚀 Características
 
 - **Interfaz de terminal interactiva** con autocompletado de comandos
-- **Content Collections de Astro** para gestión de contenido estructurado
-- **Validación de datos** con Zod schemas y type-safety completo
+- **Content Collections de Astro** con validación por Zod y type-safety completo
 - **Tema oscuro/ligero** con conmutador integrado (4 temas disponibles)
 - **Efecto de lluvia de Matrix** (activable con el comando `/rain`)
 - **Navegación por historial** de comandos con las teclas de flecha
@@ -28,11 +27,10 @@
 
 ## 🛠️ Tecnologías Utilizadas
 
-- [Astro 5.11](https://astro.build/) - Framework web con Content Collections
+- [Astro 5.11](https://astro.build/) - Framework web con Content Collections y Zod (`astro:content`)
 - [React 19](https://reactjs.org/) - Biblioteca de JavaScript para interfaces de usuario
 - [TypeScript](https://www.typescriptlang.org/) - JavaScript tipado estáticamente
 - [Tailwind CSS 4](https://tailwindcss.com/) - Framework CSS utility-first
-- [Zod](https://zod.dev/) - Validación de schemas TypeScript-first
 - [Vite](https://vitejs.dev/) - Herramienta de compilación y servidor de desarrollo
 
 ## 🚀 Cómo Empezar
@@ -134,7 +132,6 @@ Para entender la arquitectura completa:
 
 Todo el contenido está organizado en **Content Collections** de Astro:
 
-- ✅ **Validación automática** con Zod schemas
 - ✅ **Type-safety** completo con TypeScript
 - ✅ **Fácil edición** en archivos JSON
 - ✅ **Intellisense** en el editor

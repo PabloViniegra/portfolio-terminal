@@ -8,8 +8,8 @@ const TerminalLoader: React.FC = () => {
       </span>
       <div className="flex items-center gap-1">
         <div className="h-1.5 w-6 rounded-full bg-terminal-accent/80 animate-pulse"></div>
-        <div className="h-1.5 w-3 rounded-full bg-terminal-text-secondary/50 animate-pulse" style={{ animationDelay: '120ms' }}></div>
-        <div className="h-1.5 w-2 rounded-full bg-terminal-text-secondary/30 animate-pulse" style={{ animationDelay: '240ms' }}></div>
+        <div className="h-1.5 w-3 rounded-full bg-terminal-text-secondary/70 animate-pulse" style={{ animationDelay: '120ms' }}></div>
+        <div className="h-1.5 w-2 rounded-full bg-terminal-text-secondary/70 animate-pulse" style={{ animationDelay: '240ms' }}></div>
       </div>
     </div>
   );

@@ -1,92 +1,283 @@
+/*
+ * Portfolio Terminal — Design System Tokens
+ *
+ * Architecture: primitive → semantic → component.
+ *   1. :root defines the One Dark (default) palette.
+ *   2. [data-theme="..."] blocks override per theme.
+ *   3. Components consume SEMANTIC tokens, never raw values.
+ *   4. @theme block maps tokens to Tailwind v4 utilities.
+ *
+ * See: /design-system/tokens/colors.md, /design-system/themes/*.md
+ */
+
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 @import "tailwindcss";
 
-/* Variables globales y tema por defecto (One Dark) */
+/* ============================================================================
+ * FONT STACKS
+ * ========================================================================= */
+
 :root {
-  --font-sans: 'Montserrat', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  
-  /* Tema One Dark */
+  --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, Consolas, monospace;
+}
+
+/* ============================================================================
+ * DEFAULT THEME: ONE DARK
+ *
+ * Token roles documented in /design-system/tokens/colors.md
+ * Contrast verified per WCAG 2.1 AA. See /design-system/themes/one-dark.md
+ * ========================================================================= */
+
+:root {
+  /* Canvas */
   --terminal-bg: #11151b;
   --terminal-bg-rgb: 17, 21, 27;
   --terminal-bg-secondary: #171d26;
   --terminal-bg-secondary-rgb: 23, 29, 38;
+  --terminal-bg-elevated: #1d2530;
+  --terminal-bg-elevated-rgb: 29, 37, 48;
   --terminal-header-bg: #0d1117;
   --terminal-header-bg-rgb: 13, 17, 23;
+
+  /* Borders & dividers */
+  --terminal-border: #273142;
+  --terminal-border-rgb: 39, 49, 66;
+
+  /* Text */
   --terminal-text: #d5dde8;
+  --terminal-text-rgb: 213, 221, 232;
   --terminal-text-secondary: #7d889c;
   --terminal-text-secondary-rgb: 125, 136, 156;
+  --terminal-text-tertiary: #5a6678;
+  --terminal-text-tertiary-rgb: 90, 102, 120;
+
+  /* Semantic accents */
   --terminal-accent: #77bdfb;
   --terminal-prompt: #8fd6b4;
-  --terminal-error: #f38b92;
   --terminal-warning: #d8b26b;
+  --terminal-error: #f38b92;
   --terminal-success: #8fd6b4;
-  --terminal-border: #273142;
   --terminal-cursor: #8fd6b4;
+
+  /* Overlays (Matrix rain, modal scrims) */
+  --terminal-overlay-rgb: 0, 0, 0;
+
+  /* Window-chrome decoration (mac-style traffic lights) */
+  --terminal-dot-close: #ef6a72;
+  --terminal-dot-min: #d6ad63;
+  --terminal-dot-max: #7bcf9d;
+
+  /* Avatar SVG palette (themable — reuses prompt + secondary surfaces) */
+  --avatar-fill: #23272E;
+  --avatar-stroke: #56d364;
+  --avatar-stroke-strong: #7fff00;
+  --avatar-accent: #4ADE80;
+  --avatar-accent-soft: #56d364;
+  --avatar-accent-deep: #21371B;
+
+  /* Z-index scale (documented in /design-system/tokens/elevation.md) */
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-dropdown: 20;
+  --z-overlay: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+
+  /* Scrollbar (derived; do not change per theme except via tokens) */
+  --scrollbar-track: rgba(var(--terminal-header-bg-rgb), 0.8);
+  --scrollbar-thumb: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.35);
+  --scrollbar-thumb-hover: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.55);
+  --scrollbar-width: 8px;
 }
 
-/* Tema Light */
+/* ============================================================================
+ * THEME: LIGHT
+ * ========================================================================= */
+
 [data-theme="light"] {
   --terminal-bg: #f2f4f7;
   --terminal-bg-rgb: 242, 244, 247;
   --terminal-bg-secondary: #ffffff;
   --terminal-bg-secondary-rgb: 255, 255, 255;
+  --terminal-bg-elevated: #ffffff;
+  --terminal-bg-elevated-rgb: 255, 255, 255;
   --terminal-header-bg: #e6ebf2;
   --terminal-header-bg-rgb: 230, 235, 242;
+
+  --terminal-border: #c9d2e0;
+  --terminal-border-rgb: 201, 210, 224;
+
   --terminal-text: #1b2430;
+  --terminal-text-rgb: 27, 36, 48;
   --terminal-text-secondary: #5a6678;
   --terminal-text-secondary-rgb: 90, 102, 120;
+  --terminal-text-tertiary: #8b98a8;
+  --terminal-text-tertiary-rgb: 139, 152, 168;
+
   --terminal-accent: #2f6fb2;
   --terminal-prompt: #2d7d61;
-  --terminal-error: #c64747;
   --terminal-warning: #a97721;
+  --terminal-error: #c64747;
   --terminal-success: #2d7d61;
-  --terminal-border: #c9d2e0;
   --terminal-cursor: #2f6fb2;
+
+  --terminal-overlay-rgb: 20, 20, 20;
+
+  --terminal-dot-close: #d96b6b;
+  --terminal-dot-min: #c39a4f;
+  --terminal-dot-max: #5fa97f;
+
+  --avatar-fill: #4a5564;
+  --avatar-stroke: #2d7d61;
+  --avatar-stroke-strong: #38a169;
+  --avatar-accent: #2d7d61;
+  --avatar-accent-soft: #38a169;
+  --avatar-accent-deep: #1a3d2c;
 }
 
-/* Tema Ayu */
+/* ============================================================================
+ * THEME: AYU
+ * ========================================================================= */
+
 [data-theme="ayu"] {
   --terminal-bg: #0f1419;
   --terminal-bg-rgb: 15, 20, 25;
   --terminal-bg-secondary: #151d24;
   --terminal-bg-secondary-rgb: 21, 29, 36;
+  --terminal-bg-elevated: #1a232c;
+  --terminal-bg-elevated-rgb: 26, 35, 44;
   --terminal-header-bg: #0b1015;
   --terminal-header-bg-rgb: 11, 16, 21;
+
+  --terminal-border: #283746;
+  --terminal-border-rgb: 40, 55, 70;
+
   --terminal-text: #edf0e3;
+  --terminal-text-rgb: 237, 240, 227;
   --terminal-text-secondary: #90a0ae;
   --terminal-text-secondary-rgb: 144, 160, 174;
+  --terminal-text-tertiary: #6a7785;
+  --terminal-text-tertiary-rgb: 106, 119, 133;
+
   --terminal-accent: #5cc8f5;
   --terminal-prompt: #b9d36a;
-  --terminal-error: #ff6b6b;
   --terminal-warning: #f2be67;
+  --terminal-error: #ff6b6b;
   --terminal-success: #b9d36a;
-  --terminal-border: #283746;
   --terminal-cursor: #f2be67;
+
+  --terminal-overlay-rgb: 0, 0, 0;
+
+  --terminal-dot-close: #f08080;
+  --terminal-dot-min: #f2be67;
+  --terminal-dot-max: #b9d36a;
+
+  --avatar-fill: #2a3340;
+  --avatar-stroke: #b9d36a;
+  --avatar-stroke-strong: #d2e889;
+  --avatar-accent: #b9d36a;
+  --avatar-accent-soft: #c7db7e;
+  --avatar-accent-deep: #3d4928;
 }
 
-/* Tema GitHub Dark */
+/* ============================================================================
+ * THEME: GITHUB DARK
+ * ========================================================================= */
+
 [data-theme="github-dark"] {
   --terminal-bg: #0d1117;
   --terminal-bg-rgb: 13, 17, 23;
   --terminal-bg-secondary: #151b23;
   --terminal-bg-secondary-rgb: 21, 27, 35;
+  --terminal-bg-elevated: #1b232c;
+  --terminal-bg-elevated-rgb: 27, 35, 44;
   --terminal-header-bg: #0b1016;
   --terminal-header-bg-rgb: 11, 16, 22;
+
+  --terminal-border: #2c3644;
+  --terminal-border-rgb: 44, 54, 68;
+
   --terminal-text: #d0d7de;
+  --terminal-text-rgb: 208, 215, 222;
   --terminal-text-secondary: #8b98a8;
   --terminal-text-secondary-rgb: 139, 152, 168;
+  --terminal-text-tertiary: #6a7785;
+  --terminal-text-tertiary-rgb: 106, 119, 133;
+
   --terminal-accent: #66b3ff;
   --terminal-prompt: #87e1a0;
-  --terminal-error: #ff8a80;
   --terminal-warning: #d7ac55;
+  --terminal-error: #ff8a80;
   --terminal-success: #87e1a0;
-  --terminal-border: #2c3644;
   --terminal-cursor: #66b3ff;
+
+  --terminal-overlay-rgb: 0, 0, 0;
+
+  --terminal-dot-close: #ff7b72;
+  --terminal-dot-min: #d7ac55;
+  --terminal-dot-max: #87e1a0;
+
+  --avatar-fill: #21262d;
+  --avatar-stroke: #87e1a0;
+  --avatar-stroke-strong: #a8eeb6;
+  --avatar-accent: #87e1a0;
+  --avatar-accent-soft: #95dba5;
+  --avatar-accent-deep: #1c3a26;
 }
 
-/* Estilos base del body */
+/* ============================================================================
+ * TAILWIND v4 @THEME MAP
+ *
+ * Maps semantic tokens to Tailwind utilities. Components can use:
+ *   bg-terminal-bg, text-terminal-text, border-terminal-border, etc.
+ *
+ * Adding a token here makes it available as a Tailwind class automatically.
+ * ========================================================================= */
+
+@theme {
+  --color-terminal-bg: var(--terminal-bg);
+  --color-terminal-bg-secondary: var(--terminal-bg-secondary);
+  --color-terminal-bg-elevated: var(--terminal-bg-elevated);
+  --color-terminal-header-bg: var(--terminal-header-bg);
+  --color-terminal-border: var(--terminal-border);
+  --color-terminal-text: var(--terminal-text);
+  --color-terminal-text-secondary: var(--terminal-text-secondary);
+  --color-terminal-text-tertiary: var(--terminal-text-tertiary);
+  --color-terminal-accent: var(--terminal-accent);
+  --color-terminal-prompt: var(--terminal-prompt);
+  --color-terminal-warning: var(--terminal-warning);
+  --color-terminal-error: var(--terminal-error);
+  --color-terminal-success: var(--terminal-success);
+  --color-terminal-cursor: var(--terminal-cursor);
+  --color-terminal-dot-close: var(--terminal-dot-close);
+  --color-terminal-dot-min: var(--terminal-dot-min);
+  --color-terminal-dot-max: var(--terminal-dot-max);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --shadow-terminal: 0 28px 80px rgba(3, 6, 11, 0.48);
+
+  --z-index-base: var(--z-base);
+  --z-index-sticky: var(--z-sticky);
+  --z-index-dropdown: var(--z-dropdown);
+  --z-index-overlay: var(--z-overlay);
+  --z-index-modal: var(--z-modal);
+  --z-index-toast: var(--z-toast);
+}
+
+/* ============================================================================
+ * BASE RESET
+ * ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -103,56 +294,61 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 300ms var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1)),
+    color 300ms var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1));
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Animaciones */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+/* ============================================================================
+ * MOTION TOKENS
+ *
+ * Documented in /design-system/tokens/motion.md
+ * ========================================================================= */
+
+:root {
+  --motion-instant: 0ms;
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --motion-medium: 300ms;
+  --motion-slow: 400ms;
+  --motion-cursor: 1000ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-step: steps(1, end);
+  --ease-linear: linear;
 }
 
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-
-@keyframes flicker {
-  0%, 100% { opacity: 0.9; }
-  20% { opacity: 0.92; }
-  50% { opacity: 0.95; }
-  80% { opacity: 0.91; }
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.animate-shimmer {
-  animation: shimmer 2s infinite;
-}
+/* ============================================================================
+ * SCROLLBAR
+ * ========================================================================= */
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(var(--terminal-header-bg-rgb), 0.8);
+  background: var(--scrollbar-track);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.35);
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.55);
+  background: var(--scrollbar-thumb-hover);
 }
+
+/* ============================================================================
+ * TERMINAL SHELL
+ *
+ * The outermost container. Documented in /design-system/components/terminal.md
+ * ========================================================================= */
 
 .terminal {
   background:
@@ -161,7 +357,7 @@ body {
   border-radius: 18px;
   border: 1px solid var(--terminal-border);
   box-shadow:
-    0 28px 80px rgba(3, 6, 11, 0.48),
+    var(--shadow-terminal),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
   color: var(--terminal-text);
   display: flex;
@@ -173,7 +369,10 @@ body {
   position: relative;
   width: 100%;
   margin: 0 auto;
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color var(--motion-medium) var(--ease-in-out),
+    border-color var(--motion-medium) var(--ease-in-out),
+    box-shadow var(--motion-medium) var(--ease-in-out);
 }
 
 .terminal-header {
@@ -184,7 +383,9 @@ body {
   align-items: center;
   justify-content: space-between;
   user-select: none;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color var(--motion-medium) var(--ease-in-out),
+    border-color var(--motion-medium) var(--ease-in-out);
 }
 
 .terminal-body {
@@ -193,7 +394,7 @@ body {
   padding: 1.5rem;
   position: relative;
   background-color: var(--terminal-bg);
-  transition: background-color 0.3s ease;
+  transition: background-color var(--motion-medium) var(--ease-in-out);
 }
 
 .terminal-body::-webkit-scrollbar {
@@ -213,6 +414,13 @@ body {
   background-color: var(--scrollbar-thumb-hover);
 }
 
+/* ============================================================================
+ * COMMAND STRUCTURE
+ *
+ * Prompt symbol, input field, command output. Documented in
+ * /design-system/components/command-input.md
+ * ========================================================================= */
+
 .terminal-prompt {
   color: var(--terminal-prompt);
   font-weight: bold;
@@ -224,7 +432,7 @@ body {
   height: 1.25rem;
   background-color: var(--terminal-cursor);
   vertical-align: middle;
-  animation: blink 1s step-end infinite;
+  animation: blink var(--motion-cursor) var(--ease-step) infinite;
 }
 
 .terminal-command {
@@ -277,7 +485,7 @@ input[type="text"]:disabled {
 
 .command-list li {
   margin-bottom: 0.25rem;
-  transition: all 0.2s ease;
+  transition: all var(--motion-fast) var(--ease-out);
 }
 
 .command-list li:hover {
@@ -285,13 +493,21 @@ input[type="text"]:disabled {
   padding-left: 0.25rem;
 }
 
+/* ============================================================================
+ * SEMANTIC TEXT UTILITIES
+ * ========================================================================= */
+
 .text-terminal-accent {
   color: var(--terminal-accent);
-  transition: all 0.3s ease;
+  transition: color var(--motion-fast) var(--ease-out);
 }
 
 .text-terminal-accent:hover {
   color: var(--terminal-text);
+}
+
+.text-terminal-comment {
+  color: var(--terminal-text-secondary);
 }
 
 .error-message {
@@ -302,9 +518,9 @@ input[type="text"]:disabled {
   color: var(--terminal-success);
 }
 
-.text-terminal-comment {
-  color: var(--terminal-text-secondary);
-}
+/* ============================================================================
+ * RESPONSIVE
+ * ========================================================================= */
 
 @media (max-width: 768px) {
   .terminal {
@@ -313,11 +529,58 @@ input[type="text"]:disabled {
     height: 100vh !important;
     max-height: 100vh !important;
   }
-  
+
   .terminal-body {
     padding: 0.5rem;
   }
 }
+
+/* ============================================================================
+ * ANIMATIONS
+ *
+ * Documented in /design-system/tokens/motion.md
+ * ========================================================================= */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.9; }
+  20% { opacity: 0.92; }
+  50% { opacity: 0.95; }
+  80% { opacity: 0.91; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-appear {
+  animation: appear var(--motion-base) var(--ease-out) both;
+}
+
+/* ============================================================================
+ * EFFECTS
+ *
+ * Glitch, scanlines. Documented as deliberate decoration in principles.md.
+ * ========================================================================= */
 
 .glitch {
   position: relative;
@@ -361,12 +624,19 @@ input[type="text"]:disabled {
   z-index: 2;
 }
 
-/* Estilos para CommandSuggestions */
+/* ============================================================================
+ * COMPONENT OVERRIDES
+ *
+ * Suggestions dropdown — documented in /design-system/components/command-input.md
+ * ========================================================================= */
+
 .suggestions-dropdown {
   background-color: var(--terminal-bg);
   border: 1px solid var(--terminal-border);
   border-radius: 0.375rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 
@@ -375,4 +645,51 @@ input[type="text"]:disabled {
   border: 1px solid var(--terminal-border);
   border-radius: 0.375rem;
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================================================
+ * SKIP LINK
+ * ========================================================================= */
+
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: var(--z-toast);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  background: var(--terminal-bg-secondary);
+  color: var(--terminal-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  transform: translateY(-200%);
+  opacity: 0;
+  transition: transform var(--motion-fast) var(--ease-out),
+    opacity var(--motion-fast) var(--ease-out);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  opacity: 1;
+  outline: none;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--terminal-accent) 50%, transparent);
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ *
+ * Future work — collapse decorative animations when prefers-reduced-motion is set.
+ * Documented in /design-system/tokens/motion.md
+ * ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

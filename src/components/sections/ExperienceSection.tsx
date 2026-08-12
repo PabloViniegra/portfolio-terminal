@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionHeader from './SectionHeader';
 
 interface ExperienceItem {
   title: string;
@@ -14,19 +15,10 @@ interface ExperienceSectionProps {
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) => {
   return (
     <div className="font-sans">
-      <div className="mb-5 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 font-mono text-sm">
-          <span className="text-terminal-prompt">$</span>
-          <span className="text-terminal-accent">history</span>
-          <span className="text-terminal-text-secondary">--experience</span>
-        </div>
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">
-          {experiences.length} entries
-        </span>
-      </div>
+      <SectionHeader verb="history" args="--experience" meta={`${experiences.length} entries`} />
 
       <div className="relative space-y-0">
-        {experiences.map((experience, index) => (
+        {experiences.map((experience) => (
           <article
             key={experience.title}
             className="border-t border-terminal-border/40 py-5 first:border-t-0 first:pt-0"

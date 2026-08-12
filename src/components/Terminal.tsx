@@ -101,7 +101,7 @@ const QuickCommand = ({
   <button
     type="button"
     onClick={() => onRun(command)}
-    className="inline-flex items-center gap-2 rounded-full border border-terminal-border/70 bg-terminal-bg px-3 py-1.5 font-mono text-xs text-terminal-text-secondary transition-colors duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
+    className="inline-flex items-center gap-2 rounded-full border border-terminal-border/70 bg-terminal-bg px-3 py-1.5 font-mono text-xs text-terminal-text-secondary transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.98]"
     aria-label={`Ejecutar ${command}`}
   >
     <span className="text-terminal-prompt">$</span>
@@ -113,14 +113,14 @@ const QuickCommand = ({
 );
 
 const AsciiTitle = () => (
-  <div className="inline-flex flex-wrap items-end gap-3 font-mono">
+  <div className="inline-flex flex-wrap items-end gap-3 font-mono [text-wrap:balance]">
     <span className="text-3xl font-semibold text-terminal-prompt md:text-4xl">
       $
     </span>
     <span className="text-4xl font-semibold tracking-tight text-terminal-accent md:text-5xl">
       ./pablo
     </span>
-    <span className="pb-1 text-sm uppercase tracking-[0.3em] text-terminal-text-secondary">
+    <span className="pb-1 text-sm uppercase tracking-[0.22em] text-terminal-text-secondary">
       fullstack engineer
     </span>
   </div>
@@ -150,7 +150,7 @@ const WelcomeMessage = ({
           {welcomeMessage}
         </p>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text-secondary">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
           <span>v{version}</span>
           <span className="text-terminal-border">·</span>
           <span>{today}</span>
@@ -159,7 +159,7 @@ const WelcomeMessage = ({
         </div>
 
         <div className="flex flex-wrap items-center gap-3 pt-1">
-          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text-secondary">
+          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
             Quick start
           </span>
           <QuickCommand
@@ -200,14 +200,14 @@ const HelpMessage = ({
   <div className="terminal-output font-sans">
     <div className="mb-4 flex items-center justify-between gap-4">
       <div>
-        <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-terminal-text-secondary">
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
           command index
         </p>
         <div className="mt-2 text-lg font-semibold text-terminal-accent">
           {helpTitle}
         </div>
       </div>
-      <span className="rounded-full border border-terminal-border/70 bg-terminal-bg px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text-secondary">
+      <span className="rounded-full border border-terminal-border/70 bg-terminal-bg px-3 py-1 font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
         /help
       </span>
     </div>
@@ -216,7 +216,7 @@ const HelpMessage = ({
       {commands.map((cmd) => (
         <div
           key={cmd.command}
-          className="grid gap-2 rounded-xl border border-terminal-border/60 bg-terminal-bg-secondary/35 px-4 py-3 md:grid-cols-[11rem_minmax(0,1fr)] md:items-start"
+          className="grid gap-2 rounded-xl border border-terminal-border/60 bg-terminal-bg-secondary/60 px-4 py-3 md:grid-cols-[11rem_minmax(0,1fr)] md:items-start"
         >
           <div className="font-mono text-sm font-semibold text-terminal-accent">
             {cmd.command}
@@ -302,7 +302,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
       case COMMANDS.RAIN:
         setShowMatrixRain(true);
         return (
-          <div className="rounded-xl border border-terminal-border/70 bg-terminal-bg-secondary/40 px-4 py-3 text-terminal-text">
+          <div className="rounded-xl border border-terminal-border/70 bg-terminal-bg-secondary/60 px-4 py-3 text-terminal-text">
             <p className="font-medium text-terminal-text">
               Matrix rain activado.
             </p>
@@ -367,13 +367,13 @@ const Terminal = ({ contentData }: TerminalProps) => {
       case COMMANDS.CV:
         window.open("/cv/CV_2026.pdf", "_blank");
         return (
-          <div className="rounded-xl border border-terminal-border/70 bg-terminal-bg-secondary/35 px-4 py-3 text-sm text-terminal-text">
+          <div className="rounded-xl border border-terminal-border/70 bg-terminal-bg-secondary/60 px-4 py-3 text-sm text-terminal-text">
             Abriendo CV en una nueva pestaña.
             <a
               href="/cv/CV_2026.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 font-medium text-terminal-accent underline underline-offset-4"
+              className="ml-2 font-medium text-terminal-accent underline underline-offset-4 transition-colors duration-200 hover:text-terminal-text focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
             >
               Abrir manualmente
             </a>
@@ -381,7 +381,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
         );
       default:
         return (
-          <div className="rounded-xl border border-terminal-error/40 bg-terminal-bg-secondary/35 px-4 py-3 text-terminal-error">
+          <div className="rounded-xl border border-terminal-error/40 bg-terminal-bg-secondary/60 px-4 py-3 text-terminal-error">
             <div>
               Comando no reconocido:{" "}
               <span className="font-mono font-semibold text-terminal-text">
@@ -462,7 +462,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
         {
           input: "",
           output: (
-            <div className="rounded-xl border border-terminal-border/70 bg-terminal-bg-secondary/35 px-4 py-3 text-sm text-terminal-text-secondary">
+            <div className="rounded-xl border border-terminal-border/70 bg-terminal-bg-secondary/60 px-4 py-3 text-sm text-terminal-text-secondary">
               Matrix rain desactivado, shell establecida de nuevo en modo
               normal.
             </div>
@@ -493,7 +493,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
 
       <div
         className={`relative flex h-full flex-col ${showMatrixRain ? "bg-terminal-bg/90 backdrop-blur-sm" : ""}`}
-        style={{ zIndex: 10 }}
+        style={{ zIndex: 'var(--z-sticky)' }}
       >
         <header
           className="flex flex-wrap items-center justify-between gap-4 border-b border-terminal-border/90 bg-terminal-header-bg/90 px-4 py-3 backdrop-blur"
@@ -501,28 +501,27 @@ const Terminal = ({ contentData }: TerminalProps) => {
         >
           <div className="flex min-w-0 items-center gap-4">
             <div className="flex items-center gap-1.5" aria-hidden="true">
-              <span className="h-3 w-3 rounded-full bg-[#ef6a72]"></span>
-              <span className="h-3 w-3 rounded-full bg-[#d6ad63]"></span>
-              <span className="h-3 w-3 rounded-full bg-[#7bcf9d]"></span>
+              <span className="h-3 w-3 rounded-full bg-terminal-dot-close"></span>
+              <span className="h-3 w-3 rounded-full bg-terminal-dot-min"></span>
+              <span className="h-3 w-3 rounded-full bg-terminal-dot-max"></span>
             </div>
             <div className="min-w-0">
               <div className="truncate font-mono text-sm text-terminal-text">
                 terminal@pablo.dev
               </div>
-              <div className="truncate font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">
+              <div className="truncate font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
                 portfolio-shell / hiring-mode
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="hidden rounded-full border border-terminal-border/70 bg-terminal-bg px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text-secondary md:inline-flex">
+            <span className="hidden rounded-full border border-terminal-border/70 bg-terminal-bg px-3 py-1 font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary md:inline-flex">
               ready
             </span>
             <ThemeSwitcher />
             <div
-              className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-terminal-border/60 bg-terminal-bg-secondary/50"
-              role="img"
+              className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-terminal-border/60 bg-terminal-bg-secondary/60"
               aria-label="Avatar de Pablo Viniegra"
             >
               <Avatar size={34} className="opacity-90" />
@@ -530,7 +529,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
           </div>
         </header>
 
-        <main
+        <div
           ref={terminalRef}
           className="flex-1 space-y-8 overflow-y-auto px-4 py-5 md:px-6 md:py-6"
           role="log"
@@ -549,7 +548,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
                       {item.input}
                     </span>
                   </div>
-                  <time className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">
+                  <time className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
                     {new Date(item.timestamp).toLocaleTimeString()}
                   </time>
                 </div>
@@ -563,7 +562,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
           ))}
           {isLoading && <TerminalLoader />}
           <div ref={historyEndRef} />
-        </main>
+        </div>
 
         <footer className="border-t border-terminal-border/90 bg-terminal-header-bg/78 p-4 backdrop-blur">
           <CommandInput
