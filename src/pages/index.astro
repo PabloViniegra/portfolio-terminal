@@ -102,6 +102,7 @@ const contentData = {
     display: flex;
     flex-direction: column;
     animation: pulse 2s var(--ease-in-out) infinite;
+    transition: opacity var(--motion-medium) var(--ease-in-out);
   }
 
   .skeleton-header {
@@ -179,7 +180,10 @@ const contentData = {
 
   /* Ocultar skeleton cuando el terminal carga */
   :global(body:has(.terminal) .terminal-skeleton) {
-    display: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
   }
 </style>
 

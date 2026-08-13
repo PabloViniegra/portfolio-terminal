@@ -438,14 +438,20 @@ body {
   height: 80vh;
   max-height: 800px;
   max-width: 100%;
+  opacity: 1;
   overflow: hidden;
   position: relative;
   width: 100%;
   margin: 0 auto;
   transition:
+    opacity var(--motion-medium) var(--ease-in-out),
     background-color var(--motion-medium) var(--ease-in-out),
     border-color var(--motion-medium) var(--ease-in-out),
     box-shadow var(--motion-medium) var(--ease-in-out);
+
+  @starting-style {
+    opacity: 0;
+  }
 }
 
 .terminal-header {

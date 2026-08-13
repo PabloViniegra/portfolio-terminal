@@ -379,9 +379,13 @@ const Terminal = ({ contentData }: TerminalProps) => {
 
   useEffect(() => {
     const skeleton = document.getElementById('terminal-skeleton');
-    if (skeleton) {
-      skeleton.style.display = 'none';
-    }
+    if (!skeleton) return;
+
+    const timeoutId = window.setTimeout(() => {
+      skeleton.remove();
+    }, 320);
+
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   const buildWelcomeEntry = useCallback(
@@ -737,7 +741,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
                 ) : (
                   <div className="h-px w-full bg-gradient-to-r from-transparent via-terminal-border/70 to-transparent"></div>
                 )}
-                <div className={entry.input ? 'pl-5 md:pl-6' : ''}>
+                <div className={`animate-appear ${entry.input ? 'pl-5 md:pl-6' : ''}`}>
                   {entry.output}
                 </div>
               </div>
