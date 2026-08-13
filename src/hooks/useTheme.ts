@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { DEFAULT_THEME } from '../constants/themes';
+import { DEFAULT_THEME, getTheme } from '../constants/themes';
 
 /**
  * Tipos de temas disponibles en la aplicación
@@ -13,7 +13,7 @@ export type ThemeType = 'one-dark' | 'light' | 'ayu' | 'github-dark';
 const getSavedTheme = (): ThemeType => {
   try {
     const savedTheme = localStorage.getItem('theme');
-    return (savedTheme as ThemeType) || DEFAULT_THEME;
+    return getTheme(savedTheme).id;
   } catch (error) {
     console.warn('localStorage no disponible, usando tema por defecto:', error);
     return DEFAULT_THEME;

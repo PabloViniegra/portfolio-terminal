@@ -37,7 +37,7 @@
 
 ### Requisitos Previos
 
-- Node.js (v16 o superior)
+- Node.js (v18.20.8 o superior)
 - pnpm (recomendado) o npm/yarn
 
 ### Instalación
@@ -107,6 +107,8 @@
 | `pnpm dev`       | Iniciar servidor de desarrollo            |
 | `pnpm build`     | Construir para producción                 |
 | `pnpm preview`   | Vista previa de la compilación localmente |
+| `pnpm test`      | Ejecutar Vitest en modo watch             |
+| `pnpm test:run`  | Ejecutar todos los tests una vez          |
 | `pnpm astro ...` | Comandos de la CLI de Astro               |
 
 ## 📝 Actualizar Contenido

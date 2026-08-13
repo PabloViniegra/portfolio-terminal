@@ -12,7 +12,7 @@ type Props = {
 
 export default function CommandInput({ onCommand, onHistoryNavigate, suggestions: availableSuggestions, disabled = false }: Props) {
   const [input, setInput] = useState("");
-  const [temporaryInput, setTemporaryInput] = useState("");
+  const [temporaryInput, setTemporaryInput] = useState<string | null>(null);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -96,7 +96,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
     if (input.trim() === '' || disabled) return;
     onCommand(input);
     setInput('');
-    setTemporaryInput('');
+    setTemporaryInput(null);
     setShowSuggestions(false);
   };
 
@@ -138,17 +138,15 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
     
     const direction = e.key === 'ArrowUp' ? 'up' : 'down';
     
-    // Guardar input actual antes de navegar hacia arriba
-    if (direction === 'up' && temporaryInput === '') {
+    if (direction === 'up' && temporaryInput === null) {
       setTemporaryInput(input);
     }
     
     const historyCommand = onHistoryNavigate(direction);
     
-    // Restaurar input temporal al llegar al final del historial
-    if (direction === 'down' && historyCommand === '' && temporaryInput !== '') {
+    if (direction === 'down' && historyCommand === '' && temporaryInput !== null) {
       setInput(temporaryInput);
-      setTemporaryInput('');
+      setTemporaryInput(null);
     } else if (historyCommand !== '') {
       setInput(historyCommand);
     }

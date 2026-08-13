@@ -120,7 +120,7 @@ const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
       ref={containerRef}
       className="fixed inset-0 pointer-events-none transition-opacity duration-300"
       style={{
-        zIndex: 'var(--z-overlay)',
+        zIndex: 'var(--z-base)',
         opacity: exiting ? 0 : 1,
       }}
       aria-hidden="true"

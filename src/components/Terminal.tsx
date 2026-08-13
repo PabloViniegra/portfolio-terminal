@@ -631,7 +631,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
     }
 
     const lastIndex = commandHistory.length - 1;
-    const currentIndex = historyIndex === -1 ? lastIndex : historyIndex;
+    const currentIndex = historyIndex === -1 ? commandHistory.length : historyIndex;
     const nextIndex =
       direction === 'up'
         ? currentIndex <= 0
@@ -685,7 +685,8 @@ const Terminal = ({ contentData }: TerminalProps) => {
         style={{ zIndex: 'var(--z-sticky)' }}
       >
         <header
-          className="flex flex-wrap items-center justify-between gap-4 border-b border-terminal-border/90 bg-terminal-header-bg/90 px-4 py-3 backdrop-blur"
+          className="relative flex flex-wrap items-center justify-between gap-4 border-b border-terminal-border/90 bg-terminal-header-bg/90 px-4 py-3 backdrop-blur"
+          style={{ zIndex: 'var(--z-dropdown)' }}
           aria-label="Barra de título de la terminal"
         >
           <div className="flex min-w-0 items-center gap-4">
