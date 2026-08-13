@@ -38,7 +38,7 @@ Available commands       ← headline
 
 ### Implementation
 ```tsx
-<p className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
+<p className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
   command index
 </p>
 ```
@@ -115,7 +115,7 @@ A small rounded badge showing status information. Used for "ready", "executing..
 
 ### Implementation
 ```tsx
-<span className="rounded-full border border-terminal-border/70 bg-terminal-bg px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text-secondary">
+<span className="rounded-full border border-terminal-border/70 bg-terminal-bg px-3 py-1 font-mono text-mono-xs uppercase tracking-[0.2em] text-terminal-text-secondary">
   ready
 </span>
 ```
@@ -162,7 +162,7 @@ A clickable pill that runs a command. Used in the welcome message for one-click 
 >
   <span className="text-terminal-prompt">$</span>
   <span className="text-terminal-text">{command}</span>
-  <span className="font-sans text-[11px] text-terminal-text-secondary">
+  <span className="font-sans text-sans-xs text-terminal-text-secondary">
     {label}
   </span>
 </button>
@@ -203,7 +203,7 @@ $ inspect projects.registry                      4 builds
     <span className="text-terminal-accent">inspect</span>
     <span className="text-terminal-text-secondary">projects.registry</span>
   </div>
-  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">
+  <span className="font-mono text-mono-xs uppercase tracking-[0.18em] text-terminal-text-secondary">
     {projects.length} builds
   </span>
 </div>
@@ -230,7 +230,7 @@ When a paragraph or section uses sans-serif body, the labels around it (eyebrow,
 ### Example (good)
 ```tsx
 <div>
-  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
+  <p className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
     QUICK START
   </p>
   <p className="mt-2 font-sans text-base leading-relaxed text-terminal-text">

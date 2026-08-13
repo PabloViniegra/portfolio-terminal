@@ -1,17 +1,11 @@
-
 <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="64" cy="64" r="62" fill="#23272E" stroke="#7fff00" stroke-width="4"/>
-  <ellipse cx="64" cy="50" rx="36" ry="28" fill="#d4ccb5"/>
-  <ellipse cx="64" cy="42" rx="30" ry="16" fill="#bab29e"/>
-  <ellipse cx="64" cy="72" rx="26" ry="28" fill="#F9E7D3"/>
-  <rect x="34" y="28" width="60" height="12" rx="6" fill="#23272E" stroke="#4ADE80" stroke-width="3"/>
-  <ellipse cx="28" cy="60" rx="8" ry="16" fill="#23272E" stroke="#4ADE80" stroke-width="3"/>
-  <ellipse cx="100" cy="60" rx="8" ry="16" fill="#23272E" stroke="#4ADE80" stroke-width="3"/>
-  <ellipse cx="52" cy="76" rx="5" ry="7" fill="#56d364"/>
-  <ellipse cx="76" cy="76" rx="5" ry="7" fill="#56d364"/>
-  <ellipse cx="52" cy="78" rx="2" ry="3" fill="#21371B" opacity="0.8"/>
-  <ellipse cx="76" cy="78" rx="2" ry="3" fill="#21371B" opacity="0.8"/>
-  <rect x="44" y="65" width="12" height="2.5" rx="1" fill="#b6ad96"/>
-  <rect x="72" y="65" width="12" height="2.5" rx="1" fill="#b6ad96"/>
-  <path d="M54 93 Q64 100 74 93" stroke="#a77b59" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="64" cy="64" r="62" fill="#21262d" stroke="#8fd6b4" stroke-width="3"/>
+  <rect x="18" y="34" width="92" height="60" rx="8" fill="#171d26" stroke="#273142" stroke-width="1.5"/>
+  <line x1="18" y1="48" x2="110" y2="48" stroke="#273142" stroke-width="1"/>
+  <circle cx="26" cy="41" r="2" fill="#ef6a72"/>
+  <circle cx="34" cy="41" r="2" fill="#d6ad63"/>
+  <circle cx="42" cy="41" r="2" fill="#7bcf9d"/>
+  <text x="26" y="84" font-family="'Mona Sans Mono','Cascadia Code',monospace" font-size="22" font-weight="700" fill="#8fd6b4">$</text>
+  <text x="46" y="84" font-family="'Mona Sans Mono','Cascadia Code',monospace" font-size="22" font-weight="500" fill="#d5dde8">pablo</text>
+  <rect x="100" y="70" width="8" height="16" fill="#4ade80" class="avatar-cursor"/>
 </svg>

@@ -37,7 +37,7 @@
 
 **Type pairing rules**:
 - Both fonts at the same optical size feel different. Mono runs ~5% larger visually. Compensate by setting mono one step smaller for the same visual weight, or accept the slight bulk.
-- `Montserrat` for narrative is a deliberate choice: humanist, modern, restrained. Not the LLM default of Inter.
+- `Mona Sans` for narrative is a deliberate choice: GitHub's variable sans, designed to sit next to code, drawn as the pair of `Mona Sans Mono`. Self-hosted, no CDN. Not the LLM default of Inter, not the LLM-default pair of Montserrat + JetBrains Mono.
 
 ---
 
@@ -163,10 +163,11 @@ These are the AI tells and the terminal cheats we explicitly ban:
 4. **Emoji as icons** — zero emoji. Symbols and SVG only.
 5. **Three identical feature cards in a row** — the LLM default. Break it.
 6. **"Used by" logo wall inside the hero** — hero is for the value prop, not fake social proof.
-7. **Inter as the default sans** — Montserrat (or a deliberate alternative) instead.
+7. **Inter as the default sans** — Mona Sans (or a deliberate alternative) instead.
 8. **Mixed family emphasis in headlines** — italic or bold of the SAME font for emphasis, never a serif word inside a sans headline.
 9. **Bouncing buttons, infinite shimmer, decorative marquees** — motion budget above forbids them.
 10. **Random `z-50` everywhere** — use a layered z-index scale (see tokens/elevation.md).
+11. **Google Fonts or any third-party font CDN** — self-host in `/public/fonts/`. The page must never depend on a runtime fetch to render text.
 
 ---
 

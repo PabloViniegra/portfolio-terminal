@@ -5,7 +5,7 @@ interface AvatarProps {
   size?: number;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ className = '', size = 32 }) => {
+const Avatar: React.FC<AvatarProps> = ({ className = '', size = 48 }) => {
   return (
     <svg
       className={className}
@@ -15,7 +15,7 @@ const Avatar: React.FC<AvatarProps> = ({ className = '', size = 32 }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Avatar de Pablo Viniegra"
+      aria-label="Pablo Viniegra — terminal prompt mark"
     >
       <circle
         cx="64"
@@ -23,51 +23,59 @@ const Avatar: React.FC<AvatarProps> = ({ className = '', size = 32 }) => {
         r="62"
         fill="var(--avatar-fill)"
         stroke="var(--avatar-stroke-strong)"
-        strokeWidth="4"
+        strokeWidth="3"
       />
-      <ellipse cx="64" cy="50" rx="36" ry="28" fill="#d4ccb5" />
-      <ellipse cx="64" cy="42" rx="30" ry="16" fill="#bab29e" />
-      <ellipse cx="64" cy="72" rx="26" ry="28" fill="#f9e7d3" />
       <rect
-        x="34"
-        y="28"
-        width="60"
-        height="12"
-        rx="6"
-        fill="var(--avatar-fill)"
-        stroke="var(--avatar-accent)"
-        strokeWidth="3"
-      />
-      <ellipse
-        cx="28"
-        cy="60"
+        x="18"
+        y="34"
+        width="92"
+        height="60"
         rx="8"
-        ry="16"
-        fill="var(--avatar-fill)"
-        stroke="var(--avatar-accent)"
-        strokeWidth="3"
+        fill="var(--terminal-bg-secondary)"
+        stroke="var(--terminal-border)"
+        strokeWidth="1.5"
       />
-      <ellipse
-        cx="100"
-        cy="60"
-        rx="8"
-        ry="16"
-        fill="var(--avatar-fill)"
-        stroke="var(--avatar-accent)"
-        strokeWidth="3"
+      <line
+        x1="18"
+        y1="48"
+        x2="110"
+        y2="48"
+        stroke="var(--terminal-border)"
+        strokeWidth="1"
       />
-      <ellipse cx="52" cy="76" rx="5" ry="7" fill="var(--avatar-accent-soft)" />
-      <ellipse cx="76" cy="76" rx="5" ry="7" fill="var(--avatar-accent-soft)" />
-      <ellipse cx="52" cy="78" rx="2" ry="3" fill="var(--avatar-accent-deep)" opacity="0.8" />
-      <ellipse cx="76" cy="78" rx="2" ry="3" fill="var(--avatar-accent-deep)" opacity="0.8" />
-      <rect x="44" y="65" width="12" height="2.5" rx="1" fill="#b6ad96" />
-      <rect x="72" y="65" width="12" height="2.5" rx="1" fill="#b6ad96" />
-      <path
-        d="M54 93 Q64 100 74 93"
-        stroke="#a77b59"
-        strokeWidth="3"
-        fill="none"
-        strokeLinecap="round"
+      <circle cx="26" cy="41" r="2" fill="var(--terminal-dot-close)" />
+      <circle cx="34" cy="41" r="2" fill="var(--terminal-dot-min)" />
+      <circle cx="42" cy="41" r="2" fill="var(--terminal-dot-max)" />
+      <text
+        x="26"
+        y="84"
+        fontFamily="'Mona Sans Mono','Cascadia Code',monospace"
+        fontSize="22"
+        fontWeight="700"
+        fill="var(--avatar-stroke-strong)"
+        aria-hidden="true"
+      >
+        $
+      </text>
+      <text
+        x="46"
+        y="84"
+        fontFamily="'Mona Sans Mono','Cascadia Code',monospace"
+        fontSize="22"
+        fontWeight="500"
+        fill="var(--terminal-text)"
+        aria-hidden="true"
+      >
+        pablo
+      </text>
+      <rect
+        x="100"
+        y="70"
+        width="8"
+        height="16"
+        fill="var(--avatar-accent)"
+        className="avatar-cursor"
+        aria-hidden="true"
       />
     </svg>
   );

@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef, useCallback, useId } from "react";
 import type { KeyboardEvent } from "react";
 import CommandSuggestions from "./CommandSuggestions";
-import { COMMAND_SUGGESTIONS, type Suggestion } from "../constants/suggestions";
+import type { Suggestion } from "../constants/suggestions";
 
 type Props = {
   onCommand: (input: string) => void;
   onHistoryNavigate: (direction: 'up' | 'down') => string;
+  suggestions: readonly Suggestion[];
   disabled?: boolean;
 };
 
-export default function CommandInput({ onCommand, onHistoryNavigate, disabled = false }: Props) {
+export default function CommandInput({ onCommand, onHistoryNavigate, suggestions: availableSuggestions, disabled = false }: Props) {
   const [input, setInput] = useState("");
   const [temporaryInput, setTemporaryInput] = useState("");
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
@@ -28,14 +29,14 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
     }
 
     const inputValue = value.toLowerCase().substring(1);
-    const filtered = COMMAND_SUGGESTIONS.filter(suggestion =>
+    const filtered = availableSuggestions.filter(suggestion =>
       suggestion.command.substring(1).startsWith(inputValue)
     );
     
     setSuggestions(filtered);
     setShowSuggestions(filtered.length > 0);
     setSelectedSuggestion(0);
-  }, []);
+  }, [availableSuggestions]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -194,10 +195,10 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
       <form onSubmit={handleSubmit} className="w-full relative">
         <div className="rounded-2xl border border-terminal-border/80 bg-terminal-bg-secondary/60 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-colors duration-200 focus-within:border-terminal-accent/40">
           <div className="mb-2 flex items-center justify-between gap-3">
-            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
+            <span className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
               command input
             </span>
-            <span className="hidden font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary md:inline">
+            <span className="hidden font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary md:inline">
               /help · tab autocomplete · history
             </span>
           </div>
@@ -217,20 +218,21 @@ export default function CommandInput({ onCommand, onHistoryNavigate, disabled = 
                   setShowSuggestions(false);
                 }
               }}
-              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+              onBlur={() => window.setTimeout(() => setShowSuggestions(false), 200)}
               className="command-input flex-1 bg-transparent outline-none text-base"
               disabled={disabled}
               autoFocus
               role="combobox"
               aria-label="Comando de terminal"
+              aria-haspopup="listbox"
               aria-autocomplete="list"
               aria-expanded={hasVisibleSuggestions}
               aria-controls={hasVisibleSuggestions ? `${listboxId}-listbox` : undefined}
               aria-activedescendant={hasVisibleSuggestions ? `${listboxId}-listbox-opt-${selectedSuggestion}` : undefined}
-              placeholder={disabled ? 'Procesando comando...' : 'Prueba con /projects, /experience o /contact'}
+              placeholder={disabled ? 'Procesando comando...' : 'Prueba con /contact, /projects o /experience'}
             />
           </div>
-          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-terminal-text-secondary/70">
+          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-mono-xs text-terminal-text-secondary/70">
             <span>tab · autocomplete</span>
             <span>↑↓ · history</span>
           </div>

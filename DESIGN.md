@@ -17,30 +17,30 @@ colors:
   success: "#8fd6b4"
 typography:
   display:
-    fontFamily: "'Montserrat', system-ui, sans-serif"
+    fontFamily: "'Mona Sans', system-ui, sans-serif"
     fontSize: "2rem"
     fontWeight: 600
     lineHeight: 1.25
     letterSpacing: "-0.02em"
   headline:
-    fontFamily: "'Montserrat', system-ui, sans-serif"
+    fontFamily: "'Mona Sans', system-ui, sans-serif"
     fontSize: "1.5rem"
     fontWeight: 600
     lineHeight: 1.375
   body:
-    fontFamily: "'Montserrat', system-ui, sans-serif"
+    fontFamily: "'Mona Sans', system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.5
   label:
-    fontFamily: "'JetBrains Mono', monospace"
+    fontFamily: "'Mona Sans Mono', ui-monospace, monospace"
     fontSize: "0.6875rem"
     fontWeight: 400
     lineHeight: 1.25
     letterSpacing: "0.22em"
     textTransform: "uppercase"
   mono:
-    fontFamily: "'JetBrains Mono', monospace"
+    fontFamily: "'Mona Sans Mono', ui-monospace, monospace"
     fontSize: "0.875rem"
     fontWeight: 400
     lineHeight: 1.4
@@ -161,13 +161,15 @@ The palette is dark, low-chroma, and family-bound. Charcoal canvas, terminal blu
 
 ## Typography
 
-**Display Font:** Montserrat (with system-ui fallback) — humanist, restrained, well-paired with mono. Not the LLM default of Inter.
+**Display Font:** Mona Sans (self-hosted, OFL 1.1) — GitHub's variable sans, designed for product UIs adjacent to code. Width, optical size and weight axes; reads precise without being cold. Fallback: `system-ui, -apple-system, 'Segoe UI', sans-serif`.
 
-**Body Font:** Montserrat (same family as display, different weights).
+**Body Font:** Mona Sans (same family as display; weights 400-700).
 
-**Mono Font:** JetBrains Mono (with Fira Code / Cascadia / Menlo fallbacks) — ligature-aware, well-spaced, designed for code. The only typeface for commands, prompts, metadata, eyebrows, and code-adjacent content.
+**Mono Font:** Mona Sans Mono (self-hosted, OFL 1.1) — GitHub's mono companion to Mona Sans. Width and weight axes; ligature-aware, designed to sit next to code. Fallback: `ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace`.
 
-**Character:** Mono runs ~5% larger visually than sans at the same size; compensate by setting mono one step smaller for equivalent visual weight. Mono feels deliberate (a terminal speaks), sans feels human (a person narrates). The two share a calm, modern temperature — neither is decorative, neither calls attention to itself.
+**Character:** Mona Sans + Mona Sans Mono were drawn as a pair — the metrics line up, the temperature matches, and a paragraph in sans followed by a mono label sits without a visible seam. The pair reads "engineer-made-this", which is exactly the pitch. Self-hosted, no CDN dependency, no Google Fonts runtime cost.
+
+**Why we moved off Montserrat + JetBrains Mono:** both are defensible but became the LLM-default pair — any random generator picks them. Mona Sans/Mono is a curated choice that says "this engineer picked the typography on purpose" without paying for a foundry license.
 
 ### Hierarchy
 - **Display** (`{typography.display}`, semibold, `2rem` / `clamp`, line-height `1.25`, tracking `-0.02em`): Hero headlines only. Used in the welcome message; not reused elsewhere.
@@ -179,7 +181,7 @@ The palette is dark, low-chroma, and family-bound. Charcoal canvas, terminal blu
 ### Named Rules
 **The Pairing-Discipline Rule.** When a paragraph uses sans body, the labels around it (eyebrow, status, count) use mono. Visual rhythm is mono label → sans content → mono metadata. Mixing families inconsistently (mono label with sans body, or vice versa) is amateur.
 
-**The No-Inter-Default Rule.** Inter is not the default sans for this system. Montserrat is. Inter is acceptable only when the brief explicitly demands Linear-style neutrality, which this brief does not.
+**The Mona-Pair Rule.** Mona Sans and Mona Sans Mono are the only typefaces for this system. Both are self-hosted from `/public/fonts/`. Loading goes through `@font-face` with `font-display: swap` and a `<link rel="preload">` in the layout — never a CDN, never a Google Fonts import. Inter is not an acceptable substitute (it doesn't pair with Mona Mono); Montserrat, Geist, Söhne, IBM Plex and JetBrains Mono are all acceptable substitutes if the brief explicitly demands them, which this one does not.
 
 ## Layout
 
@@ -296,7 +298,8 @@ Borders are `1px` at reduced opacity — never bold `2-3px` strokes. The only ex
 - **Don't** use raw hex values in component markup. Reach for the semantic token via Tailwind utility or `var(--terminal-*)`.
 - **Don't** add emoji as icons, decorative elements, or in copy. Symbols (`$`, `→`, `·`, `×`) and SVG only.
 - **Don't** mix families inconsistently. If a paragraph is sans body, its labels are mono. If a list item is mono, its description can be sans.
-- **Don't** use Inter as the default sans. Montserrat is the default; Inter only when the brief explicitly demands Linear-style neutrality.
+- **Don't** use Inter as the default sans. Mona Sans is the default; Inter only when the brief explicitly demands Linear-style neutrality.
+- **Don't** load fonts from a third-party CDN (Google Fonts, Bunny, etc.). Self-host in `/public/fonts/` so the page never depends on a runtime fetch to render text.
 - **Don't** add multiple heavy shadows on stacked elements. The terminal shell carries the only significant shadow.
 - **Don't** introduce gradients on text, borders, or large headers. The terminal metaphor is solid color + subtle inset highlights.
 - **Don't** use `linear-gradient` or `radial-gradient` for decorative purposes. The page background uses subtle gradients (terminal grid + radial accent fade) for atmosphere; component surfaces do not.

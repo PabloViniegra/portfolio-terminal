@@ -21,9 +21,10 @@ const ExternalLink = ({ href, label }: { href: string; label: string }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary transition-colors duration-200 hover:text-terminal-accent active:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
+    aria-label={`${label} (enlace externo)`}
+    className="font-mono text-mono-xs uppercase tracking-[0.18em] text-terminal-text-secondary transition-colors duration-200 hover:text-terminal-accent active:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
   >
-    {label} →
+    {label} <span aria-hidden="true">↗</span>
   </a>
 );
 
@@ -33,13 +34,13 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
 
   return (
     <div className="font-sans">
-      <SectionHeader verb="inspect" args="projects.registry" meta={`${projects.length} builds`} />
+      <SectionHeader verb="inspect" args="projects.registry" meta={`${projects.length} proyectos`} />
 
       <div className="space-y-8">
         <section>
           <div className="mb-4 flex items-center gap-3">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
-              Featured builds
+            <h3 className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+              destacados
             </h3>
             <span className="h-px flex-1 bg-terminal-border/40"></span>
           </div>
@@ -53,11 +54,11 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                 }`}
               >
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-terminal-accent">
+                  <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-accent">
                     {project.type}
                   </span>
                   {index === 0 && (
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-terminal-text-secondary/60">
+                    <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary/60">
                       primary
                     </span>
                   )}
@@ -82,7 +83,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                   </div>
                 </div>
 
-                <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-terminal-text-secondary/70">
+                <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-mono-xs text-terminal-text-secondary/70">
                   {project.technologies.map((technology) => (
                     <span key={technology}>{technology}</span>
                   ))}
@@ -94,12 +95,12 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
 
         {archiveProjects.length > 0 && (
           <section>
-            <div className="mb-4 flex items-center gap-3">
-              <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
-                Archive
-              </h3>
-              <span className="h-px flex-1 bg-terminal-border/40"></span>
-            </div>
+          <div className="mb-4 flex items-center gap-3">
+            <h3 className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+              archivo
+            </h3>
+            <span className="h-px flex-1 bg-terminal-border/40"></span>
+          </div>
 
             <div className="space-y-0">
               {archiveProjects.map((project) => (
@@ -109,7 +110,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                 >
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-terminal-text-secondary/60">
+                      <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary/60">
                         {project.type}
                       </span>
                       <h4 className="text-sm font-medium text-terminal-text">
@@ -120,7 +121,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                       {project.scope}
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-terminal-text-secondary/60">
+                  <div className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-mono-xs text-terminal-text-secondary/60">
                     {project.link && <ExternalLink href={project.link} label="Live" />}
                     <ExternalLink href={project.github} label="Repo" />
                   </div>

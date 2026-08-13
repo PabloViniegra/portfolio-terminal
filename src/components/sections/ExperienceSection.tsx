@@ -15,7 +15,7 @@ interface ExperienceSectionProps {
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) => {
   return (
     <div className="font-sans">
-      <SectionHeader verb="history" args="--experience" meta={`${experiences.length} entries`} />
+      <SectionHeader verb="history" args="--experience" meta={`${experiences.length} entradas`} />
 
       <div className="relative space-y-0">
         {experiences.map((experience) => (
@@ -27,7 +27,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) =>
               <h3 className="text-base font-semibold leading-snug text-terminal-text md:text-lg">
                 {experience.title}
               </h3>
-              <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-terminal-text-secondary">
+              <div className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">
                 {experience.date}
               </div>
             </div>
@@ -36,7 +36,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) =>
               {experience.description}
             </p>
 
-            <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-terminal-text-secondary/80">
+            <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-mono-xs text-terminal-text-secondary/80">
               {experience.tags.map((tag) => (
                 <span key={tag}>{tag}</span>
               ))}

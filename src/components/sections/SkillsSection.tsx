@@ -33,31 +33,18 @@ const getSoftSkillLabel = (rating: number) => {
   return 'en práctica';
 };
 
-const SkillDepth = ({ rating }: { rating: number }) => (
-  <div className="flex items-center gap-1" aria-hidden="true">
-    {Array.from({ length: 4 }).map((_, index) => (
-      <span
-        key={index}
-        className={`h-1.5 w-5 rounded-full ${
-          index < rating ? 'bg-terminal-accent/75' : 'bg-terminal-border/60'
-        }`}
-      ></span>
-    ))}
-  </div>
-);
-
 const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, softSkills }) => {
   const sortedSoftSkills = [...softSkills].sort((first, second) => second.rating - first.rating);
 
   return (
     <div className="font-sans">
-      <SectionHeader verb="map" args="skillset --current" meta="stack overview" />
+      <SectionHeader verb="map" args="skillset --current" meta="mapa de stack" />
 
       <div className="space-y-8">
         <section>
           <div className="mb-4 flex items-center gap-3">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
-              Technical depth
+            <h3 className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+              profundidad técnica
             </h3>
             <span className="h-px flex-1 bg-terminal-border/40"></span>
           </div>
@@ -67,7 +54,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
               <div key={category.category}>
                 <div className="mb-3 flex items-baseline justify-between gap-3">
                   <h4 className="text-sm font-semibold text-terminal-text">{category.category}</h4>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-terminal-text-secondary">
+                  <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">
                     {category.knowledges.length}
                   </span>
                 </div>
@@ -80,11 +67,10 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
                     >
                       <div className="min-w-0">
                         <div className="text-sm text-terminal-text">{skill.name}</div>
-                        <div className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-terminal-text-secondary/70">
+                        <div className="mt-0.5 font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary/70">
                           {getDepthLabel(skill.rating)}
                         </div>
                       </div>
-                      <SkillDepth rating={skill.rating} />
                     </div>
                   ))}
                 </div>
@@ -95,8 +81,8 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
 
         <section>
           <div className="mb-4 flex items-center gap-3">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
-              Working style
+            <h3 className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+              forma de trabajo
             </h3>
             <span className="h-px flex-1 bg-terminal-border/40"></span>
           </div>
@@ -108,7 +94,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
                 className="flex items-baseline justify-between gap-4 border-t border-terminal-border/30 py-2"
               >
                 <span className="text-sm text-terminal-text">{skill.name}</span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-terminal-text-secondary/70">
+                <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary/70">
                   {getSoftSkillLabel(skill.rating)}
                 </span>
               </div>

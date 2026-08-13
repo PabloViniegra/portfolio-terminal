@@ -160,10 +160,10 @@ The CommandInput is the user's main interaction point. It:
 <form onSubmit={handleSubmit} className="w-full relative">
   <div className="rounded-2xl border border-terminal-border/80 bg-terminal-bg-secondary/45 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
     <div className="mb-2 flex items-center justify-between gap-3">
-      <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
+      <span className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
         command input
       </span>
-      <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary md:inline">
+      <span className="hidden font-mono text-mono-xs uppercase tracking-[0.18em] text-terminal-text-secondary md:inline">
         /help · tab autocomplete · history
       </span>
     </div>

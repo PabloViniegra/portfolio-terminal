@@ -19,6 +19,7 @@ import type { ThemeType } from '../hooks/useTheme';
 export interface Theme {
   id: ThemeType;
   name: string;
+  abbreviation: string;
   color: string;
   mode: 'dark' | 'light';
   character: string;
@@ -34,6 +35,7 @@ export const THEMES: readonly Theme[] = [
   {
     id: 'one-dark',
     name: 'One Dark',
+    abbreviation: 'OD',
     color: 'bg-[#61afef]',
     mode: 'dark',
     character: 'Charcoal canvas, terminal blue accent, mint prompt.',
@@ -41,6 +43,7 @@ export const THEMES: readonly Theme[] = [
   {
     id: 'light',
     name: 'Light',
+    abbreviation: 'LT',
     color: 'bg-[#e5c07b]',
     mode: 'light',
     character: 'Off-white canvas, professional blue accent, forest green prompt.',
@@ -48,6 +51,7 @@ export const THEMES: readonly Theme[] = [
   {
     id: 'ayu',
     name: 'Ayu',
+    abbreviation: 'AY',
     color: 'bg-[#ffb454]',
     mode: 'dark',
     character: 'Deep blue-black canvas, sky-blue accent, olive prompt.',
@@ -55,6 +59,7 @@ export const THEMES: readonly Theme[] = [
   {
     id: 'github-dark',
     name: 'GitHub',
+    abbreviation: 'GH',
     color: 'bg-[#58a6ff]',
     mode: 'dark',
     character: 'GitHub-neutral palette, blue accent, mint prompt.',

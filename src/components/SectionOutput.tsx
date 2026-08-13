@@ -51,7 +51,7 @@ interface ContactItem {
 }
 
 type Props = {
-  section: 'home' | 'experience' | 'projects' | 'skills' | 'contact';
+  section: 'experience' | 'projects' | 'skills' | 'contact';
   data?: {
     experiences?: ExperienceItem[];
     projects?: ProjectItem[];
@@ -66,45 +66,6 @@ type Props = {
 
 const SectionOutput: React.FC<Props> = ({ section, data = {} }) => {
   switch (section) {
-    case 'home':
-      return (
-        <div className="font-sans">
-          <div className="mb-5 flex items-center gap-2 font-mono text-sm">
-            <span className="text-terminal-prompt">$</span>
-            <span className="text-terminal-accent">cat</span>
-            <span className="text-terminal-text-secondary">profile.summary</span>
-          </div>
-
-          <div className="max-w-3xl space-y-4">
-            <p className="text-lg font-semibold leading-snug text-terminal-text md:text-xl">
-              Fullstack engineer. Producto web, tooling y arquitectura pragmática.
-            </p>
-            <p className="text-sm leading-7 text-terminal-text-secondary md:text-base">
-              Software claro para quien lo usa, fiable para quien lo mantiene. Interfaz, integración y evolución de producto.
-            </p>
-          </div>
-
-          <div className="mt-6 grid gap-3 md:grid-cols-3">
-            <div className="border-t border-terminal-border/50 pt-3">
-              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">focus</div>
-              <p className="mt-1.5 text-sm text-terminal-text">Fullstack product, DX, herramientas internas.</p>
-            </div>
-            <div className="border-t border-terminal-border/50 pt-3">
-              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">approach</div>
-              <p className="mt-1.5 text-sm text-terminal-text">Sobrio, mantenible, con criterio de interfaz.</p>
-            </div>
-            <div className="border-t border-terminal-border/50 pt-3">
-              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">next</div>
-              <p className="mt-1.5 text-sm text-terminal-text">
-                <span className="font-mono text-terminal-accent">/experience</span>{' '}
-                <span className="font-mono text-terminal-accent">/projects</span>{' '}
-                <span className="font-mono text-terminal-accent">/contact</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-
     case 'experience':
       if (!data.experiences || data.experiences.length === 0) {
         return <ErrorMessage message="No hay datos de experiencia disponibles." />;

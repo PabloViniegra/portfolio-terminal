@@ -14,7 +14,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({ verb, args, meta }) => (
       {args && <span className="text-terminal-text-secondary">{args}</span>}
     </div>
     {meta && (
-      <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">
+      <span className="font-mono text-mono-xs uppercase tracking-[0.18em] text-terminal-text-secondary">
         {meta}
       </span>
     )}

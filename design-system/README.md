@@ -45,7 +45,7 @@ The full design system documentation for this project. It is the single source o
 
 | Property | Value |
 |----------|-------|
-| Primary typeface | JetBrains Mono (mono) + Montserrat (sans) |
+| Primary typeface | Mona Sans Mono (mono) + Mona Sans (sans) — self-hosted OFL |
 | Default theme | One Dark |
 | Canvas | `#11151b` (charcoal) |
 | Accent | `#77bdfb` (terminal blue) |

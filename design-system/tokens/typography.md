@@ -6,15 +6,17 @@
 ## Font Families
 
 ```css
---font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
---font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, Consolas, monospace;
+--font-sans: 'Mona Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+--font-mono: 'Mona Sans Mono', ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
 ```
 
-**Why Montserrat**: humanist, restrained, well-paired with mono. Not the LLM default of Inter.
+**Why Mona Sans**: GitHub's variable sans, designed for product UIs adjacent to code. Width + optical size + weight axes; precise without being cold. Drawn as the pair of Mona Sans Mono, which is why metrics line up.
 
-**Why JetBrains Mono**: ligature-aware, well-spaced, designed for code. IBM's Plex Mono is a fine substitute; Fira Code is more aggressive with ligatures.
+**Why Mona Sans Mono**: GitHub's mono companion to Mona Sans. Width + weight axes; ligature-aware; sits next to code without a visible seam. JetBrains Mono, IBM Plex Mono and Fira Code are acceptable substitutes if the brief explicitly demands them.
 
-**Loading**: self-hosted via `@font-face` with `font-display: swap`. No `<link>` to Google Fonts CDN in production — would cause layout shift and FOIT on cold loads.
+**Why we moved off Montserrat + JetBrains Mono**: both are defensible but became the LLM-default pair — any random generator picks them. Mona Sans / Mono is a curated choice that reads "engineer picked this on purpose" without paying a foundry license.
+
+**Loading**: self-hosted via `@font-face` with `font-display: swap`, plus `<link rel="preload">` in the layout for the two woff2 files. No Google Fonts CDN, no third-party font CDN, no `<link>` to an external font provider — the page must never depend on a runtime fetch to render text.
 
 ## Type Scale
 
@@ -58,21 +60,23 @@ Mono fonts render heavier than sans at the same weight. We don't compensate by c
 
 ## Type Pairing Rules
 
-### Sans (Montserrat) for narrative
+### Sans (Mona Sans) for narrative
 - Welcome message (`text-lg md:text-xl`, semibold, leading-snug)
 - Section headlines (`text-2xl md:text-3xl`, semibold, leading-tight)
 - Body copy (`text-base`, regular, leading-relaxed)
 - Project descriptions (`text-sm`, leading-7)
 - Card titles (`text-lg font-semibold leading-snug`)
 
-### Mono (JetBrains Mono) for everything else
+### Mono (Mona Sans Mono) for everything else
 - Commands: `text-sm font-medium`
 - `$` prompt symbol: `text-lg font-bold` (visually heavier than commands)
-- Timestamps, labels, metadata: `text-[11px] uppercase tracking-[0.18em]`
-- Eyebrows (above section titles): `text-[11px] uppercase tracking-[0.22em]`
-- Tab pills / status badges: `text-[11px] uppercase tracking-[0.2em]`
-- Section dividers (small caps headers): `text-[11px] uppercase tracking-[0.22em]`
-- Inline labels (e.g. "command input"): `text-[11px] uppercase tracking-[0.22em]`
+- Timestamps, labels, metadata: `text-mono-xs uppercase tracking-[0.18em]`
+- Eyebrows (above section titles): `text-mono-xs uppercase tracking-[0.22em]`
+- Tab pills / status badges: `text-mono-xs uppercase tracking-[0.2em]`
+- Section dividers (small caps headers): `text-mono-xs uppercase tracking-[0.22em]`
+- Inline labels (e.g. "command input"): `text-mono-xs uppercase tracking-[0.22em]`
+
+The `text-mono-xs` utility maps to the `--text-mono-xs` Tailwind token (`0.6875rem` / 11px — the readability floor). Use the token, not `text-[11px]` literals.
 
 ## Tracking Values
 
@@ -95,7 +99,7 @@ Mono fonts render heavier than sans at the same weight. We don't compensate by c
 </p>
 
 // Mono eyebrow above headline (small caps, wide tracking)
-<span className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text-secondary">
+<span className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
   Quick start
 </span>
 
@@ -105,7 +109,7 @@ Mono fonts render heavier than sans at the same weight. We don't compensate by c
 </h2>
 
 // Mono metadata (timestamps, counts)
-<span className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text-secondary">
+<span className="font-mono text-mono-xs uppercase tracking-[0.18em] text-terminal-text-secondary">
   {projects.length} builds
 </span>
 
@@ -120,13 +124,14 @@ Mono fonts render heavier than sans at the same weight. We don't compensate by c
 
 ## Anti-Patterns
 
-❌ **Banned**: Inter as the default sans. We use Montserrat.
+❌ **Banned**: Inter as the default sans. We use Mona Sans.
 ❌ **Banned**: Mixing serif into the type system. The terminal is mono + sans only.
 ❌ **Banned**: Italic emphasis by switching families. Use `font-medium` or `font-semibold` of the same family.
 ❌ **Banned**: Font sizes below 11px (Mono readability floor).
 ❌ **Banned**: Tight tracking on body text (kills readability, looks performative).
 ❌ **Banned**: Decorative display fonts in headlines (Fraunces, Playfair, etc.). When a headline needs character, mono large semibold is enough.
-❌ **Banned**: Multiple sans families. We have ONE (Montserrat) and ONE mono (JetBrains Mono).
+❌ **Banned**: Multiple sans families. We have ONE (Mona Sans) and ONE mono (Mona Sans Mono).
+❌ **Banned**: Loading fonts from any third-party CDN (Google Fonts, Bunny, etc.). Self-host in `/public/fonts/` — the page must never depend on a runtime fetch to render text.
 
 ## Accessibility
 

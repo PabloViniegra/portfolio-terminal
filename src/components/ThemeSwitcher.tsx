@@ -30,12 +30,13 @@ const ThemeSwitcher = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-lg border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.98]"
+        className="flex items-center gap-2 rounded-lg border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96]"
         aria-label="Cambiar tema"
         aria-expanded={isOpen}
       >
         <span className={`h-3 w-3 rounded-full ${currentThemeData.color}`} aria-hidden="true"></span>
-        <span className="hidden lg:inline">{currentThemeData.name}</span>
+        <span className="hidden md:inline">{currentThemeData.name}</span>
+        <span className="inline md:hidden">{currentThemeData.abbreviation}</span>
         <span className="text-xs text-terminal-text-secondary">theme</span>
       </button>
 
@@ -50,7 +51,7 @@ const ThemeSwitcher = () => {
             <button
               key={theme.id}
               onClick={() => handleThemeChange(theme.id)}
-              className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 focus:ring-inset active:scale-[0.98] ${
+              className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 focus:ring-inset active:scale-[0.96] ${
                 currentTheme === theme.id
                   ? 'bg-terminal-accent/12 text-terminal-accent font-medium'
                   : 'text-terminal-text hover:bg-terminal-bg-secondary/80'

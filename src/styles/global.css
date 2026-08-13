@@ -10,17 +10,36 @@
  * See: /design-system/tokens/colors.md, /design-system/themes/*.md
  */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
 @import "tailwindcss";
 
 /* ============================================================================
  * FONT STACKS
+ *
+ * Self-hosted variable fonts (OFL 1.1). Files in /public/fonts/.
+ *   - Mona Sans: width + optical size + weight (GitHub)
+ *   - Mona Sans Mono: width + weight (GitHub)
+ * See: /design-system/tokens/typography.md
  * ========================================================================= */
 
+@font-face {
+  font-family: 'Mona Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/MonaSansVF.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Mona Sans Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/MonaSansMonoVF.woff2') format('woff2-variations');
+}
+
 :root {
-  --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, Consolas, monospace;
+  --font-sans: 'Mona Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Mona Sans Mono', ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
 }
 
 /* ============================================================================
@@ -69,13 +88,18 @@
   --terminal-dot-min: #d6ad63;
   --terminal-dot-max: #7bcf9d;
 
-  /* Avatar SVG palette (themable — reuses prompt + secondary surfaces) */
-  --avatar-fill: #23272E;
+  /* Avatar SVG palette (themable — all human tones, no chartreuse) */
+  --avatar-fill: #21262d;
   --avatar-stroke: #56d364;
-  --avatar-stroke-strong: #7fff00;
-  --avatar-accent: #4ADE80;
+  --avatar-stroke-strong: var(--terminal-prompt);
+  --avatar-skin: #d4ccb5;
+  --avatar-skin-shadow: #bab29e;
+  --avatar-hair: #1f2630;
+  --avatar-glasses: #171d26;
+  --avatar-mouth: #a77b59;
+  --avatar-accent: #4ade80;
   --avatar-accent-soft: #56d364;
-  --avatar-accent-deep: #21371B;
+  --avatar-accent-deep: #21371b;
 
   /* Z-index scale (documented in /design-system/tokens/elevation.md) */
   --z-base: 0;
@@ -90,6 +114,35 @@
   --scrollbar-thumb: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.35);
   --scrollbar-thumb-hover: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.55);
   --scrollbar-width: 8px;
+}
+
+/* ============================================================================
+ * RADIUS SCALE
+ *
+ * Documented in /design-system/tokens/radius.md
+ * Reused by scrollbar, panels, and ad-hoc declarations (avoid hardcoded px).
+ * ========================================================================= */
+:root {
+  --rounded-sm: 6px;
+  --rounded-md: 8px;
+  --rounded-lg: 12px;
+  --rounded-xl: 16px;
+  --rounded-2xl: 18px;
+  --rounded-full: 9999px;
+}
+
+/* ============================================================================
+ * TYPE FLOOR TOKENS
+ *
+ * Documented in /design-system/tokens/typography.md. The 11px floor is the
+ * readability minimum for mono labels (DESIGN.md The Pairing-Discipline Rule).
+ *
+ * NOTE: --font-sans and --font-mono (without size suffix) are FONT-FAMILY
+ * declarations above. Size tokens for the mono family use the -xs/-sm suffix.
+ * ========================================================================= */
+:root {
+  --font-mono-xs: 0.6875rem; /* 11px - the readability floor */
+  --font-mono-sm: 0.75rem;  /* 12px - meta pills */
 }
 
 /* ============================================================================
@@ -124,14 +177,20 @@
   --terminal-cursor: #2f6fb2;
 
   --terminal-overlay-rgb: 20, 20, 20;
+  --shadow-terminal: 0 28px 80px rgba(var(--terminal-overlay-rgb), 0.22);
 
   --terminal-dot-close: #d96b6b;
   --terminal-dot-min: #c39a4f;
   --terminal-dot-max: #5fa97f;
 
-  --avatar-fill: #4a5564;
+  --avatar-fill: #e6ebf2;
   --avatar-stroke: #2d7d61;
-  --avatar-stroke-strong: #38a169;
+  --avatar-stroke-strong: var(--terminal-prompt);
+  --avatar-skin: #d4ccb5;
+  --avatar-skin-shadow: #bab29e;
+  --avatar-hair: #2c3644;
+  --avatar-glasses: #1b2430;
+  --avatar-mouth: #8b5a3f;
   --avatar-accent: #2d7d61;
   --avatar-accent-soft: #38a169;
   --avatar-accent-deep: #1a3d2c;
@@ -174,9 +233,14 @@
   --terminal-dot-min: #f2be67;
   --terminal-dot-max: #b9d36a;
 
-  --avatar-fill: #2a3340;
+  --avatar-fill: #1a232c;
   --avatar-stroke: #b9d36a;
-  --avatar-stroke-strong: #d2e889;
+  --avatar-stroke-strong: var(--terminal-prompt);
+  --avatar-skin: #d4ccb5;
+  --avatar-skin-shadow: #bab29e;
+  --avatar-hair: #1a232c;
+  --avatar-glasses: #0f1419;
+  --avatar-mouth: #a77b59;
   --avatar-accent: #b9d36a;
   --avatar-accent-soft: #c7db7e;
   --avatar-accent-deep: #3d4928;
@@ -219,9 +283,14 @@
   --terminal-dot-min: #d7ac55;
   --terminal-dot-max: #87e1a0;
 
-  --avatar-fill: #21262d;
+  --avatar-fill: #1b232c;
   --avatar-stroke: #87e1a0;
-  --avatar-stroke-strong: #a8eeb6;
+  --avatar-stroke-strong: var(--terminal-prompt);
+  --avatar-skin: #d4ccb5;
+  --avatar-skin-shadow: #bab29e;
+  --avatar-hair: #21262d;
+  --avatar-glasses: #0d1117;
+  --avatar-mouth: #a77b59;
   --avatar-accent: #87e1a0;
   --avatar-accent-soft: #95dba5;
   --avatar-accent-deep: #1c3a26;
@@ -258,7 +327,11 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
 
-  --shadow-terminal: 0 28px 80px rgba(3, 6, 11, 0.48);
+  --text-mono-xs: var(--font-mono-xs);
+  --text-mono-sm: var(--font-mono-sm);
+  --text-sans-xs: var(--font-mono-xs);
+
+  --shadow-terminal: 0 28px 80px rgba(var(--terminal-overlay-rgb), 0.48);
 
   --z-index-base: var(--z-base);
   --z-index-sticky: var(--z-sticky);
@@ -332,12 +405,12 @@ body {
 
 ::-webkit-scrollbar-track {
   background: var(--scrollbar-track);
-  border-radius: 4px;
+  border-radius: var(--rounded-sm);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
-  border-radius: 4px;
+  border-radius: var(--rounded-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -407,7 +480,7 @@ body {
 
 .terminal-body::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
-  border-radius: 3px;
+  border-radius: var(--rounded-sm);
 }
 
 .terminal-body::-webkit-scrollbar-thumb:hover {
@@ -546,11 +619,6 @@ input[type="text"]:disabled {
   50% { opacity: 0; }
 }
 
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-
 @keyframes flicker {
   0%, 100% { opacity: 0.9; }
   20% { opacity: 0.92; }
@@ -576,52 +644,13 @@ input[type="text"]:disabled {
   animation: appear var(--motion-base) var(--ease-out) both;
 }
 
-/* ============================================================================
- * EFFECTS
- *
- * Glitch, scanlines. Documented as deliberate decoration in principles.md.
- * ========================================================================= */
-
-.glitch {
-  position: relative;
-  text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-  animation: glitch 500ms infinite;
+@keyframes avatar-cursor-blink {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.2; }
 }
 
-@keyframes glitch {
-  0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
-  14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
-  15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
-  49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
-  50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
-  99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
-  100% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75); }
-}
-
-.scanlines {
-  position: relative;
-  overflow: hidden;
-}
-
-.scanlines::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    transparent 100%
-  );
-  background-size: 100% 4px;
-  animation: scanline 8s linear infinite;
-  pointer-events: none;
-  z-index: 2;
+.avatar-cursor {
+  animation: avatar-cursor-blink var(--motion-cursor) var(--ease-step) infinite;
 }
 
 /* ============================================================================
@@ -633,18 +662,11 @@ input[type="text"]:disabled {
 .suggestions-dropdown {
   background-color: var(--terminal-bg);
   border: 1px solid var(--terminal-border);
-  border-radius: 0.375rem;
+  border-radius: var(--rounded-xl);
   box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    0 10px 15px -3px rgba(var(--terminal-overlay-rgb), 0.1),
+    0 4px 6px -2px rgba(var(--terminal-overlay-rgb), 0.05);
   overflow: hidden;
-}
-
-.suggestions-dropdown-inner {
-  background-color: var(--terminal-bg);
-  border: 1px solid var(--terminal-border);
-  border-radius: 0.375rem;
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
 }
 
 /* ============================================================================
@@ -657,11 +679,11 @@ input[type="text"]:disabled {
   left: 0.5rem;
   z-index: var(--z-toast);
   padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
+  border-radius: var(--rounded-sm);
   background: var(--terminal-bg-secondary);
   color: var(--terminal-accent);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: var(--font-mono-xs);
   transform: translateY(-200%);
   opacity: 0;
   transition: transform var(--motion-fast) var(--ease-out),
