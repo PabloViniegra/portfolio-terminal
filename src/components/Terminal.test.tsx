@@ -148,6 +148,18 @@ describe('Terminal', () => {
     );
   });
 
+  it('exposes recruiter-critical sections as welcome actions', async () => {
+    useCommandTimers();
+    renderTerminal();
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'Ejecutar /projects' }));
+      vi.advanceTimersByTime(COMMAND_DELAYS.MIN);
+    });
+
+    expect(screen.getByRole('heading', { name: 'Project Alpha' })).toBeInTheDocument();
+  });
+
   it('renders the published profile through its terminal command', async () => {
     useCommandTimers();
     const input = renderTerminal();

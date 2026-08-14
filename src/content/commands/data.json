@@ -18,14 +18,14 @@
     "id": "experience",
     "command": "/experience",
     "description": "Muestra mi experiencia laboral",
-    "category": "info",
+    "category": "navigation",
     "order": 3
   },
   {
     "id": "projects",
     "command": "/projects",
     "description": "Muestra mis proyectos",
-    "category": "info",
+    "category": "navigation",
     "order": 4
   },
   {
@@ -67,14 +67,14 @@
     "id": "contact",
     "command": "/contact",
     "description": "Muestra mis datos de contacto",
-    "category": "info",
+    "category": "navigation",
     "order": 10
   },
   {
     "id": "cv",
     "command": "/cv",
     "description": "Descarga mi CV en PDF",
-    "category": "utility",
+    "category": "navigation",
     "order": 11
   },
   {

@@ -154,16 +154,18 @@ const QuickCommand = ({
   label,
   onRun,
   primary = false,
+  showCommand = true,
 }: {
   command: string;
   label: string;
   onRun: (command: string) => void;
   primary?: boolean;
+  showCommand?: boolean;
 }) => (
   <button
     type="button"
     onClick={() => onRun(command)}
-    className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-xs transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96] ${
+    className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-xs transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-terminal-accent/70 active:scale-[0.96] ${
       primary
         ? 'border-terminal-accent/60 bg-terminal-accent/10 text-terminal-accent hover:border-terminal-accent hover:bg-terminal-accent/15'
         : 'border-terminal-border/70 bg-terminal-bg text-terminal-text-secondary hover:border-terminal-accent/40 hover:text-terminal-accent'
@@ -171,7 +173,9 @@ const QuickCommand = ({
     aria-label={`Ejecutar ${command}`}
   >
     <span className="text-terminal-prompt">$</span>
-    <span className={primary ? 'text-terminal-accent' : 'text-terminal-text'}>{command}</span>
+    {showCommand && (
+      <span className={primary ? 'text-terminal-accent' : 'text-terminal-text'}>{command}</span>
+    )}
     <span className="font-sans text-sans-xs text-terminal-text-secondary">{label}</span>
   </button>
 );
@@ -231,12 +235,33 @@ const WelcomeMessage = ({
           <TasteLine profile={profile} />
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 pt-1">
+        <p className="font-mono text-mono-xs uppercase tracking-[0.18em] text-terminal-text-secondary">
+          Escribe un comando o elige una sección.
+        </p>
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          <QuickCommand
+            command="/projects"
+            label="proyectos"
+            onRun={onQuickCommand}
+            primary
+            showCommand={false}
+          />
+          <QuickCommand
+            command="/experience"
+            label="experiencia"
+            onRun={onQuickCommand}
+            showCommand={false}
+          />
+          <QuickCommand
+            command="/cv"
+            label="CV"
+            onRun={onQuickCommand}
+            showCommand={false}
+          />
           <QuickCommand
             command="/contact"
             label="canal"
             onRun={onQuickCommand}
-            primary
           />
           <button
             type="button"
@@ -309,10 +334,10 @@ const ClearRecoveryHint = ({
 );
 
 const CATEGORY_LABELS: Record<ContentCommand['category'], string> = {
-  navigation: 'Navegación',
-  info: 'Información',
-  utility: 'Utilidad',
-  special: 'Especial',
+  navigation: 'Comienza aquí',
+  info: 'Más información',
+  utility: 'Herramientas',
+  special: 'Experimento',
 };
 
 const CATEGORY_ORDER: ContentCommand['category'][] = [
@@ -390,6 +415,7 @@ const HelpMessage = ({
 
 const StatusPill = ({ isLoading }: { isLoading: boolean }) => (
   <span
+    aria-label={isLoading ? 'Estado: ejecutando' : 'Estado: listo'}
     className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-mono-xs uppercase tracking-[0.22em] transition-colors duration-200 max-md:border-0 max-md:bg-transparent max-md:px-0 max-md:py-0 ${
       isLoading
         ? 'border-terminal-accent/60 bg-terminal-accent/10 text-terminal-accent'
@@ -402,7 +428,7 @@ const StatusPill = ({ isLoading }: { isLoading: boolean }) => (
       }`}
       aria-hidden="true"
     />
-    <span aria-live="polite">
+    <span className="status-label sr-only md:not-sr-only md:inline" aria-live="polite">
       {isLoading ? 'executing' : 'ready'}
     </span>
   </span>
@@ -734,7 +760,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
         style={{ zIndex: 'var(--z-sticky)' }}
       >
         <header
-          className="relative flex flex-wrap items-center justify-between gap-4 border-b border-terminal-border/90 bg-terminal-header-bg/90 px-4 py-3 backdrop-blur"
+          className="relative flex flex-nowrap items-center justify-between gap-2 border-b border-terminal-border/90 bg-terminal-header-bg/90 px-3 py-3 backdrop-blur md:gap-4 md:px-4"
           style={{ zIndex: 'var(--z-dropdown)' }}
           aria-label="Barra de título de la terminal"
         >
@@ -748,18 +774,18 @@ const Terminal = ({ contentData }: TerminalProps) => {
               <div className="truncate font-mono text-sm text-terminal-text">
                 terminal@pablo.dev
               </div>
-              <div className="truncate font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+              <div className="hidden truncate font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary sm:block">
                 portfolio-shell / hiring-mode
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-2 md:gap-3">
             <StatusPill isLoading={isLoading} />
             <ThemeSwitcher />
             <Avatar
               size={48}
-              className="opacity-95"
+              className="h-9 w-9 opacity-95 md:h-12 md:w-12"
             />
           </div>
         </header>
