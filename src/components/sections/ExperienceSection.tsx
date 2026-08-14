@@ -1,13 +1,6 @@
 import React from 'react';
+import type { ExperienceItem } from '../../types/content';
 import SectionHeader from './SectionHeader';
-
-interface ExperienceItem {
-  title: string;
-  date: string;
-  description: string;
-  achievements?: string[];
-  tags: string[];
-}
 
 interface ExperienceSectionProps {
   experiences: ExperienceItem[];

@@ -1,14 +1,9 @@
 import React from 'react';
+import type { GithubItem } from '../../types/content';
 import SectionHeader from './SectionHeader';
 
 interface GithubSectionProps {
-  github: {
-    summary: string;
-    contributions: number;
-    period: string;
-    profileUrl: string;
-    months: { label: string; contributions: number }[];
-  };
+  github: GithubItem;
 }
 
 const GithubSection: React.FC<GithubSectionProps> = ({ github }) => {

@@ -1,15 +1,6 @@
 import React from 'react';
+import type { KnowledgeCategory } from '../../types/content';
 import SectionHeader from './SectionHeader';
-
-interface KnowledgeItem {
-  name: string;
-  rating: number;
-}
-
-interface KnowledgeCategory {
-  category: string;
-  knowledges: KnowledgeItem[];
-}
 
 interface SkillsSectionProps {
   knowledgeCategories: KnowledgeCategory[];

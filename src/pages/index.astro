@@ -1,75 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
 import Terminal from "../components/Terminal";
 import TerminalLayout from "../layouts/TerminalLayout.astro";
 import MobileFallback from "../components/MobileFallback.astro";
+import { loadContentData } from "../content/loadContentData";
 import "../styles/global.css";
 
-// Cargar todas las colecciones de contenido
-const experienceEntries = await getCollection('experience');
-const projectsEntries = await getCollection('projects');
-const skillsEntries = await getCollection('skills');
-const contactEntries = await getCollection('contact');
-const commandsEntries = await getCollection('commands');
-const generalEntries = await getCollection('general');
-const profileEntries = await getCollection('profile');
-const aiEngineeringEntries = await getCollection('ai-engineering');
-const certificationsEntries = await getCollection('certifications');
-const githubEntries = await getCollection('github');
-
-// Ordenar y formatear los datos
-const experiences = experienceEntries
-  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-  .map(entry => entry.data);
-
-const projects = projectsEntries
-  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-  .map(entry => entry.data);
-
-const knowledgeCategories = skillsEntries
-  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-  .map(entry => entry.data);
-
-const contactInfo = contactEntries
-  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-  .map(entry => entry.data);
-
-const commands = commandsEntries
-  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-  .map(entry => entry.data);
-
-const profile = profileEntries[0]?.data;
-const aiEngineering = aiEngineeringEntries[0]?.data;
-const certifications = certificationsEntries
-  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-  .map(entry => entry.data);
-const github = githubEntries[0]?.data;
-
-// Obtener mensajes generales
-const getGeneralContent = (key: string) => {
-  const entry = generalEntries.find(e => e.data.key === key);
-  return entry?.data.content || '';
-};
-
-const contentData = {
-  experiences,
-  projects,
-  knowledgeCategories,
-  contactInfo,
-  commands,
-  profile,
-  aiEngineering,
-  certifications,
-  github,
-  general: {
-    ctaMessage: getGeneralContent('contact-cta'),
-    ctaButtonText: getGeneralContent('contact-button'),
-    welcomeMessage: getGeneralContent('welcome-message'),
-    helpTitle: getGeneralContent('help-title'),
-    helpTip: getGeneralContent('help-tip'),
-    contactEmail: getGeneralContent('contact-email'),
-  }
-};
+const contentData = await loadContentData();
 ---
 
 <TerminalLayout>

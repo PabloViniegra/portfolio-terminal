@@ -1,8 +1,9 @@
 import React from 'react';
+import type { CertificationItem } from '../../types/content';
 import SectionHeader from './SectionHeader';
 
 interface CertificationsSectionProps {
-  certifications: { year: string; title: string; issuer: string; description: string }[];
+  certifications: CertificationItem[];
 }
 
 const CertificationsSection: React.FC<CertificationsSectionProps> = ({ certifications }) => (

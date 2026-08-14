@@ -1,22 +1,9 @@
 import React from 'react';
+import type { ProfileItem } from '../../types/content';
 import SectionHeader from './SectionHeader';
 
 interface ProfileSectionProps {
-  profile: {
-    role: string;
-    stack: string[];
-    location: string;
-    status: string;
-    bio: string;
-    availability: string;
-    about: string[];
-    principles: { label: string; content: string }[];
-    categories: {
-      title: string;
-      description: string;
-      groups: { title: string; skills: string[] }[];
-    }[];
-  };
+  profile: ProfileItem;
 }
 
 const ProfileSection: React.FC<ProfileSectionProps> = ({ profile }) => (

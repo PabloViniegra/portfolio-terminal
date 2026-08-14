@@ -1,15 +1,9 @@
 import React from 'react';
+import type { AiEngineeringItem } from '../../types/content';
 import SectionHeader from './SectionHeader';
 
 interface AiEngineeringSectionProps {
-  aiEngineering: {
-    subtitle: string;
-    intro: string;
-    positioning: string;
-    metrics: { label: string; value: string }[];
-    sections: { title: string; description: string; items: string[] }[];
-    agentSkills: { name: string; description: string; install: string; repository: string }[];
-  };
+  aiEngineering: AiEngineeringItem;
 }
 
 const AiEngineeringSection: React.FC<AiEngineeringSectionProps> = ({ aiEngineering }) => (

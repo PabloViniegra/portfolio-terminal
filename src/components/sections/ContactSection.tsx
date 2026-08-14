@@ -1,11 +1,6 @@
 import React from 'react';
+import type { ContactItem } from '../../types/content';
 import SectionHeader from './SectionHeader';
-
-interface ContactItem {
-  title: string;
-  content: string;
-  link: string;
-}
 
 interface ContactSectionProps {
   contactInfo: ContactItem[];

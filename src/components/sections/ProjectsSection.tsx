@@ -1,16 +1,6 @@
 import React from 'react';
+import type { ProjectItem } from '../../types/content';
 import SectionHeader from './SectionHeader';
-
-interface ProjectItem {
-  title: string;
-  description: string;
-  type: string;
-  scope: string;
-  link?: string;
-  github: string;
-  technologies: string[];
-  featured?: boolean;
-}
 
 interface ProjectsSectionProps {
   projects: ProjectItem[];

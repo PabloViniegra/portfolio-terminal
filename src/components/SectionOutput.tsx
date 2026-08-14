@@ -1,9 +1,10 @@
 import React from 'react';
 
-import ContactSection from './sections/ContactSection';
-import ExperienceSection from './sections/ExperienceSection';
+import type { PortfolioSection, SectionOutputData } from '../types/content';
 import AiEngineeringSection from './sections/AiEngineeringSection';
 import CertificationsSection from './sections/CertificationsSection';
+import ContactSection from './sections/ContactSection';
+import ExperienceSection from './sections/ExperienceSection';
 import GithubSection from './sections/GithubSection';
 import ProfileSection from './sections/ProfileSection';
 import ProjectsSection from './sections/ProjectsSection';
@@ -15,96 +16,9 @@ const ErrorMessage: React.FC<{ message: string }> = ({ message }) => (
   </div>
 );
 
-interface ExperienceItem {
-  title: string;
-  date: string;
-  description: string;
-  achievements?: string[];
-  tags: string[];
-}
-
-interface ProjectItem {
-  title: string;
-  description: string;
-  type: string;
-  scope: string;
-  link?: string;
-  github: string;
-  technologies: string[];
-  featured?: boolean;
-}
-
-interface KnowledgeItem {
-  name: string;
-  rating: number;
-}
-
-interface KnowledgeCategory {
-  category: string;
-  knowledges: KnowledgeItem[];
-}
-
-interface ContactItem {
-  title: string;
-  content: string;
-  link: string;
-}
-
-interface ProfileItem {
-  role: string;
-  stack: string[];
-  location: string;
-  status: string;
-  bio: string;
-  availability: string;
-  about: string[];
-  principles: { label: string; content: string }[];
-  categories: {
-    title: string;
-    description: string;
-    groups: { title: string; skills: string[] }[];
-  }[];
-}
-
-interface AiEngineeringItem {
-  subtitle: string;
-  intro: string;
-  positioning: string;
-  metrics: { label: string; value: string }[];
-  sections: { title: string; description: string; items: string[] }[];
-  agentSkills: { name: string; description: string; install: string; repository: string }[];
-}
-
-interface CertificationItem {
-  year: string;
-  title: string;
-  issuer: string;
-  description: string;
-}
-
-interface GithubItem {
-  summary: string;
-  contributions: number;
-  period: string;
-  profileUrl: string;
-  months: { label: string; contributions: number }[];
-}
-
 type Props = {
-  section: 'experience' | 'projects' | 'skills' | 'profile' | 'ai' | 'github' | 'certifications' | 'contact';
-  data?: {
-    experiences?: ExperienceItem[];
-    projects?: ProjectItem[];
-    knowledgeCategories?: KnowledgeCategory[];
-    contactInfo?: ContactItem[];
-    ctaMessage?: string;
-    ctaButtonText?: string;
-    contactEmail?: string;
-    profile?: ProfileItem;
-    aiEngineering?: AiEngineeringItem;
-    certifications?: CertificationItem[];
-    github?: GithubItem;
-  };
+  section: PortfolioSection;
+  data?: SectionOutputData;
 };
 
 const SectionOutput: React.FC<Props> = ({ section, data = {} }) => {
@@ -175,9 +89,10 @@ const SectionOutput: React.FC<Props> = ({ section, data = {} }) => {
           contactEmail={data.contactEmail || 'pablovpmadrid@gmail.com'}
         />
       );
-
-    default:
-      return null;
+    default: {
+      const _exhaustive: never = section;
+      return _exhaustive;
+    }
   }
 };
 
