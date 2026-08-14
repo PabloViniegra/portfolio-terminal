@@ -4,7 +4,6 @@
     "title": "Email",
     "content": "pablovpmadrid@gmail.com",
     "link": "mailto:pablovpmadrid@gmail.com",
-    "icon": "email",
     "order": 1
   },
   {
@@ -12,7 +11,6 @@
     "title": "Dirección",
     "content": "Móstoles, Madrid, España",
     "link": "https://www.google.com/maps?q=Mostoles,+Madrid,+España",
-    "icon": "location",
     "order": 2
   },
   {
@@ -20,7 +18,6 @@
     "title": "LinkedIn",
     "content": "linkedin.com/in/pablo-viniegra-picazo",
     "link": "https://www.linkedin.com/in/pablo-viniegra-picazo/",
-    "icon": "linkedin",
     "order": 3
   },
   {
@@ -28,7 +25,6 @@
     "title": "GitHub",
     "content": "github.com/PabloViniegra",
     "link": "https://github.com/PabloViniegra",
-    "icon": "github",
     "order": 4
   }
 ]

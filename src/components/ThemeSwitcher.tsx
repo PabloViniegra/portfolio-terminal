@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { THEMES } from '../constants/themes';
+import { getTheme, THEMES } from '../constants/themes';
 import { useTheme, type ThemeType } from '../hooks/useTheme';
 
 const ThemeSwitcher = () => {
@@ -24,7 +24,7 @@ const ThemeSwitcher = () => {
     setIsOpen(false);
   };
 
-  const currentThemeData = THEMES.find((theme) => theme.id === currentTheme) || THEMES[0];
+  const currentThemeData = getTheme(currentTheme);
 
   return (
     <div className="relative" ref={dropdownRef}>

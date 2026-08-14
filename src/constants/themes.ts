@@ -21,8 +21,6 @@ export interface Theme {
   name: string;
   abbreviation: string;
   color: string;
-  mode: 'dark' | 'light';
-  character: string;
 }
 
 /**
@@ -37,32 +35,24 @@ export const THEMES: readonly Theme[] = [
     name: 'One Dark',
     abbreviation: 'OD',
     color: 'bg-[#61afef]',
-    mode: 'dark',
-    character: 'Charcoal canvas, terminal blue accent, mint prompt.',
   },
   {
     id: 'light',
     name: 'Light',
     abbreviation: 'LT',
     color: 'bg-[#e5c07b]',
-    mode: 'light',
-    character: 'Off-white canvas, professional blue accent, forest green prompt.',
   },
   {
     id: 'ayu',
     name: 'Ayu',
     abbreviation: 'AY',
     color: 'bg-[#ffb454]',
-    mode: 'dark',
-    character: 'Deep blue-black canvas, sky-blue accent, olive prompt.',
   },
   {
     id: 'github-dark',
     name: 'GitHub',
     abbreviation: 'GH',
     color: 'bg-[#58a6ff]',
-    mode: 'dark',
-    character: 'GitHub-neutral palette, blue accent, mint prompt.',
   },
 ] as const;
 

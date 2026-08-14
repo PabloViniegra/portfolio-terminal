@@ -44,7 +44,6 @@ const Terminal = ({ contentData }: TerminalProps) => {
   const [showMatrixRain, setShowMatrixRain] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [welcomeKey, setWelcomeKey] = useState(0);
-  const terminalRef = useRef<HTMLDivElement>(null);
   const historyEndRef = useRef<HTMLDivElement>(null);
   const commandInFlightRef = useRef(false);
   const toggleFullscreenRef = useRef<HTMLButtonElement>(null);
@@ -80,12 +79,11 @@ const Terminal = ({ contentData }: TerminalProps) => {
     return () => window.clearTimeout(timeoutId);
   }, []);
 
-  const runCommand = useCallback((command: string) => {
+  const runCommand = (command: string) => {
     void handleCommandRef.current(command);
-  }, []);
+  };
 
-  const renderResult = useCallback(
-    (result: CommandResult): React.ReactNode => {
+  const renderResult = (result: CommandResult): React.ReactNode => {
       switch (result.kind) {
         case 'empty':
         case 'home':
@@ -131,12 +129,9 @@ const Terminal = ({ contentData }: TerminalProps) => {
           return _exhaustive;
         }
       }
-    },
-    [contentData.commands, contentData.general.helpTip, contentData.general.helpTitle, runCommand],
-  );
+  };
 
-  const buildWelcomeEntry = useCallback(
-    (key: number): CommandEntry => ({
+  const buildWelcomeEntry = (key: number): CommandEntry => ({
       input: '',
       output: (
         <WelcomeMessage
@@ -147,24 +142,16 @@ const Terminal = ({ contentData }: TerminalProps) => {
         />
       ),
       timestamp: Date.now(),
-    }),
-    [contentData.general.welcomeMessage, contentData.profile, runCommand],
-  );
-
-  const scrollToBottom = useCallback(() => {
-    if (historyEndRef.current) {
-      requestAnimationFrame(() => {
-        historyEndRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-        });
-      });
-    }
-  }, []);
+  });
 
   useEffect(() => {
-    scrollToBottom();
-  }, [history, isLoading, scrollToBottom]);
+    requestAnimationFrame(() => {
+      historyEndRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    });
+  }, [history, isLoading]);
 
   const handleCommand = async (input: string) => {
     if (input.trim() === '' || commandInFlightRef.current) {
@@ -362,8 +349,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
         </header>
 
         <div
-          ref={terminalRef}
-          className="flex-1 space-y-8 overflow-y-auto px-4 py-5 md:px-6 md:py-6"
+           className="flex-1 space-y-8 overflow-y-auto px-4 py-5 md:px-6 md:py-6"
           role="log"
           aria-live="polite"
           aria-label="Salida de la terminal"

@@ -3,124 +3,77 @@
     "id": "welcome-title",
     "key": "welcome-title",
     "title": "Portfolio Terminal",
-    "content": "$ ./portfolio_",
-    "metadata": {
-      "type": "ascii-title"
-    }
+    "content": "$ ./portfolio_"
   },
   {
     "id": "welcome-message",
     "key": "welcome-message",
     "title": "Bienvenida",
-    "content": "Construyo y modernizo productos web de frontend a backend y CI/CD. En mi trabajo para BBVA aplico Vue.js, React, Python y tooling agéntico para mejorar rendimiento, mantenibilidad y entrega.",
-    "metadata": {
-      "type": "welcome"
-    }
+    "content": "Construyo y modernizo productos web de frontend a backend y CI/CD. En mi trabajo para BBVA aplico Vue.js, React, Python y tooling agéntico para mejorar rendimiento, mantenibilidad y entrega."
   },
   {
     "id": "welcome-hint",
     "key": "welcome-hint",
-    "content": "Prueba el comando /rain para un efecto especial",
-    "metadata": {
-      "type": "hint"
-    }
+    "content": "Prueba el comando /rain para un efecto especial"
   },
   {
     "id": "help-intro",
     "key": "help-intro",
-    "content": "Empieza por /experience, /projects o /contact.",
-    "metadata": {
-      "type": "hint"
-    }
+    "content": "Empieza por /experience, /projects o /contact."
   },
   {
     "id": "tab-hint",
     "key": "tab-hint",
-    "content": "para autocompletar comandos",
-    "metadata": {
-      "type": "keyboard-hint",
-      "key": "Tab"
-    }
+    "content": "para autocompletar comandos"
   },
   {
     "id": "arrow-hint",
     "key": "arrow-hint",
-    "content": "para navegar entre sugerencias",
-    "metadata": {
-      "type": "keyboard-hint",
-      "key": "↑/↓"
-    }
+    "content": "para navegar entre sugerencias"
   },
   {
     "id": "version",
     "key": "version",
-    "content": "1.0.0",
-    "metadata": {
-      "type": "version"
-    }
+    "content": "1.0.0"
   },
   {
     "id": "terminal-user",
     "key": "terminal-user",
-    "content": "pablo@terminal: ~",
-    "metadata": {
-      "type": "terminal-prompt"
-    }
+    "content": "pablo@terminal: ~"
   },
   {
     "id": "terminal-domain",
     "key": "terminal-domain",
-    "content": "terminal@pablo.dev",
-    "metadata": {
-      "type": "terminal-domain"
-    }
+    "content": "terminal@pablo.dev"
   },
   {
     "id": "contact-cta",
     "key": "contact-cta",
-    "content": "Disponible para incorporarme a un equipo de producto donde aportar experiencia full stack, modernización y automatización.",
-    "metadata": {
-      "type": "cta"
-    }
+    "content": "Disponible para incorporarme a un equipo de producto donde aportar experiencia full stack, modernización y automatización."
   },
   {
     "id": "contact-button",
     "key": "contact-button",
-    "content": "Abrir email",
-    "metadata": {
-      "type": "button-text"
-    }
+    "content": "Abrir email"
   },
   {
     "id": "error-unknown-command",
     "key": "error-unknown-command",
-    "content": "Comando no reconocido",
-    "metadata": {
-      "type": "error"
-    }
+    "content": "Comando no reconocido"
   },
   {
     "id": "help-title",
     "key": "help-title",
-    "content": "Índice de comandos",
-    "metadata": {
-      "type": "title"
-    }
+    "content": "Índice de comandos"
   },
   {
     "id": "help-tip",
     "key": "help-tip",
-    "content": "Tab autocompleta, las flechas recuperan historial y /help muestra el índice completo.",
-    "metadata": {
-      "type": "tip"
-    }
+    "content": "Tab autocompleta, las flechas recuperan historial y /help muestra el índice completo."
   },
   {
     "id": "contact-email",
     "key": "contact-email",
-    "content": "pablovpmadrid@gmail.com",
-    "metadata": {
-      "type": "email"
-    }
+    "content": "pablovpmadrid@gmail.com"
   }
 ]

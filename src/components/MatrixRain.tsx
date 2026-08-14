@@ -11,7 +11,6 @@ const prefersReducedMotion = () =>
 
 const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
   const columnsRef = useRef<number[]>([]);
   const [exiting, setExiting] = useState(false);
@@ -117,7 +116,6 @@ const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
 
   return (
     <div
-      ref={containerRef}
       className="fixed inset-0 pointer-events-none transition-opacity duration-300"
       style={{
         zIndex: 'var(--z-base)',

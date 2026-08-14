@@ -60,7 +60,6 @@ const contactCollection = defineCollection({
     title: z.string(),
     content: z.string(),
     link: z.string(),
-    icon: z.string().optional(),
     order: z.number().optional(),
   }),
 });
@@ -74,7 +73,6 @@ const commandsCollection = defineCollection({
     command: z.string(),
     description: z.string(),
     category: z.enum(['navigation', 'info', 'utility', 'special']),
-    aliases: z.array(z.string()).optional(),
     hint: z.string().optional(),
     order: z.number().optional(),
   }),
@@ -89,7 +87,6 @@ const generalCollection = defineCollection({
     key: z.string(),
     title: z.string().optional(),
     content: z.string(),
-    metadata: z.record(z.string(), z.any()).optional(),
   }),
 });
 

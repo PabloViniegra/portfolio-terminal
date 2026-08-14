@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, useId } from "react";
+import { useState, useEffect, useRef, useId } from "react";
 import type { KeyboardEvent } from "react";
 import CommandSuggestions from "./CommandSuggestions";
 import type { Suggestion } from "../constants/suggestions";
@@ -21,7 +21,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
   const listboxId = useId();
   const hasVisibleSuggestions = showSuggestions && suggestions.length > 0;
 
-  const updateSuggestions = useCallback((value: string) => {
+  const updateSuggestions = (value: string) => {
     if (!value.startsWith('/') || value.trim() === '') {
       setSuggestions([]);
       setShowSuggestions(false);
@@ -36,7 +36,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
     setSuggestions(filtered);
     setShowSuggestions(filtered.length > 0);
     setSelectedSuggestion(0);
-  }, [availableSuggestions]);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -79,19 +79,6 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
   }, []);
 
   useEffect(() => {
-    const handleEscape = (e: globalThis.KeyboardEvent) => {
-      if (e.key === 'Escape' && showSuggestions) {
-        setShowSuggestions(false);
-      }
-    };
-
-    document.addEventListener('keydown', handleEscape);
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [showSuggestions]);
-
-  useEffect(() => {
     if (disabled) return;
     if (typeof document === 'undefined') return;
     if (document.activeElement && document.activeElement !== document.body) return;
@@ -107,11 +94,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
     setShowSuggestions(false);
   };
 
-  /**
-   * Maneja la navegación por sugerencias con flechas y Tab
-   * @param {KeyboardEvent<HTMLInputElement>} e - Evento de teclado
-   */
-  const handleSuggestionNavigation = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+  const handleSuggestionNavigation = (e: KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     
     switch (e.key) {
@@ -134,13 +117,9 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
         }
         break;
     }
-  }, [suggestions, selectedSuggestion]);
+  };
 
-  /**
-   * Maneja la navegación por el historial de comandos
-   * @param {KeyboardEvent<HTMLInputElement>} e - Evento de teclado
-   */
-  const handleHistoryNavigation = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+  const handleHistoryNavigation = (e: KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     
     const direction = e.key === 'ArrowUp' ? 'up' : 'down';
@@ -157,7 +136,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
     } else if (historyCommand !== '') {
       setInput(historyCommand);
     }
-  }, [input, temporaryInput, onHistoryNavigate]);
+  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (disabled) return;
@@ -189,12 +168,6 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
     }
   };
 
-  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Escape') {
-      setShowSuggestions(false);
-    }
-  };
-
   return (
     <div className="relative w-full">
       <form onSubmit={handleSubmit} className="w-full relative">
@@ -215,7 +188,6 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
               value={input}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
-              onKeyUp={handleKeyUp}
               onFocus={() => {
                 if (input.startsWith('/')) {
                   updateSuggestions(input);
