@@ -27,7 +27,7 @@
 
 ## 🛠️ Tecnologías Utilizadas
 
-- [Astro 5.11](https://astro.build/) - Framework web con Content Collections y Zod (`astro:content`)
+- [Astro 7](https://astro.build/) - Framework web con Content Collections y Zod (`astro:content`)
 - [React 19](https://reactjs.org/) - Biblioteca de JavaScript para interfaces de usuario
 - [TypeScript](https://www.typescriptlang.org/) - JavaScript tipado estáticamente
 - [Tailwind CSS 4](https://tailwindcss.com/) - Framework CSS utility-first
@@ -37,8 +37,8 @@
 
 ### Requisitos Previos
 
-- Node.js (v18.20.8 o superior)
-- pnpm (recomendado) o npm/yarn
+- Node.js (v22.22.2 o superior)
+- pnpm 11.2.2 o superior
 
 ### Instalación
 
