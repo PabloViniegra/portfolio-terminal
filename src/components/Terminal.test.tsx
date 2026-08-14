@@ -237,4 +237,85 @@ describe('Terminal', () => {
     expect(screen.getByRole('button', { name: '/home' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '/help' })).toBeInTheDocument();
   });
+
+  it('toggles the terminal fullscreen state from the header', () => {
+    renderTerminal();
+    const toggle = screen.getByRole('button', { name: 'Pantalla completa' });
+    const terminal = screen.getByRole('application');
+
+    expect(toggle).toHaveAttribute('aria-controls', 'terminal-shell');
+    expect(toggle).toHaveAttribute('aria-pressed', 'false');
+    expect(terminal).not.toHaveClass('terminal--fullscreen');
+
+    fireEvent.click(toggle);
+
+    expect(toggle).toHaveAttribute('aria-pressed', 'true');
+    expect(terminal).toHaveClass('terminal--fullscreen');
+
+    const restore = screen.getByRole('button', {
+      name: 'Restaurar tamaño',
+    });
+    fireEvent.click(restore);
+
+    expect(restore).toHaveAttribute('aria-pressed', 'false');
+    expect(terminal).not.toHaveClass('terminal--fullscreen');
+  });
+
+  it('locks body scroll while fullscreen is active and unbinds it on exit', () => {
+    renderTerminal();
+    const toggle = screen.getByRole('button', { name: 'Pantalla completa' });
+
+    expect(document.body).not.toHaveClass('is-fullscreen-open');
+
+    fireEvent.click(toggle);
+    expect(document.body).toHaveClass('is-fullscreen-open');
+
+    fireEvent.click(toggle);
+    expect(document.body).not.toHaveClass('is-fullscreen-open');
+  });
+
+  it('exits fullscreen when the ESC key is pressed and resets aria-pressed', () => {
+    renderTerminal();
+    const toggle = screen.getByRole('button', { name: 'Pantalla completa' });
+    const terminal = screen.getByRole('application');
+
+    fireEvent.click(toggle);
+    expect(terminal).toHaveClass('terminal--fullscreen');
+    expect(toggle).toHaveAttribute('aria-pressed', 'true');
+
+    fireEvent.keyDown(document, { key: 'Escape' });
+
+    expect(terminal).not.toHaveClass('terminal--fullscreen');
+    expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  it('ignores non-ESC keys while fullscreen is active', () => {
+    renderTerminal();
+    const toggle = screen.getByRole('button', { name: 'Pantalla completa' });
+    const terminal = screen.getByRole('application');
+
+    fireEvent.click(toggle);
+    expect(terminal).toHaveClass('terminal--fullscreen');
+
+    fireEvent.keyDown(document, { key: 'a' });
+    expect(terminal).toHaveClass('terminal--fullscreen');
+
+    fireEvent.keyDown(document, { key: 'Enter' });
+    expect(terminal).toHaveClass('terminal--fullscreen');
+
+    fireEvent.keyDown(document, { key: ' ' });
+    expect(terminal).toHaveClass('terminal--fullscreen');
+  });
+
+  it('restores focus to the toggle when ESC exits fullscreen', () => {
+    renderTerminal();
+    const toggle = screen.getByRole('button', { name: 'Pantalla completa' });
+
+    toggle.focus();
+    fireEvent.click(toggle);
+
+    fireEvent.keyDown(document, { key: 'Escape' });
+
+    expect(toggle).toHaveFocus();
+  });
 });

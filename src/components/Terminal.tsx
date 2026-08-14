@@ -42,10 +42,12 @@ interface TerminalProps {
 const Terminal = ({ contentData }: TerminalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showMatrixRain, setShowMatrixRain] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [welcomeKey, setWelcomeKey] = useState(0);
   const terminalRef = useRef<HTMLDivElement>(null);
   const historyEndRef = useRef<HTMLDivElement>(null);
   const commandInFlightRef = useRef(false);
+  const toggleFullscreenRef = useRef<HTMLButtonElement>(null);
 
   const handleCommandRef = useRef<(input: string) => Promise<void>>(async () => {});
   const [history, setHistory] = useState<CommandEntry[]>(() => [
@@ -238,9 +240,36 @@ const Terminal = ({ contentData }: TerminalProps) => {
     }
   }, [showMatrixRain]);
 
+  const toggleFullscreen = useCallback(() => {
+    setIsFullscreen((prev) => !prev);
+  }, []);
+
+  useEffect(() => {
+    if (!isFullscreen) return;
+
+    document.body.classList.add('is-fullscreen-open');
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsFullscreen(false);
+        toggleFullscreenRef.current?.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.classList.remove('is-fullscreen-open');
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isFullscreen]);
+
   return (
     <section
-      className="terminal relative h-full overflow-hidden bg-terminal-bg text-terminal-text"
+      id="terminal-shell"
+      className={`terminal relative overflow-hidden bg-terminal-bg text-terminal-text ${
+        isFullscreen ? 'terminal--fullscreen' : ''
+      }`}
       role="application"
       aria-label="Terminal interactiva de portfolio"
     >
@@ -284,6 +313,47 @@ const Terminal = ({ contentData }: TerminalProps) => {
           <div className="flex shrink-0 items-center gap-2 md:gap-3">
             <StatusPill isLoading={isLoading} />
             <ThemeSwitcher />
+            <button
+              ref={toggleFullscreenRef}
+              type="button"
+              onClick={toggleFullscreen}
+              aria-label={
+                isFullscreen ? 'Restaurar tamaño' : 'Pantalla completa'
+              }
+              aria-controls="terminal-shell"
+              aria-pressed={isFullscreen}
+              className="flex items-center gap-2 rounded-lg border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96]"
+            >
+              <svg
+                className="h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                {isFullscreen ? (
+                  <>
+                    <path d="M8 3v3a2 2 0 0 1-2 2H3" />
+                    <path d="M21 8h-3a2 2 0 0 1-2-2V3" />
+                    <path d="M3 16h3a2 2 0 0 1 2 2v3" />
+                    <path d="M16 21v-3a2 2 0 0 1 2-2h3" />
+                  </>
+                ) : (
+                  <>
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+                    <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+                    <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+                    <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+                  </>
+                )}
+              </svg>
+              <span className="hidden md:inline">
+                {isFullscreen ? 'restaurar' : 'fullscreen'}
+              </span>
+            </button>
             <Avatar
               size={48}
               className="h-9 w-9 opacity-95 md:h-12 md:w-12"
