@@ -11,7 +11,7 @@ import ProjectsSection from './sections/ProjectsSection';
 import SkillsSection from './sections/SkillsSection';
 
 const ErrorMessage: React.FC<{ message: string }> = ({ message }) => (
-  <div className="rounded-xl border border-terminal-error/35 bg-terminal-bg-secondary/28 px-4 py-3 text-terminal-error">
+  <div className="rounded-xl border border-terminal-error/30 bg-terminal-bg-secondary/30 px-4 py-3 text-terminal-error">
     <div className="text-terminal-text">{message}</div>
   </div>
 );

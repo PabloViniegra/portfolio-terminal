@@ -48,7 +48,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                     {project.type}
                   </span>
                   {index === 0 && (
-                    <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary/60">
+                    <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary/80">
                       primary
                     </span>
                   )}

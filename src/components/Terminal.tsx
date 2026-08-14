@@ -398,7 +398,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
           <div ref={historyEndRef} />
         </div>
 
-        <footer className="border-t border-terminal-border/90 bg-terminal-header-bg/78 p-4 backdrop-blur">
+        <footer className="border-t border-terminal-border/90 bg-terminal-header-bg/75 p-4 backdrop-blur">
           <CommandInput
             onCommand={handleCommand}
             onHistoryNavigate={navigateHistory}

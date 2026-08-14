@@ -54,7 +54,7 @@ const ThemeSwitcher = () => {
             onClick={() => handleThemeChange(theme.id)}
             className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 focus:ring-inset active:scale-[0.96] ${
               currentTheme === theme.id
-                ? 'bg-terminal-accent/12 text-terminal-accent font-medium'
+                ? 'bg-terminal-accent/10 text-terminal-accent font-medium'
                 : 'text-terminal-text hover:bg-terminal-bg-secondary/80'
             }`}
             role="menuitem"

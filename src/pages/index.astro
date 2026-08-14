@@ -72,15 +72,15 @@ const contentData = await loadContentData();
   }
 
   .skeleton-dots span:nth-child(1) {
-    background-color: rgba(239, 68, 68, 0.5);
+    background-color: color-mix(in srgb, var(--terminal-dot-close) 50%, transparent);
   }
 
   .skeleton-dots span:nth-child(2) {
-    background-color: rgba(234, 179, 8, 0.5);
+    background-color: color-mix(in srgb, var(--terminal-dot-min) 50%, transparent);
   }
 
   .skeleton-dots span:nth-child(3) {
-    background-color: rgba(34, 197, 94, 0.5);
+    background-color: color-mix(in srgb, var(--terminal-dot-max) 50%, transparent);
   }
 
   .skeleton-title {
