@@ -1,213 +1,191 @@
 # Portfolio Interactivo con Terminal
 
-¡Bienvenido a mi portfolio interactivo con temática de terminal! Este proyecto es una aplicación web moderna construida con Astro, React y TypeScript que simula una terminal de comandos para mostrar mi información profesional y proyectos de una manera única y atractiva.
+Portfolio web con interfaz de terminal: comandos reales, contenido tipado y un artefacto que demuestra craft de ingeniería fullstack.
 
-## 🚀 Características
+[![Astro](https://img.shields.io/badge/Astro-7-BC52EE?style=flat-square&logo=astro&logoColor=white)](https://astro.build/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-bundler-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+[![Vitest](https://img.shields.io/badge/Vitest-4-6E9F18?style=flat-square&logo=vitest&logoColor=white)](https://vitest.dev/)
+[![pnpm](https://img.shields.io/badge/pnpm-11-F69220?style=flat-square&logo=pnpm&logoColor=white)](https://pnpm.io/)
 
-- **Interfaz de terminal interactiva** con autocompletado de comandos
-- **Content Collections de Astro** con validación por Zod y type-safety completo
-- **Tema oscuro/ligero** con conmutador integrado (4 temas disponibles)
-- **Efecto de lluvia de Matrix** (activable con el comando `/rain`)
-- **Navegación por historial** de comandos con las teclas de flecha
-- **Contenido fácilmente editable** en archivos JSON
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=astro,react,ts,tailwind,vite,pnpm" alt="Astro, React, TypeScript, Tailwind CSS, Vite, pnpm" />
+  </a>
+</p>
 
-## 🖥️ Comandos Disponibles
+## Índice
 
-| Comando       | Descripción                        |
-| ------------- | ---------------------------------- |
-| `/home`       | Ir a la página de inicio           |
-| `/experience` | Ver experiencia laboral            |
-| `/projects`   | Ver proyectos destacados           |
-| `/skills`     | Ver habilidades técnicas           |
-| `/contact`    | Información de contacto            |
-| `/cv`         | Descargar mi CV                    |
-| `/rain`       | Activar efecto de lluvia de Matrix |
-| `/help`       | Mostrar esta ayuda                 |
-| `/clear`      | Limpiar la terminal                |
+- [Tecnologías](#tecnologías)
+- [Características](#características)
+- [Comandos disponibles](#comandos-disponibles)
+- [Requisitos](#requisitos)
+- [Inicio rápido](#inicio-rápido)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Scripts](#scripts)
+- [Contenido](#contenido)
+- [Temas](#temas)
+- [Documentación de diseño](#documentación-de-diseño)
+- [Contribuir](#contribuir)
+- [Licencia](#licencia)
+- [Contacto](#contacto)
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías
 
-- [Astro 7](https://astro.build/) - Framework web con Content Collections y Zod (`astro:content`)
-- [React 19](https://reactjs.org/) - Biblioteca de JavaScript para interfaces de usuario
-- [TypeScript](https://www.typescriptlang.org/) - JavaScript tipado estáticamente
-- [Tailwind CSS 4](https://tailwindcss.com/) - Framework CSS utility-first
-- [Vite](https://vitejs.dev/) - Herramienta de compilación y servidor de desarrollo
+| Capa | Stack |
+| ---- | ----- |
+| Framework | [Astro 7](https://astro.build/) (static-first, islands) |
+| UI interactiva | [React 19](https://react.dev/) |
+| Lenguaje | [TypeScript](https://www.typescriptlang.org/) (strict) |
+| Estilos | [Tailwind CSS 4](https://tailwindcss.com/) |
+| Contenido | Astro Content Collections + Zod (`astro:content`) |
+| Build | Vite (via Astro) |
+| Tests | [Vitest](https://vitest.dev/) + Testing Library |
+| Gestor de paquetes | [pnpm](https://pnpm.io/) 11 |
 
-## 🚀 Cómo Empezar
+## Características
 
-### Requisitos Previos
+- Terminal interactiva con autocompletado (`Tab`), sugerencias y historial (flechas)
+- Content Collections con validación Zod y type-safety de extremo a extremo
+- Cuatro temas conmutables; preferencia en `localStorage`
+- Efecto Matrix Rain (`/rain`; salir con `Ctrl+C`)
+- Secciones de perfil, AI engineering, GitHub y certificaciones
+- Fallback móvil con aviso desktop-first
+- Skeleton de carga y tema aplicado antes de la hidratación (sin FOUC de tema)
+- Suite de tests unitarios/componentes con Vitest
 
-- Node.js (v22.22.2 o superior)
-- pnpm 11.2.2 o superior
+## Comandos disponibles
 
-### Instalación
+| Comando | Descripción |
+| ------- | ----------- |
+| `/home` | Página de inicio |
+| `/experience` | Experiencia laboral |
+| `/projects` | Proyectos destacados |
+| `/skills` | Habilidades técnicas |
+| `/profile` | Perfil y forma de trabajo |
+| `/ai` | Práctica de AI Engineering |
+| `/github` | Actividad reciente en GitHub |
+| `/certifications` | Certificaciones |
+| `/contact` | Datos de contacto |
+| `/cv` | Descarga del CV (PDF) |
+| `/rain` | Activa la lluvia Matrix |
+| `/help` | Ayuda de comandos |
+| `/clear` | Limpia la terminal |
 
-1. Clona el repositorio:
+## Requisitos
 
-   ```bash
-   git clone https://github.com/tu-usuario/portfolio-terminal.git
-   cd portfolio-terminal
-   ```
+- Node.js `>= 22.22.2`
+- pnpm `>= 11.2.2`
 
-2. Instala las dependencias:
+## Inicio rápido
 
-   ```bash
-   pnpm install
-   # o
-   npm install
-   ```
+```bash
+git clone https://github.com/PabloViniegra/portfolio-terminal.git
+cd portfolio-terminal
+pnpm install
+pnpm dev
+```
 
-3. Inicia el servidor de desarrollo:
+Abre [http://localhost:4321](http://localhost:4321).
 
-   ```bash
-   pnpm dev
-   # o
-   npm run dev
-   ```
-
-4. Abre tu navegador en [http://localhost:4321](http://localhost:4321)
-
-## 🏗️ Estructura del Proyecto
+## Estructura del proyecto
 
 ```
 /
-├── public/               # Archivos estáticos
-│   └── cv/              # Archivos de CV para descargar
+├── public/
+│   ├── cv/                 # CV en PDF
+│   ├── fonts/              # Mona Sans (variable)
+│   └── favicon.svg
 ├── src/
-│   ├── content/         # 🆕 Content Collections (JSON)
-│   │   ├── experience/  # Experiencia laboral
-│   │   ├── projects/    # Proyectos personales
-│   │   ├── skills/      # Habilidades técnicas
-│   │   ├── contact/     # Información de contacto
-│   │   ├── commands/    # Comandos de terminal
-│   │   └── general/     # Textos generales
-│   ├── content.config.ts # 🆕 Configuración de colecciones
-│   ├── assets/          # Imágenes y fuentes
-│   ├── components/      # Componentes React/TSX
-│   │   ├── CommandInput.tsx  # Entrada de comandos
-│   │   ├── MatrixRain.tsx    # Efecto de lluvia de Matrix
-│   │   ├── SectionOutput.tsx # Salida de secciones
-│   │   └── sections/    # Componentes de sección
-│   ├── layouts/         # Plantillas de diseño
-│   └── pages/           # Páginas de la aplicación
-├── docs/                # 🆕 Documentación completa
-│   ├── README.md        # Índice de documentación
-│   ├── QUICK-START-CONTENT.md    # Guía rápida
-│   ├── CONTENT-COLLECTIONS.md   # Guía completa
-│   ├── MIGRATION-GUIDE.md       # Guía de migración
-│   └── CONTENT-STRUCTURE.md     # Estructura de contenido
-└── package.json         # Dependencias y scripts
+│   ├── commands/           # Resolución y sugerencias de comandos
+│   ├── components/         # Terminal, input, secciones, temas
+│   ├── constants/          # Comandos, temas, matrix
+│   ├── content/            # JSON de Content Collections
+│   │   ├── experience/
+│   │   ├── projects/
+│   │   ├── skills/
+│   │   ├── profile/
+│   │   ├── ai-engineering/
+│   │   ├── github/
+│   │   ├── certifications/
+│   │   ├── contact/
+│   │   ├── commands/
+│   │   └── general/
+│   ├── content.config.ts   # Schemas Zod de colecciones
+│   ├── hooks/              # useTheme
+│   ├── layouts/
+│   ├── pages/
+│   ├── styles/
+│   └── types/
+├── design-system/          # Tokens, temas y patrones UI
+├── DESIGN.md
+├── PRODUCT.md
+├── test/
+└── package.json
 ```
 
-## 🧪 Comandos de Desarrollo
+## Scripts
 
-| Comando          | Acción                                    |
-| ---------------- | ----------------------------------------- |
-| `pnpm install`   | Instalar dependencias                     |
-| `pnpm dev`       | Iniciar servidor de desarrollo            |
-| `pnpm build`     | Construir para producción                 |
-| `pnpm preview`   | Vista previa de la compilación localmente |
-| `pnpm test`      | Ejecutar Vitest en modo watch             |
-| `pnpm test:run`  | Ejecutar todos los tests una vez          |
-| `pnpm astro ...` | Comandos de la CLI de Astro               |
+| Comando | Acción |
+| ------- | ------ |
+| `pnpm install` | Instalar dependencias |
+| `pnpm dev` | Servidor de desarrollo |
+| `pnpm build` | Build de producción |
+| `pnpm preview` | Preview del build local |
+| `pnpm test` | Vitest en modo watch |
+| `pnpm test:run` | Ejecutar tests una vez |
+| `pnpm typecheck` | Comprobación de tipos (`tsgo`) |
+| `pnpm astro ...` | CLI de Astro |
 
-## 📝 Actualizar Contenido
+## Contenido
 
-### Opción 1: Edición Rápida (Recomendado)
+El contenido editable vive en `src/content/*/data.json`. Los schemas están en `src/content.config.ts`.
 
-1. Abre el archivo JSON correspondiente en `src/content/`
-2. Edita el contenido siguiendo el formato existente
-3. Guarda el archivo
-4. El servidor recargará automáticamente
+Flujo típico:
 
-**[⚡ Ver guía rápida](./docs/QUICK-START-CONTENT.md)**
+1. Edita el JSON de la colección correspondiente
+2. Guarda el archivo
+3. El dev server recarga con validación Zod
 
-### Opción 2: Documentación Completa
+Colecciones actuales: `experience`, `projects`, `skills`, `profile`, `ai-engineering`, `github`, `certifications`, `contact`, `commands`, `general`.
 
-Para entender la arquitectura completa:
+## Temas
 
-**[📖 Documentación de Content Collections](./docs/CONTENT-COLLECTIONS.md)**
+Selector en la UI; la elección se persiste en `localStorage`:
 
-## 🌟 Características Especiales
+| Tema | Notas |
+| ---- | ----- |
+| One Dark | Por defecto |
+| Light | Variante clara |
+| Ayu | Tema de acentos suaves |
+| GitHub Dark | Estilo GitHub |
 
-### Content Collections
+Definiciones y tokens: `design-system/themes/` y `src/constants/themes.ts`.
 
-Todo el contenido está organizado en **Content Collections** de Astro:
+## Documentación de diseño
 
-- ✅ **Type-safety** completo con TypeScript
-- ✅ **Fácil edición** en archivos JSON
-- ✅ **Intellisense** en el editor
+| Documento | Contenido |
+| --------- | --------- |
+| [PRODUCT.md](./PRODUCT.md) | Propósito, usuarios, principios de producto |
+| [DESIGN.md](./DESIGN.md) | Lenguaje visual y decisiones de interfaz |
+| [design-system/](./design-system/) | Tokens, temas, componentes y patrones |
 
-**[📖 Ver documentación completa](./docs/README.md)**
+## Contribuir
 
-### Gestión de Contenido
+1. Fork del repositorio
+2. Rama de trabajo: `git checkout -b feature/nombre`
+3. Commit con mensaje convencional
+4. Push y Pull Request
 
-Actualiza fácilmente:
-- Experiencia laboral
-- Proyectos personales
-- Habilidades técnicas y blandas
-- Información de contacto
-- Comandos de terminal
-- Textos generales
+## Licencia
 
-**[⚡ Guía rápida de edición](./docs/QUICK-START-CONTENT.md)**
+MIT. Ver [LICENSE](./LICENSE).
 
-### Efecto de Lluvia de Matrix
+## Contacto
 
-Activa el efecto de lluvia de Matrix escribiendo `/rain` en la terminal. Puedes desactivarlo presionando `Ctrl+C`.
-
-### Navegación por Historial
-
-- Usa las teclas de flecha arriba/abajo para navegar por el historial de comandos.
-- Presiona `Tab` para autocompletar comandos.
-
-### Temas
-
-Cambia entre 4 temas disponibles con el selector de temas:
-- One Dark (por defecto)
-- Light
-- Ayu
-- GitHub Dark
-
-La preferencia se guarda localmente en localStorage.
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
-
-## 🙏 Créditos
-
-- Diseño inspirado en terminales Unix/Linux
-- Efecto de lluvia de Matrix inspirado en la película "The Matrix"
-- Desarrollado con ❤️ por Pablo Viniegra
-
-## 📚 Documentación
-
-- **[Índice de Documentación](./docs/README.md)** - Punto de partida
-- **[Quick Start](./docs/QUICK-START-CONTENT.md)** - Edición rápida de contenido
-- **[Content Collections](./docs/CONTENT-COLLECTIONS.md)** - Guía completa
-- **[Migration Guide](./docs/MIGRATION-GUIDE.md)** - Cambios recientes
-- **[Content Structure](./docs/CONTENT-STRUCTURE.md)** - Vista general
-
-## 🤝 Contribuir
-
-Las contribuciones son bienvenidas! Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📧 Contacto
-
-Pablo Viniegra - [@PabloViniegra](https://github.com/PabloViniegra)
+**Pablo Viniegra** — [@PabloViniegra](https://github.com/PabloViniegra)
 
 - Email: pablovpmadrid@gmail.com
 - LinkedIn: [pabloviniegra](https://linkedin.com/in/pabloviniegra)
-
-## 🌟 Recursos Adicionales
-
-- [Documentación de Astro](https://docs.astro.build)
-- [Astro Discord](https://astro.build/chat)
-- [Content Collections Guide](https://docs.astro.build/en/guides/content-collections/)
