@@ -2,3 +2,5 @@ allowBuilds:
   '@tailwindcss/oxide': true
   esbuild: true
   sharp: true
+minimumReleaseAgeExclude:
+  - astro@7.2.2
