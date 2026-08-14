@@ -197,7 +197,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
               command input
             </span>
             <span className="hidden font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary md:inline">
-              /help · tab autocomplete · history
+              /help · tab · history
             </span>
           </div>
           <div className="relative flex items-center">

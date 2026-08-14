@@ -7,8 +7,6 @@ interface GithubSectionProps {
 }
 
 const GithubSection: React.FC<GithubSectionProps> = ({ github }) => {
-  const maximum = Math.max(...github.months.map((month) => month.contributions));
-
   return (
     <div className="font-sans">
       <SectionHeader verb="tail" args="github/contribution.log" meta={github.period} />
@@ -19,10 +17,7 @@ const GithubSection: React.FC<GithubSectionProps> = ({ github }) => {
           <div key={month.label} className="border-t border-terminal-border/40 pt-2">
             <div className="flex items-center justify-between gap-3 font-mono text-mono-xs text-terminal-text-secondary">
               <span>{month.label}</span>
-              <span>{month.contributions}</span>
-            </div>
-            <div className="mt-2 h-1 rounded-full bg-terminal-border/40">
-              <div className="h-full rounded-full bg-terminal-accent" style={{ width: `${(month.contributions / maximum) * 100}%` }} />
+              <span className="text-terminal-text">{month.contributions}</span>
             </div>
           </div>
         ))}

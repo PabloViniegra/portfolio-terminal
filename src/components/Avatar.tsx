@@ -15,7 +15,7 @@ const Avatar: React.FC<AvatarProps> = ({ className = '', size = 48 }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Pablo Viniegra — working shell mark"
+      aria-label="Pablo Viniegra - working shell mark"
     >
       <circle
         cx="64"

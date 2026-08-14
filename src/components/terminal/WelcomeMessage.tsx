@@ -21,7 +21,6 @@ const AsciiTitle = ({ profile }: { profile?: ProfileItem }) => (
     <div className="flex items-center gap-3 font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
       <span className="text-terminal-prompt">└─</span>
       <span>{profile?.role ?? 'fullstack engineer'}</span>
-      <span className="text-terminal-border">·</span>
       <span>{profile?.location ?? 'madrid'}</span>
       <span className="text-terminal-border">·</span>
       <span className="text-terminal-accent">{profile?.status ?? 'open to roles'}</span>
