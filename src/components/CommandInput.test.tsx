@@ -15,7 +15,7 @@ const renderInput = (overrides: Partial<React.ComponentProps<typeof CommandInput
   const onCommand = vi.fn();
   const onHistoryNavigate = vi.fn(() => '');
 
-  render(
+  const { rerender } = render(
     <CommandInput
       onCommand={onCommand}
       onHistoryNavigate={onHistoryNavigate}
@@ -28,6 +28,7 @@ const renderInput = (overrides: Partial<React.ComponentProps<typeof CommandInput
     input: screen.getByRole('combobox', { name: 'Comando de terminal' }),
     onCommand,
     onHistoryNavigate,
+    rerender,
   };
 };
 
@@ -124,5 +125,45 @@ describe('CommandInput', () => {
     expect(input).toBeDisabled();
     expect(onCommand).not.toHaveBeenCalled();
     expect(onHistoryNavigate).not.toHaveBeenCalled();
+  });
+
+  it('restores focus to the input when transitioning from disabled to enabled', () => {
+    const { rerender, input } = renderInput({ disabled: true });
+    expect(input).not.toHaveFocus();
+
+    rerender(
+      <CommandInput
+        onCommand={vi.fn()}
+        onHistoryNavigate={vi.fn(() => '')}
+        suggestions={suggestions}
+        disabled={false}
+      />,
+    );
+
+    expect(input).toHaveFocus();
+  });
+
+  it('does not steal focus from another element when re-enabled', () => {
+    const { rerender, input } = renderInput({ disabled: true });
+
+    const button = document.createElement('button');
+    button.textContent = 'external';
+    document.body.appendChild(button);
+    button.focus();
+    expect(document.activeElement).toBe(button);
+
+    rerender(
+      <CommandInput
+        onCommand={vi.fn()}
+        onHistoryNavigate={vi.fn(() => '')}
+        suggestions={suggestions}
+        disabled={false}
+      />,
+    );
+
+    expect(document.activeElement).toBe(button);
+    expect(input).not.toHaveFocus();
+
+    button.remove();
   });
 });

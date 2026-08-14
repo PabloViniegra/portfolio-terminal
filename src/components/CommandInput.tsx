@@ -84,12 +84,19 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
         setShowSuggestions(false);
       }
     };
-    
+
     document.addEventListener('keydown', handleEscape);
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
   }, [showSuggestions]);
+
+  useEffect(() => {
+    if (disabled) return;
+    if (typeof document === 'undefined') return;
+    if (document.activeElement && document.activeElement !== document.body) return;
+    inputRef.current?.focus();
+  }, [disabled]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
