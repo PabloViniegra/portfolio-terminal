@@ -15,6 +15,10 @@ export const COMMANDS = {
   EXPERIENCE: '/experience',
   PROJECTS: '/projects',
   SKILLS: '/skills',
+  PROFILE: '/profile',
+  AI: '/ai',
+  GITHUB: '/github',
+  CERTIFICATIONS: '/certifications',
   CONTACT: '/contact',
   CV: '/cv',
 } as const;

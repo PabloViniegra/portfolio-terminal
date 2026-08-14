@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pablo-viniegra",
+    "role": "Full Stack Developer",
+    "stack": ["Vue.js", "Python", ".NET"],
+    "location": "Madrid, ES",
+    "status": "Open to work",
+    "bio": "Construyo y modernizo productos web de frontend a backend y CI/CD. En mi trabajo para BBVA aplico Vue.js, React, Python y tooling agéntico para mejorar rendimiento, mantenibilidad y entrega.",
+    "availability": "Disponible para incorporarme a un equipo de producto donde aportar experiencia full stack, modernización y automatización.",
+    "about": [
+      "Me importa que la interfaz, la lógica y el despliegue se aguanten los unos a los otros. El stack va detrás.",
+      "Cuando entro en un proyecto, leo la arquitectura y la lógica de negocio hasta que puedo opinar con criterio."
+    ],
+    "principles": [
+      { "label": "Priorizo", "content": "Buenas prácticas y CI/CD." },
+      { "label": "Aporto", "content": "Conocimiento técnico y disponibilidad para echar una mano." }
+    ],
+    "categories": [
+      {
+        "title": "Frontend de producto",
+        "description": "La interfaz es parte del producto, no decoración. Me preocupo de que se lea clara, se use con ritmo y se pueda tocar dentro de seis meses.",
+        "groups": [
+          { "title": "Base de interfaz", "skills": ["JavaScript", "TypeScript", "HTML5", "CSS", "Tailwind CSS"] },
+          { "title": "Frameworks y metaframeworks", "skills": ["Vue.js", "Astro", "React", "Next.js"] }
+        ]
+      },
+      {
+        "title": "Backend y automatización",
+        "description": "También me defiendo en la parte que no se ve: APIs, integraciones, automatizaciones y la lógica que mantiene al producto de pie cuando crece.",
+        "groups": [
+          { "title": "Servicios y automatización", "skills": [".NET", "Python", "Flask", "FastAPI"] }
+        ]
+      },
+      {
+        "title": "Despliegue y criterio",
+        "description": "Que el código llegue a producción en condiciones: despliegue limpio, datos en orden y decisiones que no me exploten en la cara dentro de un año.",
+        "groups": [
+          { "title": "Entorno y despliegue", "skills": ["Git", "Docker", "Azure", "Google Cloud"] },
+          { "title": "Datos y persistencia", "skills": ["SQL Server", "MySQL", "PostgreSQL", "MongoDB"] }
+        ]
+      }
+    ]
+  }
+]

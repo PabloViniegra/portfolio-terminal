@@ -9,10 +9,13 @@ import "../styles/global.css";
 const experienceEntries = await getCollection('experience');
 const projectsEntries = await getCollection('projects');
 const skillsEntries = await getCollection('skills');
-const softSkillsEntries = await getCollection('soft-skills');
 const contactEntries = await getCollection('contact');
 const commandsEntries = await getCollection('commands');
 const generalEntries = await getCollection('general');
+const profileEntries = await getCollection('profile');
+const aiEngineeringEntries = await getCollection('ai-engineering');
+const certificationsEntries = await getCollection('certifications');
+const githubEntries = await getCollection('github');
 
 // Ordenar y formatear los datos
 const experiences = experienceEntries
@@ -27,10 +30,6 @@ const knowledgeCategories = skillsEntries
   .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
   .map(entry => entry.data);
 
-const softSkills = softSkillsEntries
-  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-  .map(entry => entry.data);
-
 const contactInfo = contactEntries
   .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
   .map(entry => entry.data);
@@ -38,6 +37,13 @@ const contactInfo = contactEntries
 const commands = commandsEntries
   .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
   .map(entry => entry.data);
+
+const profile = profileEntries[0]?.data;
+const aiEngineering = aiEngineeringEntries[0]?.data;
+const certifications = certificationsEntries
+  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+  .map(entry => entry.data);
+const github = githubEntries[0]?.data;
 
 // Obtener mensajes generales
 const getGeneralContent = (key: string) => {
@@ -49,9 +55,12 @@ const contentData = {
   experiences,
   projects,
   knowledgeCategories,
-  softSkills,
   contactInfo,
   commands,
+  profile,
+  aiEngineering,
+  certifications,
+  github,
   general: {
     ctaMessage: getGeneralContent('contact-cta'),
     ctaButtonText: getGeneralContent('contact-button'),

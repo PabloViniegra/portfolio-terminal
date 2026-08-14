@@ -10,6 +10,7 @@ const experienceCollection = defineCollection({
     title: z.string(),
     date: z.string(),
     description: z.string(),
+    achievements: z.array(z.string()).optional(),
     tags: z.array(z.string()),
     order: z.number().optional(),
   }),
@@ -46,18 +47,6 @@ const skillsCollection = defineCollection({
         rating: z.number().min(0).max(4),
       })
     ),
-    order: z.number().optional(),
-  }),
-});
-
-/**
- * Schema para la colección de habilidades blandas
- */
-const softSkillsCollection = defineCollection({
-  loader: file('src/content/skills/soft-skills.json'),
-  schema: z.object({
-    name: z.string(),
-    rating: z.number().min(0).max(100),
     order: z.number().optional(),
   }),
 });
@@ -104,12 +93,79 @@ const generalCollection = defineCollection({
   }),
 });
 
+const profileCollection = defineCollection({
+  loader: file('src/content/profile/data.json'),
+  schema: z.object({
+    role: z.string(),
+    stack: z.array(z.string()),
+    location: z.string(),
+    status: z.string(),
+    bio: z.string(),
+    availability: z.string(),
+    about: z.array(z.string()),
+    principles: z.array(z.object({ label: z.string(), content: z.string() })),
+    categories: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+        groups: z.array(z.object({ title: z.string(), skills: z.array(z.string()) })),
+      })
+    ),
+  }),
+});
+
+const aiEngineeringCollection = defineCollection({
+  loader: file('src/content/ai-engineering/data.json'),
+  schema: z.object({
+    subtitle: z.string(),
+    intro: z.string(),
+    positioning: z.string(),
+    metrics: z.array(z.object({ label: z.string(), value: z.string() })),
+    sections: z.array(
+      z.object({ title: z.string(), description: z.string(), items: z.array(z.string()) })
+    ),
+    agentSkills: z.array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        install: z.string(),
+        repository: z.string(),
+      })
+    ),
+  }),
+});
+
+const certificationsCollection = defineCollection({
+  loader: file('src/content/certifications/data.json'),
+  schema: z.object({
+    year: z.string(),
+    title: z.string(),
+    issuer: z.string(),
+    description: z.string(),
+    order: z.number().optional(),
+  }),
+});
+
+const githubCollection = defineCollection({
+  loader: file('src/content/github/data.json'),
+  schema: z.object({
+    summary: z.string(),
+    contributions: z.number(),
+    period: z.string(),
+    profileUrl: z.string().url(),
+    months: z.array(z.object({ label: z.string(), contributions: z.number() })),
+  }),
+});
+
 export const collections = {
   experience: experienceCollection,
   projects: projectsCollection,
   skills: skillsCollection,
-  'soft-skills': softSkillsCollection,
   contact: contactCollection,
   commands: commandsCollection,
   general: generalCollection,
+  profile: profileCollection,
+  'ai-engineering': aiEngineeringCollection,
+  certifications: certificationsCollection,
+  github: githubCollection,
 };

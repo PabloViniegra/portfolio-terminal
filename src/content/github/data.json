@@ -1,0 +1,24 @@
+[
+  {
+    "id": "github-activity",
+    "summary": "Lo que he subido a GitHub en el último año: PRs, mantenimiento y commits sueltos.",
+    "contributions": 1613,
+    "period": "Últimos 12 meses",
+    "profileUrl": "https://github.com/PabloViniegra",
+    "months": [
+      { "label": "ago 2025", "contributions": 16 },
+      { "label": "sep 2025", "contributions": 46 },
+      { "label": "oct 2025", "contributions": 21 },
+      { "label": "nov 2025", "contributions": 21 },
+      { "label": "dic 2025", "contributions": 241 },
+      { "label": "ene 2026", "contributions": 72 },
+      { "label": "feb 2026", "contributions": 2 },
+      { "label": "mar 2026", "contributions": 78 },
+      { "label": "abr 2026", "contributions": 127 },
+      { "label": "may 2026", "contributions": 61 },
+      { "label": "jun 2026", "contributions": 311 },
+      { "label": "jul 2026", "contributions": 483 },
+      { "label": "ago 2026", "contributions": 134 }
+    ]
+  }
+]

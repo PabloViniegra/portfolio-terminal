@@ -1,0 +1,18 @@
+[
+  {
+    "id": "google-cloud-digital-leader",
+    "year": "2025",
+    "title": "Google Cloud Digital Leader",
+    "issuer": "Google Cloud",
+    "description": "Certificación de fundamentos de Google Cloud: identidad, seguridad, datos, IA y operaciones en la plataforma.",
+    "order": 1
+  },
+  {
+    "id": "power-platform-developer-associate",
+    "year": "2024",
+    "title": "Microsoft Power Platform Developer Associate",
+    "issuer": "Microsoft",
+    "description": "Desarrollo de soluciones con Power Apps, Power Automate, Power Pages y conectores personalizados en Dataverse.",
+    "order": 2
+  }
+]

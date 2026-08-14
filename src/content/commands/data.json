@@ -36,31 +36,59 @@
     "order": 5
   },
   {
+    "id": "profile",
+    "command": "/profile",
+    "description": "Muestra mi perfil y forma de trabajo",
+    "category": "info",
+    "order": 6
+  },
+  {
+    "id": "ai",
+    "command": "/ai",
+    "description": "Muestra mi práctica de AI Engineering",
+    "category": "info",
+    "order": 7
+  },
+  {
+    "id": "github",
+    "command": "/github",
+    "description": "Muestra mi actividad reciente en GitHub",
+    "category": "info",
+    "order": 8
+  },
+  {
+    "id": "certifications",
+    "command": "/certifications",
+    "description": "Muestra mis certificaciones",
+    "category": "info",
+    "order": 9
+  },
+  {
     "id": "contact",
     "command": "/contact",
     "description": "Muestra mis datos de contacto",
     "category": "info",
-    "order": 6
+    "order": 10
   },
   {
     "id": "cv",
     "command": "/cv",
     "description": "Descarga mi CV en PDF",
     "category": "utility",
-    "order": 7
+    "order": 11
   },
   {
     "id": "clear",
     "command": "/clear",
     "description": "Limpia la terminal",
     "category": "utility",
-    "order": 8
+    "order": 12
   },
   {
     "id": "help",
     "command": "/help",
     "description": "Muestra esta ayuda",
     "category": "utility",
-    "order": 9
+    "order": 13
   }
 ]

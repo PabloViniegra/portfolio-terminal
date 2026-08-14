@@ -5,6 +5,7 @@ interface ExperienceItem {
   title: string;
   date: string;
   description: string;
+  achievements?: string[];
   tags: string[];
 }
 
@@ -35,6 +36,17 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) =>
             <p className="mt-2 max-w-3xl text-sm leading-7 text-terminal-text-secondary">
               {experience.description}
             </p>
+
+            {experience.achievements && experience.achievements.length > 0 && (
+              <ul className="mt-3 max-w-3xl space-y-2 text-sm leading-6 text-terminal-text-secondary">
+                {experience.achievements.map((achievement) => (
+                  <li key={achievement} className="flex gap-2">
+                    <span className="text-terminal-prompt" aria-hidden="true">→</span>
+                    <span>{achievement}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
 
             <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-mono-xs text-terminal-text-secondary/80">
               {experience.tags.map((tag) => (

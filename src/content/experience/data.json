@@ -4,16 +4,27 @@
     "title": "Desarrollador de Software y consultor en Minsait (Indra)",
     "date": "Abril de 2024 - Actualidad",
     "description": "Mantenimiento e implementación de mejoras para proyectos internos del BBVA. Desarrollo de features, testing unitario y CI/CD.",
+    "achievements": [
+      "Reduje los tiempos de carga un 35% en 4 aplicaciones internas de BBVA con más de 10.000 usuarios diarios, refactorizando las capas de obtención de datos e implementando renderizado virtualizado para grandes volúmenes de información.",
+      "Lideré la migración de 3 aplicaciones críticas de Vue 2 a Vue 3, lo que redujo la deuda técnica en un 40% y garantizó el mantenimiento a largo plazo en un equipo de 12 personas.",
+      "Mejoré el rendimiento de renderizado en aplicaciones React un 15% (medido con Lighthouse) eliminando re-renders innecesarios y reorganizando la arquitectura de componentes.",
+      "Implanté estándares de testing unitario en código heredado, llevando la cobertura del 12% al 65% y reduciendo las incidencias en producción un 20% durante el primer trimestre.",
+      "Diseñé e implementé arquitecturas de IA agéntica (Claude Code, Protocolo MCP) que estandarizaron el flujo de trabajo del equipo y recortaron el tiempo medio de entrega de funcionalidades en un 25%."
+    ],
     "tags": [
-      "Java",
-      "Maven",
       "Google Cloud Platform",
-      "GAE",
-      "Vue js",
+      "Google App Engine",
+      "Vue 3",
+      "Vue 2",
+      "React",
       "Python",
       "Flask",
-      "Javascript/Typescript",
-      "JQuery"
+      "TypeScript",
+      "Claude Code",
+      "MCPs",
+      "Agent Skills",
+      "Jest",
+      "MySQL"
     ],
     "order": 1
   },
@@ -21,15 +32,25 @@
     "id": "imagar-2021",
     "title": "Desarrollador de Software y consultor en Imagar Solutions Company",
     "date": "Junio de 2021 - Abril 2024",
-    "description": "Desarrollo de proyectos diversos para cliente, basados en la integración de distintos sistemas vía software y RPA. Creación de soluciones low code para pequeños clientes con el objetivo de automatizar procesos de negocio.",
+    "description": "Desarrollo de proyectos para cliente basados en integración de sistemas vía software y RPA. Creación de soluciones low code para automatizar procesos de negocio.",
+    "achievements": [
+      "Diseñé un middleware de alta disponibilidad, en colaboración con un equipo interno de 6 desarrolladores y equipos externos de otras consultoras, que procesa más de 2 millones de intercambios de datos al día entre AENA y más de 15 aerolíneas internacionales, manteniendo una disponibilidad del 99,9% en producción.",
+      "Construí pipelines serverless con Azure Functions y Service Workers, orquestados con Azure DevOps, que automatizaron 8 procesos manuales, ahorrando al equipo de operaciones más de 20 horas a la semana.",
+      "Desarrollé sistemas de integración de datos de vuelos en tiempo real con conexiones concurrentes a múltiples APIs de aerolíneas, reduciendo la latencia de 45 segundos a menos de 5.",
+      "Creé herramientas de automatización interna que aumentaron la productividad del departamento un 30% y se adoptaron como estándar en 3 equipos de ingeniería."
+    ],
     "tags": [
       ".NET",
-      "ASP.NET",
+      "C#",
+      "Azure",
+      "Azure Functions",
+      "Azure DevOps",
       "Power Platform",
       "Power Automate Desktop",
-      "Azure Functions",
       "Mulesoft",
       "MySQL",
+      "Java",
+      "Maven",
       "SQL Server"
     ],
     "order": 2

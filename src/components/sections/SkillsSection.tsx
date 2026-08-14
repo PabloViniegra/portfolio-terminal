@@ -11,14 +11,8 @@ interface KnowledgeCategory {
   knowledges: KnowledgeItem[];
 }
 
-interface SoftSkill {
-  name: string;
-  rating: number;
-}
-
 interface SkillsSectionProps {
   knowledgeCategories: KnowledgeCategory[];
-  softSkills: SoftSkill[];
 }
 
 const getDepthLabel = (rating: number) => {
@@ -27,15 +21,7 @@ const getDepthLabel = (rating: number) => {
   return 'en crecimiento';
 };
 
-const getSoftSkillLabel = (rating: number) => {
-  if (rating >= 75) return 'muy presente';
-  if (rating >= 60) return 'consistente';
-  return 'en práctica';
-};
-
-const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, softSkills }) => {
-  const sortedSoftSkills = [...softSkills].sort((first, second) => second.rating - first.rating);
-
+const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories }) => {
   return (
     <div className="font-sans">
       <SectionHeader verb="map" args="skillset --current" meta="mapa de stack" />
@@ -74,29 +60,6 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories, soft
                     </div>
                   ))}
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <div className="mb-4 flex items-center gap-3">
-            <h3 className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
-              forma de trabajo
-            </h3>
-            <span className="h-px flex-1 bg-terminal-border/40"></span>
-          </div>
-
-          <div className="grid gap-x-6 gap-y-2 md:grid-cols-2">
-            {sortedSoftSkills.map((skill) => (
-              <div
-                key={skill.name}
-                className="flex items-baseline justify-between gap-4 border-t border-terminal-border/30 py-2"
-              >
-                <span className="text-sm text-terminal-text">{skill.name}</span>
-                <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary/70">
-                  {getSoftSkillLabel(skill.rating)}
-                </span>
               </div>
             ))}
           </div>

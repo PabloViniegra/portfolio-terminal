@@ -12,7 +12,7 @@
     "id": "welcome-message",
     "key": "welcome-message",
     "title": "Bienvenida",
-    "content": "Fullstack engineer. Producto web, tooling y arquitectura pragmática.",
+    "content": "Construyo y modernizo productos web de frontend a backend y CI/CD. En mi trabajo para BBVA aplico Vue.js, React, Python y tooling agéntico para mejorar rendimiento, mantenibilidad y entrega.",
     "metadata": {
       "type": "welcome"
     }
@@ -78,7 +78,7 @@
   {
     "id": "contact-cta",
     "key": "contact-cta",
-    "content": "Disponible para roles fullstack, producto web y tooling.",
+    "content": "Disponible para incorporarme a un equipo de producto donde aportar experiencia full stack, modernización y automatización.",
     "metadata": {
       "type": "cta"
     }

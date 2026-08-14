@@ -33,6 +33,7 @@ interface ExperienceItem {
   title: string;
   date: string;
   description: string;
+  achievements?: string[];
   tags: string[];
 }
 
@@ -57,24 +58,62 @@ interface KnowledgeCategory {
   knowledges: KnowledgeItem[];
 }
 
-interface SoftSkill {
-  name: string;
-  rating: number;
-}
-
 interface ContactItem {
   title: string;
   content: string;
   link: string;
 }
 
+interface ProfileItem {
+  role: string;
+  stack: string[];
+  location: string;
+  status: string;
+  bio: string;
+  availability: string;
+  about: string[];
+  principles: { label: string; content: string }[];
+  categories: {
+    title: string;
+    description: string;
+    groups: { title: string; skills: string[] }[];
+  }[];
+}
+
+interface AiEngineeringItem {
+  subtitle: string;
+  intro: string;
+  positioning: string;
+  metrics: { label: string; value: string }[];
+  sections: { title: string; description: string; items: string[] }[];
+  agentSkills: { name: string; description: string; install: string; repository: string }[];
+}
+
+interface CertificationItem {
+  year: string;
+  title: string;
+  issuer: string;
+  description: string;
+}
+
+interface GithubItem {
+  summary: string;
+  contributions: number;
+  period: string;
+  profileUrl: string;
+  months: { label: string; contributions: number }[];
+}
+
 interface ContentData {
   experiences: ExperienceItem[];
   projects: ProjectItem[];
   knowledgeCategories: KnowledgeCategory[];
-  softSkills: SoftSkill[];
   contactInfo: ContactItem[];
   commands: ContentCommand[];
+  profile?: ProfileItem;
+  aiEngineering?: AiEngineeringItem;
+  certifications: CertificationItem[];
+  github?: GithubItem;
   general: {
     ctaMessage: string;
     ctaButtonText: string;
@@ -137,7 +176,7 @@ const QuickCommand = ({
   </button>
 );
 
-const AsciiTitle = () => (
+const AsciiTitle = ({ profile }: { profile?: ProfileItem }) => (
   <div className="flex flex-col gap-2 font-mono leading-none">
     <div className="flex items-center gap-3 font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
       <span className="text-terminal-prompt">┌─</span>
@@ -155,39 +194,41 @@ const AsciiTitle = () => (
     </div>
     <div className="flex items-center gap-3 font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
       <span className="text-terminal-prompt">└─</span>
-      <span>fullstack engineer</span>
+      <span>{profile?.role ?? 'fullstack engineer'}</span>
       <span className="text-terminal-border">·</span>
-      <span>madrid</span>
+      <span>{profile?.location ?? 'madrid'}</span>
       <span className="text-terminal-border">·</span>
-      <span className="text-terminal-accent">open to roles</span>
+      <span className="text-terminal-accent">{profile?.status ?? 'open to roles'}</span>
     </div>
   </div>
 );
 
-const TasteLine = () => (
+const TasteLine = ({ profile }: { profile?: ProfileItem }) => (
   <p className="max-w-3xl font-mono text-sm tracking-[0.04em] text-terminal-text-secondary md:text-base">
     <span className="text-terminal-prompt">→</span>{' '}
-    Código claro, criterio firme. Producto primero, frameworks después.
+    {profile?.availability ?? 'Código claro, criterio firme. Producto primero, frameworks después.'}
   </p>
 );
 
 const WelcomeMessage = ({
   welcomeMessage,
+  profile,
   onQuickCommand,
 }: {
   welcomeMessage: string;
+  profile?: ProfileItem;
   onQuickCommand: (command: string) => void;
 }) => {
   return (
     <div className="terminal-output font-sans">
       <div className="mx-auto flex max-w-4xl flex-col gap-6">
-        <AsciiTitle />
+        <AsciiTitle profile={profile} />
 
         <div className="flex flex-col gap-3">
           <p className="max-w-3xl text-lg font-semibold leading-snug text-terminal-text md:text-xl">
             {welcomeMessage}
           </p>
-          <TasteLine />
+          <TasteLine profile={profile} />
         </div>
 
         <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -395,6 +436,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
         <WelcomeMessage
           key={`welcome-${key}`}
           welcomeMessage={contentData.general.welcomeMessage}
+          profile={contentData.profile}
           onQuickCommand={(command: string) => {
             void handleCommandRef.current(command);
           }}
@@ -402,7 +444,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
       ),
       timestamp: Date.now(),
     }),
-    [contentData.general.welcomeMessage],
+    [contentData.general.welcomeMessage, contentData.profile],
   );
 
   const [history, setHistory] = useState<CommandEntry[]>(() => [
@@ -505,10 +547,17 @@ const Terminal = ({ contentData }: TerminalProps) => {
             section="skills"
             data={{
               knowledgeCategories: contentData.knowledgeCategories,
-              softSkills: contentData.softSkills,
             }}
           />
         );
+      case COMMANDS.PROFILE:
+        return <SectionOutput section="profile" data={{ profile: contentData.profile }} />;
+      case COMMANDS.AI:
+        return <SectionOutput section="ai" data={{ aiEngineering: contentData.aiEngineering }} />;
+      case COMMANDS.GITHUB:
+        return <SectionOutput section="github" data={{ github: contentData.github }} />;
+      case COMMANDS.CERTIFICATIONS:
+        return <SectionOutput section="certifications" data={{ certifications: contentData.certifications }} />;
       case COMMANDS.CONTACT:
         return (
           <SectionOutput

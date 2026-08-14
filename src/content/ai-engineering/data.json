@@ -1,0 +1,68 @@
+[
+  {
+    "id": "ai-engineering",
+    "subtitle": "Cómo uso agentes en el día a día del equipo, no en demos.",
+    "intro": "Trabajo con agentes en el repositorio: los uso para codificar, revisar y operar, igual que cualquier otra herramienta del equipo.",
+    "positioning": "Claude Code, MCPs y Agent Skills son el centro. OpenCode y Copilot CLI para cosas puntuales. Harness Engineering como disciplina.",
+    "metrics": [
+      { "label": "Adopción", "value": "12 personas en BBVA" },
+      { "label": "Métrica", "value": "-25% time-to-delivery" },
+      { "label": "Estándar", "value": "Flujo agéntico compartido" }
+    ],
+    "sections": [
+      {
+        "title": "Stack agéntico en uso",
+        "description": "Estas son las herramientas con las que escribo código, abro PRs y opero sobre repos reales cada semana.",
+        "items": ["Claude Code", "OpenCode", "GitHub Copilot CLI", "MCPs (Model Context Protocol)", "Agent Skills", "Harness Engineering"]
+      },
+      {
+        "title": "Cómo lo meto en el equipo",
+        "description": "Lo que sirve no es el modelo, es tener el flujo versionado dentro del repositorio: AGENTS.md por proyecto, skills reutilizables, subagentes especializados y hooks por evento para que cualquiera del equipo los pueda aprovechar desde el día uno.",
+        "items": ["AGENTS.md por repositorio", "Agent Skills versionadas", "Subagentes especializados", "Hooks por evento", "Servidores MCP", "Plantillas de PR"]
+      },
+      {
+        "title": "Resultados en el equipo",
+        "description": "Lo que salió cuando lo adoptamos de verdad, con números, en un equipo de BBVA.",
+        "items": ["-25% tiempo medio de entrega de funcionalidades", "Flujo estandarizado en un equipo de 12 personas", "Migración Vue 2 a Vue 3 con soporte agéntico (-40% deuda técnica)", "Cobertura de tests del 12% al 65% con asistencia agéntica"]
+      }
+    ],
+    "agentSkills": [
+      {
+        "name": "better-init",
+        "description": "Una versión más precisa de /init para agentes de código: analiza proyectos existentes o entrevista proyectos vacíos para generar un CLAUDE.md o AGENTS.md breve y de alta señal.",
+        "install": "npx skills add PabloViniegra/better-init",
+        "repository": "https://github.com/PabloViniegra/better-init"
+      },
+      {
+        "name": "setup-graphify",
+        "description": "Integra Graphify en cualquier proyecto con un solo comando: instala la herramienta, configura archivos de instrucciones, hooks de Git, ignores y construye el grafo inicial.",
+        "install": "npx skills add PabloViniegra/setup-graphify",
+        "repository": "https://github.com/PabloViniegra/setup-graphify"
+      },
+      {
+        "name": "architecture-advisor",
+        "description": "Recomienda y persiste la arquitectura adecuada a partir del stack y el dominio del proyecto, o audita una existente y propone una migración incremental.",
+        "install": "npx skills add PabloViniegra/architecture-advisor",
+        "repository": "https://github.com/PabloViniegra/architecture-advisor"
+      },
+      {
+        "name": "tell-me-the-domain",
+        "description": "Reconstruye el dominio de negocio de un código desconocido usando el repositorio como fuente de verdad y genera guías para incorporarse al proyecto.",
+        "install": "npx skills add PabloViniegra/tell-me-the-domain",
+        "repository": "https://github.com/PabloViniegra/tell-me-the-domain"
+      },
+      {
+        "name": "clean-my-code",
+        "description": "Audita la calidad, mantenibilidad, testabilidad y escalabilidad del código con evidencia, prioriza hallazgos y espera aprobación explícita antes de editar.",
+        "install": "npx skills add PabloViniegra/clean-my-code --skill clean-my-code",
+        "repository": "https://github.com/PabloViniegra/clean-my-code"
+      },
+      {
+        "name": "improve-prompt",
+        "description": "Transforma peticiones vagas de desarrollo en prompts precisos y listos para coding agents. Preserva decisiones explícitas, hace de la inspección del repo el primer paso y define criterios de aceptación observables.",
+        "install": "npx skills add PabloViniegra/improve-prompt",
+        "repository": "https://github.com/PabloViniegra/improve-prompt"
+      }
+    ]
+  }
+]

@@ -31,7 +31,6 @@ const contentData: ComponentProps<typeof Terminal>['contentData'] = {
       knowledges: [{ name: 'React', rating: 4 }],
     },
   ],
-  softSkills: [{ name: 'Clear communication', rating: 80 }],
   contactInfo: [
     { title: 'Email', content: 'hello@example.com', link: 'mailto:hello@example.com' },
   ],
@@ -40,11 +39,62 @@ const contentData: ComponentProps<typeof Terminal>['contentData'] = {
     { command: '/experience', description: 'Show experience', category: 'info' },
     { command: '/projects', description: 'Show projects', category: 'info' },
     { command: '/skills', description: 'Show skills', category: 'info' },
+    { command: '/profile', description: 'Show profile', category: 'info' },
+    { command: '/ai', description: 'Show AI work', category: 'info' },
+    { command: '/github', description: 'Show GitHub activity', category: 'info' },
+    { command: '/certifications', description: 'Show certifications', category: 'info' },
     { command: '/contact', description: 'Show contact', category: 'info' },
     { command: '/cv', description: 'Open CV', category: 'utility' },
     { command: '/clear', description: 'Clear terminal', category: 'utility' },
     { command: '/help', description: 'Show help', category: 'utility' },
   ],
+  profile: {
+    role: 'Full Stack Developer',
+    stack: ['React'],
+    location: 'Madrid, ES',
+    status: 'Open to work',
+    bio: 'Builds reliable products.',
+    availability: 'Available for product teams.',
+    about: ['Works from evidence.'],
+    principles: [{ label: 'Prioritizes', content: 'Quality.' }],
+    categories: [
+      {
+        title: 'Frontend',
+        description: 'Clear interfaces.',
+        groups: [{ title: 'Core', skills: ['React'] }],
+      },
+    ],
+  },
+  aiEngineering: {
+    subtitle: 'Agent work in production.',
+    intro: 'Uses agents with the team.',
+    positioning: 'Workflows are versioned.',
+    metrics: [{ label: 'Adoption', value: '12 people' }],
+    sections: [{ title: 'Stack', description: 'Tools used weekly.', items: ['Claude Code'] }],
+    agentSkills: [
+      {
+        name: 'better-init',
+        description: 'Creates project instructions.',
+        install: 'npx skills add example/better-init',
+        repository: 'https://github.com/example/better-init',
+      },
+    ],
+  },
+  certifications: [
+    {
+      year: '2025',
+      title: 'Cloud Leader',
+      issuer: 'Google Cloud',
+      description: 'Cloud foundations.',
+    },
+  ],
+  github: {
+    summary: 'Recent contributions.',
+    contributions: 42,
+    period: 'Last year',
+    profileUrl: 'https://github.com/example',
+    months: [{ label: 'Jan', contributions: 42 }],
+  },
   general: {
     ctaMessage: 'Available for useful work.',
     ctaButtonText: 'Open email',
@@ -96,6 +146,29 @@ describe('Terminal', () => {
       'href',
       'https://github.com/example/project-alpha',
     );
+  });
+
+  it('renders the published profile through its terminal command', async () => {
+    useCommandTimers();
+    const input = renderTerminal();
+
+    await submitCommand(input, '/profile');
+
+    expect(screen.getByText('Builds reliable products.')).toBeInTheDocument();
+    expect(screen.getByText('Frontend')).toBeInTheDocument();
+  });
+
+  it.each([
+    ['/ai', 'Agent work in production.'],
+    ['/github', 'contribuciones públicas'],
+    ['/certifications', 'Cloud Leader'],
+  ])('renders %s through its terminal command', async (command, expectedOutput) => {
+    useCommandTimers();
+    const input = renderTerminal();
+
+    await submitCommand(input, command);
+
+    expect(screen.getByText(expectedOutput)).toBeInTheDocument();
   });
 
   it('suggests the nearest known command for a typo', async () => {
