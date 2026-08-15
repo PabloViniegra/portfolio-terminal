@@ -53,7 +53,7 @@ Portfolio web con interfaz de terminal: comandos reales, contenido tipado y un a
 - Efecto Matrix Rain (`/rain`; salir con `Ctrl+C`)
 - Secciones de perfil, AI engineering, GitHub y certificaciones
 - Fallback móvil con aviso desktop-first
-- Skeleton de carga y tema aplicado antes de la hidratación (sin FOUC de tema)
+- Terminal renderizada desde el servidor y tema aplicado antes de la hidratación (sin FOUC de tema)
 - Suite de tests unitarios/componentes con Vitest
 
 ## Comandos disponibles

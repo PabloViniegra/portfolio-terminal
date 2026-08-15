@@ -68,17 +68,6 @@ const Terminal = ({ contentData }: TerminalProps) => {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
 
-  useEffect(() => {
-    const skeleton = document.getElementById('terminal-skeleton');
-    if (!skeleton) return;
-
-    const timeoutId = window.setTimeout(() => {
-      skeleton.remove();
-    }, 320);
-
-    return () => window.clearTimeout(timeoutId);
-  }, []);
-
   const runCommand = (command: string) => {
     void handleCommandRef.current(command);
   };

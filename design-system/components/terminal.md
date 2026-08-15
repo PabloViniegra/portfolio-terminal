@@ -95,9 +95,8 @@ The shell is a Card pattern, not a Browser Window pattern. It does not pretend t
 ## Behavior
 
 ### Loading State
-- A skeleton loader (`terminal-skeleton` in `index.astro`) shows while the React island hydrates.
-- Skeleton matches the shell structure: header dots + title placeholder, body lines at varying widths.
-- When React mounts, the skeleton is hidden (`#terminal-skeleton` `display: none`).
+- The server-rendered terminal remains visible while the React island hydrates.
+- During command execution, the body shows an in-terminal loader and the command input is disabled.
 
 ### Empty State (initial load)
 - Welcome message renders in the body.
@@ -146,7 +145,7 @@ The shell is a Card pattern, not a Browser Window pattern. It does not pretend t
 The shell adapts to all 4 themes via CSS variable cascade. No theme-specific styles in the component.
 
 ### By State
-- **Loading**: skeleton shows
+- **Loading**: server-rendered terminal remains visible while the island hydrates
 - **Ready**: status pill says "ready"
 - **Executing**: command input disabled, "loading dots" animation visible
 - **Rain active**: matrix rain overlay, blurred body content

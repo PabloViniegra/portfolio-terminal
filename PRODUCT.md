@@ -38,7 +38,7 @@ The portfolio is the artifact. Most developer portfolios are LLM-generated card 
 - **Viewport**: desktop-first (terminal metaphor assumes a real keyboard and screen real estate). Mobile shows a warning overlay recommending desktop use, but the terminal still works on mobile.
 - **Browser**: modern evergreen browsers (Chrome, Edge, Firefox, Safari). No IE / legacy support.
 - **State**: in-memory React state per session. Theme persists in `localStorage`. No server, no auth, no backend.
-- **Loading**: skeleton loader while the React island hydrates; theme applied before hydration to avoid FOUC.
+- **Loading**: the terminal is server-rendered before the React island hydrates; command execution shows an in-terminal loader. Theme is applied before hydration to avoid FOUC.
 
 ## Capabilities and Constraints
 
@@ -47,7 +47,7 @@ The portfolio is the artifact. Most developer portfolios are LLM-generated card 
 - **Features**: command autocompletion (Tab), history navigation (arrow keys), command suggestions dropdown, Matrix rain easter egg (Ctrl+C to exit), theme switcher, terminal-style loading delays
 - **Content management**: JSON files in `src/content/` (experience, projects, skills, contact, commands, general) validated with Zod schemas
 - **Accessibility**: ARIA roles (`application`, `log`, `menu`, `menuitem`), keyboard navigation, screen reader announcements via `aria-live`
-- **Performance**: lazy-loaded Matrix rain, skeleton-first render, GPU-friendly animations (transform/opacity only)
+- **Performance**: lazy-loaded Matrix rain, server-rendered terminal, GPU-friendly animations (transform/opacity only)
 
 ## Brand Commitments
 
