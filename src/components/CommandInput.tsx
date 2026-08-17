@@ -67,6 +67,7 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
     inputRef.current?.focus();
     
     const handleClickOutside = (event: MouseEvent) => {
+      // SAFETY: mousedown always targets a DOM Element (subtype of Node); never null at this point.
       if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node)) {
         setShowSuggestions(false);
       }
@@ -80,7 +81,6 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
 
   useEffect(() => {
     if (disabled) return;
-    if (typeof document === 'undefined') return;
     if (document.activeElement && document.activeElement !== document.body) return;
     inputRef.current?.focus();
   }, [disabled]);

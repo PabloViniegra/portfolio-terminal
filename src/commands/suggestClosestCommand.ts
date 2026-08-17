@@ -2,8 +2,8 @@ export const levenshtein = (a: string, b: string): number => {
   if (a === b) return 0;
   if (a.length === 0) return b.length;
   if (b.length === 0) return a.length;
-  const prev = new Array(b.length + 1).fill(0).map((_, i) => i);
-  const curr = new Array(b.length + 1).fill(0);
+  const prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  const curr = Array.from({ length: b.length + 1 }, () => 0);
   for (let i = 1; i <= a.length; i++) {
     curr[0] = i;
     for (let j = 1; j <= b.length; j++) {

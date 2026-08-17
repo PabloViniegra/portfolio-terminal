@@ -1,11 +1,11 @@
 import type { ContentCommand } from '../../types/content';
 
-const CATEGORY_LABELS: Record<ContentCommand['category'], string> = {
+const CATEGORY_LABELS = {
   navigation: 'Comienza aquí',
   info: 'Más información',
   utility: 'Herramientas',
   special: 'Experimento',
-};
+} satisfies Record<ContentCommand['category'], string>;
 
 const CATEGORY_ORDER: ContentCommand['category'][] = [
   'navigation',

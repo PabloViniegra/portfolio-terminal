@@ -6,7 +6,6 @@ interface MatrixRainProps {
 }
 
 const prefersReducedMotion = () =>
-  typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {

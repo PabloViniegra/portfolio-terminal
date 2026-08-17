@@ -10,6 +10,7 @@ const ThemeSwitcher = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // SAFETY: mousedown always targets a DOM Element (subtype of Node); never null at this point.
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
