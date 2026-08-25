@@ -36,25 +36,20 @@
     "order": 5
   },
   {
-    "id": "dev_snippets",
-    "title": "Dev Snippets",
-    "description": "Biblioteca personal para guardar, clasificar, buscar y reutilizar snippets con resaltado de sintaxis.",
-    "type": "Biblioteca personal",
-    "scope": "Snippets con clasificación, búsqueda y resaltado",
-    "link": "https://dev-snippets-pi.vercel.app/",
-    "github": "https://github.com/PabloViniegra/dev-snippets",
+    "id": "sqlito",
+    "title": "SQLito",
+    "description": "Cliente SQLite keyboard-first para el terminal: el SQL es la interfaz; historial, autocompletado y tabla de resultados solo sostienen el flujo.",
+    "type": "Cliente SQLite para el terminal",
+    "scope": "SQL como protagonista, resultados y prompt",
+    "github": "https://github.com/PabloViniegra/sqlito",
     "technologies": [
-      "Next.js",
       "TypeScript",
-      "pnpm",
+      "Node.js",
       "React",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "Better Auth",
-      "PostgreSQL",
-      "Drizzle ORM",
-      "Vercel",
-      "Git"
+      "SQLite",
+      "pnpm",
+      "Vitest",
+      "Prettier"
     ],
     "featured": false,
     "order": 9
