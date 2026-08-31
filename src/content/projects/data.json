@@ -197,5 +197,30 @@
       "pnpm"
     ],
     "order": 7
+  },
+  {
+    "id": "platinum-gold",
+    "title": "Platinum Gold",
+    "description": "API de solo lectura con el catálogo de ítems de The Binding of Isaac, y un sitio de documentación que la consume sin exponer la clave en el navegador.",
+    "type": "API de solo lectura",
+    "scope": "Catálogo de ítems y docs sin exponer la clave",
+    "link": "https://platinum-gold-frontend.vercel.app/",
+    "github": "https://github.com/PabloViniegra/platinum-gold-backend",
+    "technologies": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Docker",
+      "Git",
+      "Astro",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "pnpm",
+      "Vercel",
+      "Vitest"
+    ],
+    "featured": true,
+    "order": 5
   }
 ]
