@@ -181,7 +181,7 @@
     "description": "Editor de tier lists con persistencia, exportación PNG, exploración pública y recuperación local del trabajo.",
     "type": "Editor de tier lists",
     "scope": "Persistencia, exportación PNG y exploración pública",
-    "link": "https://project-hbojo.vercel.app/",
+    "link": "https://tiermaker.pabloviniegra.dev/",
     "github": "https://github.com/PabloViniegra/tier-maker",
     "technologies": [
       "Next.js",
