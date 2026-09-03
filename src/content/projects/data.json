@@ -108,7 +108,7 @@
     "description": "Aplicación full stack para organizar Amigos Invisibles con participantes, listas de deseos y reglas de exclusión personalizadas.",
     "type": "Aplicación full stack",
     "scope": "Participantes, listas de deseos y reglas de exclusión",
-    "link": "https://santa-app-chi.vercel.app/",
+    "link": "https://santa-app.pabloviniegra.dev/",
     "github": "https://github.com/PabloViniegra/santa-app",
     "technologies": [
       "Nuxt",
