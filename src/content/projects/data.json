@@ -157,7 +157,7 @@
     "description": "Plataforma editorial personal con contenido MDX, previsualización, búsqueda y gestión privada de publicaciones y recursos.",
     "type": "Plataforma editorial personal",
     "scope": "MDX, previsualización, búsqueda y gestión privada",
-    "link": "https://my-personal-blog-five-sigma.vercel.app/",
+    "link": "https://blog.pabloviniegra.dev/",
     "github": "https://github.com/PabloViniegra/personal-blog",
     "technologies": [
       "Next.js",
