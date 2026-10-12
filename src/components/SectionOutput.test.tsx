@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import SectionOutput from './SectionOutput';
+import projects from '../content/projects/data.json';
 
 const project = {
   title: 'Project Alpha',
@@ -56,6 +57,23 @@ describe('SectionOutput', () => {
     expect(screen.getByRole('link', { name: /Abrir email/ })).toHaveAttribute(
       'href',
       'mailto:pablovpmadrid@gmail.com',
+    );
+  });
+
+  it('renders the elections simulator with its live and repository links', () => {
+    const simulator = projects.find((entry) => entry.id === 'spanish-elections-simulator');
+    expect(simulator).toBeDefined();
+
+    render(<SectionOutput section="projects" data={{ projects: [simulator!] }} />);
+
+    expect(screen.getByRole('heading', { name: 'Spanish Elections Simulator' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Live/ })).toHaveAttribute(
+      'href',
+      'https://spanish-elections-simulator.pabloviniegra.dev/',
+    );
+    expect(screen.getByRole('link', { name: /Repo/ })).toHaveAttribute(
+      'href',
+      'https://github.com/PabloViniegra/spanish-elections-simulator',
     );
   });
 });

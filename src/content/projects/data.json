@@ -1,5 +1,29 @@
 [
   {
+    "id": "spanish-elections-simulator",
+    "title": "Spanish Elections Simulator",
+    "description": "Simulador del Congreso con reparto D'Hondt en 52 circunscripciones, mapa provincial, cálculo de coaliciones y escenarios compartibles.",
+    "type": "Aplicación full stack",
+    "scope": "Simulación electoral, coaliciones y escenarios compartibles",
+    "link": "https://spanish-elections-simulator.pabloviniegra.dev/",
+    "github": "https://github.com/PabloViniegra/spanish-elections-simulator",
+    "technologies": [
+      "Git",
+      "React",
+      "Tailwind CSS",
+      "Next.js",
+      "pnpm",
+      "TypeScript",
+      "Better Auth",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Resend",
+      "Vercel"
+    ],
+    "featured": false,
+    "order": 0
+  },
+  {
     "id": "gasolink",
     "title": "GasoLink",
     "description": "Aplicación de escritorio para localizar, comparar y guardar gasolineras españolas mediante mapas y precios públicos.",
