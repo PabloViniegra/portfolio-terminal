@@ -250,9 +250,9 @@
   {
     "id": "pixel-ui",
     "title": "PixelUI",
-    "description": "Librería de 47 componentes React accesibles con firma pixel, publicados como paquetes npm independientes, con design tokens y preset para Tailwind CSS v4.",
+    "description": "47 componentes React accesibles con estética pixel. Cada uno se publica como paquete npm independiente e incluye design tokens y un preset para Tailwind CSS v4.",
     "type": "Librería de componentes",
-    "scope": "Un paquete npm por componente, tokens temables y Storybook",
+    "scope": "Un paquete npm por componente, tokens CSS y Storybook",
     "link": "https://pabloviniegra.github.io/pixel-ui/",
     "github": "https://github.com/PabloViniegra/pixel-ui",
     "technologies": [
