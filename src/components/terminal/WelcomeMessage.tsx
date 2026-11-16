@@ -14,8 +14,14 @@ const AsciiTitle = ({ profile }: { profile?: ProfileItem }) => (
       <span className="text-3xl text-terminal-prompt md:text-5xl" aria-hidden="true">
         $
       </span>
-      <h1 className="pixel-glow inline-flex items-baseline text-5xl text-terminal-accent md:text-7xl">
-        ./pablo
+      <h1 aria-label="./pablo" className="pixel-glow inline-flex items-baseline text-5xl text-terminal-accent md:text-7xl">
+        <span className="terminal-startup-command" aria-hidden="true">
+          {'./pablo'.split('').map((character, index) => (
+            <span key={index} style={{ animationDelay: `calc(var(--motion-base) * ${index} / 7)` }}>
+              {character}
+            </span>
+          ))}
+        </span>
         <span className="pixel-cursor" aria-hidden="true"></span>
       </h1>
     </div>
@@ -46,7 +52,7 @@ export const WelcomeMessage = ({
   onQuickCommand: (command: string) => void;
 }) => (
   <div className="terminal-output font-sans">
-    <div className="mx-auto flex max-w-4xl flex-col gap-6">
+    <div className="terminal-welcome mx-auto flex max-w-4xl flex-col gap-6">
       <AsciiTitle profile={profile} />
 
       <div className="flex flex-col gap-3">

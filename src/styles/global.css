@@ -635,13 +635,55 @@ input[type="text"]:disabled {
   animation: shimmer 2s infinite;
 }
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes terminal-print {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.animate-appear {
-  animation: appear var(--motion-base) var(--ease-out) both;
+.terminal-stream > div > *,
+.terminal-welcome > * {
+  animation: terminal-print var(--motion-instant) step-end both;
+}
+
+.terminal-stream > div > :nth-child(2) { animation-delay: calc(var(--motion-base) * 0.3); }
+.terminal-stream > div > :nth-child(3) { animation-delay: var(--motion-instant); }
+.terminal-stream > div > :nth-child(n + 4) { animation-delay: calc(var(--motion-base) * 0.7); }
+.terminal-welcome > :nth-child(2) { animation-delay: var(--motion-fast); }
+.terminal-welcome > :nth-child(3) { animation-delay: var(--motion-base); }
+.terminal-welcome > :nth-child(4) { animation-delay: calc(var(--motion-base) * 1.2); }
+
+.terminal-stream:focus-within *,
+.terminal-welcome:focus-within > * {
+  animation: none;
+}
+
+.terminal-startup-command {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.terminal-startup-command > span {
+  animation: terminal-print var(--motion-instant) step-end both;
+}
+
+@keyframes terminal-spin {
+  0%, 100% { content: '⠋'; }
+  10% { content: '⠙'; }
+  20% { content: '⠹'; }
+  30% { content: '⠸'; }
+  40% { content: '⠼'; }
+  50% { content: '⠴'; }
+  60% { content: '⠦'; }
+  70% { content: '⠧'; }
+  80% { content: '⠇'; }
+  90% { content: '⠏'; }
+}
+
+.terminal-spinner::before {
+  content: '⠋';
+  display: inline-block;
+  width: 1ch;
+  animation: terminal-spin var(--motion-cursor) steps(1, end) infinite;
 }
 
 @keyframes avatar-cursor-blink {
@@ -714,5 +756,12 @@ input[type="text"]:disabled {
 
   body::before {
     display: none;
+  }
+
+  .terminal-stream *,
+  .terminal-welcome > *,
+  .terminal-startup-command > span,
+  .terminal-spinner::before {
+    animation: none !important;
   }
 }

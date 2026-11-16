@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import type { ComponentProps } from 'react';
 
@@ -124,6 +124,35 @@ const useCommandTimers = () => {
 };
 
 describe('Terminal', () => {
+  it('echoes a command immediately and replaces its loader with one response', async () => {
+    useCommandTimers();
+    const input = renderTerminal();
+
+    fireEvent.change(input, { target: { value: '/profile' } });
+    fireEvent.submit(input.closest('form')!);
+
+    expect(screen.getByText('/profile')).toBeInTheDocument();
+    const commandEntry = screen.getByText('/profile').closest<HTMLDivElement>('.space-y-3')!;
+    expect(screen.getByRole('status')).toHaveTextContent('Ejecutando comando');
+    expect(input).toBeDisabled();
+    expect(screen.queryByText('Builds reliable products.')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Ejecutar /projects' }));
+
+    await act(async () => {
+      vi.advanceTimersByTime(COMMAND_DELAYS.MIN);
+    });
+
+    expect(screen.getAllByText('/profile')).toHaveLength(1);
+    expect(within(commandEntry).getByText('Builds reliable products.')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: './pablo' })).toBeInTheDocument();
+    expect(screen.getByText('Welcome to the terminal.')).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Project Alpha' })).not.toBeInTheDocument();
+    expect(input).toBeEnabled();
+    expect(input).toHaveFocus();
+  });
+
   it('executes a content-driven command and renders its output', async () => {
     useCommandTimers();
     const input = renderTerminal();
@@ -236,6 +265,27 @@ describe('Terminal', () => {
     expect(screen.getByText('terminal limpio')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '/home' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '/help' })).toBeInTheDocument();
+  });
+
+  it('preserves the pending command when the clear hint is dismissed', async () => {
+    useCommandTimers();
+    const input = renderTerminal();
+    await submitCommand(input, '/clear');
+
+    fireEvent.change(input, { target: { value: '/profile' } });
+    fireEvent.submit(input.closest('form')!);
+    fireEvent.click(screen.getByRole('button', { name: 'Cerrar' }));
+
+    expect(screen.queryByText('terminal limpio')).not.toBeInTheDocument();
+    expect(screen.getByText('/profile')).toBeInTheDocument();
+    expect(screen.getByRole('status')).toBeInTheDocument();
+
+    await act(async () => {
+      vi.advanceTimersByTime(COMMAND_DELAYS.MIN);
+    });
+
+    expect(screen.getByText('Builds reliable products.')).toBeInTheDocument();
+    expect(input).toBeEnabled();
   });
 
   it('toggles the terminal fullscreen state from the header', () => {

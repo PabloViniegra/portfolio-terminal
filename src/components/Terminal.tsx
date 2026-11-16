@@ -72,7 +72,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
     void handleCommandRef.current(command);
   };
 
-  const renderResult = (result: CommandResult): React.ReactNode => {
+  const renderResult = (result: CommandResult, onClearDismiss: () => void): React.ReactNode => {
       switch (result.kind) {
         case 'empty':
         case 'home':
@@ -84,7 +84,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
           return (
             <ClearRecoveryHint
               onRun={runCommand}
-              onDismiss={() => setHistory([])}
+              onDismiss={onClearDismiss}
             />
           );
         case 'help':
@@ -134,12 +134,15 @@ const Terminal = ({ contentData }: TerminalProps) => {
   });
 
   useEffect(() => {
-    requestAnimationFrame(() => {
+    const frame = requestAnimationFrame(() => {
       historyEndRef.current?.scrollIntoView({
-        behavior: 'smooth',
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'instant'
+          : 'smooth',
         block: 'end',
       });
     });
+    return () => cancelAnimationFrame(frame);
   }, [history, isLoading]);
 
   const handleCommand = async (input: string) => {
@@ -149,6 +152,12 @@ const Terminal = ({ contentData }: TerminalProps) => {
 
     commandInFlightRef.current = true;
     setIsLoading(true);
+    const pendingEntry: CommandEntry = {
+      input,
+      output: null,
+      timestamp: Date.now(),
+    };
+    setHistory((prev) => [...prev, pendingEntry]);
 
     try {
       const delay =
@@ -157,7 +166,9 @@ const Terminal = ({ contentData }: TerminalProps) => {
       await new Promise((resolve) => setTimeout(resolve, delay));
 
       const result = resolveCommand(input, contentData);
-      const output = renderResult(result);
+      const output: React.ReactNode = renderResult(result, () => {
+        setHistory((entries) => entries.filter((entry) => entry.output !== output));
+      });
 
       if (result.kind === 'home') {
         setWelcomeKey((k) => k + 1);
@@ -165,10 +176,11 @@ const Terminal = ({ contentData }: TerminalProps) => {
       } else if (result.kind === 'clear') {
         setHistory([{ input, output, timestamp: Date.now() }]);
       } else if (output !== null) {
-        setHistory((prevHistory) => [
-          ...prevHistory,
-          { input, output, timestamp: Date.now() },
-        ]);
+        setHistory((prevHistory) =>
+          prevHistory.map((entry) =>
+            entry === pendingEntry ? { ...entry, output } : entry,
+          ),
+        );
       }
 
       if (output !== null || result.kind === 'clear' || result.kind === 'home') {
@@ -362,13 +374,16 @@ const Terminal = ({ contentData }: TerminalProps) => {
                 ) : (
                   <div className="h-px w-full bg-gradient-to-r from-transparent via-terminal-border/70 to-transparent"></div>
                 )}
-                <div className={`animate-appear ${entry.input ? 'pl-5 md:pl-6' : ''}`}>
-                  {entry.output}
-                </div>
+                {entry.output !== null ? (
+                  <div className={`terminal-stream ${entry.input ? 'pl-5 md:pl-6' : ''}`}>
+                    {entry.output}
+                  </div>
+                ) : isLoading && index === history.length - 1 ? (
+                  <div className="pl-5 md:pl-6"><TerminalLoader /></div>
+                ) : null}
               </div>
             );
           })}
-          {isLoading && <TerminalLoader />}
           <div ref={historyEndRef} />
         </div>
 

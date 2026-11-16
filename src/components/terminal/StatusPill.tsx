@@ -9,7 +9,7 @@ export const StatusPill = ({ isLoading }: { isLoading: boolean }) => (
   >
     <span
       className={`inline-block h-1.5 w-1.5 rounded-full align-middle ${
-        isLoading ? 'bg-terminal-accent animate-pulse' : 'bg-terminal-success'
+        isLoading ? 'bg-terminal-accent' : 'bg-terminal-success'
       }`}
       aria-hidden="true"
     />
