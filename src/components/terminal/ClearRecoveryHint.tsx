@@ -5,12 +5,12 @@ export const ClearRecoveryHint = ({
   onRun: (command: string) => void;
   onDismiss: () => void;
 }) => (
-  <div className="relative rounded-xl border border-terminal-border/60 bg-terminal-bg-secondary/60 px-4 py-3 pr-10">
+  <div className="relative border border-terminal-border/60 bg-terminal-bg-secondary/60 px-4 py-3 pr-10">
     <button
       type="button"
       onClick={onDismiss}
       aria-label="Cerrar"
-      className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded text-terminal-text-secondary transition-colors duration-200 hover:text-terminal-text focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
+      className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center text-terminal-text-secondary transition-colors duration-200 hover:text-terminal-text focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@ export const ClearRecoveryHint = ({
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
     </button>
-    <div className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+    <div className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
       terminal limpio
     </div>
     <p className="mt-1 text-sm text-terminal-text">

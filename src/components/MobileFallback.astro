@@ -28,12 +28,11 @@
     inset-inline: 0;
     bottom: 0;
     z-index: var(--z-modal);
-    background: rgba(var(--terminal-bg-rgb), 0.96);
+    background: var(--terminal-bg);
     color: var(--terminal-text-secondary);
     border-top: 1px solid color-mix(in srgb, var(--terminal-warning) 35%, transparent);
     min-height: 3.5rem;
     padding: 0.75rem 3.5rem 0.75rem 1rem;
-    backdrop-filter: blur(8px);
     text-align: center;
   }
 
@@ -45,7 +44,7 @@
 
   .warning-text {
     font-family: var(--font-mono);
-    font-size: var(--font-mono-xs);
+    font-size: var(--text-mono-xs);
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }

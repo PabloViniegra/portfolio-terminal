@@ -1,7 +1,7 @@
 # Theme Switcher
 
 > **A small dropdown that lets the visitor change the world.**
-> Lives in the terminal header. One of four themes, switchable at any time.
+> Lives in the terminal header. One of two themes (Phosphor / Paper), switchable at any time.
 
 ## Purpose
 
@@ -11,14 +11,12 @@ The ThemeSwitcher is the only persistent UI control that lets the visitor change
 
 ```
 ┌──────────────────────┐
-│ ● One Dark  theme  ▾ │ ← button (closed state)
+│ ● Phosphor  theme  ▾ │ ← button (closed state)
 └──────────────────────┘
    ↓ (when open)
 ┌──────────────────────┐
-│ ● One Dark           │
-│ ● Light              │ ← dropdown (open state)
-│ ● Ayu                │
-│ ● GitHub             │
+│ ● Phosphor           │ ← dropdown (open state)
+│ ○ Paper              │
 └──────────────────────┘
 ```
 
@@ -32,28 +30,26 @@ The ThemeSwitcher is the only persistent UI control that lets the visitor change
 | `--terminal-text` | Button text |
 | `--terminal-text-secondary` | "theme" label |
 | `--terminal-accent` | Border on hover (40% opacity), text on hover |
-| `--radius-md` | Button border radius (8px) |
-| `--motion-fast` | Hover transition (150ms) |
+| `--rounded-sm` | Border radius (`0`) |
+| `--motion-base` | Hover transition (200ms, `--ease-out`) |
 
 ### Dropdown
 | Token | Where |
 |-------|-------|
-| `--terminal-bg` | Background (95% opacity + backdrop-blur 8px) |
+| `--terminal-bg` | Background (95% opacity, no blur) + `shadow-(--shadow-terminal)` |
 | `--terminal-border` | Border (80% opacity) |
 | `--terminal-text-secondary` | Default item text |
 | `--terminal-accent` | Selected item text + bg (12% opacity) |
 | `--terminal-bg-secondary` | Hover item background (80% opacity) |
 | `--space-1` | Vertical padding (4px) |
-| `--radius-lg` | Dropdown border radius (12px) |
+| `--rounded-sm` | Dropdown border radius (`0`) |
 
 ### Color Dot
 The colored dot is a Tailwind utility class per theme:
-- One Dark: `bg-[#61afef]` (terminal blue)
-- Light: `bg-[#e5c07b]` (bronze warning)
-- Ayu: `bg-[#ffb454]` (Ayu amber)
-- GitHub Dark: `bg-[#58a6ff]` (GitHub blue)
+- Phosphor: `bg-primary-500` (CRT amber)
+- Paper: `bg-paper ring-1 ring-primary-700` (cream with amber ring)
 
-These are the canonical "preview" colors that represent each theme — they are the only place a raw hex appears in the component layer (acceptable: they are part of the theme metadata, not theme application).
+They use palette utilities, not raw hex, and live in the theme metadata (`src/constants/themes.ts`).
 
 ## Behavior
 
@@ -101,7 +97,7 @@ When the user selects a theme:
 
 ### Screen Reader
 - Button announces "Cambiar tema, expanded/collapsed"
-- Items announce "Cambiar al tema One Dark, pressed/not pressed"
+- Items announce "Cambiar al tema Paper, pressed/not pressed"
 
 ## Variants
 
@@ -123,7 +119,7 @@ On desktop (≥ lg), the trigger shows:
 <div className="relative" ref={dropdownRef}>
   <button
     onClick={() => setIsOpen(!isOpen)}
-    className="flex items-center gap-2 rounded-lg border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
+    className="flex items-center gap-2 border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-[color,background-color,border-color,transform] duration-200 ease-out hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96]"
     aria-label="Cambiar tema"
     aria-expanded={isOpen}
   >
@@ -134,7 +130,7 @@ On desktop (≥ lg), the trigger shows:
 
   {isOpen && (
     <div
-      className="absolute right-0 mt-2 w-52 overflow-hidden rounded-xl border border-terminal-border/80 bg-terminal-bg py-1 shadow-xl backdrop-blur-sm"
+      className="absolute right-0 mt-2 w-52 overflow-hidden border border-terminal-border/80 bg-terminal-bg/95 py-1 shadow-(--shadow-terminal)"
       role="menu"
       aria-label="Selector de tema"
     >
@@ -142,7 +138,7 @@ On desktop (≥ lg), the trigger shows:
         <button
           key={theme.id}
           onClick={() => handleThemeChange(theme.id)}
-          className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-all duration-150 ${
+          className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors duration-150 ${
             currentTheme === theme.id
               ? 'bg-terminal-accent/12 text-terminal-accent font-medium'
               : 'text-terminal-text hover:bg-terminal-bg-secondary/80'
@@ -167,4 +163,4 @@ On desktop (≥ lg), the trigger shows:
 ❌ **Banned**: Showing the same theme as a "selected" indicator with just bold text — use a clear visual signal (background, weight, accent color).
 ❌ **Banned**: Hiding the dropdown after a timeout (close on click outside or selection, not timer).
 ❌ **Banned**: Theme names that don't match the metadata in `themes.ts` — keep them in sync.
-❌ **Banned**: Adding new themes without verifying contrast in all 4 themes — every new theme ships with WCAG AA.
+❌ **Banned**: Adding new themes without verifying contrast — every new theme ships with WCAG AA.

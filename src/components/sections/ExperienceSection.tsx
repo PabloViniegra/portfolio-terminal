@@ -21,7 +21,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) =>
               <h3 className="text-base font-semibold leading-snug text-terminal-text md:text-lg">
                 {experience.title}
               </h3>
-              <div className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">
+              <div className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
                 {experience.date}
               </div>
             </div>

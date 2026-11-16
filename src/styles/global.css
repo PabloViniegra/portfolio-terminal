@@ -1,14 +1,15 @@
 /*
  * Portfolio Terminal — Design System Tokens
  *
+ * Aligned with my-portfolio (~/vscode/my-portfolio/DESIGN.md): CRT amber
+ * phosphor + warm paper, zinc neutrals, Geist type family.
+ *
  * Architecture: primitive → semantic → component.
- *   1. :root defines the One Dark (default) palette.
- *   2. [data-theme="..."] blocks override per theme.
+ *   1. :root defines palette primitives and the Phosphor (default) theme.
+ *   2. [data-theme="paper"] overrides semantic tokens for the light surface.
  *   3. Components consume SEMANTIC tokens, never raw values.
  *   4. @theme block maps tokens to Tailwind v4 utilities.
- *
- * See: /design-system/tokens/colors.md, /design-system/themes/*.md
- */
+ * ========================================================================= */
 
 @import "tailwindcss";
 
@@ -16,92 +17,132 @@
  * FONT STACKS
  *
  * Self-hosted variable fonts (OFL 1.1). Files in /public/fonts/.
- *   - Mona Sans: width + optical size + weight (GitHub)
- *   - Mona Sans Mono: width + weight (GitHub)
- * See: /design-system/tokens/typography.md
+ *   - Geist: body / UI
+ *   - Geist Mono: terminal prompts, code, metadata
+ *   - Geist Pixel Square: short uppercase display markers
  * ========================================================================= */
 
 @font-face {
-  font-family: 'Mona Sans';
+  font-family: 'Geist Variable';
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('/fonts/MonaSansVF.woff2') format('woff2-variations');
+  src: url('/fonts/GeistVF.woff2') format('woff2-variations');
 }
 
 @font-face {
-  font-family: 'Mona Sans Mono';
+  font-family: 'Geist Mono';
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('/fonts/MonaSansMonoVF.woff2') format('woff2-variations');
+  src: url('/fonts/GeistMonoVF.woff2') format('woff2-variations');
 }
 
-:root {
-  --font-sans: 'Mona Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'Mona Sans Mono', ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+@font-face {
+  font-family: 'Geist Pixel Square';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/GeistPixel-Square.woff2') format('woff2');
 }
 
 /* ============================================================================
- * DEFAULT THEME: ONE DARK
- *
- * Token roles documented in /design-system/tokens/colors.md
- * Contrast verified per WCAG 2.1 AA. See /design-system/themes/one-dark.md
+ * PALETTE PRIMITIVES (mirrors my-portfolio tailwind.config.mjs)
  * ========================================================================= */
 
 :root {
+  --palette-paper: #fffcf5;
+  --palette-ink: #221f1b;
+
+  --palette-zinc-50: #fafafa;
+  --palette-zinc-100: #f4f4f5;
+  --palette-zinc-200: #e4e4e7;
+  --palette-zinc-300: #d4d4d8;
+  --palette-zinc-400: #a1a1aa;
+  --palette-zinc-500: #71717a;
+  --palette-zinc-600: #52525b;
+  --palette-zinc-700: #3f3f46;
+  --palette-zinc-800: #27272a;
+  --palette-zinc-900: #18181b;
+  --palette-zinc-950: #09090b;
+
+  --palette-primary-50: #fffbeb;
+  --palette-primary-100: #fef3c7;
+  --palette-primary-200: #fde68a;
+  --palette-primary-300: #fcd34d;
+  --palette-primary-400: #fbbf24;
+  --palette-primary-500: #ff9500;
+  --palette-primary-600: #ea7c00;
+  --palette-primary-700: #b45309;
+  --palette-primary-800: #92400e;
+  --palette-primary-900: #78350f;
+  --palette-primary-950: #451a03;
+
+  --palette-accent-500: #f59e0b;
+
+  --palette-surface-void: #03030a;
+
+  /* my-portfolio has no error hue; terminals need one distinct from amber. */
+  --palette-error-dark: #f87171;
+  --palette-error-light: #b91c1c;
+}
+
+/* ============================================================================
+ * DEFAULT THEME: PHOSPHOR
+ *
+ * Matches my-portfolio [data-surface="phosphor"]: CRT void + amber.
+ * ========================================================================= */
+
+:root {
+  color-scheme: dark;
+
   /* Canvas */
-  --terminal-bg: #11151b;
-  --terminal-bg-rgb: 17, 21, 27;
-  --terminal-bg-secondary: #171d26;
-  --terminal-bg-secondary-rgb: 23, 29, 38;
-  --terminal-bg-elevated: #1d2530;
-  --terminal-bg-elevated-rgb: 29, 37, 48;
-  --terminal-header-bg: #0d1117;
-  --terminal-header-bg-rgb: 13, 17, 23;
+  --terminal-bg: var(--palette-zinc-950);
+  --terminal-bg-secondary: var(--palette-zinc-900);
+  --terminal-bg-elevated: var(--palette-zinc-800);
+  --terminal-header-bg: var(--palette-surface-void);
 
   /* Borders & dividers */
-  --terminal-border: #273142;
-  --terminal-border-rgb: 39, 49, 66;
+  --terminal-border: color-mix(in srgb, var(--palette-primary-500) 28%, transparent);
 
   /* Text */
-  --terminal-text: #d5dde8;
-  --terminal-text-rgb: 213, 221, 232;
-  --terminal-text-secondary: #7d889c;
-  --terminal-text-secondary-rgb: 125, 136, 156;
-  --terminal-text-tertiary: #5a6678;
-  --terminal-text-tertiary-rgb: 90, 102, 120;
+  --terminal-text: var(--palette-zinc-100);
+  --terminal-text-secondary: var(--palette-zinc-400);
+  --terminal-text-tertiary: var(--palette-zinc-500);
 
   /* Semantic accents */
-  --terminal-accent: #77bdfb;
-  --terminal-prompt: #8fd6b4;
-  --terminal-warning: #d8b26b;
-  --terminal-error: #f38b92;
-  --terminal-success: #8fd6b4;
-  --terminal-cursor: #8fd6b4;
+  --terminal-accent: var(--palette-primary-500);
+  --terminal-prompt: var(--palette-primary-400);
+  --terminal-warning: var(--palette-accent-500);
+  --terminal-error: var(--palette-error-dark);
+  --terminal-success: var(--palette-primary-400);
+  --terminal-cursor: var(--palette-primary-500);
 
-  /* Overlays (Matrix rain, modal scrims) */
-  --terminal-overlay-rgb: 0, 0, 0;
+  /* Backdrop grid (my-portfolio body::before) */
+  --grid-line: var(--palette-primary-500);
+  --grid-alpha: 6%;
+  --grid-size: 32px;
 
-  /* Window-chrome decoration (mac-style traffic lights) */
-  --terminal-dot-close: #ef6a72;
-  --terminal-dot-min: #d6ad63;
-  --terminal-dot-max: #7bcf9d;
+  /* Overlays (Matrix rain, modal scrims, shadows) */
+  --terminal-overlay: #000000;
 
-  /* Avatar SVG palette (themable — all human tones, no chartreuse) */
-  --avatar-fill: #21262d;
-  --avatar-stroke: #56d364;
+  /* Avatar SVG palette (themable — all human tones) */
+  --avatar-fill: var(--palette-zinc-900);
+  --avatar-stroke: var(--palette-primary-600);
   --avatar-stroke-strong: var(--terminal-prompt);
   --avatar-skin: #d4ccb5;
   --avatar-skin-shadow: #bab29e;
-  --avatar-hair: #1f2630;
-  --avatar-glasses: #171d26;
+  --avatar-hair: var(--palette-zinc-800);
+  --avatar-glasses: var(--palette-zinc-900);
   --avatar-mouth: #a77b59;
-  --avatar-accent: #4ade80;
-  --avatar-accent-soft: #56d364;
-  --avatar-accent-deep: #21371b;
+  --avatar-accent: var(--palette-primary-500);
+  --avatar-accent-soft: var(--palette-primary-400);
+  --avatar-accent-deep: var(--palette-primary-950);
+  --avatar-dot-1: var(--palette-primary-700);
+  --avatar-dot-2: var(--palette-primary-500);
+  --avatar-dot-3: var(--palette-primary-300);
 
-  /* Z-index scale (documented in /design-system/tokens/elevation.md) */
+  /* Z-index scale */
   --z-base: 0;
   --z-sticky: 10;
   --z-dropdown: 20;
@@ -109,191 +150,72 @@
   --z-modal: 40;
   --z-toast: 50;
 
-  /* Scrollbar (derived; do not change per theme except via tokens) */
-  --scrollbar-track: rgba(var(--terminal-header-bg-rgb), 0.8);
-  --scrollbar-thumb: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.35);
-  --scrollbar-thumb-hover: rgba(var(--terminal-text-secondary-rgb, 125, 136, 156), 0.55);
-  --scrollbar-width: 8px;
+  /* Scrollbar (my-portfolio: void track, amber-950 thumb, amber hover) */
+  --scrollbar-track: var(--terminal-header-bg);
+  --scrollbar-thumb: var(--palette-primary-950);
+  --scrollbar-thumb-hover: var(--palette-primary-500);
+  --scrollbar-width: 6px;
+
+  --selection-bg: color-mix(in srgb, var(--palette-primary-500) 42%, transparent);
 }
 
 /* ============================================================================
  * RADIUS SCALE
  *
- * Documented in /design-system/tokens/radius.md
- * Reused by scrollbar, panels, and ad-hoc declarations (avoid hardcoded px).
+ * Terminal aesthetic: pixel-aligned rectangles (my-portfolio rounded-none).
  * ========================================================================= */
 :root {
-  --rounded-sm: 6px;
-  --rounded-md: 8px;
-  --rounded-lg: 12px;
-  --rounded-xl: 16px;
-  --rounded-2xl: 18px;
+  --rounded-sm: 0;
   --rounded-full: 9999px;
 }
 
 /* ============================================================================
- * TYPE FLOOR TOKENS
+ * THEME: PAPER
  *
- * Documented in /design-system/tokens/typography.md. The 11px floor is the
- * readability minimum for mono labels (DESIGN.md The Pairing-Discipline Rule).
- *
- * NOTE: --font-sans and --font-mono (without size suffix) are FONT-FAMILY
- * declarations above. Size tokens for the mono family use the -xs/-sm suffix.
- * ========================================================================= */
-:root {
-  --font-mono-xs: 0.6875rem; /* 11px - the readability floor */
-  --font-mono-sm: 0.75rem;  /* 12px - meta pills */
-}
-
-/* ============================================================================
- * THEME: LIGHT
+ * Matches my-portfolio light reading surface: warm cream + zinc + dark amber.
  * ========================================================================= */
 
-[data-theme="light"] {
-  --terminal-bg: #f2f4f7;
-  --terminal-bg-rgb: 242, 244, 247;
+[data-theme="paper"] {
+  color-scheme: light;
+
+  --terminal-bg: var(--palette-paper);
   --terminal-bg-secondary: #ffffff;
-  --terminal-bg-secondary-rgb: 255, 255, 255;
   --terminal-bg-elevated: #ffffff;
-  --terminal-bg-elevated-rgb: 255, 255, 255;
-  --terminal-header-bg: #e6ebf2;
-  --terminal-header-bg-rgb: 230, 235, 242;
+  --terminal-header-bg: var(--palette-primary-50);
 
-  --terminal-border: #c9d2e0;
-  --terminal-border-rgb: 201, 210, 224;
+  --terminal-border: var(--palette-zinc-300);
 
-  --terminal-text: #1b2430;
-  --terminal-text-rgb: 27, 36, 48;
-  --terminal-text-secondary: #5a6678;
-  --terminal-text-secondary-rgb: 90, 102, 120;
-  --terminal-text-tertiary: #8b98a8;
-  --terminal-text-tertiary-rgb: 139, 152, 168;
+  --terminal-text: var(--palette-ink);
+  --terminal-text-secondary: var(--palette-zinc-600);
+  --terminal-text-tertiary: var(--palette-zinc-500);
 
-  --terminal-accent: #2f6fb2;
-  --terminal-prompt: #2d7d61;
-  --terminal-warning: #a97721;
-  --terminal-error: #c64747;
-  --terminal-success: #2d7d61;
-  --terminal-cursor: #2f6fb2;
+  --terminal-accent: var(--palette-primary-700);
+  --terminal-prompt: var(--palette-primary-800);
+  --terminal-warning: var(--palette-primary-700);
+  --terminal-error: var(--palette-error-light);
+  --terminal-success: var(--palette-primary-800);
+  --terminal-cursor: var(--palette-primary-700);
 
-  --terminal-overlay-rgb: 20, 20, 20;
-  --shadow-terminal: 0 28px 80px rgba(var(--terminal-overlay-rgb), 0.22);
+  --grid-line: var(--palette-primary-700);
+  --grid-alpha: 5%;
 
-  --terminal-dot-close: #d96b6b;
-  --terminal-dot-min: #c39a4f;
-  --terminal-dot-max: #5fa97f;
+  --terminal-overlay: var(--palette-zinc-900);
+  --shadow-terminal: 0 28px 80px -34px color-mix(in srgb, var(--palette-zinc-900) 22%, transparent);
 
-  --avatar-fill: #e6ebf2;
-  --avatar-stroke: #2d7d61;
-  --avatar-stroke-strong: var(--terminal-prompt);
-  --avatar-skin: #d4ccb5;
-  --avatar-skin-shadow: #bab29e;
-  --avatar-hair: #2c3644;
-  --avatar-glasses: #1b2430;
+  --avatar-fill: var(--palette-primary-50);
+  --avatar-stroke: var(--palette-primary-700);
+  --avatar-hair: var(--palette-zinc-700);
+  --avatar-glasses: var(--palette-ink);
   --avatar-mouth: #8b5a3f;
-  --avatar-accent: #2d7d61;
-  --avatar-accent-soft: #38a169;
-  --avatar-accent-deep: #1a3d2c;
-}
+  --avatar-accent: var(--palette-primary-700);
+  --avatar-accent-soft: var(--palette-primary-600);
+  --avatar-accent-deep: var(--palette-primary-950);
 
-/* ============================================================================
- * THEME: AYU
- * ========================================================================= */
+  --scrollbar-track: var(--palette-primary-50);
+  --scrollbar-thumb: var(--palette-primary-200);
+  --scrollbar-thumb-hover: var(--palette-primary-700);
 
-[data-theme="ayu"] {
-  --terminal-bg: #0f1419;
-  --terminal-bg-rgb: 15, 20, 25;
-  --terminal-bg-secondary: #151d24;
-  --terminal-bg-secondary-rgb: 21, 29, 36;
-  --terminal-bg-elevated: #1a232c;
-  --terminal-bg-elevated-rgb: 26, 35, 44;
-  --terminal-header-bg: #0b1015;
-  --terminal-header-bg-rgb: 11, 16, 21;
-
-  --terminal-border: #283746;
-  --terminal-border-rgb: 40, 55, 70;
-
-  --terminal-text: #edf0e3;
-  --terminal-text-rgb: 237, 240, 227;
-  --terminal-text-secondary: #90a0ae;
-  --terminal-text-secondary-rgb: 144, 160, 174;
-  --terminal-text-tertiary: #6a7785;
-  --terminal-text-tertiary-rgb: 106, 119, 133;
-
-  --terminal-accent: #5cc8f5;
-  --terminal-prompt: #b9d36a;
-  --terminal-warning: #f2be67;
-  --terminal-error: #ff6b6b;
-  --terminal-success: #b9d36a;
-  --terminal-cursor: #f2be67;
-
-  --terminal-overlay-rgb: 0, 0, 0;
-
-  --terminal-dot-close: #f08080;
-  --terminal-dot-min: #f2be67;
-  --terminal-dot-max: #b9d36a;
-
-  --avatar-fill: #1a232c;
-  --avatar-stroke: #b9d36a;
-  --avatar-stroke-strong: var(--terminal-prompt);
-  --avatar-skin: #d4ccb5;
-  --avatar-skin-shadow: #bab29e;
-  --avatar-hair: #1a232c;
-  --avatar-glasses: #0f1419;
-  --avatar-mouth: #a77b59;
-  --avatar-accent: #b9d36a;
-  --avatar-accent-soft: #c7db7e;
-  --avatar-accent-deep: #3d4928;
-}
-
-/* ============================================================================
- * THEME: GITHUB DARK
- * ========================================================================= */
-
-[data-theme="github-dark"] {
-  --terminal-bg: #0d1117;
-  --terminal-bg-rgb: 13, 17, 23;
-  --terminal-bg-secondary: #151b23;
-  --terminal-bg-secondary-rgb: 21, 27, 35;
-  --terminal-bg-elevated: #1b232c;
-  --terminal-bg-elevated-rgb: 27, 35, 44;
-  --terminal-header-bg: #0b1016;
-  --terminal-header-bg-rgb: 11, 16, 22;
-
-  --terminal-border: #2c3644;
-  --terminal-border-rgb: 44, 54, 68;
-
-  --terminal-text: #d0d7de;
-  --terminal-text-rgb: 208, 215, 222;
-  --terminal-text-secondary: #8b98a8;
-  --terminal-text-secondary-rgb: 139, 152, 168;
-  --terminal-text-tertiary: #6a7785;
-  --terminal-text-tertiary-rgb: 106, 119, 133;
-
-  --terminal-accent: #66b3ff;
-  --terminal-prompt: #87e1a0;
-  --terminal-warning: #d7ac55;
-  --terminal-error: #ff8a80;
-  --terminal-success: #87e1a0;
-  --terminal-cursor: #66b3ff;
-
-  --terminal-overlay-rgb: 0, 0, 0;
-
-  --terminal-dot-close: #ff7b72;
-  --terminal-dot-min: #d7ac55;
-  --terminal-dot-max: #87e1a0;
-
-  --avatar-fill: #1b232c;
-  --avatar-stroke: #87e1a0;
-  --avatar-stroke-strong: var(--terminal-prompt);
-  --avatar-skin: #d4ccb5;
-  --avatar-skin-shadow: #bab29e;
-  --avatar-hair: #21262d;
-  --avatar-glasses: #0d1117;
-  --avatar-mouth: #a77b59;
-  --avatar-accent: #87e1a0;
-  --avatar-accent-soft: #95dba5;
-  --avatar-accent-deep: #1c3a26;
+  --selection-bg: color-mix(in srgb, var(--palette-primary-500) 32%, transparent);
 }
 
 /* ============================================================================
@@ -301,11 +223,10 @@
  *
  * Maps semantic tokens to Tailwind utilities. Components can use:
  *   bg-terminal-bg, text-terminal-text, border-terminal-border, etc.
- *
- * Adding a token here makes it available as a Tailwind class automatically.
+ * Palette utilities (bg-primary-500, bg-paper…) mirror my-portfolio names.
  * ========================================================================= */
 
-@theme {
+@theme inline {
   --color-terminal-bg: var(--terminal-bg);
   --color-terminal-bg-secondary: var(--terminal-bg-secondary);
   --color-terminal-bg-elevated: var(--terminal-bg-elevated);
@@ -320,18 +241,10 @@
   --color-terminal-error: var(--terminal-error);
   --color-terminal-success: var(--terminal-success);
   --color-terminal-cursor: var(--terminal-cursor);
-  --color-terminal-dot-close: var(--terminal-dot-close);
-  --color-terminal-dot-min: var(--terminal-dot-min);
-  --color-terminal-dot-max: var(--terminal-dot-max);
 
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-
-  --text-mono-xs: var(--font-mono-xs);
-  --text-mono-sm: var(--font-mono-sm);
-  --text-sans-xs: var(--font-mono-xs);
-
-  --shadow-terminal: 0 28px 80px rgba(var(--terminal-overlay-rgb), 0.48);
+  --color-paper: var(--palette-paper);
+  --color-primary-500: var(--palette-primary-500);
+  --color-primary-700: var(--palette-primary-700);
 
   --z-index-base: var(--z-base);
   --z-index-sticky: var(--z-sticky);
@@ -340,6 +253,23 @@
   --z-index-modal: var(--z-modal);
   --z-index-toast: var(--z-toast);
 }
+
+@theme static {
+  --shadow-terminal: 0 28px 90px -34px color-mix(in srgb, var(--terminal-overlay) 90%, transparent), 0 0 40px color-mix(in srgb, var(--palette-primary-500) 10%, transparent);
+  --shadow-glow-sm: 0 0 12px color-mix(in srgb, var(--palette-primary-500) 22%, transparent);
+
+  --font-sans: 'Geist Variable', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-pixel: 'Geist Pixel Square', 'Geist Mono', monospace;
+
+  --text-mono-xs: 0.6875rem;
+  --text-mono-sm: 0.75rem;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-step: steps(1, end);
+}
+
 
 /* ============================================================================
  * BASE RESET
@@ -355,40 +285,48 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-sans);
+  letter-spacing: -0.01em;
   background-color: var(--terminal-bg);
-  background-image:
-    radial-gradient(circle at top, rgba(119, 189, 251, 0.12), transparent 38%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 22rem);
-  background-position: center top, center top;
   color: var(--terminal-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition:
-    background-color 300ms var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1)),
-    color 300ms var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1));
+    background-color var(--motion-medium) var(--ease-in-out),
+    color var(--motion-medium) var(--ease-in-out);
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--grid-line) var(--grid-alpha), transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--grid-line) var(--grid-alpha), transparent) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  pointer-events: none;
+  z-index: var(--z-base);
+}
+
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--terminal-text);
 }
 
 /* ============================================================================
  * MOTION TOKENS
  *
- * Documented in /design-system/tokens/motion.md
+ * Mirrors my-portfolio --duration-* tokens.
  * ========================================================================= */
 
 :root {
-  --motion-instant: 0ms;
-  --motion-fast: 150ms;
+  --motion-instant: 100ms;
+  --motion-fast: 160ms;
   --motion-base: 200ms;
   --motion-medium: 300ms;
-  --motion-slow: 400ms;
-  --motion-cursor: 1000ms;
-
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-step: steps(1, end);
-  --ease-linear: linear;
+  --motion-cursor: 1100ms;
 }
 
 /* ============================================================================
@@ -421,14 +359,10 @@ body {
  * ========================================================================= */
 
 .terminal {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 12rem),
-    var(--terminal-bg);
-  border-radius: 18px;
+  background: var(--terminal-bg);
+  border-radius: 0;
   border: 1px solid var(--terminal-border);
-  box-shadow:
-    var(--shadow-terminal),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: var(--shadow-terminal);
   color: var(--terminal-text);
   display: flex;
   flex-direction: column;
@@ -524,7 +458,7 @@ body:has(.terminal--fullscreen) .mobile-warning {
 
 .terminal-prompt {
   color: var(--terminal-prompt);
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .terminal-cursor {
@@ -534,6 +468,31 @@ body:has(.terminal--fullscreen) .mobile-warning {
   background-color: var(--terminal-cursor);
   vertical-align: middle;
   animation: blink var(--motion-cursor) var(--ease-step) infinite;
+}
+
+.pixel-cursor {
+  display: inline-block;
+  width: 0.45em;
+  height: 0.72em;
+  margin-left: 0.1em;
+  background-color: currentColor;
+  animation: blink var(--motion-cursor) var(--ease-step) infinite;
+}
+
+.pixel-glow {
+  text-shadow:
+    0 0 6px color-mix(in srgb, var(--palette-primary-500) 45%, transparent),
+    0 0 18px color-mix(in srgb, var(--palette-primary-500) 18%, transparent);
+}
+
+[data-theme="paper"] .pixel-glow {
+  text-shadow: none;
+}
+
+.section-rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, currentColor 8%, currentColor 92%, transparent);
+  opacity: 0.35;
 }
 
 .terminal-command {
@@ -586,7 +545,9 @@ input[type="text"]:disabled {
 
 .command-list li {
   margin-bottom: 0.25rem;
-  transition: all var(--motion-fast) var(--ease-out);
+  transition:
+    color var(--motion-fast) var(--ease-out),
+    padding-left var(--motion-fast) var(--ease-out);
 }
 
 .command-list li:hover {
@@ -626,7 +587,7 @@ input[type="text"]:disabled {
 @media (max-width: 768px) {
   .terminal {
     margin: 0.5rem 0 4rem;
-    border-radius: 16px;
+    border-radius: 0;
     height: calc(100vh - 4.5rem) !important;
     max-height: calc(100vh - 4.5rem) !important;
   }
@@ -701,10 +662,8 @@ input[type="text"]:disabled {
 .suggestions-dropdown {
   background-color: var(--terminal-bg);
   border: 1px solid var(--terminal-border);
-  border-radius: var(--rounded-xl);
-  box-shadow:
-    0 10px 15px -3px rgba(var(--terminal-overlay-rgb), 0.1),
-    0 4px 6px -2px rgba(var(--terminal-overlay-rgb), 0.05);
+  border-radius: 0;
+  box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--terminal-overlay) 10%, transparent);
   overflow: hidden;
 }
 
@@ -722,7 +681,7 @@ input[type="text"]:disabled {
   background: var(--terminal-bg-secondary);
   color: var(--terminal-accent);
   font-family: var(--font-mono);
-  font-size: var(--font-mono-xs);
+  font-size: var(--text-mono-xs);
   transform: translateY(-200%);
   opacity: 0;
   transition: transform var(--motion-fast) var(--ease-out),
@@ -751,5 +710,9 @@ input[type="text"]:disabled {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
+  }
+
+  body::before {
+    display: none;
   }
 }

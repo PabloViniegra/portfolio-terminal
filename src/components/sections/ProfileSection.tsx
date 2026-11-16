@@ -16,15 +16,15 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ profile }) => (
         <p className="mt-3 max-w-3xl text-sm leading-7 text-terminal-text-secondary">{profile.availability}</p>
         <dl className="mt-4 grid gap-3 text-sm md:grid-cols-3">
           <div>
-            <dt className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">rol</dt>
+            <dt className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">rol</dt>
             <dd className="mt-1 text-terminal-text">{profile.role}</dd>
           </div>
           <div>
-            <dt className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">stack</dt>
+            <dt className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">stack</dt>
             <dd className="mt-1 text-terminal-text">{profile.stack.join(', ')}</dd>
           </div>
           <div>
-            <dt className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">ubicación</dt>
+            <dt className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">ubicación</dt>
             <dd className="mt-1 text-terminal-text">{profile.location}</dd>
           </div>
         </dl>
@@ -37,7 +37,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ profile }) => (
         <dl className="grid gap-3 pt-2 md:grid-cols-2">
           {profile.principles.map((principle) => (
             <div key={principle.label}>
-              <dt className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">{principle.label}</dt>
+              <dt className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">{principle.label}</dt>
               <dd className="mt-1 text-sm text-terminal-text">{principle.content}</dd>
             </div>
           ))}
@@ -51,7 +51,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ profile }) => (
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             {category.groups.map((group) => (
               <div key={group.title}>
-                <h4 className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">{group.title}</h4>
+                <h4 className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">{group.title}</h4>
                 <p className="mt-2 text-sm text-terminal-text">{group.skills.join(' · ')}</p>
               </div>
             ))}

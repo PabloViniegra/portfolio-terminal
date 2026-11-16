@@ -162,7 +162,7 @@ A clickable pill that runs a command. Used in the welcome message for one-click 
 >
   <span className="text-terminal-prompt">$</span>
   <span className="text-terminal-text">{command}</span>
-  <span className="font-sans text-sans-xs text-terminal-text-secondary">
+  <span className="font-pixel text-mono-sm uppercase tracking-[0.12em] text-terminal-text-secondary">
     {label}
   </span>
 </button>

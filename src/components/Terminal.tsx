@@ -266,21 +266,20 @@ const Terminal = ({ contentData }: TerminalProps) => {
         style={{ zIndex: 'var(--z-sticky)' }}
       >
         <header
-          className="relative flex flex-nowrap items-center justify-between gap-2 border-b border-terminal-border/90 bg-terminal-header-bg/90 px-3 py-3 backdrop-blur md:gap-4 md:px-4"
+          className="relative flex flex-nowrap items-center justify-between gap-2 border-b border-terminal-border/90 bg-terminal-header-bg px-3 py-3 md:gap-4 md:px-4"
           style={{ zIndex: 'var(--z-dropdown)' }}
           aria-label="Barra de título de la terminal"
         >
           <div className="flex min-w-0 items-center gap-4">
-            <div className="flex items-center gap-1.5" aria-hidden="true">
-              <span className="h-3 w-3 rounded-full bg-terminal-dot-close"></span>
-              <span className="h-3 w-3 rounded-full bg-terminal-dot-min"></span>
-              <span className="h-3 w-3 rounded-full bg-terminal-dot-max"></span>
-            </div>
+            <span
+              className="h-2.5 w-2.5 shrink-0 rounded-full bg-terminal-accent shadow-glow-sm"
+              aria-hidden="true"
+            ></span>
             <div className="min-w-0">
-              <div className="truncate font-mono text-sm text-terminal-text">
+              <div className="truncate font-pixel text-sm text-terminal-text">
                 terminal@pablo.dev
               </div>
-              <div className="hidden truncate font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary sm:block">
+              <div className="hidden truncate font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary sm:block">
                 portfolio-shell / hiring-mode
               </div>
             </div>
@@ -298,7 +297,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
               }
               aria-controls="terminal-shell"
               aria-pressed={isFullscreen}
-              className="flex items-center gap-2 rounded-lg border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96]"
+              className="flex items-center gap-2 border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-[color,background-color,border-color,transform] duration-200 ease-out hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96]"
             >
               <svg
                 className="h-4 w-4"
@@ -356,7 +355,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
                         {entry.input}
                       </span>
                     </div>
-                    <time className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+                    <time className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
                       {new Date(entry.timestamp).toLocaleTimeString()}
                     </time>
                   </div>
@@ -373,7 +372,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
           <div ref={historyEndRef} />
         </div>
 
-        <footer className="border-t border-terminal-border/90 bg-terminal-header-bg/75 p-4 backdrop-blur">
+        <footer className="border-t border-terminal-border/90 bg-terminal-header-bg p-4">
           <CommandInput
             onCommand={handleCommand}
             onHistoryNavigate={navigateHistory}

@@ -20,7 +20,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories }) =>
       <div className="space-y-8">
         <section>
           <div className="mb-4 flex items-center gap-3">
-            <h3 className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+            <h3 className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
               profundidad técnica
             </h3>
             <span className="h-px flex-1 bg-terminal-border/40"></span>
@@ -31,7 +31,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories }) =>
               <div key={category.category}>
                 <div className="mb-3 flex items-baseline justify-between gap-3">
                   <h4 className="text-sm font-semibold text-terminal-text">{category.category}</h4>
-                  <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">
+                  <span className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
                     {category.knowledges.length}
                   </span>
                 </div>
@@ -44,7 +44,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories }) =>
                     >
                       <div className="min-w-0">
                         <div className="text-sm text-terminal-text">{skill.name}</div>
-                        <div className="mt-0.5 font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary/70">
+                        <div className="mt-0.5 font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary/70">
                           {getDepthLabel(skill.rating)}
                         </div>
                       </div>

@@ -68,7 +68,7 @@ The CommandInput is the user's main interaction point. It:
 ### Suggestions Popover
 | Token | Where |
 |-------|-------|
-| `--terminal-bg` | Background (95% opacity + backdrop-blur) |
+| `--terminal-bg` | Background (opaque, no blur) |
 | `--terminal-border` | Border (80% opacity) |
 | `--terminal-text-secondary` | Default item text |
 | `--terminal-accent` | Selected item text + bg (12% opacity) |
@@ -158,7 +158,7 @@ The CommandInput is the user's main interaction point. It:
 
 ```tsx
 <form onSubmit={handleSubmit} className="w-full relative">
-  <div className="rounded-2xl border border-terminal-border/80 bg-terminal-bg-secondary/45 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+  <div className="border border-terminal-border/80 bg-terminal-bg-secondary/60 px-4 py-3 transition-colors duration-200 focus-within:border-terminal-accent/40">
     <div className="mb-2 flex items-center justify-between gap-3">
       <span className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
         command input

@@ -1,74 +1,30 @@
 # Elevation Tokens
 
 > **Borders separate. Shadows signal depth.**
-> Most surfaces are flat; the terminal shell is the one element that sits above the page.
+> Most surfaces are flat; the terminal shell and its dropdowns are the only elements that sit above the page. Mirrors my-portfolio: no box-shadow elevation on dark surfaces except the panel glow.
 
-## Elevation Scale
+## Shadow Tokens
 
-| Token | Definition | Used for |
-|-------|------------|----------|
-| `--elevation-0` | none | Page background, terminal body (flat) |
-| `--elevation-1` | subtle inset highlight | Inner panels (`inset 0 1px 0 rgba(255,255,255,0.04)`) |
-| `--elevation-2` | panel shadow + inset | Dropdowns (`0 10px 15px -3px rgba(0,0,0,0.1)`) |
-| `--elevation-3` | strong shadow | Theme switcher dropdown (`0 28px 80px rgba(3,6,11,0.48)`) |
+Defined in Tailwind `@theme static`. Tailwind inlines shadow values into `shadow-*` utilities, so per-theme overrides only apply through the variable: use `shadow-(--shadow-terminal)`, never `shadow-terminal`.
 
-## The One Heavy Shadow
+| Token | Phosphor | Paper | Used for |
+|-------|----------|-------|----------|
+| `--shadow-terminal` | `0 28px 90px -34px` black @ 90% + `0 0 40px` amber @ 10% | `0 28px 80px -34px` zinc-900 @ 22% | Terminal shell, theme dropdown |
+| `--shadow-glow-sm` | `0 0 12px` amber @ 22% | same | Status indicators only (header signal dot) |
 
-The terminal shell is the only element with significant elevation. It sits on the page like a card, lifted by:
+The phosphor shell shadow is the same as my-portfolio's `.terminal-window__panel`, so the embedded terminal and its host dialog read as one object.
 
-```css
-.terminal {
-  box-shadow:
-    0 28px 80px rgba(3, 6, 11, 0.48),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-```
+## Tonal Layering
 
-- Outer shadow: 28px blur, 80px spread, dark base color (`rgba(3,6,11,0.48)`) — pulls the shell away from the page.
-- Inner highlight: 1px from top, white at 4% opacity — catches light, makes the shell feel like glass / CRT.
-
-**The shadow is tinted to the background hue, not pure black.** This avoids the AI-tell of pure-black drop shadows.
-
-## Inset Highlights
-
-Inner panels use inset highlights instead of shadows:
-
-```css
-.command-input {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-}
-```
-
-This subtle inner stroke makes the panel feel like a recessed input field, consistent with the terminal metaphor.
+Panels do not cast shadows. They step lightness: `--terminal-bg` → `--terminal-bg-secondary` → `--terminal-bg-elevated`. No inset highlights.
 
 ## Glow Effects
 
-**Banned by default**. No neon glows, no outer glows, no `box-shadow: 0 0 20px var(--accent)`.
-
-If a glow is ever needed (a future feature requiring emphasis):
-- Tint to background hue
-- Use 2-3px blur max
-- Apply at 40-60% opacity
-- Never as the default state — only on hover/active
+Only `shadow-glow-sm`, only on status indicators. No glows on buttons, text or hover states.
 
 ## Translucent Surfaces
 
-For dropdowns, suggestion popovers, and the theme switcher:
-
-```css
-.theme-dropdown {
-  background: rgba(var(--terminal-bg-rgb), 0.95);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--terminal-border);
-  box-shadow: 0 28px 80px rgba(3, 6, 11, 0.48);
-}
-```
-
-- 95% background opacity with backdrop blur (8px) gives "frosted glass" feel without full transparency.
-- Border still 1px — keeps the surface grounded.
-- Heavy shadow signals "this is floating above".
-
-**Future work**: respect `prefers-reduced-transparency` with a solid fallback.
+No glassmorphism on chrome (my-portfolio rule): header, footer, dropdowns and the mobile notice use opaque backgrounds (`bg-terminal-header-bg`, `bg-terminal-bg/95` at most). The only blur is the content scrim while Matrix rain is active.
 
 ## Z-Index Scale
 
@@ -142,8 +98,8 @@ Tailwind v4 + arbitrary values for shadows:
 
 For most use cases, register an `@theme` entry:
 ```css
-@theme {
-  --shadow-terminal: 0 28px 80px rgba(3, 6, 11, 0.48);
+@theme static {
+  --shadow-example: 0 28px 80px color-mix(in srgb, var(--terminal-overlay) 48%, transparent);
 }
 ```
-Then `shadow-terminal` becomes available.
+Then `shadow-example` becomes available. If the value changes per theme, consume it as `shadow-(--shadow-example)`.

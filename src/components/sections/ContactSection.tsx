@@ -21,7 +21,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.8fr)]">
         <section>
-          <div className="mb-4 font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+          <div className="mb-4 font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
             vías de contacto
           </div>
           <div className="space-y-0">
@@ -37,7 +37,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                   className="flex items-baseline justify-between gap-4 border-t border-terminal-border/40 py-3 transition-colors duration-200 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
                 >
                   <div>
-                    <div className="font-mono text-mono-xs uppercase tracking-[0.18em] text-terminal-text-secondary">
+                    <div className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
                       {item.title}
                     </div>
                     <div className="mt-0.5 text-sm font-medium text-terminal-text">
@@ -54,7 +54,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
         </section>
 
         <section className="border-t border-terminal-border/40 pt-4 lg:border-t-0 lg:border-l lg:border-terminal-border/40 lg:pl-8 lg:pt-0">
-          <div className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+          <div className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
             status
           </div>
           <div className="mt-3 space-y-2">

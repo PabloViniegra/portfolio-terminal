@@ -4,7 +4,7 @@ import { DEFAULT_THEME, getTheme } from '../constants/themes';
 /**
  * Tipos de temas disponibles en la aplicación
  */
-export type ThemeType = 'one-dark' | 'light' | 'ayu' | 'github-dark';
+export type ThemeType = 'phosphor' | 'paper';
 
 /**
  * Obtiene el tema guardado en localStorage de forma segura
@@ -51,7 +51,7 @@ const saveTheme = (theme: ThemeType): void => {
  *   const { theme, setTheme } = useTheme();
  *   
  *   return (
- *     <button onClick={() => setTheme('light')}>
+ *     <button onClick={() => setTheme('paper')}>
  *       Tema actual: {theme}
  *     </button>
  *   );

@@ -10,11 +10,11 @@ Primitive tokens    →   Semantic tokens   →   Component tokens
 (raw values)             (role-based)          (component-specific)
 ```
 
-**Primitive**: `--neutral-900: #11151b;` (a raw color, never used in components)
-**Semantic**: `--terminal-bg: var(--neutral-900);` (assigned to a role)
+**Primitive**: `--palette-zinc-950: #09090b;` (mirrors my-portfolio, never used in components)
+**Semantic**: `--terminal-bg: var(--palette-zinc-950);` (assigned to a role)
 **Component**: (rarely needed in this system; the semantic layer usually suffices)
 
-We define primitives and semantics in `src/styles/global.css` per theme. Components consume semantics. A component using `--neutral-900` directly is a code smell.
+We define primitives once and semantics per theme (`phosphor`, `paper`) in `src/styles/global.css`. Components consume semantics. A component using `--palette-*` directly is a code smell.
 
 ## Token Categories
 
@@ -56,8 +56,8 @@ When you reach for spacing, ask: **"what relationship is this gap expressing?"**
 When you reach for motion, ask: **"what just changed?"**
 
 ```
-"instant feedback"   → 0ms (color change on press)
-"hover, focus"       → 150ms ease-out (--motion-fast)
+"instant feedback"   → 100ms (--motion-instant)
+"hover, focus"       → 160ms ease-out (--motion-fast)
 "state transition"   → 200-300ms ease-out (--motion-base)
 "content appears"    → 200ms ease-out, fade+translate (--motion-enter)
 "theme switch"       → 300ms ease-in-out (--motion-theme)

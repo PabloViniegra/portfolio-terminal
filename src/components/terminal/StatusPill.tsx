@@ -1,7 +1,7 @@
 export const StatusPill = ({ isLoading }: { isLoading: boolean }) => (
   <span
     aria-label={isLoading ? 'Estado: ejecutando' : 'Estado: listo'}
-    className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-mono-xs uppercase tracking-[0.22em] transition-colors duration-200 ${
+    className={`inline-flex min-h-11 items-center gap-1.5 border px-3 py-1 font-pixel text-mono-sm uppercase tracking-[0.16em] transition-colors duration-200 ${
       isLoading
         ? 'border-terminal-accent/60 bg-terminal-accent/10 text-terminal-accent'
         : 'border-terminal-border/70 bg-terminal-bg text-terminal-text-secondary'

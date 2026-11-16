@@ -52,9 +52,9 @@ const Avatar: React.FC<AvatarProps> = ({ className = '', size = 48 }) => {
         stroke="var(--terminal-border)"
         strokeWidth="1"
       />
-      <circle cx="26" cy="35" r="2" fill="var(--terminal-dot-close)" />
-      <circle cx="34" cy="35" r="2" fill="var(--terminal-dot-min)" />
-      <circle cx="42" cy="35" r="2" fill="var(--terminal-dot-max)" />
+      <circle cx="26" cy="35" r="2" fill="var(--avatar-dot-1)" />
+      <circle cx="34" cy="35" r="2" fill="var(--avatar-dot-2)" />
+      <circle cx="42" cy="35" r="2" fill="var(--avatar-dot-3)" />
       <path
         d="M29 57l9 7-9 7M44 71h13"
         stroke="var(--avatar-stroke-strong)"

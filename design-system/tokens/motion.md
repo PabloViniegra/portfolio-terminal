@@ -7,25 +7,31 @@
 
 | Token | Value | Used for |
 |-------|-------|----------|
-| `--motion-instant` | `0ms` | Press feedback (background swap on `:active`) |
-| `--motion-fast` | `150ms` | Hover state, focus ring, color transitions |
-| `--motion-base` | `200ms` | State transitions (panel open, dropdown show) |
-| `--motion-medium` | `300ms` | Theme switch, content fade-in |
-| `--motion-slow` | `400ms` | Modal / sheet open (rare in this system) |
-| `--motion-cursor` | `1000ms` | Cursor blink (step-end infinite) |
+Values mirror my-portfolio's `--duration-*` tokens:
 
-**Default for UI transitions**: `--motion-fast` (150ms). When in doubt, use this. Faster feels broken; slower feels theatrical.
+| Token | Value | my-portfolio | Used for |
+|-------|-------|--------------|----------|
+| `--motion-instant` | `100ms` | `--duration-instant` | Press feedback, reduced-motion fallback |
+| `--motion-fast` | `160ms` | `--duration-press` | Hover state, focus ring, color transitions |
+| `--motion-base` | `200ms` | `--duration-ui` | State transitions (dropdown show) |
+| `--motion-medium` | `300ms` | `--duration-max-ui` | Theme switch, content fade-in |
+| `--motion-cursor` | `1100ms` | `cursor-blink` | Cursor blink (step-end infinite) |
 
-**Maximum duration**: 500ms. Any animation longer than that is performing, not communicating.
+**Default for UI transitions**: `--motion-fast` (160ms) or Tailwind `duration-200`.
+
+**Maximum duration**: 300ms for UI. Longer animations are performing, not communicating.
 
 ## Easing Tokens
 
 | Token | Value | Used for |
 |-------|-------|----------|
-| `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` | Default for enter animations (expo-out) |
-| `--ease-in-out` | `cubic-bezier(0.4, 0, 0.2, 1)` | Theme switch, bidirectional state changes |
+Defined in Tailwind `@theme static`, so they also power `ease-out`, `ease-in-out`, `ease-step` utilities:
+
+| Token | Value | Used for |
+|-------|-------|----------|
+| `--ease-out` | `cubic-bezier(0.23, 1, 0.32, 1)` | Default for UI and enter animations (my-portfolio) |
+| `--ease-in-out` | `cubic-bezier(0.77, 0, 0.175, 1)` | Color-only / theme transitions (my-portfolio) |
 | `--ease-step` | `steps(1, end)` | Cursor blink (hard on/off, no fade) |
-| `--ease-linear` | `linear` | Loading dots (consistent timing) |
 
 **Default easing**: `--ease-out` for entering, `--ease-in` for exiting. The exit pattern in this codebase is mostly instant transitions (the cursor leaves the input when command submits, no fade).
 
@@ -42,7 +48,7 @@
   color: var(--terminal-accent);
 }
 ```
-- Duration: `--motion-fast` (150ms)
+- Duration: `--motion-fast` (160ms)
 - Easing: `--ease-out`
 - Property: `color`, `border-color`, `background-color` only
 
@@ -69,7 +75,7 @@ body {
   50% { opacity: 0; }
 }
 ```
-- Duration: `--motion-cursor` (1000ms)
+- Duration: `--motion-cursor` (1100ms)
 - Easing: `--ease-step` (hard transitions, no fade)
 - Property: `opacity` only
 - Why: real terminals blink; this is one of the few "infinite loops" we permit
@@ -136,7 +142,7 @@ This is not a preference — it's a performance constraint. Animating layout pro
 
 ## Reduced Motion
 
-Future work: respect `prefers-reduced-motion: reduce`. Design intent:
+Implemented in `global.css`: animations collapse to a single 0.01ms iteration and the backdrop grid (`body::before`) is hidden. Design intent for further work:
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -160,7 +166,8 @@ The cursor blink may stay (low distraction, signals interactivity); loading dots
 ❌ **Banned**: Bouncing buttons (`@keyframes bounce`).
 ❌ **Banned**: Spring physics on UI chrome (buttons, links, panels). Save for specific gesture interactions if ever.
 ❌ **Banned**: Infinite decorative loops (Matrix rain is the only allowed loop, and only on activation).
-❌ **Banned**: Animations > 500ms.
+❌ **Banned**: UI animations > 300ms.
+❌ **Banned**: `transition-all`. List properties (`transition-[color,border-color,transform]`).
 ❌ **Banned**: `linear` easing on UI chrome.
 ❌ **Banned**: Animating layout properties (`width`, `height`, `top`, etc.).
 ❌ **Banned**: Animations that the user cannot cancel or interrupt.

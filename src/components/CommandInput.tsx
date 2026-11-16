@@ -171,12 +171,12 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
   return (
     <div className="relative w-full">
       <form onSubmit={handleSubmit} className="w-full relative">
-        <div className="rounded-2xl border border-terminal-border/80 bg-terminal-bg-secondary/60 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-colors duration-200 focus-within:border-terminal-accent/40">
+        <div className="border border-terminal-border/80 bg-terminal-bg-secondary/60 px-4 py-3 transition-colors duration-200 focus-within:border-terminal-accent/40">
           <div className="mb-2 flex items-center justify-between gap-3">
-            <span className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+            <span className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
               command input
             </span>
-            <span className="hidden font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary md:inline">
+            <span className="hidden font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary md:inline">
               /help · tab · history
             </span>
           </div>

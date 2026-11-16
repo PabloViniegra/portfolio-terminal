@@ -43,7 +43,7 @@ The portfolio is the artifact. Most developer portfolios are LLM-generated card 
 ## Capabilities and Constraints
 
 - **Commands**: `/home`, `/experience`, `/projects`, `/skills`, `/contact`, `/cv`, `/rain`, `/help`, `/clear`
-- **Themes**: 4 built-in themes (One Dark default, Light, Ayu, GitHub Dark) with user-switchable runtime
+- **Themes**: 2 themes mirroring my-portfolio (Phosphor default, Paper light), user-switchable at runtime
 - **Features**: command autocompletion (Tab), history navigation (arrow keys), command suggestions dropdown, Matrix rain easter egg (Ctrl+C to exit), theme switcher, terminal-style loading delays
 - **Content management**: JSON files in `src/content/` (experience, projects, skills, contact, commands, general) validated with Zod schemas
 - **Accessibility**: ARIA roles (`application`, `log`, `menu`, `menuitem`), keyboard navigation, screen reader announcements via `aria-live`
@@ -77,7 +77,7 @@ Future work must NOT fabricate: customer logos, testimonials, awards, follower c
 
 ## Accessibility & Inclusion
 
-- WCAG 2.1 AA contrast in all 4 themes (verified per theme; light and dark variants checked independently).
+- WCAG 2.1 AA contrast in both themes (verified per theme; light and dark variants checked independently).
 - Keyboard-only operation: every action reachable without a mouse. Tab for autocomplete, arrows for history, Enter to submit, Esc to close suggestions, Ctrl+C to exit rain.
 - Screen reader support: terminal announces its role (`application`), output area uses `aria-live="polite"`, command menu uses `role="menu"` with `menuitem` children.
 - Mobile fallback: explicit warning that the experience is optimized for desktop, but terminal still usable. No "use desktop" gate.

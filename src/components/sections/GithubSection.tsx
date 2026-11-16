@@ -22,7 +22,7 @@ const GithubSection: React.FC<GithubSectionProps> = ({ github }) => {
           </div>
         ))}
       </div>
-      <a href={github.profileUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-accent underline underline-offset-4 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50">Ver perfil en GitHub ↗</a>
+      <a href={github.profileUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-accent underline underline-offset-4 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50">Ver perfil en GitHub ↗</a>
     </div>
   );
 };

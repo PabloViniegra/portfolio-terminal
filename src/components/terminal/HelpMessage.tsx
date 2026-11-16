@@ -31,7 +31,7 @@ export const HelpMessage = ({
   return (
     <div className="terminal-output font-sans">
       <div className="mb-5">
-        <p className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+        <p className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
           índice de comandos
         </p>
         <div className="mt-2 text-lg font-semibold text-terminal-accent md:text-xl">
@@ -43,11 +43,11 @@ export const HelpMessage = ({
         {grouped.map((group) => (
           <section key={group.category}>
             <div className="mb-3 flex items-center gap-3">
-              <h3 className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+              <h3 className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
                 {CATEGORY_LABELS[group.category]}
               </h3>
               <span className="h-px flex-1 bg-terminal-border/40"></span>
-              <span className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary/70">
+              <span className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary/70">
                 {group.items.length}
               </span>
             </div>
@@ -55,7 +55,7 @@ export const HelpMessage = ({
               {group.items.map((cmd) => (
                 <div
                   key={cmd.command}
-                  className="grid gap-2 rounded-xl border border-terminal-border/60 bg-terminal-bg-secondary/60 px-4 py-3 md:grid-cols-[11rem_minmax(0,1fr)] md:items-start"
+                  className="grid gap-2 border border-terminal-border/60 bg-terminal-bg-secondary/60 px-4 py-3 md:grid-cols-[11rem_minmax(0,1fr)] md:items-start"
                 >
                   <div className="font-mono text-sm font-semibold text-terminal-accent">
                     {cmd.command}

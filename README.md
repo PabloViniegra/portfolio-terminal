@@ -49,7 +49,7 @@ Portfolio web con interfaz de terminal: comandos reales, contenido tipado y un a
 
 - Terminal interactiva con autocompletado (`Tab`), sugerencias y historial (flechas)
 - Content Collections con validación Zod y type-safety de extremo a extremo
-- Cuatro temas conmutables; preferencia en `localStorage`
+- Dos temas alineados con my-portfolio (Phosphor y Paper); preferencia en `localStorage`
 - Efecto Matrix Rain (`/rain`; salir con `Ctrl+C`)
 - Secciones de perfil, AI engineering, GitHub y certificaciones
 - Fallback móvil con aviso desktop-first
@@ -96,7 +96,7 @@ Abre [http://localhost:4321](http://localhost:4321).
 /
 ├── public/
 │   ├── cv/                 # CV en PDF
-│   ├── fonts/              # Mona Sans (variable)
+│   ├── fonts/              # Geist, Geist Mono, Geist Pixel Square
 │   └── favicon.svg
 ├── src/
 │   ├── commands/           # Resolución y sugerencias de comandos
@@ -157,10 +157,8 @@ Selector en la UI; la elección se persiste en `localStorage`:
 
 | Tema | Notas |
 | ---- | ----- |
-| One Dark | Por defecto |
-| Light | Variante clara |
-| Ayu | Tema de acentos suaves |
-| GitHub Dark | Estilo GitHub |
+| Phosphor | Por defecto: ámbar CRT sobre zinc oscuro |
+| Paper | Claro: tinta cálida sobre papel crema |
 
 Definiciones y tokens: `design-system/themes/` y `src/constants/themes.ts`.
 

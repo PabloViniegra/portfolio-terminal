@@ -20,10 +20,10 @@ describe('ThemeSwitcher', () => {
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
     expect(menu).toHaveAttribute('data-state', 'open');
 
-    await user.click(screen.getByRole('menuitem', { name: 'Cambiar al tema Light' }));
+    await user.click(screen.getByRole('menuitem', { name: 'Cambiar al tema Paper' }));
 
-    expect(document.documentElement).toHaveAttribute('data-theme', 'light');
-    expect(localStorage.getItem('theme')).toBe('light');
+    expect(document.documentElement).toHaveAttribute('data-theme', 'paper');
+    expect(localStorage.getItem('theme')).toBe('paper');
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
   });
 });

@@ -4,21 +4,22 @@ import { QuickCommand } from './QuickCommand';
 
 const AsciiTitle = ({ profile }: { profile?: ProfileItem }) => (
   <div className="flex flex-col gap-2 font-mono leading-none">
-    <div className="flex items-center gap-3 font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+    <div className="flex items-center gap-3 font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
       <span className="text-terminal-prompt">┌─</span>
       <span>pablo@portfolio.dev</span>
       <span className="hidden sm:inline">·</span>
       <span className="hidden sm:inline">hiring-mode</span>
     </div>
-    <div className="flex items-baseline gap-3 [text-wrap:balance]">
-      <span className="text-3xl font-semibold text-terminal-prompt md:text-4xl">
+    <div className="flex items-baseline gap-3 py-1 font-pixel font-medium uppercase leading-[0.9] tracking-[-0.03em] [text-wrap:balance]">
+      <span className="text-3xl text-terminal-prompt md:text-5xl" aria-hidden="true">
         $
       </span>
-      <span className="text-4xl font-semibold tracking-tight text-terminal-accent md:text-6xl">
+      <h1 className="pixel-glow inline-flex items-baseline text-5xl text-terminal-accent md:text-7xl">
         ./pablo
-      </span>
+        <span className="pixel-cursor" aria-hidden="true"></span>
+      </h1>
     </div>
-    <div className="flex items-center gap-3 font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+    <div className="flex items-center gap-3 font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
       <span className="text-terminal-prompt">└─</span>
       <span>{profile?.role ?? 'fullstack engineer'}</span>
       <span>{profile?.location ?? 'madrid'}</span>
@@ -55,7 +56,7 @@ export const WelcomeMessage = ({
         <TasteLine profile={profile} />
       </div>
 
-      <p className="font-mono text-mono-xs uppercase tracking-[0.18em] text-terminal-text-secondary">
+      <p className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
         Escribe un comando o elige una sección.
       </p>
       <div className="flex flex-wrap items-center gap-2 pt-1">
@@ -86,7 +87,7 @@ export const WelcomeMessage = ({
         <button
           type="button"
           onClick={() => onQuickCommand(COMMANDS.HELP)}
-          className="font-mono text-mono-xs uppercase tracking-[0.22em] text-terminal-text-secondary transition-colors duration-200 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
+          className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary transition-colors duration-200 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
         >
           <span className="text-terminal-prompt">$</span>{' '}
           <span>/help</span>{' '}

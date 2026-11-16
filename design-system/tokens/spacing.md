@@ -80,14 +80,14 @@ A consistent radius scale. We pick ONE strategy and apply it everywhere.
 
 | Token | Value | Used for |
 |-------|-------|----------|
-| `--radius-none` | `0` | Mono labels, command lines, dividers, anything terminal-y |
-| `--radius-sm` | `6px` | Small pills, status badges (rare) |
-| `--radius-md` | `12px` | Inner panels, suggestion popover |
-| `--radius-lg` | `16px` | Theme dropdown, mobile terminal shell |
-| `--radius-xl` | `18px` | Desktop terminal shell (outer) |
-| `--radius-full` | `9999px` | Pills (status, quick commands) |
+Strategy: pixel-aligned rectangles, like my-portfolio's command palette and terminal window.
 
-**Shape Consistency Lock**: Mono labels and command lines are always `radius-none`. Pills are always `radius-full`. Cards/panels are always `radius-md` to `radius-lg`. The terminal shell is always `radius-lg` to `radius-xl`.
+| Token | Value | Used for |
+|-------|-------|----------|
+| `--rounded-sm` | `0` | Everything: shell, panels, pills, buttons, dropdowns, scrollbar |
+| `--rounded-full` | `9999px` | Small status dots only (signal, status pill dot, theme swatch, loader bars) |
+
+**Shape Consistency Lock**: no `rounded-sm…2xl` utilities in components. `rounded-full` only on dots ≤ 12px.
 
 **Banned**: Mixed radius strategies within the same component type. Don't have a rounded pill next to a sharp pill. Pick the family and stick.
 
@@ -105,8 +105,6 @@ Tailwind v4 + arbitrary value notation works for tokens that don't have Tailwind
 ```tsx
 <div className="p-[var(--space-4)]">       {/* works */}
 <div className="p-4">                       {/* works too, equivalent */}
-<div className="rounded-[var(--radius-md)]"> {/* works */}
-<div className="rounded-xl">                {/* equivalent if registered */}
 ```
 
-Prefer Tailwind utilities (`p-4`, `rounded-xl`) when they exist; reach for arbitrary values when the design system token is more specific than the Tailwind default.
+Prefer Tailwind utilities (`p-4`) when they exist; reach for arbitrary values when the design system token is more specific than the Tailwind default.

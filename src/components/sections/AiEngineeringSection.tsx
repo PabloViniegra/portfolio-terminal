@@ -18,7 +18,7 @@ const AiEngineeringSection: React.FC<AiEngineeringSectionProps> = ({ aiEngineeri
         <dl className="mt-5 grid gap-4 md:grid-cols-3">
           {aiEngineering.metrics.map((metric) => (
             <div key={metric.label} className="border-t border-terminal-border/40 pt-3">
-              <dt className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-text-secondary">{metric.label}</dt>
+              <dt className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">{metric.label}</dt>
               <dd className="mt-1 text-sm font-semibold text-terminal-text">{metric.value}</dd>
             </div>
           ))}
@@ -43,10 +43,10 @@ const AiEngineeringSection: React.FC<AiEngineeringSectionProps> = ({ aiEngineeri
             <article key={skill.name} className="border-t border-terminal-border/30 py-4 first:border-t-0 first:pt-0">
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <h4 className="text-sm font-semibold text-terminal-text">{skill.name}</h4>
-                <a href={skill.repository} target="_blank" rel="noopener noreferrer" className="font-mono text-mono-xs uppercase tracking-[0.16em] text-terminal-accent underline underline-offset-4 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50">Repositorio ↗</a>
+                <a href={skill.repository} target="_blank" rel="noopener noreferrer" className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-accent underline underline-offset-4 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50">Repositorio ↗</a>
               </div>
               <p className="mt-2 max-w-3xl text-sm leading-7 text-terminal-text-secondary">{skill.description}</p>
-              <code className="mt-3 block overflow-x-auto rounded-lg border border-terminal-border/40 bg-terminal-bg-secondary/60 px-3 py-2 font-mono text-mono-xs text-terminal-text">{skill.install}</code>
+              <code className="mt-3 block overflow-x-auto border border-terminal-border/40 bg-terminal-bg-secondary/60 px-3 py-2 font-mono text-mono-xs text-terminal-text">{skill.install}</code>
             </article>
           ))}
         </div>

@@ -13,8 +13,7 @@ import type { ThemeType } from '../hooks/useTheme';
 
 /**
  * Theme preview color: a Tailwind utility class for the dot rendered in the
- * theme switcher. These are the only raw hex values allowed in components —
- * they represent theme identity at the picker, not theme application.
+ * theme switcher, using palette tokens shared with my-portfolio.
  */
 export interface Theme {
   id: ThemeType;
@@ -26,38 +25,26 @@ export interface Theme {
 /**
  * Available themes.
  *
- * Order is the user-visible order in the ThemeSwitcher. One Dark first because
- * it is the default and the canonical experience; the rest follow.
+ * Order is the user-visible order in the ThemeSwitcher. Phosphor first because
+ * it is the default and matches my-portfolio's tool surface.
  */
 export const THEMES: readonly Theme[] = [
   {
-    id: 'one-dark',
-    name: 'One Dark',
-    abbreviation: 'OD',
-    color: 'bg-[#61afef]',
+    id: 'phosphor',
+    name: 'Phosphor',
+    abbreviation: 'PH',
+    color: 'bg-primary-500',
   },
   {
-    id: 'light',
-    name: 'Light',
-    abbreviation: 'LT',
-    color: 'bg-[#e5c07b]',
-  },
-  {
-    id: 'ayu',
-    name: 'Ayu',
-    abbreviation: 'AY',
-    color: 'bg-[#ffb454]',
-  },
-  {
-    id: 'github-dark',
-    name: 'GitHub',
-    abbreviation: 'GH',
-    color: 'bg-[#58a6ff]',
+    id: 'paper',
+    name: 'Paper',
+    abbreviation: 'PA',
+    color: 'bg-paper ring-1 ring-primary-700',
   },
 ] as const;
 
 /** Theme applied on first load (no localStorage entry). */
-export const DEFAULT_THEME: ThemeType = 'one-dark';
+export const DEFAULT_THEME: ThemeType = 'phosphor';
 
 /** Lookup a theme by id. Falls back to the default theme. */
 export function getTheme(id: ThemeType | string | null | undefined): Theme {

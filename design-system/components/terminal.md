@@ -57,8 +57,8 @@ The shell is a Card pattern, not a Browser Window pattern. It does not pretend t
 | `--space-5` | Body padding (desktop) |
 | `--space-2` | Body padding (mobile) |
 | `--space-6` | Outer page padding |
-| `--radius-xl` | Outer shell border radius (18px) |
-| `--radius-lg` | Mobile shell border radius (16px) |
+| `--rounded-sm` | Shell border radius (`0`, rectangular like my-portfolio) |
+| `--shadow-terminal` | Shell elevation |
 | `--motion-medium` | Theme switch transition (300ms) |
 
 ## Visual Structure
@@ -78,7 +78,7 @@ The shell is a Card pattern, not a Browser Window pattern. It does not pretend t
 - Background: `--terminal-header-bg` (slightly darker than body, or same as body)
 - Bottom border: 1px `--terminal-border`
 - Padding: `--space-4` horizontal, `--space-3` vertical
-- Layout: traffic lights (3 colored dots) on left, title + subtitle in middle, status pills + theme switcher + avatar on right
+- Layout: amber signal dot on left (no OS chrome / traffic lights), title + subtitle in middle, status pills + theme switcher + avatar on right
 
 ### Body
 - Background: `--terminal-bg`
@@ -87,7 +87,7 @@ The shell is a Card pattern, not a Browser Window pattern. It does not pretend t
 - Custom scrollbar styled to match theme
 
 ### Footer
-- Background: `--terminal-bg-header` with backdrop-blur (translucent)
+- Background: `--terminal-header-bg`, opaque (no glassmorphism)
 - Top border: 1px `--terminal-border`
 - Padding: `--space-4` all sides
 - Contains: command input shell
@@ -120,7 +120,7 @@ The shell is a Card pattern, not a Browser Window pattern. It does not pretend t
 - `aria-label="Terminal interactiva de portfolio"` — describes the application's purpose.
 
 ### Header
-- The traffic light dots are decorative (`aria-hidden="true"`).
+- The signal dot is decorative (`aria-hidden="true"`).
 - The title + subtitle region has no explicit role; it's read as part of the page header.
 - Theme switcher is a button with `aria-label`, `aria-expanded`.
 
@@ -142,7 +142,7 @@ The shell is a Card pattern, not a Browser Window pattern. It does not pretend t
 ## Variants
 
 ### By Theme
-The shell adapts to all 4 themes via CSS variable cascade. No theme-specific styles in the component.
+The shell adapts to both themes via CSS variable cascade. No theme-specific styles in the component.
 
 ### By State
 - **Loading**: server-rendered terminal remains visible while the island hydrates
@@ -159,7 +159,7 @@ The shell adapts to all 4 themes via CSS variable cascade. No theme-specific sty
   role="application"
   aria-label="Terminal interactiva de portfolio"
 >
-  <header className="flex flex-wrap items-center justify-between gap-4 border-b border-terminal-border/90 bg-terminal-header-bg/90 px-4 py-3 backdrop-blur">
+  <header className="flex flex-wrap items-center justify-between gap-4 border-b border-terminal-border/90 bg-terminal-header-bg px-4 py-3">
     {/* header content */}
   </header>
 
@@ -172,7 +172,7 @@ The shell adapts to all 4 themes via CSS variable cascade. No theme-specific sty
     {/* scrollable output */}
   </main>
 
-  <footer className="border-t border-terminal-border/90 bg-terminal-header-bg/78 p-4 backdrop-blur">
+  <footer className="border-t border-terminal-border/90 bg-terminal-header-bg p-4">
     {/* command input */}
   </footer>
 </section>

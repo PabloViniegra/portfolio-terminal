@@ -37,7 +37,7 @@
 
 **Type pairing rules**:
 - Both fonts at the same optical size feel different. Mono runs ~5% larger visually. Compensate by setting mono one step smaller for the same visual weight, or accept the slight bulk.
-- `Mona Sans` for narrative is a deliberate choice: GitHub's variable sans, designed to sit next to code, drawn as the pair of `Mona Sans Mono`. Self-hosted, no CDN. Not the LLM default of Inter, not the LLM-default pair of Montserrat + JetBrains Mono.
+- `Geist` / `Geist Mono` / `Geist Pixel Square` are inherited from my-portfolio, which embeds this terminal. One family keeps the iframe boundary invisible. Self-hosted, no CDN.
 
 ---
 
@@ -63,13 +63,13 @@
 | `--terminal-error` | Destructive | Errors, "command not found" |
 | `--terminal-success` | Positive | Confirmations, "command executed" |
 
-**Saturation rule**: Accent colors stay below 80% saturation in light themes and below 90% in dark themes. The terminal metaphor rewards restraint — a fully saturated neon blue would feel like a toy, not a tool.
+**One-accent rule**: amber (my-portfolio `primary`) is the only hue. Light theme uses darker shades (`primary-700/800`) for contrast. Error red is the single exception.
 
 ---
 
 ## 4. Dark is Default, Light is a Courtesy
 
-**Rule**: One Dark is the canonical experience. Light mode is offered but never inverted-for-inversion's-sake.
+**Rule**: Phosphor is the canonical experience. Paper is offered but never inverted-for-inversion's-sake.
 
 **Why (Terminal semantics + Google Labs)**: Terminals are dark-first interfaces. A light terminal that just inverts dark feels wrong because the relationships between colors change (shadows are less visible, contrast inverts weirdly). Google's developer products respect this: dark is canonical, light exists but reads differently.
 
@@ -87,10 +87,10 @@
 **Why (Google Labs)**: Google's design system documentation is explicit: motion should be fast, purposeful, and interruptible. A 400ms fade-in that the user does not register as transition is waste. A bouncing button that draws attention to itself instead of the action is noise.
 
 **Motion budget for this system**:
-- Cursor blink: `1s`, infinite (only the cursor; nothing else blinks)
-- Command output fade-in: `150-200ms` ease-out (signals "this appeared")
+- Cursor blink: `1.1s`, infinite (only the cursor; nothing else blinks)
+- Command output fade-in: `160-200ms` ease-out (signals "this appeared")
 - Theme switch transition: `300ms` on background-color and color (signals "the world changed")
-- Hover state: `150ms` color/border transition (signals "this is interactive")
+- Hover state: `160ms` color/border transition (signals "this is interactive")
 - Loading dots: `1.5s` staggered (functional: signals "still working")
 - Matrix rain: only on explicit user activation (`/rain`). Never on load. Never as decoration.
 
@@ -99,9 +99,9 @@
 - ❌ Spring physics on UI chrome (buttons, links, inputs)
 - ❌ Parallax without purpose
 - ❌ Infinite decorative loops (Matrix rain is the only allowed loop, and only when activated)
-- ❌ Animations > 500ms
+- ❌ Animations > 300ms (except cursor blink and loading dots)
 
-**Reduced motion**: respect `prefers-reduced-motion`. Matrix rain collapses to a static field. Cursor blink stops. Hover transitions reduce to instant color change. This is future work but should be designed in.
+**Reduced motion**: respect `prefers-reduced-motion`. Matrix rain collapses to a static field. Cursor blink stops. Hover transitions reduce to instant color change. Implemented in `global.css`.
 
 ---
 
@@ -132,10 +132,10 @@
 **Why (Terminal semantics)**: A portfolio terminal that does not get the prompt right fails the metaphor. The first thing the visitor sees is the prompt — that is the impression. A weak prompt (no blink, wrong color, wrong weight) signals "this is a fake terminal."
 
 **Prompt quality checklist**:
-- Color: `--terminal-prompt` (green by default, theme-respecting)
+- Color: `--terminal-prompt` (amber `primary-400` / `primary-800`)
 - Weight: bold
 - Spacing: `12px` right margin before input
-- Cursor: 2px wide, 1.25rem tall, blink at 1s interval
+- Cursor: 2px wide, 1.25rem tall, blink at 1.1s interval
 - Input: mono font, transparent background, accent-colored caret
 
 ---
@@ -158,12 +158,12 @@
 These are the AI tells and the terminal cheats we explicitly ban:
 
 1. **AI purple/blue glow gradients on hero text** — banned.
-2. **Pure black `#000000`** — use charcoal (`#11151b` or similar) for dark themes.
-3. **Pure white `#FFFFFF`** — use off-white (`#f2f4f7` or similar) for light themes.
+2. **Pure black `#000000`** — use `zinc-950` `#09090b` (phosphor).
+3. **Pure white `#FFFFFF` as canvas** — use paper `#fffcf5`.
 4. **Emoji as icons** — zero emoji. Symbols and SVG only.
 5. **Three identical feature cards in a row** — the LLM default. Break it.
 6. **"Used by" logo wall inside the hero** — hero is for the value prop, not fake social proof.
-7. **Inter as the default sans** — Mona Sans (or a deliberate alternative) instead.
+7. **Any typeface outside the Geist family** — my-portfolio's type system is the only one.
 8. **Mixed family emphasis in headlines** — italic or bold of the SAME font for emphasis, never a serif word inside a sans headline.
 9. **Bouncing buttons, infinite shimmer, decorative marquees** — motion budget above forbids them.
 10. **Random `z-50` everywhere** — use a layered z-index scale (see tokens/elevation.md).

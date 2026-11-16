@@ -16,8 +16,8 @@
 
 ## Component Principles
 
-1. **Components consume tokens, never raw values.** If a component uses `#77bdfb`, that's a bug.
-2. **Components work in all four themes.** If a component is theme-specific, it's not a reusable component.
+1. **Components consume tokens, never raw values.** If a component uses `#ff9500`, that's a bug.
+2. **Components work in both themes.** If a component is theme-specific, it's not a reusable component.
 3. **Components declare their accessibility upfront.** ARIA roles, keyboard support, focus management — not afterthoughts.
 4. **Components document their motion.** What animates, why, and for how long.
 5. **Components are honest about their state.** Loading, empty, error states are part of the API, not edge cases.
@@ -81,7 +81,7 @@ src/
 A component is shippable when:
 
 - [ ] Uses semantic tokens only
-- [ ] Works in all 4 themes
+- [ ] Works in Phosphor and Paper
 - [ ] Keyboard-only operation works
 - [ ] ARIA roles and labels are correct
 - [ ] Loading, empty, and error states exist

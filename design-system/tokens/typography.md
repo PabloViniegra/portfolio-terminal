@@ -1,22 +1,23 @@
 # Typography Tokens
 
-> **Two families, one rhythm.**
-> Monospace for everything functional. Sans-serif for narrative only.
+> **One family, three cuts — shared with my-portfolio.**
+> Geist Mono for everything functional, Geist for narrative, Geist Pixel Square for short markers.
 
 ## Font Families
 
+Defined in the Tailwind `@theme static` block of `src/styles/global.css`:
+
 ```css
---font-sans: 'Mona Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
---font-mono: 'Mona Sans Mono', ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+--font-sans: 'Geist Variable', system-ui, -apple-system, sans-serif;
+--font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+--font-pixel: 'Geist Pixel Square', 'Geist Mono', monospace;
 ```
 
-**Why Mona Sans**: GitHub's variable sans, designed for product UIs adjacent to code. Width + optical size + weight axes; precise without being cold. Drawn as the pair of Mona Sans Mono, which is why metrics line up.
+Utilities: `font-sans`, `font-mono`, `font-pixel`.
 
-**Why Mona Sans Mono**: GitHub's mono companion to Mona Sans. Width + weight axes; ligature-aware; sits next to code without a visible seam. JetBrains Mono, IBM Plex Mono and Fira Code are acceptable substitutes if the brief explicitly demands them.
+**Why Geist**: it is the my-portfolio type system. The terminal is embedded in my-portfolio, so any other family would make the iframe boundary visible.
 
-**Why we moved off Montserrat + JetBrains Mono**: both are defensible but became the LLM-default pair — any random generator picks them. Mona Sans / Mono is a curated choice that reads "engineer picked this on purpose" without paying a foundry license.
-
-**Loading**: self-hosted via `@font-face` with `font-display: swap`, plus `<link rel="preload">` in the layout for the two woff2 files. No Google Fonts CDN, no third-party font CDN, no `<link>` to an external font provider — the page must never depend on a runtime fetch to render text.
+**Loading**: self-hosted from `/public/fonts/` (`GeistVF.woff2`, `GeistMonoVF.woff2`, `GeistPixel-Square.woff2`, OFL 1.1 — see `OFL.txt`) via `@font-face` with `font-display: swap`. Geist and Geist Mono are preloaded in `TerminalLayout.astro`. Never load from a CDN.
 
 ## Type Scale
 
@@ -35,7 +36,7 @@ A 7-step scale anchored to `--font-size-base` (16px). All other sizes derive fro
 
 **The 11px minimum is intentional.** Below 11px, mono fonts lose readability. We never go smaller; if it doesn't fit, we truncate, not shrink.
 
-**Tracking on small mono labels**: `tracking-[0.18em]` to `tracking-[0.22em]` (uppercase). Gives the eyebrow / metadata feel without becoming decorative.
+**Tracking on small mono labels**: `tracking-[0.16em]` to `tracking-[0.22em]` (uppercase). Pixel markers use `tracking-[0.12em]` (my-portfolio `label`).
 
 ## Weight Scale
 
@@ -60,21 +61,22 @@ Mono fonts render heavier than sans at the same weight. We don't compensate by c
 
 ## Type Pairing Rules
 
-### Sans (Mona Sans) for narrative
+### Sans (Geist) for narrative
 - Welcome message (`text-lg md:text-xl`, semibold, leading-snug)
 - Section headlines (`text-2xl md:text-3xl`, semibold, leading-tight)
 - Body copy (`text-base`, regular, leading-relaxed)
 - Project descriptions (`text-sm`, leading-7)
 - Card titles (`text-lg font-semibold leading-snug`)
 
-### Mono (Mona Sans Mono) for everything else
+### Mono (Geist Mono) for everything else
 - Commands: `text-sm font-medium`
 - `$` prompt symbol: `text-lg font-bold` (visually heavier than commands)
-- Timestamps, labels, metadata: `text-mono-xs uppercase tracking-[0.18em]`
+- Timestamps, labels: `text-mono-xs uppercase tracking-[0.18em]`
 - Eyebrows (above section titles): `text-mono-xs uppercase tracking-[0.22em]`
-- Tab pills / status badges: `text-mono-xs uppercase tracking-[0.2em]`
-- Section dividers (small caps headers): `text-mono-xs uppercase tracking-[0.22em]`
-- Inline labels (e.g. "command input"): `text-mono-xs uppercase tracking-[0.22em]`
+### Pixel (Geist Pixel Square), as in my-portfolio
+- Every uppercase label (status pill, eyebrows, section dividers, "command input", quick-command labels, header subtitle, section meta): `font-pixel text-mono-sm uppercase tracking-[0.16em]`. 12px is the pixel floor; at 11px the glyph grid blurs.
+- Display: hero `./pablo` (`font-pixel text-5xl md:text-7xl uppercase tracking-[-0.03em]` + `.pixel-glow` + `.pixel-cursor`), section verbs in `SectionHeader` (`text-xl md:text-2xl uppercase`, followed by `.section-rule`), header title.
+- Never for sentences, body copy or anything longer than one line.
 
 The `text-mono-xs` utility maps to the `--text-mono-xs` Tailwind token (`0.6875rem` / 11px — the readability floor). Use the token, not `text-[11px]` literals.
 
@@ -82,13 +84,15 @@ The `text-mono-xs` utility maps to the `--text-mono-xs` Tailwind token (`0.6875r
 
 | Token | Value | Used for |
 |-------|-------|----------|
-| `--tracking-tight` | `-0.02em` | Large sans headlines (display only) |
+| `--tracking-tight` | `-0.025em` | Hero `./pablo` (display only) |
+| `--tracking-snug` | `-0.01em` | Body default (`body` letter-spacing) |
 | `--tracking-normal` | `0` | Default |
 | `--tracking-wide` | `0.04em` | Mono command text |
+| `--tracking-label` | `0.12em` | Pixel markers |
 | `--tracking-wider` | `0.18em` | Mono labels |
 | `--tracking-widest` | `0.22em` | Mono eyebrows, status badges |
 
-**Never use positive tracking on sans body text.** It looks performative and hurts readability.
+**Never use positive tracking on sans body text.** Body uses `-0.01em`, like my-portfolio.
 
 ## Hierarchy Examples
 
@@ -108,8 +112,8 @@ The `text-mono-xs` utility maps to the `--text-mono-xs` Tailwind token (`0.6875r
   Featured builds
 </h2>
 
-// Mono metadata (timestamps, counts)
-<span className="font-mono text-mono-xs uppercase tracking-[0.18em] text-terminal-text-secondary">
+// Pixel metadata (section meta)
+<span className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
   {projects.length} builds
 </span>
 
@@ -124,13 +128,13 @@ The `text-mono-xs` utility maps to the `--text-mono-xs` Tailwind token (`0.6875r
 
 ## Anti-Patterns
 
-❌ **Banned**: Inter as the default sans. We use Mona Sans.
+❌ **Banned**: Any family outside Geist / Geist Mono / Geist Pixel Square.
 ❌ **Banned**: Mixing serif into the type system. The terminal is mono + sans only.
 ❌ **Banned**: Italic emphasis by switching families. Use `font-medium` or `font-semibold` of the same family.
 ❌ **Banned**: Font sizes below 11px (Mono readability floor).
 ❌ **Banned**: Tight tracking on body text (kills readability, looks performative).
 ❌ **Banned**: Decorative display fonts in headlines (Fraunces, Playfair, etc.). When a headline needs character, mono large semibold is enough.
-❌ **Banned**: Multiple sans families. We have ONE (Mona Sans) and ONE mono (Mona Sans Mono).
+❌ **Banned**: Italic display headings (my-portfolio rule).
 ❌ **Banned**: Loading fonts from any third-party CDN (Google Fonts, Bunny, etc.). Self-host in `/public/fonts/` — the page must never depend on a runtime fetch to render text.
 
 ## Accessibility

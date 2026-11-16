@@ -3,7 +3,7 @@ import React from 'react';
 const TerminalLoader: React.FC = () => {
   return (
     <div className="flex items-center gap-3 py-2">
-      <span className="font-mono text-xs uppercase tracking-[0.22em] text-terminal-text-secondary">
+      <span className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
         executing
       </span>
       <div className="flex items-center gap-1">

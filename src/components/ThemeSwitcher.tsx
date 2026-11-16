@@ -31,7 +31,7 @@ const ThemeSwitcher = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-lg border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-all duration-200 hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96]"
+        className="flex items-center gap-2 border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-[color,background-color,border-color,transform] duration-200 ease-out hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96]"
         aria-label="Cambiar tema"
         aria-expanded={isOpen}
       >
@@ -43,7 +43,7 @@ const ThemeSwitcher = () => {
 
       <div
         data-state={isOpen ? 'open' : 'closed'}
-        className="absolute right-0 mt-2 w-52 origin-top-right overflow-hidden rounded-xl border border-terminal-border/80 bg-terminal-bg/95 py-1 shadow-xl backdrop-blur-sm transition-[opacity,transform] duration-150 ease-out data-[state=closed]:pointer-events-none data-[state=closed]:scale-95 data-[state=closed]:opacity-0"
+        className="absolute right-0 mt-2 w-52 origin-top-right overflow-hidden border border-terminal-border/80 bg-terminal-bg/95 py-1 shadow-(--shadow-terminal) transition-[opacity,transform] duration-150 ease-out data-[state=closed]:pointer-events-none data-[state=closed]:scale-95 data-[state=closed]:opacity-0"
         style={{ zIndex: 'var(--z-dropdown)' }}
         role="menu"
         aria-label="Selector de tema"
