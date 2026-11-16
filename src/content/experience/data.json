@@ -5,11 +5,11 @@
     "date": "Abril de 2024 - Actualidad",
     "description": "Mantenimiento e implementación de mejoras para proyectos internos del BBVA. Desarrollo de features, testing unitario y CI/CD.",
     "achievements": [
-      "Reduje los tiempos de carga un 35% en 4 aplicaciones internas de BBVA con más de 10.000 usuarios diarios, refactorizando las capas de obtención de datos e implementando renderizado virtualizado para grandes volúmenes de información.",
-      "Lideré la migración de 3 aplicaciones críticas de Vue 2 a Vue 3, lo que redujo la deuda técnica en un 40% y garantizó el mantenimiento a largo plazo en un equipo de 12 personas.",
-      "Mejoré el rendimiento de renderizado en aplicaciones React un 15% (medido con Lighthouse) eliminando re-renders innecesarios y reorganizando la arquitectura de componentes.",
-      "Implanté estándares de testing unitario en código heredado, llevando la cobertura del 12% al 65% y reduciendo las incidencias en producción un 20% durante el primer trimestre.",
-      "Diseñé e implementé arquitecturas de IA agéntica (Claude Code, Protocolo MCP) que estandarizaron el flujo de trabajo del equipo y recortaron el tiempo medio de entrega de funcionalidades en un 25%."
+      "Reduje un 35% los tiempos de carga en 4 aplicaciones internas de BBVA con más de 10.000 usuarios diarios, optimizando la obtención de datos y usando renderizado virtualizado.",
+      "Lideré la migración de 3 aplicaciones críticas de Vue 2 a Vue 3 para facilitar su mantenimiento por un equipo de 12 personas.",
+      "Mejoré el renderizado en React al eliminar re-renders innecesarios y reorganizar componentes.",
+      "Implanté estándares de testing unitario en código heredado, llevando la cobertura del 12% al 65%.",
+      "Diseñé e implementé arquitecturas de IA agéntica con Claude Code y MCP que estandarizaron el flujo del equipo y acortaron las entregas."
     ],
     "tags": [
       "Google Cloud Platform",
@@ -34,10 +34,10 @@
     "date": "Junio de 2021 - Abril 2024",
     "description": "Desarrollo de proyectos para cliente basados en integración de sistemas vía software y RPA. Creación de soluciones low code para automatizar procesos de negocio.",
     "achievements": [
-      "Diseñé un middleware de alta disponibilidad, en colaboración con un equipo interno de 6 desarrolladores y equipos externos de otras consultoras, que procesa más de 2 millones de intercambios de datos al día entre AENA y más de 15 aerolíneas internacionales, manteniendo una disponibilidad del 99,9% en producción.",
-      "Construí pipelines serverless con Azure Functions y Service Workers, orquestados con Azure DevOps, que automatizaron 8 procesos manuales, ahorrando al equipo de operaciones más de 20 horas a la semana.",
-      "Desarrollé sistemas de integración de datos de vuelos en tiempo real con conexiones concurrentes a múltiples APIs de aerolíneas, reduciendo la latencia de 45 segundos a menos de 5.",
-      "Creé herramientas de automatización interna que aumentaron la productividad del departamento un 30% y se adoptaron como estándar en 3 equipos de ingeniería."
+      "Diseñé middleware de alta disponibilidad junto a 6 desarrolladores internos y consultoras externas. Procesaba más de 2 millones de intercambios diarios entre AENA y más de 15 aerolíneas internacionales, con 99,9% de disponibilidad en producción.",
+      "Construí pipelines serverless con Azure Functions, Service Workers y Azure DevOps que automatizaron 8 procesos manuales y ahorraron más de 20 horas semanales al equipo de operaciones.",
+      "Desarrollé integraciones de datos de vuelos en tiempo real con conexiones concurrentes a APIs de aerolíneas y reduje la latencia de 45 a menos de 5 segundos.",
+      "Creé herramientas de automatización interna adoptadas como estándar por 3 equipos de ingeniería."
     ],
     "tags": [
       ".NET",

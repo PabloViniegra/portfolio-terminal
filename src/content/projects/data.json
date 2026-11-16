@@ -24,112 +24,72 @@
     "order": 0
   },
   {
-    "id": "gasolink",
-    "title": "GasoLink",
-    "description": "Aplicación de escritorio para localizar, comparar y guardar gasolineras españolas mediante mapas y precios públicos.",
-    "type": "Aplicación de escritorio",
-    "scope": "Mapas, precios públicos y favoritos",
-    "link": "https://mega.nz/file/UD1ByaJQ#u3gVPPO6XB0K55Tcu2Hzjm97W-LfrM9lyTKsl37Ho2Q",
-    "github": "https://github.com/PabloViniegra/gasolink-app",
-    "technologies": [
-      "Tauri",
-      "Rust",
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "CSS",
-      "Vite",
-      "TanStack React Query",
-      "HeroUI",
-      "Git",
-      "pnpm"
-    ],
-    "featured": false,
-    "order": 6
-  },
-  {
     "id": "win_opt",
     "title": "win_opt",
-    "description": "TUI en Rust que reúne tareas de mantenimiento, privacidad y gestión del espacio de Windows 11 en un único binario.",
+    "description": "TUI en Rust para tareas de mantenimiento, privacidad y gestión del espacio en Windows 11. Se distribuye como un único binario.",
     "type": "TUI en Rust",
     "scope": "Mantenimiento, privacidad y espacio en Windows 11",
     "link": "https://github.com/PabloViniegra/win_opt/releases/tag/v1.2.1",
     "github": "https://github.com/PabloViniegra/win_opt",
-    "technologies": ["Rust"],
+    "technologies": [
+      "Rust"
+    ],
     "featured": false,
     "order": 5
   },
   {
     "id": "sqlito",
     "title": "SQLito",
-    "description": "Cliente SQLite keyboard-first para el terminal: el SQL es la interfaz; historial, autocompletado y tabla de resultados solo sostienen el flujo.",
+    "description": "Cliente de SQLite para el terminal, pensado para usar con teclado. Incluye historial, autocompletado y una tabla de resultados.",
     "type": "Cliente SQLite para el terminal",
-    "scope": "SQL como protagonista, resultados y prompt",
+    "scope": "Historial, autocompletado y tabla de resultados",
     "github": "https://github.com/PabloViniegra/sqlito",
     "technologies": [
       "TypeScript",
-      "Node.js",
       "React",
       "SQLite",
       "pnpm",
       "Vitest",
-      "Prettier"
+      "npm"
     ],
     "featured": false,
-    "order": 9
-  },
-  {
-    "id": "promptlazy",
-    "title": "PromptLazy",
-    "description": "Producto full stack para crear, mejorar, clasificar y reutilizar prompts mediante una interfaz Vue y una API de IA en Python.",
-    "type": "Producto full stack",
-    "scope": "Interfaz Vue y API de IA en Python",
-    "link": "https://prompt-lazy.netlify.app/",
-    "github": "https://github.com/PabloViniegra/promptlazy-frontend",
-    "technologies": [
-      "Vue.js",
-      "TypeScript",
-      "Vite",
-      "Tailwind CSS",
-      "Git",
-      "pnpm",
-      "TanStack Vue Query",
-      "shadcn-vue",
-      "Python",
-      "FastAPI",
-      "Vitest"
-    ],
-    "featured": true,
-    "order": 2
+    "order": 9,
+    "link": "https://www.npmjs.com/package/@pablo-v/sqlito"
   },
   {
     "id": "ollama_fit",
     "title": "Ollama-Fit",
-    "description": "TUI y CLI en Go que cruza el hardware del equipo con el catálogo de Ollama para estimar qué modelos locales puede ejecutar.",
+    "description": "CLI y TUI en Go que compara el hardware de tu equipo con el catálogo de Ollama y estima qué modelos locales puede ejecutar.",
     "type": "TUI y CLI en Go",
     "scope": "Compatibilidad de hardware con modelos locales",
     "link": "https://github.com/PabloViniegra/tui-ollama-go/releases/tag/v0.4.0",
     "github": "https://github.com/PabloViniegra/tui-ollama-go",
-    "technologies": ["Go"],
+    "technologies": [
+      "Go"
+    ],
     "featured": true,
     "order": 3
   },
   {
     "id": "pkg-sense",
     "title": "PkgSense",
-    "description": "Extensión de Visual Studio Code que analiza package.json en tiempo real para detectar riesgos de seguridad, peso, obsolescencia, licencias y configuración.",
+    "description": "Extensión de Visual Studio Code que revisa package.json en tiempo real y avisa de problemas de seguridad, tamaño, mantenimiento, licencias y configuración.",
     "type": "Extensión de Visual Studio Code",
     "scope": "Riesgos, peso, obsolescencia, licencias y configuración",
     "link": "https://marketplace.visualstudio.com/items?itemName=PabloViniegra.pkgsense",
     "github": "https://github.com/PabloViniegra/pkgsense",
-    "technologies": ["Git", "npm", "TypeScript"],
-    "featured": true,
+    "technologies": [
+      "Git",
+      "npm",
+      "TypeScript"
+    ],
+    "featured": false,
     "order": 4
   },
   {
     "id": "santa_app",
     "title": "Santa App [Amigo Invisible]",
-    "description": "Aplicación full stack para organizar Amigos Invisibles con participantes, listas de deseos y reglas de exclusión personalizadas.",
+    "description": "Organiza Amigos Invisibles con participantes, listas de deseos y reglas sobre quién regala a quién.",
     "type": "Aplicación full stack",
     "scope": "Participantes, listas de deseos y reglas de exclusión",
     "link": "https://santa-app.pabloviniegra.dev/",
@@ -137,13 +97,13 @@
     "technologies": [
       "Nuxt",
       "Vue.js",
-      "Bun",
       "Tailwind CSS",
       "TypeScript",
       "Pinia",
       "Better Auth",
       "PostgreSQL",
       "Drizzle ORM",
+      "Bun",
       "Vercel",
       "Git",
       "Biome"
@@ -160,25 +120,26 @@
     "link": "https://trello-next-five.vercel.app/",
     "github": "https://github.com/PabloViniegra/trello-next",
     "technologies": [
+      "Git",
       "React",
       "Tailwind CSS",
       "Next.js",
-      "TypeScript",
       "pnpm",
+      "TypeScript",
       "shadcn/ui",
       "Better Auth",
       "PostgreSQL",
       "Vercel",
       "Resend",
-      "Biome",
-      "Git"
+      "Biome"
     ],
-    "order": 10
+    "order": 10,
+    "featured": false
   },
   {
     "id": "personal_blog",
     "title": "Personal Blog",
-    "description": "Plataforma editorial personal con contenido MDX, previsualización, búsqueda y gestión privada de publicaciones y recursos.",
+    "description": "Blog personal para escribir y publicar con MDX, con vista previa, búsqueda y gestión privada de publicaciones y archivos.",
     "type": "Plataforma editorial personal",
     "scope": "MDX, previsualización, búsqueda y gestión privada",
     "link": "https://blog.pabloviniegra.dev/",
@@ -191,41 +152,43 @@
       "Tailwind CSS",
       "shadcn/ui",
       "Bun",
+      "PostgreSQL",
       "SQLite",
       "Shiki",
-      "PostgreSQL",
       "Drizzle ORM",
       "Biome"
     ],
-    "order": 8
+    "order": 8,
+    "featured": false
   },
   {
     "id": "tier_maker",
     "title": "Tier Maker",
-    "description": "Editor de tier lists con persistencia, exportación PNG, exploración pública y recuperación local del trabajo.",
+    "description": "Crea tier lists, guárdalas, expórtalas a PNG y compártelas. Puedes recuperar el trabajo desde el mismo dispositivo.",
     "type": "Editor de tier lists",
     "scope": "Persistencia, exportación PNG y exploración pública",
     "link": "https://tiermaker.pabloviniegra.dev/",
     "github": "https://github.com/PabloViniegra/tier-maker",
     "technologies": [
-      "Next.js",
-      "TypeScript",
+      "Git",
       "React",
-      "Vercel",
-      "shadcn/ui",
       "Tailwind CSS",
+      "Next.js",
+      "pnpm",
+      "TypeScript",
+      "shadcn/ui",
       "Better Auth",
       "PostgreSQL",
-      "Drizzle ORM",
-      "Git",
-      "pnpm"
+      "Vercel",
+      "Drizzle ORM"
     ],
-    "order": 7
+    "order": 2,
+    "featured": true
   },
   {
     "id": "platinum-gold",
     "title": "Platinum Gold",
-    "description": "API de solo lectura con el catálogo de ítems de The Binding of Isaac, y un sitio de documentación que la consume sin exponer la clave en el navegador.",
+    "description": "API de solo lectura para consultar el catálogo de ítems de The Binding of Isaac. Incluye una web de documentación que no envía la clave API al navegador.",
     "type": "API de solo lectura",
     "scope": "Catálogo de ítems y docs sin exponer la clave",
     "link": "https://platinum-gold-frontend.vercel.app/",
@@ -245,12 +208,12 @@
       "Vitest"
     ],
     "featured": true,
-    "order": 5
+    "order": 4
   },
   {
     "id": "pixel-ui",
     "title": "PixelUI",
-    "description": "47 componentes React accesibles con estética pixel. Cada uno se publica como paquete npm independiente e incluye design tokens y un preset para Tailwind CSS v4.",
+    "description": "Librería de 47 componentes accesibles para React con estilo pixel. Cada uno se publica por separado en npm e incluye tokens de diseño y un preset para Tailwind CSS v4.",
     "type": "Librería de componentes",
     "scope": "Un paquete npm por componente, tokens CSS y Storybook",
     "link": "https://pabloviniegra.github.io/pixel-ui/",

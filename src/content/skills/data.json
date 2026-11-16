@@ -3,10 +3,22 @@
     "id": "backend",
     "category": "Backend",
     "knowledges": [
-      { "name": ".NET", "rating": 4 },
-      { "name": "Python", "rating": 4 },
-      { "name": "Flask", "rating": 4 },
-      { "name": "FastAPI", "rating": 3 }
+      {
+        "name": ".NET",
+        "rating": 4
+      },
+      {
+        "name": "Python",
+        "rating": 4
+      },
+      {
+        "name": "Flask",
+        "rating": 4
+      },
+      {
+        "name": "FastAPI",
+        "rating": 3
+      }
     ],
     "order": 1
   },
@@ -14,14 +26,42 @@
     "id": "frontend",
     "category": "Frontend",
     "knowledges": [
-      { "name": "JavaScript", "rating": 3 },
-      { "name": "TypeScript", "rating": 3 },
-      { "name": "HTML5", "rating": 3 },
-      { "name": "CSS", "rating": 2 },
-      { "name": "Tailwind CSS", "rating": 3 },
-      { "name": "Vue.js", "rating": 3 },
-      { "name": "Astro", "rating": 2 },
-      { "name": "React", "rating": 2 }
+      {
+        "name": "JavaScript",
+        "rating": 3
+      },
+      {
+        "name": "TypeScript",
+        "rating": 3
+      },
+      {
+        "name": "HTML5",
+        "rating": 3
+      },
+      {
+        "name": "CSS",
+        "rating": 2
+      },
+      {
+        "name": "Tailwind CSS",
+        "rating": 3
+      },
+      {
+        "name": "Vue.js",
+        "rating": 3
+      },
+      {
+        "name": "Astro",
+        "rating": 2
+      },
+      {
+        "name": "React",
+        "rating": 2
+      },
+      {
+        "name": "Next.js",
+        "rating": 3
+      }
     ],
     "order": 2
   },
@@ -29,10 +69,22 @@
     "id": "tools",
     "category": "Herramientas",
     "knowledges": [
-      { "name": "Git", "rating": 3 },
-      { "name": "Docker", "rating": 3 },
-      { "name": "Azure", "rating": 3 },
-      { "name": "Google Cloud", "rating": 3 }
+      {
+        "name": "Git",
+        "rating": 3
+      },
+      {
+        "name": "Docker",
+        "rating": 3
+      },
+      {
+        "name": "Azure",
+        "rating": 3
+      },
+      {
+        "name": "Google Cloud",
+        "rating": 4
+      }
     ],
     "order": 3
   },
@@ -40,11 +92,54 @@
     "id": "databases",
     "category": "Bases de Datos",
     "knowledges": [
-      { "name": "SQL Server", "rating": 2 },
-      { "name": "MySQL", "rating": 3 },
-      { "name": "PostgreSQL", "rating": 3 },
-      { "name": "MongoDB", "rating": 2 }
+      {
+        "name": "SQL Server",
+        "rating": 2
+      },
+      {
+        "name": "MySQL",
+        "rating": 3
+      },
+      {
+        "name": "PostgreSQL",
+        "rating": 3
+      },
+      {
+        "name": "MongoDB",
+        "rating": 2
+      }
     ],
     "order": 4
+  },
+  {
+    "id": "ai",
+    "category": "IA",
+    "knowledges": [
+      {
+        "name": "Claude Code",
+        "rating": 4
+      },
+      {
+        "name": "OpenCode",
+        "rating": 3
+      },
+      {
+        "name": "GitHub Copilot CLI",
+        "rating": 3
+      },
+      {
+        "name": "MCPs (Model Context Protocol)",
+        "rating": 4
+      },
+      {
+        "name": "Agent Skills",
+        "rating": 4
+      },
+      {
+        "name": "Harness Engineering",
+        "rating": 3
+      }
+    ],
+    "order": 5
   }
 ]

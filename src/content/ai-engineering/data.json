@@ -1,29 +1,37 @@
 [
   {
     "id": "ai-engineering",
-    "subtitle": "Cómo uso agentes en el día a día del equipo, no en demos.",
+    "subtitle": "Cómo uso agentes en el día a día del equipo.",
     "intro": "Trabajo con agentes en el repositorio: los uso para codificar, revisar y operar, igual que cualquier otra herramienta del equipo.",
-    "positioning": "Claude Code, MCPs y Agent Skills son el centro. OpenCode y Copilot CLI para cosas puntuales. Harness Engineering como disciplina.",
+    "positioning": "Claude Code es la base, con MCPs (conectores a servicios externos) y Agent Skills (instrucciones reutilizables). OpenCode y Copilot CLI para cosas puntuales. Mi foco es preparar el repositorio (contexto, reglas y comprobaciones) para que el agente trabaje bien en él.",
     "metrics": [
-      { "label": "Adopción", "value": "12 personas en BBVA" },
-      { "label": "Métrica", "value": "-25% time-to-delivery" },
-      { "label": "Estándar", "value": "Flujo agéntico compartido" }
+      {
+        "label": "Adopción",
+        "value": "12 personas en BBVA"
+      }
     ],
     "sections": [
       {
-        "title": "Stack agéntico en uso",
-        "description": "Estas son las herramientas con las que escribo código, abro PRs y opero sobre repos reales cada semana.",
-        "items": ["Claude Code", "OpenCode", "GitHub Copilot CLI", "MCPs (Model Context Protocol)", "Agent Skills", "Harness Engineering"]
-      },
-      {
         "title": "Cómo lo meto en el equipo",
         "description": "Lo que sirve no es el modelo, es tener el flujo versionado dentro del repositorio: AGENTS.md por proyecto, skills reutilizables, subagentes especializados y hooks por evento para que cualquiera del equipo los pueda aprovechar desde el día uno.",
-        "items": ["AGENTS.md por repositorio", "Agent Skills versionadas", "Subagentes especializados", "Hooks por evento", "Servidores MCP", "Plantillas de PR"]
+        "items": [
+          "AGENTS.md por repositorio",
+          "Agent Skills versionadas",
+          "Subagentes especializados",
+          "Hooks por evento",
+          "Servidores MCP",
+          "Plantillas de PR"
+        ]
       },
       {
         "title": "Resultados en el equipo",
-        "description": "Lo que salió cuando lo adoptamos de verdad, con números, en un equipo de BBVA.",
-        "items": ["-25% tiempo medio de entrega de funcionalidades", "Flujo estandarizado en un equipo de 12 personas", "Migración Vue 2 a Vue 3 con soporte agéntico (-40% deuda técnica)", "Cobertura de tests del 12% al 65% con asistencia agéntica"]
+        "description": "Lo que salió cuando lo adoptamos de verdad en un equipo de BBVA.",
+        "items": [
+          "Entregas más cortas sin cambiar el criterio de revisión",
+          "Flujo de trabajo versionado y compartido por el equipo",
+          "Migración de Vue 2 a Vue 3 con ayuda de agentes",
+          "Tests sobre código heredado escritos con ayuda de agentes"
+        ]
       }
     ],
     "agentSkills": [
@@ -62,6 +70,12 @@
         "description": "Transforma peticiones vagas de desarrollo en prompts precisos y listos para coding agents. Preserva decisiones explícitas, hace de la inspección del repo el primer paso y define criterios de aceptación observables.",
         "install": "npx skills add PabloViniegra/improve-prompt",
         "repository": "https://github.com/PabloViniegra/improve-prompt"
+      },
+      {
+        "name": "eu-legal-compliance-audit",
+        "description": "Audita brechas de cumplimiento legal en proyectos de la UE —RGPD, cookies, consumo, accesibilidad EAA, AI Act y DSA— y estima la exposición a sanciones. Genera una preauditoría técnica, no asesoramiento legal.",
+        "install": "npx skills add PabloViniegra/eu-legal-compliance-audit",
+        "repository": "https://github.com/PabloViniegra/eu-legal-compliance-audit"
       }
     ]
   }
