@@ -1,5 +1,24 @@
 [
   {
+    "id": "transfer-board",
+    "title": "Transfer Board",
+    "description": "Panel para seguir fichajes y rumores de League of Legends en la LCK, LPL, LEC y LCS.",
+    "type": "Aplicación full stack",
+    "scope": "Fichajes y rumores de League of Legends",
+    "link": "https://lol-market-changes.vercel.app/",
+    "github": "https://github.com/PabloViniegra/lol-market-changes",
+    "technologies": [
+      "Vue.js",
+      "TypeScript",
+      "Rust",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Vercel"
+    ],
+    "featured": false,
+    "order": -1
+  },
+  {
     "id": "spanish-elections-simulator",
     "title": "Spanish Elections Simulator",
     "description": "Simulador del Congreso con reparto D'Hondt en 52 circunscripciones, mapa provincial, cálculo de coaliciones y escenarios compartibles.",
