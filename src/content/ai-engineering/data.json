@@ -76,6 +76,12 @@
         "description": "Audita brechas de cumplimiento legal en proyectos de la UE —RGPD, cookies, consumo, accesibilidad EAA, AI Act y DSA— y estima la exposición a sanciones. Genera una preauditoría técnica, no asesoramiento legal.",
         "install": "npx skills add PabloViniegra/eu-legal-compliance-audit",
         "repository": "https://github.com/PabloViniegra/eu-legal-compliance-audit"
+      },
+      {
+        "name": "quick-full-review",
+        "description": "Revisa aplicaciones web de principio a fin: captura cada página en escritorio y móvil, prioriza los cinco problemas principales de jerarquía visual y densidad, y corrige únicamente los fallos de alta confianza.",
+        "install": "npx skills add PabloViniegra/quick-full-review",
+        "repository": "https://github.com/PabloViniegra/quick-full-review"
       }
     ]
   }
