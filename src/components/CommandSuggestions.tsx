@@ -42,7 +42,7 @@ const CommandSuggestions: React.FC<CommandSuggestionsProps> = ({
                 id={optionId}
                 role="option"
                 aria-selected={isSelected}
-                className={`px-4 py-2.5 text-sm cursor-pointer flex justify-between items-center transition-colors duration-150 ${
+                className={`flex cursor-pointer items-center gap-3 px-4 py-2.5 text-sm transition-colors duration-(--motion-instant) ${
                   isSelected
                     ? 'bg-terminal-accent/10 text-terminal-accent'
                     : 'text-terminal-text hover:bg-terminal-bg-secondary'
@@ -52,8 +52,12 @@ const CommandSuggestions: React.FC<CommandSuggestionsProps> = ({
                   onSelect(suggestion.command);
                 }}
               >
-                <span className="font-mono text-terminal-accent/90">{suggestion.command}</span>
-                <span className="text-terminal-text-secondary ml-4 text-right">{suggestion.description}</span>
+                <span className={`w-2 font-mono ${isSelected ? 'text-terminal-prompt' : 'text-transparent'}`} aria-hidden="true">›</span>
+                <span className="font-mono text-terminal-accent">{suggestion.command}</span>
+                <span className="ml-auto truncate pl-4 text-right text-terminal-text-secondary">{suggestion.description}</span>
+                {isSelected && (
+                  <kbd className="kbd hidden md:inline-flex" aria-hidden="true">tab</kbd>
+                )}
               </li>
             );
           })}

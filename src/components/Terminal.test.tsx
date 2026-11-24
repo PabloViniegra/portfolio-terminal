@@ -164,6 +164,38 @@ describe('Terminal', () => {
     expect(screen.getByText('Use Tab for autocomplete.')).toBeInTheDocument();
   });
 
+  it('runs a command when its help row is clicked', async () => {
+    useCommandTimers();
+    const input = renderTerminal();
+
+    await submitCommand(input, '/help');
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: /^\/projects\s*Show projects/ }));
+      vi.advanceTimersByTime(COMMAND_DELAYS.MIN);
+    });
+
+    expect(screen.getByRole('heading', { name: 'Project Alpha' })).toBeInTheDocument();
+  });
+
+  it('anchors the newest command at the top of the log and resets on /home', async () => {
+    useCommandTimers();
+    vi.spyOn(HTMLElement.prototype, 'offsetTop', 'get').mockReturnValue(120);
+    const scrollTo = vi.spyOn(Element.prototype, 'scrollTo');
+    const input = renderTerminal();
+
+    await submitCommand(input, '/projects');
+    await act(async () => {
+      vi.advanceTimersByTime(16);
+    });
+    expect(scrollTo).toHaveBeenLastCalledWith(expect.objectContaining({ top: 128 }));
+
+    await submitCommand(input, '/home');
+    await act(async () => {
+      vi.advanceTimersByTime(16);
+    });
+    expect(scrollTo).toHaveBeenLastCalledWith(expect.objectContaining({ top: 0 }));
+  });
+
   it('renders the requested portfolio section through a terminal command', async () => {
     useCommandTimers();
     const input = renderTerminal();
@@ -367,5 +399,24 @@ describe('Terminal', () => {
     fireEvent.keyDown(document, { key: 'Escape' });
 
     expect(toggle).toHaveFocus();
+  });
+
+  it('closes the theme menu on ESC without leaving fullscreen', () => {
+    renderTerminal();
+    const toggle = screen.getByRole('button', { name: 'Pantalla completa' });
+    const terminal = screen.getByRole('application');
+    fireEvent.click(toggle);
+
+    const themeTrigger = screen.getByRole('button', { name: 'Cambiar tema' });
+    fireEvent.click(themeTrigger);
+    expect(themeTrigger).toHaveAttribute('aria-expanded', 'true');
+
+    fireEvent.keyDown(screen.getByRole('menuitem', { name: 'Cambiar al tema Paper' }), {
+      key: 'Escape',
+    });
+
+    expect(themeTrigger).toHaveAttribute('aria-expanded', 'false');
+    expect(themeTrigger).toHaveFocus();
+    expect(terminal).toHaveClass('terminal--fullscreen');
   });
 });

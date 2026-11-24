@@ -18,7 +18,9 @@ export const HelpMessage = ({
   commands,
   helpTitle,
   helpTip,
+  onRun,
 }: {
+  onRun: (command: string) => void;
   commands: ContentCommand[];
   helpTitle: string;
   helpTip: string;
@@ -30,14 +32,9 @@ export const HelpMessage = ({
 
   return (
     <div className="terminal-output font-sans">
-      <div className="mb-5">
-        <p className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
-          índice de comandos
-        </p>
-        <div className="mt-2 text-lg font-semibold text-terminal-accent md:text-xl">
-          {helpTitle}
-        </div>
-      </div>
+      <h2 className="mb-5 text-lg font-semibold text-terminal-accent md:text-xl">
+        {helpTitle}
+      </h2>
 
       <div className="space-y-6">
         {grouped.map((group) => (
@@ -51,26 +48,32 @@ export const HelpMessage = ({
                 {group.items.length}
               </span>
             </div>
-            <div className="space-y-2">
+            <ul className="border-y border-terminal-border/40">
               {group.items.map((cmd) => (
-                <div
-                  key={cmd.command}
-                  className="grid gap-2 border border-terminal-border/60 bg-terminal-bg-secondary/60 px-4 py-3 md:grid-cols-[11rem_minmax(0,1fr)] md:items-start"
-                >
-                  <div className="font-mono text-sm font-semibold text-terminal-accent">
-                    {cmd.command}
-                  </div>
-                  <div>
-                    <p className="text-sm text-terminal-text">{cmd.description}</p>
-                    {cmd.hint && (
-                      <p className="mt-1 text-sm text-terminal-text-secondary">
-                        {cmd.hint}
-                      </p>
-                    )}
-                  </div>
-                </div>
+                <li key={cmd.command} className="border-t border-terminal-border/30 first:border-t-0">
+                  <button
+                    type="button"
+                    onClick={() => onRun(cmd.command)}
+                    className="help-row"
+                  >
+                    <span className="font-mono text-sm font-semibold text-terminal-accent">
+                      {cmd.command}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-sm text-terminal-text">{cmd.description}</span>
+                      {cmd.hint && (
+                        <span className="mt-1 block text-sm text-terminal-text-secondary">
+                          {cmd.hint}
+                        </span>
+                      )}
+                    </span>
+                    <span className="help-row__run" aria-hidden="true">
+                      ejecutar ↵
+                    </span>
+                  </button>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
         ))}
       </div>

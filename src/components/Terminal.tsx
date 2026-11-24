@@ -44,7 +44,8 @@ const Terminal = ({ contentData }: TerminalProps) => {
   const [showMatrixRain, setShowMatrixRain] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [welcomeKey, setWelcomeKey] = useState(0);
-  const historyEndRef = useRef<HTMLDivElement>(null);
+  const logRef = useRef<HTMLDivElement>(null);
+  const lastEntryRef = useRef<HTMLDivElement>(null);
   const commandInFlightRef = useRef(false);
   const toggleFullscreenRef = useRef<HTMLButtonElement>(null);
 
@@ -90,6 +91,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
         case 'help':
           return (
             <HelpMessage
+              onRun={runCommand}
               commands={contentData.commands}
               helpTitle={contentData.general.helpTitle}
               helpTip={contentData.general.helpTip}
@@ -135,11 +137,16 @@ const Terminal = ({ contentData }: TerminalProps) => {
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
-      historyEndRef.current?.scrollIntoView({
+      const log = logRef.current;
+      const entry = lastEntryRef.current;
+      if (!log || !entry) return;
+      // Anchor the newest entry's prompt line at the top so long outputs are read from their start;
+      // the +8 hides the previous entry's divider behind the header edge.
+      log.scrollTo({
+        top: history.length === 1 ? 0 : Math.max(0, entry.offsetTop + 8),
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
           ? 'instant'
           : 'smooth',
-        block: 'end',
       });
     });
     return () => cancelAnimationFrame(frame);
@@ -238,7 +245,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
     document.body.classList.add('is-fullscreen-open');
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === 'Escape' && !event.defaultPrevented) {
         setIsFullscreen(false);
         toggleFullscreenRef.current?.focus();
       }
@@ -282,18 +289,13 @@ const Terminal = ({ contentData }: TerminalProps) => {
           style={{ zIndex: 'var(--z-dropdown)' }}
           aria-label="Barra de título de la terminal"
         >
-          <div className="flex min-w-0 items-center gap-4">
+          <div className="flex min-w-0 items-center gap-3">
             <span
-              className="h-2.5 w-2.5 shrink-0 rounded-full bg-terminal-accent shadow-glow-sm"
+              className="h-2 w-2 shrink-0 rounded-full bg-terminal-accent shadow-glow-sm"
               aria-hidden="true"
             ></span>
-            <div className="min-w-0">
-              <div className="truncate font-pixel text-sm text-terminal-text">
-                terminal@pablo.dev
-              </div>
-              <div className="hidden truncate font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary sm:block">
-                portfolio-shell / hiring-mode
-              </div>
+            <div className="truncate font-pixel text-sm text-terminal-text">
+              pablo@portfolio<span className="text-terminal-text-secondary">:~</span>
             </div>
           </div>
 
@@ -309,7 +311,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
               }
               aria-controls="terminal-shell"
               aria-pressed={isFullscreen}
-              className="flex items-center gap-2 border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-[color,background-color,border-color,transform] duration-200 ease-out hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96]"
+              className="header-control"
             >
               <svg
                 className="h-4 w-4"
@@ -342,37 +344,46 @@ const Terminal = ({ contentData }: TerminalProps) => {
               </span>
             </button>
             <Avatar
-              size={48}
-              className="h-9 w-9 opacity-95 md:h-12 md:w-12"
+              size={40}
+              className="hidden h-10 w-10 opacity-95 sm:block"
             />
           </div>
         </header>
 
         <div
-           className="flex-1 space-y-8 overflow-y-auto px-4 py-5 md:px-6 md:py-6"
+          ref={logRef}
+          className="relative flex-1 space-y-8 overflow-y-auto overflow-x-hidden px-4 py-5 md:px-6 md:py-7"
           role="log"
           aria-live="polite"
           aria-label="Salida de la terminal"
         >
           {history.map((entry, index) => {
             return (
-              <div key={`${entry.timestamp}-${index}`} className="space-y-3">
-                {entry.input ? (
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 font-mono text-sm">
+              <div
+                key={`${entry.timestamp}-${index}`}
+                ref={index === history.length - 1 ? lastEntryRef : undefined}
+                className={`space-y-3 ${index > 0 ? 'border-t border-terminal-border/40 pt-6' : ''}`}
+              >
+                {entry.input && (
+                  <div className="flex items-baseline justify-between gap-3">
+                    <div className="flex min-w-0 items-baseline gap-2 font-mono text-sm">
+                      <span className="hidden text-terminal-text-secondary sm:inline" aria-hidden="true">
+                        pablo@portfolio:~
+                      </span>
                       <span className="text-terminal-prompt" aria-hidden="true">
                         $
                       </span>
-                      <span className="text-terminal-text">
+                      <span className="truncate text-terminal-text">
                         {entry.input}
                       </span>
                     </div>
-                    <time className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
+                    <time
+                      dateTime={new Date(entry.timestamp).toISOString()}
+                      className="shrink-0 font-mono text-mono-xs tabular-nums text-terminal-text-secondary"
+                    >
                       {new Date(entry.timestamp).toLocaleTimeString()}
                     </time>
                   </div>
-                ) : (
-                  <div className="h-px w-full bg-gradient-to-r from-transparent via-terminal-border/70 to-transparent"></div>
                 )}
                 {entry.output !== null ? (
                   <div className={`terminal-stream ${entry.input ? 'pl-5 md:pl-6' : ''}`}>
@@ -384,10 +395,9 @@ const Terminal = ({ contentData }: TerminalProps) => {
               </div>
             );
           })}
-          <div ref={historyEndRef} />
         </div>
 
-        <footer className="border-t border-terminal-border/90 bg-terminal-header-bg p-4">
+        <footer className="border-t border-terminal-border/90 bg-terminal-header-bg p-3 md:p-4">
           <CommandInput
             onCommand={handleCommand}
             onHistoryNavigate={navigateHistory}

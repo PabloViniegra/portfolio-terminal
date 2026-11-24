@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 
 import { getTheme, THEMES } from '../constants/themes';
 import { useTheme, type ThemeType } from '../hooks/useTheme';
@@ -7,6 +7,7 @@ const ThemeSwitcher = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme: currentTheme, setTheme: changeTheme } = useTheme();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -20,6 +21,15 @@ const ThemeSwitcher = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // React handles this at the root before document listeners run, so the
+  // fullscreen Escape handler in Terminal sees defaultPrevented and stays put.
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'Escape' || !isOpen) return;
+    event.preventDefault();
+    setIsOpen(false);
+    triggerRef.current?.focus();
+  };
+
   const handleThemeChange = (themeId: ThemeType) => {
     changeTheme(themeId);
     setIsOpen(false);
@@ -28,17 +38,19 @@ const ThemeSwitcher = () => {
   const currentThemeData = getTheme(currentTheme);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative" ref={dropdownRef} onKeyDown={handleKeyDown}>
       <button
+        ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 border border-terminal-border/70 bg-terminal-bg-secondary/60 px-3 py-2 text-sm text-terminal-text transition-[color,background-color,border-color,transform] duration-200 ease-out hover:border-terminal-accent/40 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 active:scale-[0.96]"
+        type="button"
+        className="header-control"
         aria-label="Cambiar tema"
         aria-expanded={isOpen}
       >
         <span className={`h-3 w-3 rounded-full ${currentThemeData.color}`} aria-hidden="true"></span>
         <span className="hidden md:inline">{currentThemeData.name}</span>
-        <span className="inline md:hidden">{currentThemeData.abbreviation}</span>
-        <span className="text-xs text-terminal-text-secondary">theme</span>
+        <span className="sr-only md:hidden">{currentThemeData.abbreviation}</span>
+        <span className="hidden text-xs text-terminal-text-secondary md:inline">theme</span>
       </button>
 
       <div
@@ -53,7 +65,8 @@ const ThemeSwitcher = () => {
           <button
             key={theme.id}
             onClick={() => handleThemeChange(theme.id)}
-            className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-terminal-accent/50 focus:ring-inset active:scale-[0.96] ${
+            type="button"
+            className={`flex min-h-11 w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors duration-(--motion-fast) focus:outline-none focus-visible:ring-1 focus-visible:ring-terminal-accent/50 focus-visible:ring-inset ${
               currentTheme === theme.id
                 ? 'bg-terminal-accent/10 text-terminal-accent font-medium'
                 : 'text-terminal-text hover:bg-terminal-bg-secondary/80'

@@ -26,4 +26,19 @@ describe('ThemeSwitcher', () => {
     expect(localStorage.getItem('theme')).toBe('paper');
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
   });
+
+  it('closes the menu on ESC and returns focus to the trigger', async () => {
+    const user = userEvent.setup();
+
+    render(<ThemeSwitcher />);
+
+    const trigger = screen.getByRole('button', { name: 'Cambiar tema' });
+    await user.click(trigger);
+    screen.getByRole('menuitem', { name: 'Cambiar al tema Paper' }).focus();
+    await user.keyboard('{Escape}');
+
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.getByRole('menu')).toHaveAttribute('data-state', 'closed');
+    expect(trigger).toHaveFocus();
+  });
 });

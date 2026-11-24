@@ -171,17 +171,9 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
   return (
     <div className="relative w-full">
       <form onSubmit={handleSubmit} className="w-full relative">
-        <div className="border border-terminal-border/80 bg-terminal-bg-secondary/60 px-4 py-3 transition-colors duration-200 focus-within:border-terminal-accent/40">
-          <div className="mb-2 flex items-center justify-between gap-3">
-            <span className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
-              command input
-            </span>
-            <span className="hidden font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary md:inline">
-              /help · tab · history
-            </span>
-          </div>
+        <div className="command-field" data-disabled={disabled || undefined}>
           <div className="relative flex items-center">
-            <span className="mr-3 font-mono text-lg font-bold text-terminal-prompt">$</span>
+            <span className="mr-3 font-mono text-lg font-bold text-terminal-prompt" aria-hidden="true">$</span>
             <input
               ref={inputRef}
               type="text"
@@ -206,15 +198,17 @@ export default function CommandInput({ onCommand, onHistoryNavigate, suggestions
               aria-expanded={hasVisibleSuggestions}
               aria-controls={hasVisibleSuggestions ? `${listboxId}-listbox` : undefined}
               aria-activedescendant={hasVisibleSuggestions ? `${listboxId}-listbox-opt-${selectedSuggestion}` : undefined}
-              placeholder={disabled ? 'Procesando comando...' : 'Prueba con /contact, /projects o /experience'}
+              placeholder={disabled ? 'Procesando comando…' : 'Escribe /help o /projects'}
             />
           </div>
-          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-mono-xs text-terminal-text-secondary/70">
-            <span>tab · autocomplete</span>
-            <span>↑↓ · history</span>
+          <div className="mt-2 hidden flex-wrap items-center gap-x-4 gap-y-1 font-mono text-mono-xs text-terminal-text-secondary md:flex" aria-hidden="true">
+            <span><kbd className="kbd">/</kbd> comandos</span>
+            <span><kbd className="kbd">tab</kbd> completar</span>
+            <span><kbd className="kbd">↑</kbd><kbd className="kbd">↓</kbd> historial</span>
+            <span><kbd className="kbd">↵</kbd> ejecutar</span>
           </div>
         </div>
-        <div ref={suggestionsRef} className="absolute left-0 right-0 -top-1 transform -translate-y-full">
+        <div ref={suggestionsRef} className="absolute inset-x-0 -top-2 -translate-y-full">
           <CommandSuggestions
             suggestions={suggestions}
             selectedIndex={selectedSuggestion}

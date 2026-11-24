@@ -25,7 +25,7 @@ const AsciiTitle = ({ profile }: { profile?: ProfileItem }) => (
         <span className="pixel-cursor" aria-hidden="true"></span>
       </h1>
     </div>
-    <div className="flex items-center gap-3 font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-pixel text-mono-sm uppercase leading-normal tracking-[0.16em] text-terminal-text-secondary">
       <span className="text-terminal-prompt">└─</span>
       <span>{profile?.role ?? 'fullstack engineer'}</span>
       <span>{profile?.location ?? 'madrid'}</span>
@@ -36,9 +36,9 @@ const AsciiTitle = ({ profile }: { profile?: ProfileItem }) => (
 );
 
 const TasteLine = ({ profile }: { profile?: ProfileItem }) => (
-  <p className="max-w-3xl font-mono text-sm tracking-[0.04em] text-terminal-text-secondary md:text-base">
-    <span className="text-terminal-prompt">→</span>{' '}
-    {profile?.availability ?? 'Código claro, criterio firme. Producto primero, frameworks después.'}
+  <p className="flex max-w-[62ch] gap-2 text-base leading-relaxed text-terminal-text-secondary [text-wrap:pretty]">
+    <span className="font-mono text-terminal-prompt" aria-hidden="true">→</span>
+    <span>{profile?.availability ?? 'Código claro, criterio firme. Producto primero, frameworks después.'}</span>
   </p>
 );
 
@@ -55,17 +55,18 @@ export const WelcomeMessage = ({
     <div className="terminal-welcome mx-auto flex max-w-4xl flex-col gap-6">
       <AsciiTitle profile={profile} />
 
-      <div className="flex flex-col gap-3">
-        <p className="max-w-3xl text-lg font-semibold leading-snug text-terminal-text md:text-xl">
+      <div className="flex flex-col gap-4">
+        <p className="max-w-[44ch] text-xl font-medium leading-snug tracking-[-0.015em] text-terminal-text [text-wrap:pretty] md:text-2xl">
           {welcomeMessage}
         </p>
         <TasteLine profile={profile} />
       </div>
 
+      <nav aria-label="Secciones principales" className="flex flex-col gap-3 pt-2">
       <p className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
         Escribe un comando o elige una sección.
       </p>
-      <div className="flex flex-wrap items-center gap-2 pt-1">
+      <div className="flex flex-wrap items-center gap-2">
         <QuickCommand
           command="/projects"
           label="proyectos"
@@ -87,19 +88,18 @@ export const WelcomeMessage = ({
         />
         <QuickCommand
           command="/contact"
-          label="canal"
+          label="contacto"
           onRun={onQuickCommand}
+          showCommand={false}
         />
-        <button
-          type="button"
-          onClick={() => onQuickCommand(COMMANDS.HELP)}
-          className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary transition-colors duration-200 hover:text-terminal-accent focus:outline-none focus:ring-1 focus:ring-terminal-accent/50"
-        >
-          <span className="text-terminal-prompt">$</span>{' '}
-          <span>/help</span>{' '}
-          <span className="text-terminal-text-secondary">· ver todos los comandos</span>
-        </button>
+        <QuickCommand
+          command={COMMANDS.HELP}
+          label="todos los comandos"
+          onRun={onQuickCommand}
+          ghost
+        />
       </div>
+      </nav>
     </div>
   </div>
 );
