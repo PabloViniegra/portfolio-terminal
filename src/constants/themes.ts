@@ -18,8 +18,8 @@ import type { ThemeType } from '../hooks/useTheme';
 export interface Theme {
   id: ThemeType;
   name: string;
-  abbreviation: string;
   color: string;
+  browserColor: string;
 }
 
 /**
@@ -31,15 +31,15 @@ export interface Theme {
 export const THEMES: readonly Theme[] = [
   {
     id: 'phosphor',
-    name: 'Phosphor',
-    abbreviation: 'PH',
+    name: 'Fósforo',
     color: 'bg-primary-500',
+    browserColor: '#09090b',
   },
   {
     id: 'paper',
-    name: 'Paper',
-    abbreviation: 'PA',
+    name: 'Papel',
     color: 'bg-paper ring-1 ring-primary-700',
+    browserColor: '#fffcf5',
   },
 ] as const;
 

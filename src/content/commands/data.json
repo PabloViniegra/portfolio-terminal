@@ -4,7 +4,7 @@
     "command": "/rain",
     "description": "Siéntete un hacker",
     "category": "special",
-    "hint": "Usa Ctrl+C para desactivar",
+    "hint": "Usa Ctrl+C o escribe /rain de nuevo para desactivar",
     "order": 1
   },
   {
@@ -45,7 +45,7 @@
   {
     "id": "ai",
     "command": "/ai",
-    "description": "Muestra mi práctica de AI Engineering",
+    "description": "Muestra mi práctica de ingeniería de IA",
     "category": "info",
     "order": 7
   },

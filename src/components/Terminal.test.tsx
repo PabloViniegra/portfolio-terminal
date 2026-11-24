@@ -203,7 +203,7 @@ describe('Terminal', () => {
     await submitCommand(input, '  /projects  ');
 
     expect(screen.getByRole('heading', { name: 'Project Alpha' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Repo/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Código/ })).toHaveAttribute(
       'href',
       'https://github.com/example/project-alpha',
     );
@@ -266,6 +266,46 @@ describe('Terminal', () => {
       'href',
       '/cv/CV_2026.pdf',
     );
+  });
+
+  it('confirms the CV opened when the browser returns a window', async () => {
+    useCommandTimers();
+    const frame = document.body.appendChild(document.createElement('iframe'));
+    const opened = frame.contentWindow;
+    const open = vi.spyOn(window, 'open').mockReturnValue(opened);
+    const input = renderTerminal();
+
+    await submitCommand(input, '/cv');
+
+    expect(open).toHaveBeenCalledWith('/cv/CV_2026.pdf', '_blank');
+    expect(screen.getByText('CV 2026 abierto en una nueva pestaña.')).toBeInTheDocument();
+    frame.remove();
+  });
+
+  it('turns the rain off when /rain is submitted again', async () => {
+    useCommandTimers();
+    const input = renderTerminal();
+
+    await submitCommand(input, '/rain');
+    expect(screen.getByText('Lluvia Matrix activada.')).toBeInTheDocument();
+
+    await submitCommand(input, '/rain');
+    expect(screen.getByText('Lluvia Matrix desactivada, terminal restaurada.')).toBeInTheDocument();
+  });
+
+  it('explains that the rain is unavailable when reduced motion is preferred', async () => {
+    useCommandTimers();
+    const matchMedia = window.matchMedia;
+    vi.spyOn(window, 'matchMedia').mockImplementation((query) => ({
+      ...matchMedia(query),
+      matches: query.includes('prefers-reduced-motion'),
+    }));
+    const input = renderTerminal();
+
+    await submitCommand(input, '/rain');
+
+    expect(screen.getByText(/Lluvia Matrix no disponible/)).toBeInTheDocument();
+    expect(screen.queryByText('Lluvia Matrix activada.')).not.toBeInTheDocument();
   });
 
   it('navigates through the submitted command history', async () => {
@@ -411,7 +451,7 @@ describe('Terminal', () => {
     fireEvent.click(themeTrigger);
     expect(themeTrigger).toHaveAttribute('aria-expanded', 'true');
 
-    fireEvent.keyDown(screen.getByRole('menuitem', { name: 'Cambiar al tema Paper' }), {
+    fireEvent.keyDown(screen.getByRole('menuitem', { name: 'Cambiar al tema Papel' }), {
       key: 'Escape',
     });
 

@@ -30,7 +30,7 @@ describe('SectionOutput', () => {
     render(<SectionOutput section="projects" data={{ projects: [project] }} />);
 
     expect(screen.getByRole('heading', { name: 'Project Alpha' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Repo/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Código/ })).toHaveAttribute(
       'href',
       project.github,
     );
@@ -67,11 +67,11 @@ describe('SectionOutput', () => {
     render(<SectionOutput section="projects" data={{ projects: [simulator!] }} />);
 
     expect(screen.getByRole('heading', { name: 'Spanish Elections Simulator' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Live/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Demo/ })).toHaveAttribute(
       'href',
       'https://spanish-elections-simulator.pabloviniegra.dev/',
     );
-    expect(screen.getByRole('link', { name: /Repo/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Código/ })).toHaveAttribute(
       'href',
       'https://github.com/PabloViniegra/spanish-elections-simulator',
     );

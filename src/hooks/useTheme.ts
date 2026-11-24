@@ -32,6 +32,11 @@ const saveTheme = (theme: ThemeType): void => {
   }
 };
 
+const applyTheme = (theme: ThemeType): void => {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', getTheme(theme).browserColor);
+};
+
 /**
  * Hook personalizado para gestionar el tema de la aplicación
  * 
@@ -65,7 +70,7 @@ export function useTheme() {
     // Leer tema inicial desde localStorage
     const savedTheme = getSavedTheme();
     setThemeState(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    applyTheme(savedTheme);
   }, []);
 
   /**
@@ -75,7 +80,7 @@ export function useTheme() {
   const setTheme = (newTheme: ThemeType) => {
     setThemeState(newTheme);
     saveTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
+    applyTheme(newTheme);
   };
 
   return { theme, setTheme };

@@ -15,7 +15,7 @@ const getDepthLabel = (rating: number) => {
 const SkillsSection: React.FC<SkillsSectionProps> = ({ knowledgeCategories }) => {
   return (
     <div className="font-sans">
-      <SectionHeader verb="map" args="skillset --current" meta="mapa de stack" />
+      <SectionHeader verb="mapear" args="habilidades --actual" meta="mapa de stack" />
 
       <div className="space-y-8">
         <section>

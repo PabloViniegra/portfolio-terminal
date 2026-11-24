@@ -10,14 +10,22 @@ export const RainActivatedMessage = () => (
       <span className="border border-terminal-border/70 bg-terminal-bg px-1.5 py-0.5 font-mono text-terminal-text">
         Ctrl+C
       </span>{' '}
+      o escribe{' '}
+      <span className="font-mono text-terminal-text">{COMMANDS.RAIN}</span>{' '}
       para volver al modo normal.
     </p>
   </div>
 );
 
+export const RainReducedMotionMessage = () => (
+  <div className="border border-terminal-border/70 bg-terminal-bg-secondary/60 px-4 py-3 text-sm text-terminal-text-secondary">
+    Lluvia Matrix no disponible: tu sistema tiene activada la reducción de movimiento.
+  </div>
+);
+
 export const RainDeactivatedMessage = () => (
   <div className="border border-terminal-border/70 bg-terminal-bg-secondary/60 px-4 py-3 text-sm text-terminal-text-secondary">
-    Lluvia Matrix desactivada, shell restaurada.
+    Lluvia Matrix desactivada, terminal restaurada.
   </div>
 );
 

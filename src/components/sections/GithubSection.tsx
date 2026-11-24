@@ -9,7 +9,7 @@ interface GithubSectionProps {
 const GithubSection: React.FC<GithubSectionProps> = ({ github }) => {
   return (
     <div className="font-sans">
-      <SectionHeader verb="tail" args="github/contribution.log" meta={github.period} />
+      <SectionHeader verb="seguir" args="github/contribuciones.log" meta={github.period} />
       <p className="max-w-3xl text-sm leading-7 text-terminal-text-secondary">{github.summary}</p>
       <p className="mt-4 font-mono text-2xl font-semibold text-terminal-accent">{github.contributions} <span className="text-sm font-normal text-terminal-text-secondary">contribuciones públicas</span></p>
       <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">

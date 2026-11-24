@@ -24,7 +24,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
 
   return (
     <div className="font-sans">
-      <SectionHeader verb="inspect" args="projects.registry" meta={`${projects.length} proyectos`} />
+      <SectionHeader verb="inspeccionar" args="proyectos.registro" meta={`${projects.length} proyectos`} />
 
       <div className="space-y-8">
         <section>
@@ -49,7 +49,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                   </span>
                   {index === 0 && (
                     <span className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary/80">
-                      primary
+                      principal
                     </span>
                   )}
                 </div>
@@ -68,8 +68,8 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                   </div>
 
                   <div className="flex flex-wrap gap-4 lg:flex-col lg:items-end lg:gap-2">
-                    {project.link && <ExternalLink href={project.link} label="Live" />}
-                    <ExternalLink href={project.github} label="Repo" />
+                    {project.link && <ExternalLink href={project.link} label="Demo" />}
+                    <ExternalLink href={project.github} label="Código" />
                   </div>
                 </div>
 
@@ -112,8 +112,8 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-mono-xs text-terminal-text-secondary/60">
-                    {project.link && <ExternalLink href={project.link} label="Live" />}
-                    <ExternalLink href={project.github} label="Repo" />
+                    {project.link && <ExternalLink href={project.link} label="Demo" />}
+                    <ExternalLink href={project.github} label="Código" />
                   </div>
                 </article>
               ))}

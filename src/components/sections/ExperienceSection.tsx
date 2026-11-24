@@ -9,7 +9,7 @@ interface ExperienceSectionProps {
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) => {
   return (
     <div className="font-sans">
-      <SectionHeader verb="history" args="--experience" meta={`${experiences.length} entradas`} />
+      <SectionHeader verb="historial" args="--experiencia" meta={`${experiences.length} entradas`} />
 
       <div className="relative space-y-0">
         {experiences.map((experience) => (

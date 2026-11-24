@@ -66,12 +66,19 @@ const MatrixRain: React.FC<MatrixRainProps> = ({ onDeactivate }) => {
     animationRef.current = requestAnimationFrame(draw);
   }, []);
 
+  const exitingRef = useRef(false);
+  const exitTimerRef = useRef(0);
+
   const handleDeactivate = useCallback(() => {
+    if (exitingRef.current) return;
+    exitingRef.current = true;
     setExiting(true);
-    window.setTimeout(() => {
+    exitTimerRef.current = window.setTimeout(() => {
       onDeactivate?.();
     }, 320);
   }, [onDeactivate]);
+
+  useEffect(() => () => window.clearTimeout(exitTimerRef.current), []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

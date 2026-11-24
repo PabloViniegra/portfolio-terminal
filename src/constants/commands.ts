@@ -24,11 +24,6 @@ export const COMMANDS = {
 } as const;
 
 /**
- * Tipo derivado de los comandos disponibles
- */
-export type CommandType = typeof COMMANDS[keyof typeof COMMANDS];
-
-/**
  * Configuración de delays para la simulación de procesamiento de comandos
  * @constant
  */

@@ -20,7 +20,7 @@ describe('ThemeSwitcher', () => {
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
     expect(menu).toHaveAttribute('data-state', 'open');
 
-    await user.click(screen.getByRole('menuitem', { name: 'Cambiar al tema Paper' }));
+    await user.click(screen.getByRole('menuitem', { name: 'Cambiar al tema Papel' }));
 
     expect(document.documentElement).toHaveAttribute('data-theme', 'paper');
     expect(localStorage.getItem('theme')).toBe('paper');
@@ -34,7 +34,7 @@ describe('ThemeSwitcher', () => {
 
     const trigger = screen.getByRole('button', { name: 'Cambiar tema' });
     await user.click(trigger);
-    screen.getByRole('menuitem', { name: 'Cambiar al tema Paper' }).focus();
+    screen.getByRole('menuitem', { name: 'Cambiar al tema Papel' }).focus();
     await user.keyboard('{Escape}');
 
     expect(trigger).toHaveAttribute('aria-expanded', 'false');

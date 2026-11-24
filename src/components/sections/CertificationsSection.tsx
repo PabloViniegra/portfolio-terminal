@@ -8,7 +8,7 @@ interface CertificationsSectionProps {
 
 const CertificationsSection: React.FC<CertificationsSectionProps> = ({ certifications }) => (
   <div className="font-sans">
-    <SectionHeader verb="list" args="certifications" meta={`${certifications.length} credenciales`} />
+    <SectionHeader verb="listar" args="certificaciones" meta={`${certifications.length} credenciales`} />
     <div className="space-y-0">
       {certifications.map((certification) => (
         <article key={certification.title} className="border-t border-terminal-border/40 py-5 first:border-t-0 first:pt-0">

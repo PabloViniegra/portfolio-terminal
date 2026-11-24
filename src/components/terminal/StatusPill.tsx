@@ -13,7 +13,7 @@ export const StatusPill = ({ isLoading }: { isLoading: boolean }) => (
       <span className="inline-block h-1.5 w-1.5 rounded-full bg-terminal-success" aria-hidden="true" />
     )}
     <span className="status-label sr-only md:not-sr-only md:inline" aria-live="polite">
-      {isLoading ? 'executing' : 'ready'}
+      {isLoading ? 'ejecutando' : 'listo'}
     </span>
   </span>
 );

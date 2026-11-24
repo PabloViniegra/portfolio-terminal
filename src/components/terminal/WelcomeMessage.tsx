@@ -8,7 +8,7 @@ const AsciiTitle = ({ profile }: { profile?: ProfileItem }) => (
       <span className="text-terminal-prompt">┌─</span>
       <span>pablo@portfolio.dev</span>
       <span className="hidden sm:inline">·</span>
-      <span className="hidden sm:inline">hiring-mode</span>
+      <span className="hidden sm:inline">búsqueda-activa</span>
     </div>
     <div className="flex items-baseline gap-3 py-1 font-pixel font-medium uppercase leading-[0.9] tracking-[-0.03em] [text-wrap:balance]">
       <span className="text-3xl text-terminal-prompt md:text-5xl" aria-hidden="true">
@@ -27,10 +27,11 @@ const AsciiTitle = ({ profile }: { profile?: ProfileItem }) => (
     </div>
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-pixel text-mono-sm uppercase leading-normal tracking-[0.16em] text-terminal-text-secondary">
       <span className="text-terminal-prompt">└─</span>
-      <span>{profile?.role ?? 'fullstack engineer'}</span>
-      <span>{profile?.location ?? 'madrid'}</span>
+      <span>{profile?.role ?? 'ingeniero full stack'}</span>
       <span className="text-terminal-text-tertiary">·</span>
-      <span className="text-terminal-accent">{profile?.status ?? 'open to roles'}</span>
+      <span>{profile?.location ?? 'Madrid'}</span>
+      <span className="text-terminal-text-tertiary">·</span>
+      <span className="text-terminal-accent">{profile?.status ?? 'abierto a ofertas'}</span>
     </div>
   </div>
 );

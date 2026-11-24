@@ -8,7 +8,7 @@ interface ProfileSectionProps {
 
 const ProfileSection: React.FC<ProfileSectionProps> = ({ profile }) => (
   <div className="font-sans">
-    <SectionHeader verb="read" args="profile.md" meta={profile.status} />
+    <SectionHeader verb="leer" args="perfil.md" meta={profile.status} />
 
     <div className="space-y-8">
       <section>

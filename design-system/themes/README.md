@@ -28,7 +28,7 @@ function MyComponent() {
 
 The hook:
 1. Reads from `localStorage` on mount; unknown or legacy ids (`one-dark`, `light`, `ayu`, `github-dark`) fall back to `phosphor` via `getTheme`.
-2. Sets `data-theme` on `<html>`.
+2. Sets `data-theme` on `<html>` and the matching `<meta name="theme-color">`.
 3. Persists to `localStorage`.
 4. Triggers the CSS variable cascade — no re-render needed.
 
@@ -37,12 +37,12 @@ The hook:
 Applied before hydration by an inline script in `index.astro`:
 
 ```html
-<script is:inline>
-  const savedTheme = localStorage.getItem("theme");
-  document.documentElement.setAttribute(
-    "data-theme",
-    savedTheme === "paper" ? "paper" : "phosphor",
-  );
+<script is:inline define:vars={{ paperColor }}>
+  const isPaper = localStorage.getItem("theme") === "paper";
+  document.documentElement.setAttribute("data-theme", isPaper ? "paper" : "phosphor");
+  if (isPaper) {
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", paperColor);
+  }
 </script>
 ```
 

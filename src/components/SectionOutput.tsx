@@ -57,7 +57,7 @@ const SectionOutput: React.FC<Props> = ({ section, data = {} }) => {
 
     case 'ai':
       if (!data.aiEngineering) {
-        return <ErrorMessage message="No hay datos de AI Engineering disponibles." />;
+        return <ErrorMessage message="No hay datos de ingeniería de IA disponibles." />;
       }
 
       return <AiEngineeringSection aiEngineering={data.aiEngineering} />;

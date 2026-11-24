@@ -3,8 +3,10 @@ import Terminal from "../components/Terminal";
 import TerminalLayout from "../layouts/TerminalLayout.astro";
 import MobileFallback from "../components/MobileFallback.astro";
 import { loadContentData } from "../content/loadContentData";
+import { getTheme } from "../constants/themes";
 
 const contentData = await loadContentData();
+const paperColor = getTheme("paper").browserColor;
 ---
 
 <TerminalLayout>
@@ -12,11 +14,11 @@ const contentData = await loadContentData();
   <MobileFallback />
 </TerminalLayout>
 
-<script is:inline>
+<script is:inline define:vars={{ paperColor }}>
   // Aplicar tema guardado antes de la hidratación para evitar FOUC
-  const savedTheme = localStorage.getItem("theme");
-  document.documentElement.setAttribute(
-    "data-theme",
-    savedTheme === "paper" ? "paper" : "phosphor",
-  );
+  const isPaper = localStorage.getItem("theme") === "paper";
+  document.documentElement.setAttribute("data-theme", isPaper ? "paper" : "phosphor");
+  if (isPaper) {
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", paperColor);
+  }
 </script>

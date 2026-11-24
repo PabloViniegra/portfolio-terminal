@@ -49,7 +49,7 @@ Portfolio web con interfaz de terminal: comandos reales, contenido tipado y un a
 
 - Terminal interactiva con autocompletado (`Tab`), sugerencias y historial (flechas)
 - Content Collections con validación Zod y type-safety de extremo a extremo
-- Dos temas alineados con my-portfolio (Phosphor y Paper); preferencia en `localStorage`
+- Dos temas alineados con my-portfolio (Fósforo y Papel); preferencia en `localStorage`
 - Efecto Matrix Rain (`/rain`; salir con `Ctrl+C`)
 - Secciones de perfil, AI engineering, GitHub y certificaciones
 - Fallback móvil con aviso desktop-first
@@ -97,7 +97,7 @@ Abre [http://localhost:4321](http://localhost:4321).
 ├── public/
 │   ├── cv/                 # CV en PDF
 │   ├── fonts/              # Geist, Geist Mono, Geist Pixel Square
-│   └── favicon.svg
+│   └── avatar.svg          # Favicon y logo
 ├── src/
 │   ├── commands/           # Resolución y sugerencias de comandos
 │   ├── components/         # Terminal, input, secciones, temas

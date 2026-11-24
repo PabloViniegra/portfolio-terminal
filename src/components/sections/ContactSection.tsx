@@ -17,7 +17,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
 }) => {
   return (
     <div className="font-sans">
-      <SectionHeader verb="open" args="contact.channel" meta="disponible" />
+      <SectionHeader verb="abrir" args="contacto.canal" meta="disponible" />
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.8fr)]">
         <section>
@@ -55,10 +55,10 @@ const ContactSection: React.FC<ContactSectionProps> = ({
 
         <section className="border-t border-terminal-border/40 pt-4 lg:border-t-0 lg:border-l lg:border-terminal-border/40 lg:pl-8 lg:pt-0">
           <div className="font-pixel text-mono-sm uppercase tracking-[0.16em] text-terminal-text-secondary">
-            status
+            estado
           </div>
           <div className="mt-3 space-y-2">
-            <p className="text-base font-semibold text-terminal-text">Open to fullstack roles</p>
+            <p className="text-base font-semibold text-terminal-text">Abierto a puestos full stack</p>
             <p className="text-sm leading-6 text-terminal-text-secondary">{ctaMessage}</p>
           </div>
 

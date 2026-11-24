@@ -38,6 +38,10 @@ describe('useTheme', () => {
 
   it('persists and applies a theme selected by the user', async () => {
     const user = userEvent.setup();
+    const themeColor = document.createElement('meta');
+    themeColor.name = 'theme-color';
+    themeColor.content = '#09090b';
+    document.head.append(themeColor);
 
     render(<ThemeProbe />);
     await user.click(screen.getByRole('button', { name: 'Use Paper' }));
@@ -45,5 +49,7 @@ describe('useTheme', () => {
     expect(screen.getByRole('status')).toHaveTextContent('paper');
     expect(localStorage.getItem('theme')).toBe('paper');
     expect(document.documentElement).toHaveAttribute('data-theme', 'paper');
+    expect(themeColor).toHaveAttribute('content', '#fffcf5');
+    themeColor.remove();
   });
 });

@@ -48,9 +48,8 @@ const ThemeSwitcher = () => {
         aria-expanded={isOpen}
       >
         <span className={`h-3 w-3 rounded-full ${currentThemeData.color}`} aria-hidden="true"></span>
-        <span className="hidden md:inline">{currentThemeData.name}</span>
-        <span className="sr-only md:hidden">{currentThemeData.abbreviation}</span>
-        <span className="hidden text-xs text-terminal-text-secondary md:inline">theme</span>
+        <span>{currentThemeData.name}</span>
+        <span className="hidden text-xs text-terminal-text-secondary md:inline">tema</span>
       </button>
 
       <div

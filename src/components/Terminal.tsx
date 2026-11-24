@@ -19,6 +19,7 @@ import {
   CvOpenedMessage,
   RainActivatedMessage,
   RainDeactivatedMessage,
+  RainReducedMotionMessage,
   UnknownCommandMessage,
 } from './terminal/CommandFeedback';
 import { HelpMessage } from './terminal/HelpMessage';
@@ -79,6 +80,13 @@ const Terminal = ({ contentData }: TerminalProps) => {
         case 'home':
           return null;
         case 'rain':
+          if (showMatrixRain) {
+            setShowMatrixRain(false);
+            return <RainDeactivatedMessage />;
+          }
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return <RainReducedMotionMessage />;
+          }
           setShowMatrixRain(true);
           return <RainActivatedMessage />;
         case 'clear':
@@ -100,7 +108,9 @@ const Terminal = ({ contentData }: TerminalProps) => {
         case 'section':
           return <SectionOutput section={result.section} data={result.data} />;
         case 'cv': {
-          const opened = window.open(result.pdfUrl, '_blank', 'noopener,noreferrer');
+          // The 'noopener' feature makes window.open return null even on success, so sever opener manually.
+          const opened = window.open(result.pdfUrl, '_blank');
+          if (opened) opened.opener = null;
           return opened ? (
             <CvOpenedMessage />
           ) : (
@@ -340,7 +350,7 @@ const Terminal = ({ contentData }: TerminalProps) => {
                 )}
               </svg>
               <span className="hidden md:inline">
-                {isFullscreen ? 'restaurar' : 'fullscreen'}
+                {isFullscreen ? 'restaurar' : 'ampliar'}
               </span>
             </button>
             <Avatar

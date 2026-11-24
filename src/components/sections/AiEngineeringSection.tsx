@@ -8,7 +8,7 @@ interface AiEngineeringSectionProps {
 
 const AiEngineeringSection: React.FC<AiEngineeringSectionProps> = ({ aiEngineering }) => (
   <div className="font-sans">
-    <SectionHeader verb="inspect" args="ai-engineering" meta="en producción" />
+    <SectionHeader verb="inspeccionar" args="ingenieria-ia" meta="en producción" />
 
     <div className="space-y-8">
       <section>
